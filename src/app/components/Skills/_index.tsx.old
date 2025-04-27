@@ -1,0 +1,92 @@
+'use client'
+import { Skill, skillGroup, SkillGroupItem } from '@/app/components/Skills/skills'
+import { useGSAP } from '@gsap/react'
+import Image from 'next/image'
+import { CSSProperties, useRef, useState } from 'react'
+import { Autoplay, EffectCreative } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+const SkillItem = ({ skill, index, length, open }: { skill: Skill; index: number; length: number; open?: boolean }) => {
+  const r = (360 / length) * index + 90
+
+  return (
+    <Image
+      draggable={false}
+      className="absolute top-0 w-full duration-1000"
+      style={
+        {
+          transitionDelay: `${(index * 500) / length}ms`,
+          transform: open ? `rotate(${r}deg) translate(0, 200%) rotate(${-r}deg)` : `rotate(${r - 180}deg) translate(0, 0) rotate(${-r + 180}deg)`,
+        } as CSSProperties
+      }
+      src={skill.icon}
+      alt={skill.name}
+    />
+  )
+}
+
+const SkillCard = ({ skill, open }: { skill: SkillGroupItem; open?: boolean }) => {
+  const firstSkill = skill.skills[0]
+  const restSkill = skill.skills.slice(1)
+
+  const el = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {})
+
+  return (
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="flex aspect-square w-150 items-center justify-center select-none" ref={el}>
+        <div className="relative aspect-square w-30">
+          {restSkill.map((skill, index) => (
+            <SkillItem key={skill.name} length={restSkill.length} {...{ skill, index }} open={open} />
+          ))}
+          <div className="flex aspect-square w-full scale-200 items-center justify-center rounded-full)">
+            <Image className="w-full scale-70" draggable={false} src={firstSkill.icon} alt={firstSkill.name} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export interface SkillsProps {}
+
+export default function Skills(props: SkillsProps) {
+  const [realIndex, setRealIndex] = useState(0)
+
+  return (
+    <div className="flex w-full justify-center">
+      <Swiper
+        modules={[EffectCreative, Autoplay]}
+        autoplay={{
+          delay: 5000,
+        }}
+        speed={800}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: [0, 0, -400],
+          },
+          next: {
+            translate: ['100%', 0, 0],
+          },
+        }}
+        onSlideChange={(swiper) => {
+          setRealIndex(swiper.realIndex)
+        }}
+        className="w-4/5"
+        effect="creative"
+        loop
+        spaceBetween={8}
+      >
+        {skillGroup.map((skill, index) => (
+          <SwiperSlide key={skill.name} className="aspect-[4/5]">
+            <div className="h-full w-full rounded bg-(--background)">
+              <SkillCard skill={skill} open={index === realIndex} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  )
+}
