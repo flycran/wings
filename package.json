@@ -6,7 +6,8 @@
     "dev:next": "next dev --turbopack -p 3001",
     "dev:fastAPI": "nodemon --exec \"poetry run uvicorn api.main:app\" -e py --watch api",
     "build": "next build",
-    "start": "next start",
+    "start:next": "next start",
+    "start:fastAPI": "poetry run uvicorn api.main:app",
     "lint": "next lint"
   },
   "engines": {

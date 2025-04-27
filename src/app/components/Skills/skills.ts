@@ -33,107 +33,107 @@ export interface Skill {
 
 export const skills: Skill[] = [
   {
-    title: 'Ant Design',
+    name: 'Ant Design',
     icon: AntDesignSvg,
   },
   {
-    title: 'Axios',
+    name: 'Axios',
     icon: AxiosSvg,
   },
   {
-    title: 'CSS3',
+    name: 'CSS3',
     icon: CSS3Svg,
   },
   {
-    title: 'Electron',
+    name: 'Electron',
     icon: ElectronSvg,
   },
   {
-    title: 'HTML5',
+    name: 'HTML5',
     icon: HTML5Svg,
   },
   {
-    title: 'JavaScript',
+    name: 'JavaScript',
     icon: JavaScriptSvg,
   },
   {
-    title: 'jQuery',
+    name: 'jQuery',
     icon: jQuerySvg,
   },
   {
-    title: 'JSON',
+    name: 'JSON',
     icon: JSONSvg,
   },
   {
-    title: 'Jupyter',
+    name: 'Jupyter',
     icon: JupyterSvg,
   },
   {
-    title: 'Nest.js',
+    name: 'Nest.js',
     icon: NestjsSvg,
   },
   {
-    title: 'Next.js',
+    name: 'Next.js',
     icon: NextjsSvg,
   },
   {
-    title: 'Node.js',
+    name: 'Node.js',
     icon: NodejsSvg,
   },
   {
-    title: 'PyCharm',
+    name: 'PyCharm',
     icon: PyCharmSvg,
   },
   {
-    title: 'Python',
+    name: 'Python',
     icon: PythonSvg,
   },
   {
-    title: 'Python Poetry',
+    name: 'Python Poetry',
     icon: PythonPoetrySvg,
   },
   {
-    title: 'React',
+    name: 'React',
     icon: ReactSvg,
   },
   {
-    title: 'Redux',
+    name: 'Redux',
     icon: ReduxSvg,
   },
   {
-    title: 'Rollup.js',
+    name: 'Rollup.js',
     icon: RollupjsSvg,
   },
   {
-    title: 'Sass',
+    name: 'Sass',
     icon: SassSvg,
   },
   {
-    title: 'Sequelize',
+    name: 'Sequelize',
     icon: SequelizeSvg,
   },
   {
-    title: 'TailwindCSS',
+    name: 'TailwindCSS',
     icon: TailwindCSSSvg,
   },
   {
-    title: 'TypeScript',
+    name: 'TypeScript',
     icon: TypeScriptSvg,
   },
   {
-    title: 'Visual Studio Code',
+    name: 'Visual Studio Code',
     icon: VisualStudioCodeSvg,
   },
   {
-    title: 'Vite.js',
+    name: 'Vite.js',
     icon: VitejsSvg,
   },
   {
-    title: 'Vuejs',
+    name: 'Vuejs',
     icon: VuejsSvg,
   },
   {
-    title: 'WebStorm',
+    name: 'WebStorm',
     icon: WebStormSvg,
   },
 ]
@@ -147,11 +147,11 @@ export interface SkillGroupItem {
 
 export const skillGroup: SkillGroupItem[] = [
   {
-    title: '语言',
+    name: '语言',
     skills: [skillMap['TypeScript'], skillMap['JavaScript'], skillMap['Python'], skillMap['HTML5'], skillMap['CSS3']],
   },
   {
-    title: '框架',
+    name: '框架',
     skills: [
       skillMap['Next.js'],
       skillMap['React'],
@@ -164,7 +164,7 @@ export const skillGroup: SkillGroupItem[] = [
     ],
   },
   {
-    title: '编辑器',
+    name: '编辑器',
     skills: [skillMap['WebStorm'], skillMap['Visual Studio Code'], skillMap['PyCharm']],
   },
 ]
