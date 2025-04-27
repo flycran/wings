@@ -69,9 +69,7 @@ const MenuItem = ({ text, href, color }: MenuItemProps) => {
   )
 }
 
-export interface HeaderProps {}
-
-const Header = (props: HeaderProps) => {
+const Header = () => {
   return (
     <header className="absolute top-0 z-1 flex h-12 w-full items-center pl-4">
       <div className="aspect-square w-10">
