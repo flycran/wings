@@ -2,7 +2,7 @@ const FlyingCrane = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.75 187.75">
       <g>
-        <circle cx="93.88" cy="93.88" r="93.88" fill="none" strokeWidth="0px"/>
+        <circle cx="93.88" cy="93.88" r="93.88" fill="none" strokeWidth="0px" />
         <g>
           <polygon
             points="43.22 48.23 96.62 53.56 82.78 90.32 43.22 48.23"

@@ -1,7 +1,3 @@
 export default function Article() {
-  return (
-    <div>
-      article
-    </div>
-  )
+  return <div>article</div>
 }

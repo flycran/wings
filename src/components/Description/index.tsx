@@ -18,7 +18,7 @@ export default function Description({ column = 2, items, className, ...rest }: D
   const columns = [...chunkGenerator(items, column)]
 
   return (
-    <table {...rest} className={clsx('text-sm text-zinc-700 dark:text-zinc-300 w-full', className)}>
+    <table {...rest} className={clsx('w-full text-sm text-zinc-700 dark:text-zinc-300', className)}>
       <tbody>
         {columns.map((item, index) => (
           <tr key={index}>

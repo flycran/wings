@@ -5,6 +5,6 @@ export const usePortal = (children: ReactNode, container: () => Element | Docume
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
-  })
+  }, [])
   return mounted && createPortal(children, container(), key)
 }

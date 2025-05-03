@@ -1,11 +1,11 @@
 'use client'
-import NoData from '../../../components/NoData'
 import { GridViewData, HomeData } from '@/server/home'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
+import NoData from '../../../components/NoData'
 
 interface PaginationProps {
   index: number

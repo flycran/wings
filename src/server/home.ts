@@ -48,7 +48,7 @@ const getPlatformInfo = {
       fetch('https://api.juejin.cn/content_api/v1/article/query_list', {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
         },
         body: JSON.stringify({
           user_id: config.platforms.juejin_id,

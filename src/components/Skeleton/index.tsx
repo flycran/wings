@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
 import styles from './index.module.css'
 
-export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {}
+export type SkeletonProps = HTMLAttributes<HTMLDivElement>
 
 export default function Skeleton(props: SkeletonProps) {
   return (

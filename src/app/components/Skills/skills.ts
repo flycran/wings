@@ -1,4 +1,3 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import AntDesignSvg from '@/assets/skills/Ant Design.svg'
 import AxiosSvg from '@/assets/skills/Axios.svg'
 import CSS3Svg from '@/assets/skills/CSS3.svg'
@@ -25,6 +24,7 @@ import VisualStudioCodeSvg from '@/assets/skills/Visual Studio Code (VS Code).sv
 import VitejsSvg from '@/assets/skills/Vite.js.svg'
 import VuejsSvg from '@/assets/skills/Vue.js.svg'
 import WebStormSvg from '@/assets/skills/WebStorm.svg'
+import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 export interface Skill {
   name: string

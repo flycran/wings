@@ -1,6 +1,5 @@
 'use client'
 import MotionDiv from '@/components/motion/MotionDiv'
-import { motion } from 'motion/react'
 
 export default function HomeTitle() {
   return (
@@ -21,7 +20,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="line rounded-xl lg:text-[8rem]/[1.3] sm:text-[6rem]/[1.3] text-[3rem]/[1.3] font-bold text-white shadow-sm select-none"
+          className="line rounded-xl text-[3rem]/[1.3] font-bold text-white shadow-sm select-none sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
           style={{
             fontFamily: 'sans-serif',
           }}
@@ -45,7 +44,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="pt-3 pb-4 lg:text-[3rem] sm:text-[2.5rem] text-[1.75rem] font-bold text-zinc-600 dark:text-zinc-300"
+          className="pt-3 pb-4 text-[1.75rem] font-bold text-zinc-600 sm:text-[2.5rem] lg:text-[3rem] dark:text-zinc-300"
           style={{
             fontFamily: 'sans-serif',
           }}
@@ -53,12 +52,7 @@ export default function HomeTitle() {
           <span className="relative py-1">
             <span className="relative text-transparent">Flying crane</span>
             <svg className="absolute top-0 left-0 -z-1 h-full w-full py-1 select-none" width="100%" height="100%">
-              <text
-                x="0"
-                y="0"
-                alignmentBaseline="text-before-edge"
-                className="fill-none stroke-current stroke-1 "
-              >
+              <text x="0" y="0" alignmentBaseline="text-before-edge" className="fill-none stroke-current stroke-1">
                 Flying crane
               </text>
             </svg>
@@ -80,7 +74,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="lg:text-[2rem] sm:text-[1.6rem] text-[1.2rem] text-zinc-800 dark:text-zinc-300"
+          className="text-[1.2rem] text-zinc-800 sm:text-[1.6rem] lg:text-[2rem] dark:text-zinc-300"
         >
           译为飞鹤&nbsp;&nbsp;意为自由
         </MotionDiv>

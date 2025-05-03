@@ -6,8 +6,8 @@
       rgba(255, 255, 255, 0) 40%,
       rgba(255, 255, 255, 0.6) 50%,
       rgba(255, 255, 255, 0) 60%
-  )
-  var(--skeleton-color);
+    )
+    var(--skeleton-color);
   background-size: 200% 100%;
   background-position-x: 150%;
   animation: skeleton 1s linear infinite;

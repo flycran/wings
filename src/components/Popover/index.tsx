@@ -24,9 +24,12 @@ export default function Popover({ children, placement, delay, className, panel, 
     placement,
     open,
     onOpenChange: setOpen,
-    middleware: [offset(8), shift({
-      padding: 8,
-    })],
+    middleware: [
+      offset(8),
+      shift({
+        padding: 8,
+      }),
+    ],
   })
 
   const [startEnter, cancelEnter] = useDelay(() => {
@@ -78,7 +81,10 @@ export default function Popover({ children, placement, delay, className, panel, 
                   scale: 0.2,
                 }}
                 {...rest}
-                className={clsx('overflow-hidden rounded-xl bg-zinc-100 shadow dark:bg-zinc-800 dark:shadow-white/10', className)}
+                className={clsx(
+                  'overflow-hidden rounded-xl bg-zinc-100 shadow dark:bg-zinc-800 dark:shadow-white/10',
+                  className
+                )}
               >
                 {panel}
               </MotionDiv>
