@@ -36,6 +36,7 @@
   transform: rotate3d(1, 0, 0, calc(-1 * var(--angle) + 0deg));
   transform-origin: 0 41.43%;
 }
+
 .frameCraneWings2 {
   transform: rotate3d(1, 0, 0, var(--angle));
   transform-origin: 0 41.43%;

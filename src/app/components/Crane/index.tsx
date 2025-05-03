@@ -1,6 +1,6 @@
 import MotionDiv from '@/components/motion/MotionDiv'
 import clsx from 'clsx'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 export default function Crane() {
   return (

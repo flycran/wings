@@ -50,9 +50,6 @@ importers:
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.0)
-      sass:
-        specifier: ^1.87.0
-        version: 1.87.0
       server-only:
         specifier: ^0.0.1
         version: 0.0.1
@@ -1891,6 +1888,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+    optional: true
 
   client-only@0.0.1: {}
 
@@ -2063,7 +2061,8 @@ snapshots:
 
   husky@9.1.7: {}
 
-  immutable@5.1.1: {}
+  immutable@5.1.1:
+    optional: true
 
   inline-style-parser@0.2.4: {}
 
@@ -2571,7 +2570,8 @@ snapshots:
 
   react@19.1.0: {}
 
-  readdirp@4.1.2: {}
+  readdirp@4.1.2:
+    optional: true
 
   recma-build-jsx@1.0.0:
     dependencies:
@@ -2642,6 +2642,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   scheduler@0.26.0: {}
 
