@@ -47,7 +47,7 @@ export default function WheelNext() {
           onClick={toNext}
         >
           <div className="flex h-15 w-6 justify-center rounded-full bg-current pt-7">
-            <div className="h-6 w-3 rounded-full bg-white"></div>
+            <div className="h-6 w-3 rounded-full bg-white" />
           </div>
           <GoTriangleDown size={20} />
         </MotionDiv>

@@ -1,5 +1,5 @@
 {
-  "name": "next-demo",
+  "name": "wings",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "next build",
     "start:next": "next start",
     "start:fastAPI": "poetry run uvicorn api.main:app",
-    "lint": "biome lint ./src --write",
+    "lint": "biome lint ./src --fix",
+    "lint:unsafe": "biome lint ./src --fix --unsafe",
     "format": "biome format ./src --write",
     "prepare": "husky"
   },

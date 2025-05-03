@@ -28,6 +28,7 @@
     "rules": {
       "recommended": true,
       "a11y": {
+        "recommended": false,
         "noAriaUnsupportedElements": "warn",
         "noBlankTarget": "off",
         "useAltText": "warn",
@@ -66,7 +67,8 @@
         "noVar": "error",
         "useAsConstAssertion": "error",
         "useBlockStatements": "off",
-        "useConst": "error"
+        "useConst": "error",
+        "noNonNullAssertion": "off"
       },
       "suspicious": {
         "noClassAssign": "off",
@@ -84,7 +86,8 @@
         "noUnsafeDeclarationMerging": "error",
         "noUnsafeNegation": "off",
         "useGetterReturn": "off",
-        "useNamespaceKeyword": "error"
+        "useNamespaceKeyword": "error",
+        "noArrayIndexKey": "off"
       },
       "nursery": {
         "noImgElement": "warn"

@@ -1,6 +1,5 @@
 .skeleton {
   --skeleton-color: #ebebeb;
-  background-color: var(--skeleton-color);
   background: linear-gradient(
       100deg,
       rgba(255, 255, 255, 0) 40%,

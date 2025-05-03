@@ -70,7 +70,7 @@ const Pagination = ({
             style={{
               strokeDasharray: `calc(${ringRadius}px * 2 * 3.14) calc(${ringRadius}px * 2 * 3.14)`,
               transitionProperty: 'stroke-dashoffset',
-              transitionDuration: index === i && enableAutoplay ? autoplayDelay + 'ms' : '',
+              transitionDuration: index === i && enableAutoplay ? `${autoplayDelay}ms` : '',
               strokeDashoffset: inited && index === i && enableAutoplay ? '0px' : `calc(${ringRadius}px * 2 * 3.14)`,
             }}
             cx={centerDot}
@@ -124,7 +124,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
           onAutoplayPause={() => setEnableAutoplay(false)}
           onAutoplayResume={() => setEnableAutoplay(true)}
         >
-          {!!carousels.length ? (
+          {carousels.length ? (
             carousels.map((item, index) => (
               <SwiperSlide key={index}>
                 <Link href={item.href} className="bg-skeleton relative inline-block h-full w-full">
@@ -161,7 +161,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
           gridArea: '1 / 1 / 2 / 2',
         }}
       >
-        {!!fixeds[0] ? (
+        {fixeds[0] ? (
           <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
             <Image src={fixeds[0].cover} alt={fixeds[0].title} fill className="object-cover" />
           </Link>
@@ -175,7 +175,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
           gridArea: '2 / 1 / 3 / 2',
         }}
       >
-        {!!fixeds[1] ? (
+        {fixeds[1] ? (
           <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
             <Image src={fixeds[1].cover} alt={fixeds[1].title} fill className="object-cover" />
           </Link>

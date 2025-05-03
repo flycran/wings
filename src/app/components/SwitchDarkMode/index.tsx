@@ -19,7 +19,7 @@ export default function Switchdarkmode() {
   }, [])
   // 应用深色模式
   const applyTheme = (darkMode: boolean) => {
-    document.documentElement.dataset['theme'] = darkMode ? 'dark' : 'light'
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
   }
 
   const lightBulbRef = useRef<SVGSVGElement>(null)
