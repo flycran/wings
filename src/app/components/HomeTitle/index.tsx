@@ -1,10 +1,12 @@
+'use client'
+import MotionDiv from '@/components/motion/MotionDiv'
 import { motion } from 'motion/react'
 
 export default function HomeTitle() {
   return (
     <div className="relative z-1 flex justify-around">
       <div className="text-right">
-        <motion.div
+        <MotionDiv
           initial={{
             opacity: 0,
             y: 100,
@@ -19,15 +21,15 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="line rounded-xl text-[8rem]/[1.3] font-bold text-white shadow-sm select-none"
+          className="line rounded-xl lg:text-[8rem]/[1.3] sm:text-[6rem]/[1.3] text-[3rem]/[1.3] font-bold text-white shadow-sm select-none"
           style={{
             fontFamily: 'sans-serif',
           }}
         >
           <span className="bg-crane-blue inline-block rounded-l-xl pr-3 pl-5">FLY</span>
           <span className="bg-crane-orange inline-block rounded-r-xl pr-5 pl-3">CRAN</span>
-        </motion.div>
-        <motion.div
+        </MotionDiv>
+        <MotionDiv
           initial={{
             opacity: 0,
             y: 50,
@@ -43,21 +45,26 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="pt-3 pb-4 text-5xl font-bold text-transparent"
+          className="pt-3 pb-4 lg:text-[3rem] sm:text-[2.5rem] text-[1.75rem] font-bold text-zinc-600 dark:text-zinc-300"
           style={{
             fontFamily: 'sans-serif',
           }}
         >
-          <span className="relative py-1 text-transparent">
-            <span className="relative -z-1">Flying crane</span>
-            <svg className="absolute top-0 left-0 h-full w-full py-1" width="100%" height="100%">
-              <text x="0" y="0" alignmentBaseline="text-before-edge" className="fill-none stroke-gray-600 stroke-1">
+          <span className="relative py-1">
+            <span className="relative text-transparent">Flying crane</span>
+            <svg className="absolute top-0 left-0 -z-1 h-full w-full py-1 select-none" width="100%" height="100%">
+              <text
+                x="0"
+                y="0"
+                alignmentBaseline="text-before-edge"
+                className="fill-none stroke-current stroke-1 "
+              >
                 Flying crane
               </text>
             </svg>
           </span>
-        </motion.div>
-        <motion.div
+        </MotionDiv>
+        <MotionDiv
           initial={{
             opacity: 0,
             y: 50,
@@ -73,10 +80,10 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="text-[2rem] text-gray-600 shadow-gray-800"
+          className="lg:text-[2rem] sm:text-[1.6rem] text-[1.2rem] text-zinc-800 dark:text-zinc-300"
         >
           译为飞鹤&nbsp;&nbsp;意为自由
-        </motion.div>
+        </MotionDiv>
       </div>
     </div>
   )

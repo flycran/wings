@@ -1,4 +1,6 @@
 'use client'
+import NoData from '../../../components/NoData'
+import { GridViewData, HomeData } from '@/server/home'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
@@ -7,7 +9,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 
 interface PaginationProps {
   index: number
-  list: Carousel[]
+  list: GridViewData[]
   onChange?: (index: number) => void
   enableAutoplay?: boolean
   autoplayDelay: number
@@ -81,14 +83,7 @@ const Pagination = ({
   )
 }
 
-interface Carousel {
-  title: string
-  cover: string
-  href: string
-  color?: string
-}
-
-const SwiperView = ({ carousels }: { carousels: Carousel[] }) => {
+const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
   const swiperRef = useRef<SwiperRef>(null)
   const [realIndex, setRealIndex] = useState(0)
   const [enableAutoplay, setEnableAutoplay] = useState(true)
@@ -96,7 +91,7 @@ const SwiperView = ({ carousels }: { carousels: Carousel[] }) => {
 
   return (
     <div
-      className="overflow-hidden rounded-xl bg-gray-300 shadow"
+      className="bg-skeleton overflow-hidden rounded-xl shadow"
       style={{
         gridArea: '1 / 2 / 3 / 3',
       }}
@@ -129,13 +124,19 @@ const SwiperView = ({ carousels }: { carousels: Carousel[] }) => {
           onAutoplayPause={() => setEnableAutoplay(false)}
           onAutoplayResume={() => setEnableAutoplay(true)}
         >
-          {carousels.map((item, index) => (
-            <SwiperSlide key={index}>
-              <Link href={item.href} className="relative inline-block h-full w-full bg-gray-300">
-                <Image fill src={item.cover} alt={item.title} className="object-cover" />
-              </Link>
+          {!!carousels.length ? (
+            carousels.map((item, index) => (
+              <SwiperSlide key={index}>
+                <Link href={item.href} className="bg-skeleton relative inline-block h-full w-full">
+                  <Image fill src={item.cover} alt={item.title} className="object-cover" />
+                </Link>
+              </SwiperSlide>
+            ))
+          ) : (
+            <SwiperSlide>
+              <NoData />
             </SwiperSlide>
-          ))}
+          )}
           {carousels.length > 1 && (
             <Pagination
               index={realIndex}
@@ -151,69 +152,42 @@ const SwiperView = ({ carousels }: { carousels: Carousel[] }) => {
   )
 }
 
-const FixedView = ({ fixeds }: { fixeds: Carousel[] }) => {
+const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
   return (
     <>
       <div
-        className="overflow-hidden rounded-xl bg-gray-300 shadow"
+        className="bg-skeleton overflow-hidden rounded-xl shadow"
         style={{
           gridArea: '1 / 1 / 2 / 2',
         }}
       >
-        <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
-          <Image src={fixeds[0].cover} alt={fixeds[0].title} fill className="object-cover" />
-        </Link>
+        {!!fixeds[0] ? (
+          <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
+            <Image src={fixeds[0].cover} alt={fixeds[0].title} fill className="object-cover" />
+          </Link>
+        ) : (
+          <NoData />
+        )}
       </div>
       <div
-        className="overflow-hidden rounded-xl bg-gray-300 shadow"
+        className="bg-skeleton overflow-hidden rounded-xl shadow"
         style={{
           gridArea: '2 / 1 / 3 / 2',
         }}
       >
-        <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
-          <Image src={fixeds[1].cover} alt={fixeds[1].title} fill className="object-cover" />
-        </Link>
+        {!!fixeds[1] ? (
+          <Link href={fixeds[0].href} className="relative inline-block h-full w-full">
+            <Image src={fixeds[1].cover} alt={fixeds[1].title} fill className="object-cover" />
+          </Link>
+        ) : (
+          <NoData />
+        )}
       </div>
     </>
   )
 }
 
-export default function HomeGridShow() {
-  const data = {
-    carousels: [
-      {
-        title: 'Flycran',
-        cover: '/demo.png',
-        href: '/',
-        color: '#f9d423',
-      },
-      {
-        title: 'Flycran2',
-        cover: '/demo.png',
-        href: '/',
-        color: '#76d6e8',
-      },
-      {
-        title: 'Flycran3',
-        cover: '/demo.png',
-        href: '/',
-        color: '#ec5ec0',
-      },
-    ],
-    fixeds: [
-      {
-        title: 'Flycran',
-        cover: '/demo.png',
-        href: '/',
-      },
-      {
-        title: 'Flycran2',
-        cover: '/demo.png',
-        href: '/',
-      },
-    ],
-  }
-
+export default function HomeGridShow({ data }: { data: Pick<HomeData, 'carousels' | 'fixeds'> }) {
   return (
     <div className="grid aspect-[10/4] grid-cols-[2fr_5fr] grid-rows-2 gap-3">
       <SwiperView carousels={data.carousels} />

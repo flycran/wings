@@ -1,24 +1,37 @@
 import Sidebar from '@/app/components/Sidebar'
 import '@/assets/fonts/AlimamaFangYuanTi/index.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import { cookies } from 'next/headers'
+import NextTopLoader from 'nextjs-toploader'
+import { ReactNode } from 'react'
 import 'swiper/css'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Wings | 装上梦想的翅膀',
+  title: 'Wings | 插上梦想的翅膀',
   description: 'Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。',
 }
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
+  const cookieStore = await cookies()
+  const themeMode = cookieStore.get('THEME_MODE')
+  const theme = themeMode ? themeMode.value : 'system'
+
   return (
-    <html lang="zh">
+    <html lang="zh" data-theme={theme} className="bg-[#fffdf9] text-zinc-900 dark:bg-[#171717] dark:text-zinc-50">
       <body>
+        <NextTopLoader color="var(--color-crane-blue)" />
         <Sidebar />
-        <div className="relative m-auto w-6xl">{children}</div>
+        {children}
       </body>
     </html>
   )

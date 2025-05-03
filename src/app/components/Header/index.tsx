@@ -1,6 +1,6 @@
 'use client'
+import MotionDiv from '@/components/motion/MotionDiv'
 import FlyingCrane from '@/icons/FlyingCrane'
-import { motion } from 'motion/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRef } from 'react'
@@ -10,17 +10,17 @@ const Menu = () => {
     {
       text: '首页',
       href: '/',
-      color: 'var(--crane-orange)',
+      color: 'var(--color-crane-orange)',
     },
     {
       text: '文章',
       href: '/article',
-      color: 'var(--crane-green)',
+      color: 'var(--color-crane-green)',
     },
     {
       text: '项目',
       href: '/project',
-      color: 'var(--crane-blue)',
+      color: 'var(--color-crane-blue)',
     },
   ]
 
@@ -57,7 +57,7 @@ const MenuItem = ({ text, href, color }: MenuItemProps) => {
         {text}
       </Link>
       {pathname === href && (
-        <motion.div
+        <MotionDiv
           transition={{
             duration: 0.2,
           }}

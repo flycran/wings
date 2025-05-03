@@ -1,49 +1,50 @@
-.frame-crane-container {
-  width: 30rem;
+.frameCraneContainer {
   position: relative;
   cursor: pointer;
+  --angle: 0deg;
 }
 
-.frame-crane-adjust-view {
+.frameCraneAdjustView {
   width: 100%;
   overflow: hidden;
   padding-left: 4%;
   padding-top: 5%;
 }
 
-.frame-crane {
+.frameCrane {
   width: 90%;
   aspect-ratio: 348.57/294;
   transform: rotate3d(0, 1, 0, 15deg) rotate3d(0, 0, 1, -15deg);
   perspective: 2000px;
   transform-style: preserve-3d;
   transition: 0.3s;
-}
 
-.frame-crane svg {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  svg {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 
-  polygon {
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
+    polygon {
+      filter: drop-shadow(0 0 4px rgba(127, 127, 127, 0.4));
+    }
   }
 }
 
-.frame-crane-wings-1 {
-  transform: rotate3d(1, 0, 0, calc(var(--angle) * -1));
+.frameCraneWings1 {
+  /*移除`+ 0deg`会导致静态检查错误*/
+  transform: rotate3d(1, 0, 0, calc(-1 * var(--angle) + 0deg));
   transform-origin: 0 41.43%;
 }
-.frame-crane-wings-2 {
+.frameCraneWings2 {
   transform: rotate3d(1, 0, 0, var(--angle));
   transform-origin: 0 41.43%;
 }
 
-.frame-crane-color-1 {
+.frameCraneColor1 {
   fill: #6ed1ff;
 }
 
-.frame-crane-color-2 {
+.frameCraneColor2 {
   fill: #24b6ff;
 }

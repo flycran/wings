@@ -1,6 +1,7 @@
-import classNames from 'classnames'
-import { motion, useAnimate } from 'motion/react'
-import { RefObject, useImperativeHandle } from 'react'
+import MotionDiv from '@/components/motion/MotionDiv'
+import clsx from 'clsx'
+import { useAnimate } from 'motion/react'
+import { Ref, useImperativeHandle } from 'react'
 import { GoArrowRight } from 'react-icons/go'
 
 export interface SlideArrowRef {
@@ -8,7 +9,7 @@ export interface SlideArrowRef {
 }
 
 export interface SlideArrowProps {
-  ref?: RefObject<SlideArrowRef | null>
+  ref?: Ref<SlideArrowRef>
   size?: number
   className?: string
 }
@@ -30,9 +31,9 @@ export default function SlideArrow({ ref, size, className }: SlideArrowProps) {
     play,
   }))
   return (
-    <motion.div ref={scope} className={classNames('flex gap-1', className)} style={{ fontSize: size }}>
+    <MotionDiv ref={scope} className={clsx('flex gap-1', className)} style={{ fontSize: size }}>
       <GoArrowRight className="flex-shrink-0" />
       <GoArrowRight className="flex-shrink-0" />
-    </motion.div>
+    </MotionDiv>
   )
 }

@@ -1,5 +1,6 @@
 'use client'
-import { AnimatePresence, motion } from 'motion/react'
+import MotionDiv from '@/components/motion/MotionDiv'
+import { AnimatePresence } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { GoTriangleDown } from 'react-icons/go'
 
@@ -26,7 +27,7 @@ export default function WheelNext() {
   return (
     <AnimatePresence>
       {scrollY < 300 && (
-        <motion.div
+        <MotionDiv
           initial={{
             y: -20,
             opacity: 0,
@@ -49,7 +50,7 @@ export default function WheelNext() {
             <div className="h-6 w-3 rounded-full bg-white"></div>
           </div>
           <GoTriangleDown size={20} />
-        </motion.div>
+        </MotionDiv>
       )}
     </AnimatePresence>
   )

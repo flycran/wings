@@ -1,12 +1,15 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #fffdf9;
-  --foreground: #171717;
-  --crane-orange: #ffb22f;
-  --crane-green: #21d486;
-  --crane-blue: #00abff;
-  --crane-red: #fb658b;
+/*暗色模式*/
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root[data-theme='system'], :root[data-theme='system'] *) {
+      @slot;
+    }
+  }
+  &:where(:root[data-theme='dark'], :root[data-theme='dark'] *) {
+    @slot;
+  }
 }
 
 input {
@@ -14,15 +17,22 @@ input {
 }
 
 @theme {
-  --color-crane-orange: var(--crane-orange);
-  --color-crane-green: var(--crane-green);
-  --color-crane-blue: var(--crane-blue);
-  --color-crane-red: var(--crane-red);
+  --color-crane-orange: #ffb22f;
+  --color-crane-green: #21d486;
+  --color-crane-blue: #00abff;
+  --color-crane-red: #fb658b;
+  --color-skeleton: var(--color-gray-100);
+}
+
+@layer components {
+  .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: 'AlimamaFangYuanTi', serif;
   font-weight: normal;
 }
@@ -31,4 +41,31 @@ body {
   &:where([data-selected='true'] *) {
     @slot;
   }
+}
+
+::selection {
+  background-color: var(--color-crane-blue);
+  color: white;
+}
+
+/* 视图过渡动画 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-zinc-400);
+  border-radius: 4px;
+  transition: background 0.5s;
+}
+
+:where(.dark-mode) ::-webkit-scrollbar-thumb {
+  background: var(--color-zinc-600);
+  border-radius: 4px;
 }
