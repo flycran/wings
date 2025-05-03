@@ -3,7 +3,7 @@ import '@/assets/fonts/AlimamaFangYuanTi/index.css'
 import type { Metadata, Viewport } from 'next'
 import { cookies } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import 'swiper/css'
 import './globals.css'
 

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ComponentProps, isValidElement, ReactNode } from 'react'
+import { type ComponentProps, isValidElement, type ReactNode } from 'react'
 import { GoLink } from 'react-icons/go'
 
 export interface ExteLinkProps extends ComponentProps<typeof Link> {

@@ -24,7 +24,7 @@ import VisualStudioCodeSvg from '@/assets/skills/Visual Studio Code (VS Code).sv
 import VitejsSvg from '@/assets/skills/Vite.js.svg'
 import VuejsSvg from '@/assets/skills/Vue.js.svg'
 import WebStormSvg from '@/assets/skills/WebStorm.svg'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
 export interface Skill {
   name: string
@@ -148,23 +148,23 @@ export interface SkillGroupItem {
 export const skillGroup: SkillGroupItem[] = [
   {
     name: '语言',
-    skills: [skillMap['TypeScript'], skillMap['JavaScript'], skillMap['Python'], skillMap['HTML5'], skillMap['CSS3']],
+    skills: [skillMap.TypeScript, skillMap.JavaScript, skillMap.Python, skillMap.HTML5, skillMap.CSS3],
   },
   {
     name: '框架',
     skills: [
       skillMap['Next.js'],
-      skillMap['React'],
-      skillMap['Vuejs'],
-      skillMap['TailwindCSS'],
-      skillMap['Sequelize'],
+      skillMap.React,
+      skillMap.Vuejs,
+      skillMap.TailwindCSS,
+      skillMap.Sequelize,
       skillMap['Nest.js'],
-      skillMap['Electron'],
+      skillMap.Electron,
       skillMap['Rollup.js'],
     ],
   },
   {
     name: '编辑器',
-    skills: [skillMap['WebStorm'], skillMap['Visual Studio Code'], skillMap['PyCharm']],
+    skills: [skillMap.WebStorm, skillMap['Visual Studio Code'], skillMap.PyCharm],
   },
 ]

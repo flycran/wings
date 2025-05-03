@@ -1,8 +1,6 @@
 @font-face {
-  font-family: 'AlimamaFangYuanTi';
-  src:
-    url('./AlimamaFangYuanTiVF-Thin.woff2') format('woff2'),
-    url('./AlimamaFangYuanTiVF-Thin.woff') format('woff'),
-    url('./AlimamaFangYuanTiVF-Thin.ttf') format('truetype');
+  font-family: "AlimamaFangYuanTi";
+  src: url("./AlimamaFangYuanTiVF-Thin.woff2") format("woff2"), url("./AlimamaFangYuanTiVF-Thin.woff") format("woff"),
+    url("./AlimamaFangYuanTiVF-Thin.ttf") format("truetype");
   font-display: swap;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-export const useDelay = <T extends unknown[]>(call: (...args: T) => unknown, delay: number = 0) => {
+export const useDelay = <T extends unknown[]>(call: (...args: T) => unknown, delay = 0) => {
   const timer = useRef<NodeJS.Timeout>(null)
   const call_ = useRef(call)
 

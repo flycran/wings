@@ -1,13 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /*暗色模式*/
 @custom-variant dark {
   @media (prefers-color-scheme: dark) {
-    &:where(:root[data-theme='system'], :root[data-theme='system'] *) {
+    &:where(:root[data-theme="system"], :root[data-theme="system"] *) {
       @slot;
     }
   }
-  &:where(:root[data-theme='dark'], :root[data-theme='dark'] *) {
+  &:where(:root[data-theme="dark"], :root[data-theme="dark"] *) {
     @slot;
   }
 }
@@ -33,12 +33,12 @@ input {
 }
 
 body {
-  font-family: 'AlimamaFangYuanTi', serif;
+  font-family: "AlimamaFangYuanTi", serif;
   font-weight: normal;
 }
 
 @custom-variant selected {
-  &:where([data-selected='true'] *) {
+  &:where([data-selected="true"] *) {
     @slot;
   }
 }

@@ -1,4 +1,4 @@
-import { Key, ReactNode, useEffect, useState } from 'react'
+import { type Key, type ReactNode, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export const usePortal = (children: ReactNode, container: () => Element | DocumentFragment, key?: Key | null) => {

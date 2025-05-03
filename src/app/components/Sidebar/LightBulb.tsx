@@ -1,4 +1,4 @@
-import { HTMLAttributes, Ref } from 'react'
+import type { HTMLAttributes, Ref } from 'react'
 
 export interface LightBulbProps extends HTMLAttributes<SVGSVGElement> {
   ref?: Ref<SVGSVGElement>

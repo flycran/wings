@@ -1,11 +1,11 @@
 'use client'
-import MotionDiv, { MotionDivProps } from '@/components/motion/MotionDiv'
+import MotionDiv, { type MotionDivProps } from '@/components/motion/MotionDiv'
 import { PortalBody } from '@/components/PortalBody'
 import { useDelay } from '@/hooks/time'
-import { offset, Placement, shift, useFloating } from '@floating-ui/react'
+import { offset, type Placement, shift, useFloating } from '@floating-ui/react'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
-import { cloneElement, HTMLAttributes, ReactElement, ReactNode, Ref, useState } from 'react'
+import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, type Ref, useState } from 'react'
 
 export interface PopoverProps extends MotionDivProps {
   children: ReactElement<

@@ -2,9 +2,9 @@
 import Switchdarkmode from '@/app/components/SwitchDarkMode'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { ReactNode, useRef, useState } from 'react'
+import { type ReactNode, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
-import SlideArrow, { SlideArrowRef } from '../../../components/SlideArrow'
+import SlideArrow, { type SlideArrowRef } from '../../../components/SlideArrow'
 
 interface MenuItemProps {
   text: string
