@@ -18,7 +18,7 @@ export default function Ui() {
           ))}
         </div>
       ))}
-      <PreviewImage className="w-100 h-60 object-cover" src="/demo.png" alt="demo"/>
+      <PreviewImage className="w-100 h-60 object-cover" src="/demo.png" alt="demo" />
     </div>
   )
 }

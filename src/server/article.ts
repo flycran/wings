@@ -14,7 +14,10 @@ export type Article = {
 
 export const getArticle = async (id: string) => {
   const data = articles.find((e) => e.id === id)
-  const articleContent = await readFile(path.resolve(__dirname, '../../../../src/articles', `${id}.md`), 'utf-8')
+  const articleContent = await readFile(
+    path.resolve(__dirname, '../../../../src/articles', `${id}.md`),
+    'utf-8'
+  )
 
   if (!data) {
     return null

@@ -13,7 +13,15 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   size?: Size
 }
 
-export default function Button({ children, className, size, color, icon, variant, ...rest }: ButtonProps) {
+export default function Button({
+  children,
+  className,
+  size,
+  color,
+  icon,
+  variant,
+  ...rest
+}: ButtonProps) {
   const node = (
     <button
       {...rest}

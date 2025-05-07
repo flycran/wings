@@ -54,7 +54,7 @@ export default function Ripple({ children, color }: RippleProps) {
       Math.sqrt(left ** 2 + top ** 2) * 2,
       Math.sqrt(left ** 2 + bottom ** 2) * 2,
       Math.sqrt(right ** 2 + bottom ** 2) * 2,
-      Math.sqrt(right ** 2 + top ** 2) * 2,
+      Math.sqrt(right ** 2 + top ** 2) * 2
     )
 
     console.log(size)

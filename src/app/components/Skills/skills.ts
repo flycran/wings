@@ -148,7 +148,13 @@ export interface SkillGroupItem {
 export const skillGroup: SkillGroupItem[] = [
   {
     name: '语言',
-    skills: [skillMap.TypeScript, skillMap.JavaScript, skillMap.Python, skillMap.HTML5, skillMap.CSS3],
+    skills: [
+      skillMap.TypeScript,
+      skillMap.JavaScript,
+      skillMap.Python,
+      skillMap.HTML5,
+      skillMap.CSS3,
+    ],
   },
   {
     name: '框架',

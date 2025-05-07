@@ -27,7 +27,11 @@ export default async function RootLayout({
   const theme = themeMode ? themeMode.value : 'system'
 
   return (
-    <html lang="zh" data-theme={theme} className="bg-back-light text-zinc-900 dark:bg-back-dark dark:text-zinc-50">
+    <html
+      lang="zh"
+      data-theme={theme}
+      className="bg-back-light text-zinc-900 dark:bg-back-dark dark:text-zinc-50"
+    >
       <body>
         <NextTopLoader color="var(--color-crane-blue)" />
         <Sidebar />

@@ -28,7 +28,7 @@ export default function Markdown({ children, ...rest }: MarkdownProps) {
                 }
 
                 return (
-                  <div className='hljs atom-light dark:atom-dark'>
+                  <div className="hljs atom-light dark:atom-dark">
                     <SyntaxHighlighter
                       showLineNumbers
                       useInlineStyles={false}

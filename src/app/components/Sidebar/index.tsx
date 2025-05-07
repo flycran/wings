@@ -115,9 +115,7 @@ const Search = () => {
             onChange={(e) => onChange(e.target.value)}
             autoFocus
             placeholder="搜搜看有什么"
-            onBlur={() =>
-              Promise.resolve().then(close)
-            }
+            onBlur={() => Promise.resolve().then(close)}
             onKeyDown={({ key }) => key === 'Enter' && search()}
             className="box-border h-full w-0 flex-1 px-3"
           />

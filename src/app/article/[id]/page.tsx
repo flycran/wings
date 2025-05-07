@@ -20,8 +20,8 @@ export default async function ArticleId({ params }: ArticleIdProps) {
 
   return (
     <div className="m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl">
-      <h1 className='my-6 font-bold text-4xl'>{article.title}</h1>
-      <div className='prose dark:prose-invert my-6 max-w-none'>
+      <h1 className="my-6 font-bold text-4xl">{article.title}</h1>
+      <div className="prose dark:prose-invert my-6 max-w-none">
         <Markdown>{article.articleContent}</Markdown>
       </div>
     </div>

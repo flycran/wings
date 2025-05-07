@@ -39,7 +39,12 @@ export default function Crane() {
               strokeWidth="0"
             />
           </svg>
-          <svg className={styles.frameCraneWings1} xmlns="http://www.w3.org/2000/svg" id="b" viewBox="0 0 348.57 294">
+          <svg
+            className={styles.frameCraneWings1}
+            xmlns="http://www.w3.org/2000/svg"
+            id="b"
+            viewBox="0 0 348.57 294"
+          >
             <polygon
               points="201.35 0 348.57 0 201.35 121.83 201.35 0"
               className={styles.frameCraneColor2}
@@ -51,7 +56,12 @@ export default function Crane() {
               strokeWidth="0"
             />
           </svg>
-          <svg className={styles.frameCraneWings2} xmlns="http://www.w3.org/2000/svg" id="b" viewBox="0 0 348.57 294">
+          <svg
+            className={styles.frameCraneWings2}
+            xmlns="http://www.w3.org/2000/svg"
+            id="b"
+            viewBox="0 0 348.57 294"
+          >
             <polygon
               points="201.35 0 348.57 0 201.35 121.83 201.35 0"
               className={styles.frameCraneColor2}

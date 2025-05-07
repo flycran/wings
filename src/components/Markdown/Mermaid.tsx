@@ -10,7 +10,7 @@ export default function Mermaid({ children, ...rest }: MermaidProps) {
   const codeRef = useRef<HTMLElement>(null)
   useEffect(() => {
     mermaid.initialize({
-      theme: 'default'
+      theme: 'default',
     })
     mermaid.run({
       nodes: [codeRef.current!],

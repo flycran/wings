@@ -18,7 +18,14 @@ export interface PopoverProps extends MotionDivProps {
   panel?: ReactNode
 }
 
-export default function Popover({ children, placement, delay, className, panel, ...rest }: PopoverProps) {
+export default function Popover({
+  children,
+  placement,
+  delay,
+  className,
+  panel,
+  ...rest
+}: PopoverProps) {
   const [open, setOpen] = useState(false)
   const { refs, floatingStyles } = useFloating({
     placement,

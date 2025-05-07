@@ -39,12 +39,12 @@ const Pagination = ({
   }, [])
 
   return (
-    <div className='-translate-x-1/2 absolute bottom-2 left-1/2 z-1 flex h-10 min-w-10 gap-2 rounded-full bg-gray-800/50 p-2'>
+    <div className="-translate-x-1/2 absolute bottom-2 left-1/2 z-1 flex h-10 min-w-10 gap-2 rounded-full bg-gray-800/50 p-2">
       {list.map(({ color }, i) => (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           key={i}
-          className='aspect-square w-7 cursor-pointer text-crane-orange'
+          className="aspect-square w-7 cursor-pointer text-crane-orange"
           onClick={() => onChange?.(i)}
           width={size}
           height={size}
@@ -64,14 +64,17 @@ const Pagination = ({
             }}
           />
           <circle
-            className='-rotate-90 origin-center fill-none stroke-2 ease-linear'
+            className="-rotate-90 origin-center fill-none stroke-2 ease-linear"
             strokeLinecap="round"
             stroke="currentColor"
             style={{
               strokeDasharray: `calc(${ringRadius}px * 2 * 3.14) calc(${ringRadius}px * 2 * 3.14)`,
               transitionProperty: 'stroke-dashoffset',
               transitionDuration: index === i && enableAutoplay ? `${autoplayDelay}ms` : '',
-              strokeDashoffset: inited && index === i && enableAutoplay ? '0px' : `calc(${ringRadius}px * 2 * 3.14)`,
+              strokeDashoffset:
+                inited && index === i && enableAutoplay
+                  ? '0px'
+                  : `calc(${ringRadius}px * 2 * 3.14)`,
             }}
             cx={centerDot}
             cy={centerDot}
@@ -91,7 +94,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
 
   return (
     <div
-      className='overflow-hidden rounded-xl bg-skeleton shadow'
+      className="overflow-hidden rounded-xl bg-skeleton shadow"
       style={{
         gridArea: '1 / 2 / 3 / 3',
       }}
@@ -127,7 +130,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
           {carousels.length ? (
             carousels.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link href={item.href} className='relative inline-block h-full w-full bg-skeleton'>
+                <Link href={item.href} className="relative inline-block h-full w-full bg-skeleton">
                   <Image fill src={item.cover} alt={item.title} className="object-cover" />
                 </Link>
               </SwiperSlide>
@@ -156,7 +159,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
   return (
     <>
       <div
-        className='overflow-hidden rounded-xl bg-skeleton shadow'
+        className="overflow-hidden rounded-xl bg-skeleton shadow"
         style={{
           gridArea: '1 / 1 / 2 / 2',
         }}
@@ -170,7 +173,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
         )}
       </div>
       <div
-        className='overflow-hidden rounded-xl bg-skeleton shadow'
+        className="overflow-hidden rounded-xl bg-skeleton shadow"
         style={{
           gridArea: '2 / 1 / 3 / 2',
         }}

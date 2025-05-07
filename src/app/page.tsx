@@ -117,7 +117,9 @@ export default async function Home() {
               }}
               className="flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-zinc-100 shadow-card dark:bg-zinc-800"
             >
-              <div className="font-bold text-2xl text-crane-blue">{countUnit.format(homeData.visitCount, '-1')}</div>
+              <div className="font-bold text-2xl text-crane-blue">
+                {countUnit.format(homeData.visitCount, '-1')}
+              </div>
               <div className="h-1" />
               <div className="text-sm ">总访问量</div>
             </div>
@@ -156,7 +158,9 @@ export default async function Home() {
                       {platform.icon}
                     </Link>
                   ) : (
-                    <div className="inline-flex h-full w-full items-center justify-center">{platform.icon}</div>
+                    <div className="inline-flex h-full w-full items-center justify-center">
+                      {platform.icon}
+                    </div>
                   )}
                 </div>
               </Popover>

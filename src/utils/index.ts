@@ -8,6 +8,9 @@ export function* chunkGenerator<T>(arr: T[], n: number) {
 
 export const customVar = (vars: { [k: string]: string | number | undefined }) => {
   return Object.fromEntries(
-    Object.entries(vars).map(([k, v]) => [`--${k.replace(/[A-Z]/g, (a) => `-${a.toLowerCase()}`)}`, v])
+    Object.entries(vars).map(([k, v]) => [
+      `--${k.replace(/[A-Z]/g, (a) => `-${a.toLowerCase()}`)}`,
+      v,
+    ])
   ) as CSSProperties
 }

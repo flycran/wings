@@ -43,7 +43,7 @@ export default function WheelNext() {
             y: -20,
             opacity: 0,
           }}
-          className='-translate-x-1/2 absolute bottom-3 left-1/2 z-1 flex cursor-pointer flex-col items-center gap-1 text-crane-orange drop-shadow'
+          className="-translate-x-1/2 absolute bottom-3 left-1/2 z-1 flex cursor-pointer flex-col items-center gap-1 text-crane-orange drop-shadow"
           onClick={toNext}
         >
           <div className="flex h-15 w-6 justify-center rounded-full bg-current pt-7">
