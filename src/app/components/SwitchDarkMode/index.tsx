@@ -77,17 +77,17 @@ export default function Switchdarkmode() {
 
   return (
     <MotionDiv
-      className="relative -z-1 w-22"
+      className='-z-1 relative w-22'
       whileTap={{
         y: 15,
       }}
       onClick={handleClick}
     >
-      <div className="absolute -top-5 left-1/2 h-25 -translate-x-1/2 border-l-1 border-gray-300" />
+      <div className='-top-5 -translate-x-1/2 absolute left-1/2 h-25 border-gray-300 border-l-1' />
       <LightBulb
         ref={lightBulbRef}
         darkMode={darkMode}
-        className="absolute top-20 left-1/2 h-10 w-10 -translate-x-1/2 rotate-180 cursor-pointer"
+        className='-translate-x-1/2 absolute top-20 left-1/2 h-10 w-10 rotate-180 cursor-pointer'
       />
     </MotionDiv>
   )

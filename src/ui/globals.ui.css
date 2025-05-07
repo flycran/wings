@@ -1,0 +1,70 @@
+/*@import "tailwindcss";*/
+/* UI */
+@theme {
+  --color-primary: var(--color-crane-blue);
+  --color-warning: var(--color-crane-orange);
+  --color-success: var(--color-crane-green);
+  --color-danger: var(--color-crane-red);
+  --color-preset: var(--color-back);
+  --color-preset-s5: hsl(from var(--color-preset) h s calc(l - 5));
+  --color-preset-s10: hsl(from var(--color-preset) h s calc(l - 10));
+  --color-preset-s15: hsl(from var(--color-preset) h s calc(l - 15));
+  --color-preset-s20: hsl(from var(--color-preset) h s calc(l - 20));
+  --color-preset-a5: hsl(from var(--color-preset) h s calc(l + 5));
+  --color-preset-a10: hsl(from var(--color-preset) h s calc(l + 10));
+  --color-preset-a15: hsl(from var(--color-preset) h s calc(l + 15));
+  --color-preset-a20: hsl(from var(--color-preset) h s calc(l + 20));
+}
+
+@utility preset-color-* {
+  --color-preset: --value(--color-\*);
+  --color-preset-s5: hsl(from var(--color-preset) h s calc(l - 5));
+  --color-preset-s10: hsl(from var(--color-preset) h s calc(l - 10));
+  --color-preset-s15: hsl(from var(--color-preset) h s calc(l - 15));
+  --color-preset-s20: hsl(from var(--color-preset) h s calc(l - 20));
+  --color-preset-a5: hsl(from var(--color-preset) h s calc(l + 5));
+  --color-preset-a10: hsl(from var(--color-preset) h s calc(l + 10));
+  --color-preset-a15: hsl(from var(--color-preset) h s calc(l + 15));
+  --color-preset-a20: hsl(from var(--color-preset) h s calc(l + 20));
+}
+
+@custom-variant vt-solid {
+  &:where(.vt-solid, .vt-solid *) {
+    @slot;
+  }
+}
+@custom-variant vt-outlined {
+  &:where(.vt-outlined, .vt-outlined *) {
+    @slot;
+  }
+}
+@custom-variant vt-dashed {
+  &:where(.vt-dashed, .vt-dashed *) {
+    @slot;
+  }
+}
+@custom-variant vt-filled {
+  &:where(.vt-filled, .vt-filled *) {
+    @slot;
+  }
+}
+@custom-variant vt-text {
+  &:where(.vt-text, .vt-text *) {
+    @slot;
+  }
+}
+@custom-variant size-large {
+  &:where(.size-large, .size-large *) {
+    @slot;
+  }
+}
+@custom-variant size-default {
+  &:where(.size-default, .size-default *) {
+    @slot;
+  }
+}
+@custom-variant size-small {
+  &:where(.size-small, .size-small *) {
+    @slot;
+  }
+}

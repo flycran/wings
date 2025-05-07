@@ -1,9 +1,9 @@
 import Sidebar from '@/app/components/Sidebar'
 import '@/assets/fonts/AlimamaFangYuanTi/index.css'
-import type { Metadata, Viewport } from 'next'
+import { Metadata, Viewport } from 'next'
 import { cookies } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader'
-import type { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import 'swiper/css'
 import './globals.css'
 
@@ -27,7 +27,7 @@ export default async function RootLayout({
   const theme = themeMode ? themeMode.value : 'system'
 
   return (
-    <html lang="zh" data-theme={theme} className="bg-[#fffdf9] text-zinc-900 dark:bg-[#171717] dark:text-zinc-50">
+    <html lang="zh" data-theme={theme} className="bg-back-light text-zinc-900 dark:bg-back-dark dark:text-zinc-50">
       <body>
         <NextTopLoader color="var(--color-crane-blue)" />
         <Sidebar />

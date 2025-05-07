@@ -15,6 +15,9 @@
     "incremental": true,
     "plugins": [
       {
+        "title": "next"
+      },
+      {
         "name": "next"
       }
     ],

@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import type { ComponentProps } from 'react'
+import { ComponentProps } from 'react'
 
 export type MotionDivProps = ComponentProps<typeof motion.div>
 

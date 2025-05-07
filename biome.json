@@ -16,7 +16,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 120,
+    "lineWidth": 100,
     "attributePosition": "auto",
     "bracketSpacing": true
   },
@@ -68,7 +68,8 @@
         "useAsConstAssertion": "error",
         "useBlockStatements": "off",
         "useConst": "error",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useImportType": "off"
       },
       "suspicious": {
         "noClassAssign": "off",
@@ -90,7 +91,10 @@
         "noArrayIndexKey": "off"
       },
       "nursery": {
-        "noImgElement": "warn"
+        "noImgElement": "warn",
+        "noCommonJs": "error",
+        "noDuplicateElseIf": "error",
+        "noHeadElement": "error"
       }
     }
   },

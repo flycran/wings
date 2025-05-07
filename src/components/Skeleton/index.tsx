@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 import styles from './index.module.css'
 
 export type SkeletonProps = HTMLAttributes<HTMLDivElement>

@@ -1,10 +1,10 @@
 'use client'
-import type { GridViewData, HomeData } from '@/server/home'
+import { GridViewData, HomeData } from '@/server/home'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
-import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import NoData from '../../../components/NoData'
 
 interface PaginationProps {
@@ -39,12 +39,12 @@ const Pagination = ({
   }, [])
 
   return (
-    <div className="absolute bottom-2 left-1/2 z-1 flex h-10 min-w-10 -translate-x-1/2 gap-2 rounded-full bg-gray-800/50 p-2">
+    <div className='-translate-x-1/2 absolute bottom-2 left-1/2 z-1 flex h-10 min-w-10 gap-2 rounded-full bg-gray-800/50 p-2'>
       {list.map(({ color }, i) => (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           key={i}
-          className="text-crane-orange aspect-square w-7 cursor-pointer"
+          className='aspect-square w-7 cursor-pointer text-crane-orange'
           onClick={() => onChange?.(i)}
           width={size}
           height={size}
@@ -64,7 +64,7 @@ const Pagination = ({
             }}
           />
           <circle
-            className="origin-center -rotate-90 fill-none stroke-2 ease-linear"
+            className='-rotate-90 origin-center fill-none stroke-2 ease-linear'
             strokeLinecap="round"
             stroke="currentColor"
             style={{
@@ -91,7 +91,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
 
   return (
     <div
-      className="bg-skeleton overflow-hidden rounded-xl shadow"
+      className='overflow-hidden rounded-xl bg-skeleton shadow'
       style={{
         gridArea: '1 / 2 / 3 / 3',
       }}
@@ -127,7 +127,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
           {carousels.length ? (
             carousels.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link href={item.href} className="bg-skeleton relative inline-block h-full w-full">
+                <Link href={item.href} className='relative inline-block h-full w-full bg-skeleton'>
                   <Image fill src={item.cover} alt={item.title} className="object-cover" />
                 </Link>
               </SwiperSlide>
@@ -156,7 +156,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
   return (
     <>
       <div
-        className="bg-skeleton overflow-hidden rounded-xl shadow"
+        className='overflow-hidden rounded-xl bg-skeleton shadow'
         style={{
           gridArea: '1 / 1 / 2 / 2',
         }}
@@ -170,7 +170,7 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
         )}
       </div>
       <div
-        className="bg-skeleton overflow-hidden rounded-xl shadow"
+        className='overflow-hidden rounded-xl bg-skeleton shadow'
         style={{
           gridArea: '2 / 1 / 3 / 2',
         }}

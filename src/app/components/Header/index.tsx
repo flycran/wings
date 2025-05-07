@@ -25,7 +25,7 @@ const Menu = () => {
   ]
 
   return (
-    <ul className="absolute top-0 left-1/2 flex h-full -translate-x-1/2 items-center text-lg">
+    <ul className='-translate-x-1/2 absolute top-0 left-1/2 flex h-full items-center text-lg'>
       {menus.map((menu) => (
         <MenuItem key={menu.href} {...menu} />
       ))}

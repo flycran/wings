@@ -1,5 +1,4 @@
 'use server'
-
 import config from '@/config'
 
 export interface HomeData {
@@ -32,6 +31,7 @@ export interface HomeData {
       gists: number
     } | null
   }
+  visitCount: number
 }
 
 export interface GridViewData {
@@ -138,5 +138,6 @@ export const getHomeData = async (): Promise<HomeData> => {
       juejin,
       github,
     },
+    visitCount: 8169001,
   }
 }

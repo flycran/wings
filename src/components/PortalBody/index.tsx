@@ -1,6 +1,6 @@
 'use client'
 import { usePortal } from '@/hooks/portal'
-import type { Key, ReactNode } from 'react'
+import { Key, ReactNode } from 'react'
 
 export interface PortalBodyProps {
   children: ReactNode

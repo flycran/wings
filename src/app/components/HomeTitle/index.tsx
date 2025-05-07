@@ -20,13 +20,13 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="line rounded-xl text-[3rem]/[1.3] font-bold text-white shadow-sm select-none sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
+          className='line select-none rounded-xl font-bold text-[3rem]/[1.3] text-white shadow-sm sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]'
           style={{
             fontFamily: 'sans-serif',
           }}
         >
-          <span className="bg-crane-blue inline-block rounded-l-xl pr-3 pl-5">FLY</span>
-          <span className="bg-crane-orange inline-block rounded-r-xl pr-5 pl-3">CRAN</span>
+          <span className='inline-block rounded-l-xl bg-crane-blue pr-3 pl-5'>FLY</span>
+          <span className='inline-block rounded-r-xl bg-crane-orange pr-5 pl-3'>CRAN</span>
         </MotionDiv>
         <MotionDiv
           initial={{
@@ -44,15 +44,15 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="pt-3 pb-4 text-[1.75rem] font-bold text-zinc-600 sm:text-[2.5rem] lg:text-[3rem] dark:text-zinc-300"
+          className='pt-3 pb-4 font-bold text-[1.75rem] text-zinc-600 sm:text-[2.5rem] lg:text-[3rem] dark:text-zinc-300'
           style={{
             fontFamily: 'sans-serif',
           }}
         >
           <span className="relative py-1">
             <span className="relative text-transparent">Flying crane</span>
-            <svg className="absolute top-0 left-0 -z-1 h-full w-full py-1 select-none" width="100%" height="100%">
-              <text x="0" y="0" alignmentBaseline="text-before-edge" className="fill-none stroke-current stroke-1">
+            <svg className='-z-1 absolute top-0 left-0 h-full w-full select-none py-1' width="100%" height="100%">
+              <text x="0" y="0" alignmentBaseline="text-before-edge" className='fill-none stroke-1 stroke-current'>
                 Flying crane
               </text>
             </svg>

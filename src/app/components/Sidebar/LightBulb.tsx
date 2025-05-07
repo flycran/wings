@@ -1,4 +1,4 @@
-import type { HTMLAttributes, Ref } from 'react'
+import { HTMLAttributes, Ref } from 'react'
 
 export interface LightBulbProps extends HTMLAttributes<SVGSVGElement> {
   ref?: Ref<SVGSVGElement>
@@ -21,12 +21,12 @@ const LightBulb = ({ darkMode, ref, className, ...rest }: LightBulbProps) => {
     >
       <path
         d="M836.955114 387.898396c0-174.238415-141.248187-315.486601-315.486601-315.486601S205.981912 213.664369 205.981912 387.898396c0 102.971626 49.349345 194.401059 125.669955 251.980413h-0.021935l0.052644 0.021935a313.845864 313.845864 0 0 0 27.510867 18.565777c36.052353 31.077496 94.671425 107.924547 94.671425 279.113998h99.725247s23.123868-195.568001 141.976429-286.611378a313.012334 313.012334 0 0 0 15.534361-10.958722c0.074579-0.04387 0.135997-0.092127 0.206189-0.13161h-0.026322c76.324998-57.579354 125.674342-149.0044 125.674342-251.980413z"
-        className="selected:fill-transparent fill-[#FFD75E] transition duration-200 ease-in-out dark:fill-transparent"
+        className='fill-[#FFD75E] selected:fill-transparent transition duration-200 ease-in-out dark:fill-transparent'
         p-id="8914"
       />
       <path
         d="M507.552954 98.071349S241.933364 171.71589 298.674801 430.838337s155.738442 152.825475 155.738442 335.605375v208.176234l-75.294053-76.443446v-136.119786l27.037071-48.256982s-177.068028-98.553919-177.068029-207.206707c0-108.657176-67.612419-383.748296 278.464722-408.521676z"
-        className="selected:fill-transparent fill-[#FFFFFF] transition duration-200 ease-in-out dark:fill-transparent"
+        className='fill-[#FFFFFF] selected:fill-transparent transition duration-200 ease-in-out dark:fill-transparent'
         opacity=".25"
         p-id="8915"
       />
@@ -52,7 +52,7 @@ const LightBulb = ({ darkMode, ref, className, ...rest }: LightBulbProps) => {
       />
       <path
         d="M490.101475 96.027007s223.039384 12.56875 223.039384 223.043772c0 210.479408-192.931415 175.383421-192.931414 469.312312v213.488889s90.837188-15.946739 90.837188-59.816723 57.952249-28.677808 52.841395-74.776387c-5.110853-46.094192 5.110853-34.674835 0-92.192771s-32.40237-70.420098 26.330765-129.153232c58.737521-58.733134 194.111517-212.896644 93.210554-423.472566s-273.818891-106.928698-293.327872-126.433294z"
-        className="selected:fill-transparent fill-[#6E6E96] transition duration-200 ease-in-out dark:fill-transparent"
+        className='fill-[#6E6E96] selected:fill-transparent transition duration-200 ease-in-out dark:fill-transparent'
         opacity=".1"
         p-id="8920"
       />
@@ -63,7 +63,7 @@ const LightBulb = ({ darkMode, ref, className, ...rest }: LightBulbProps) => {
       />
       <path
         d="M467.574238 334.012895c-18.877254 52.433405-25.001504 83.287164-64.89248 68.924132-39.895363-14.363033-56.930078-68.511754-38.048437-120.940771 18.877254-52.433405 66.524443-83.287164 106.41542-68.924132 39.895363 14.363033 15.407138 68.511754-3.474503 120.940771z"
-        className="selected:fill-transparent fill-[#FFFFFF] transition duration-200 ease-in-out dark:fill-transparent"
+        className='fill-[#FFFFFF] selected:fill-transparent transition duration-200 ease-in-out dark:fill-transparent'
         opacity=".4"
         p-id="8922"
       />

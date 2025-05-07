@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 export interface CsdnProps extends HTMLAttributes<SVGSVGElement> {
   size?: number

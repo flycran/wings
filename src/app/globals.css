@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "../assets/highlight/atom-one-light.css";
+@import "../assets/highlight/atom-one-dark.css";
+@import "../ui/globals.ui.css";
+@plugin "@tailwindcss/typography";
 
 /*暗色模式*/
 @custom-variant dark {
@@ -22,6 +26,21 @@ input {
   --color-crane-blue: #00abff;
   --color-crane-red: #fb658b;
   --color-skeleton: var(--color-gray-100);
+  --shadow-card: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px
+    rgba(0, 0, 0, 0.05);
+  --color-back-light: #fffdfc;
+  --color-back-dark: #171717;
+  --color-back: var(--color-back-light);
+  --color-popover: #f6f5f4;
+  --color-popover-dark: #1f1f1f;
+}
+
+:root.bg-back-light {
+  --color-back: var(--color-back-light);
+}
+
+:root.bg-back-dark {
+  --color-back: var(--color-back-dark);
 }
 
 @layer components {
@@ -30,6 +49,18 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .transition-background {
+    transition-property: background, background-color, border-color;
+  }
+}
+
+@utility ellipsis-* {
+  width: 200px;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: --value(integer);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 body {
@@ -37,6 +68,68 @@ body {
   font-weight: normal;
 }
 
+/* 覆盖prose */
+@utility prose {
+  --tw-prose-pre-bg: var(--color-zinc-100);
+  --tw-prose-code-bg: rgba(from var(--color-zinc-800) r g b / 0.05);
+  --tw-code-text-color: var(--color-crane-orange);
+  --tw-prose-quote-bg: rgba(from var(--color-zinc-100) r g b / 0.5);
+}
+
+@utility prose-invert {
+  --tw-prose-code-bg: rgba(from var(--color-crane-orange) r g b / 0.2);
+  --tw-prose-quote-bg: rgba(from var(--color-zinc-800) r g b / 0.5);
+  --tw-prose-quote-borders: var(--color-zinc-700);
+}
+
+@utility atom-light {
+  .hljs {
+    background-color: transparent;
+
+    .linenumber {
+      border-right: 1px solid var(--color-zinc-300);
+      margin-right: 0.75em;
+    }
+  }
+}
+
+@utility atom-dark {
+  .hljs .linenumber {
+    border-right: 1px solid var(--color-zinc-700);
+  }
+}
+
+.prose :where(code):not(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: var(--tw-prose-code-bg);
+  padding: 0.25em;
+  margin: 0 0.2em;
+  border-radius: .2rem;
+  line-height: 1.71429;
+  color: var(--tw-code-text-color);
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: var(--tw-prose-quote-bg);
+  border-radius: .4rem;
+  border-inline-start-width: .5em;
+  padding: 0.5em;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) > p {
+  margin: 0;
+}
+
+.prose :where(pre):has(.mermaid):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: transparent;
+}
+
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)):before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)):after {
+  content: "";
+  display: none;
+}
+
+/* 自定义 */
 @custom-variant selected {
   &:where([data-selected="true"] *) {
     @slot;

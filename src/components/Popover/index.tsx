@@ -1,11 +1,11 @@
 'use client'
-import MotionDiv, { type MotionDivProps } from '@/components/motion/MotionDiv'
+import MotionDiv, { MotionDivProps } from '@/components/motion/MotionDiv'
 import { PortalBody } from '@/components/PortalBody'
 import { useDelay } from '@/hooks/time'
-import { offset, type Placement, shift, useFloating } from '@floating-ui/react'
+import { offset, Placement, shift, useFloating } from '@floating-ui/react'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
-import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, type Ref, useState } from 'react'
+import { cloneElement, HTMLAttributes, ReactElement, ReactNode, Ref, useState } from 'react'
 
 export interface PopoverProps extends MotionDivProps {
   children: ReactElement<
@@ -70,7 +70,7 @@ export default function Popover({ children, placement, delay, className, panel, 
               <MotionDiv
                 initial={{
                   opacity: 0,
-                  scale: 0.2,
+                  scale: 0.6,
                 }}
                 animate={{
                   opacity: 1,
@@ -78,7 +78,7 @@ export default function Popover({ children, placement, delay, className, panel, 
                 }}
                 exit={{
                   opacity: 0,
-                  scale: 0.2,
+                  scale: 0.6,
                 }}
                 {...rest}
                 className={clsx(

@@ -13,7 +13,7 @@
 
 .frameCrane {
   width: 90%;
-  aspect-ratio: 348.57/294;
+  aspect-ratio: 348.57 / 294;
   transform: rotate3d(0, 1, 0, 15deg) rotate3d(0, 0, 1, -15deg);
   perspective: 2000px;
   transform-style: preserve-3d;
@@ -32,8 +32,7 @@
 }
 
 .frameCraneWings1 {
-  /*移除`+ 0deg`会导致静态检查错误*/
-  transform: rotate3d(1, 0, 0, calc(-1 * var(--angle) + 0deg));
+  transform: rotate3d(1, 0, 0, calc(-1 * var(--angle)));
   transform-origin: 0 41.43%;
 }
 
