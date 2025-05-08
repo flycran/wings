@@ -69,11 +69,6 @@ input {
   overflow: hidden;
 }
 
-body {
-  font-family: "AlimamaFangYuanTi", serif;
-  font-weight: normal;
-}
-
 /* 覆盖prose */
 @utility prose {
   --tw-prose-pre-bg: var(--color-zinc-100);
