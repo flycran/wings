@@ -14,10 +14,6 @@ export type Article = {
 
 export const getArticle = async (id: string) => {
   const data = articles.find((e) => e.id === id)
-  const articleContent = await readFile(
-    path.resolve(__dirname, '../../../../src/articles', `${id}.md`),
-    'utf-8'
-  )
 
   if (!data) {
     return null
@@ -25,7 +21,7 @@ export const getArticle = async (id: string) => {
 
   return {
     ...data,
-    articleContent,
+    articleContent: '',
   }
 }
 
@@ -35,21 +31,6 @@ const articleDocument = new Document<Article>({
     store: ['title', 'articleContent', 'tags', 'category'],
   },
 })
-
-const initArticleDocument = async () => {
-  for (const article of articles) {
-    const articleContent = await readFile(
-      path.resolve(__dirname, '../../../../src/articles', `${article.id}.md`),
-      'utf-8'
-    )
-    articleDocument.add({
-      ...article,
-      articleContent,
-    })
-  }
-}
-
-initArticleDocument()
 
 export interface SearchArticleParams {
   search: string
