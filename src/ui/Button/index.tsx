@@ -27,8 +27,8 @@ export default function Button({
       {...rest}
       className={clsx(
         'relative rounded-lg duration-200 transition-background cursor-pointer preset-color-primary',
-        'size-small:h-6 size-small:px-3 size-small:text-sm',
-        'size-default:h-8 size-default:px-3.5 size-default:text-base',
+        'size-small:h-6 size-small:px-2 size-small:text-sm',
+        'size-default:h-8 size-default:px-3 size-default:text-base',
         'size-large:h-10 size-large:px-4 size-large:text-lg',
         'vt-solid:text-white vt-solid:border-preset vt-solid:border vt-solid:bg-preset',
         'vt-solid:hover:bg-preset-a10 hover:border-preset-a10  vt-solid:active:bg-preset active:border-preset-s5',

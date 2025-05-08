@@ -26,8 +26,7 @@ input {
   --color-crane-blue: #00abff;
   --color-crane-red: #fb658b;
   --color-skeleton: var(--color-gray-100);
-  --shadow-card: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px
-    8px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
   --color-back-light: #fffdfc;
   --color-back-dark: #171717;
   --color-back: var(--color-back-light);
@@ -35,11 +34,7 @@ input {
   --color-popover-dark: #1f1f1f;
 }
 
-:root.bg-back-light {
-  --color-back: var(--color-back-light);
-}
-
-:root.bg-back-dark {
+@utility bg-back-dark {
   --color-back: var(--color-back-dark);
 }
 
@@ -51,6 +46,16 @@ input {
   }
   .transition-background {
     transition-property: background, background-color, border-color;
+  }
+
+  .mask-number-scroll {
+    mask: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(253, 253, 253, 1) 20%,
+      rgba(255, 255, 255, 1) 80%,
+      rgba(0, 0, 0, 1) 100%
+    ) luminance;
   }
 }
 

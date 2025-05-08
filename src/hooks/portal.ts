@@ -1,4 +1,4 @@
-import { Key, ReactNode, useEffect, useState } from 'react'
+import { Key, ReactNode, useEffect, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export const usePortal = (
@@ -7,7 +7,7 @@ export const usePortal = (
   key?: Key | null
 ) => {
   const [mounted, setMounted] = useState(false)
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true)
   }, [])
   return mounted && createPortal(children, container(), key)

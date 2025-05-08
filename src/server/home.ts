@@ -101,36 +101,28 @@ export const getHomeData = async (): Promise<HomeData> => {
     getPlatformInfo.github().catch(() => null),
   ])
 
+  const random = (min: number, max: number) => Math.floor(Math.random() * (max - min) + min)
+
+  const carousels = Array(random(1, 10))
+    .fill(null)
+    .map((_) => ({
+      title: 'Flycran',
+      cover: `https://api.hn/acg.php?random=${random(0, 10000)}`,
+      href: '/',
+      color: `hsl(${random(0, 360)},${random(50, 100)}%,${random(30, 70)}%)`,
+    }))
+
   return {
-    carousels: [
-      {
-        title: 'Flycran',
-        cover: '/demo.png',
-        href: '/',
-        color: '#f9d423',
-      },
-      {
-        title: 'Flycran2',
-        cover: '/demo.png',
-        href: '/',
-        color: '#76d6e8',
-      },
-      {
-        title: 'Flycran3',
-        cover: '/demo.png',
-        href: '/',
-        color: '#ec5ec0',
-      },
-    ],
+    carousels,
     fixeds: [
       {
         title: 'Flycran',
-        cover: '/demo.png',
+        cover: `https://api.hn/acg.php?random=${random(0, 10000)}`,
         href: '/',
       },
       {
         title: 'Flycran2',
-        cover: '/demo.png',
+        cover: `https://api.hn/acg.php?random=${random(0, 10000)}`,
         href: '/',
       },
     ],

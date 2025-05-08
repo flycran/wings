@@ -1,11 +1,11 @@
 import Sidebar from '@/app/components/Sidebar'
-import '@/assets/fonts/AlimamaFangYuanTi/index.css'
 import { Metadata, Viewport } from 'next'
 import { cookies } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader'
 import { ReactNode } from 'react'
 import 'swiper/css'
 import './globals.css'
+import '@/assets/font.css'
 
 export const metadata: Metadata = {
   title: 'Wings | 插上梦想的翅膀',

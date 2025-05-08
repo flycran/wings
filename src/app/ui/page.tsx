@@ -1,24 +1,35 @@
+'use client'
+import NumberScroll from '../../components/NumberAnimation'
 import Button from '@/ui/Button'
-import PreviewImage from '@/ui/PreviewImage'
 import { presetColors, sizes, variants } from '@/ui/utils'
+import { useEffect, useState } from 'react'
 
 export default function Ui() {
+  const [number, setNumber] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNumber((prev) => prev + 1)
+    }, 1000)
+    return () => clearInterval(interval)
+  })
+
   return (
     <div className="m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl 2xl:w-6xl p-8">
-      {sizes.map((size) => (
-        <div key={size}>
-          {presetColors.map((color) => (
-            <div className="mb-3 space-x-2" key={color}>
-              {variants.map((variant) => (
-                <Button key={variant} variant={variant} color={color} size={size}>
-                  按钮
+      <div className="grid gap-4 grid-cols-5 w-150">
+        {sizes.map((size) =>
+          presetColors.map((color) =>
+            variants.map((variant) => (
+              <div key={`${size}-${color}-${variant}`} className="text-center">
+                <Button variant={variant} color={color} size={size}>
+                  {variant}
                 </Button>
-              ))}
-            </div>
-          ))}
-        </div>
-      ))}
-      <PreviewImage className="w-100 h-60 object-cover" src="/demo.png" alt="demo" />
+              </div>
+            ))
+          )
+        )}
+      </div>
+      <NumberScroll className="text-5xl m-3" value={number} />
     </div>
   )
 }

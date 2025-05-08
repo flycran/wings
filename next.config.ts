@@ -2,9 +2,13 @@ import createMDX from '@next/mdx'
 import { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  pageExtensions: [ 'js', 'jsx', 'md', 'mdx', 'ts', 'tsx' ],
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        hostname: 'api.hn',
+      },
+    ],
   },
 }
 

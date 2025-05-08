@@ -1,4 +1,4 @@
-import Crane from '@/app/components/Crane'
+import Crane from '@/app/components/HomeCrane/Crane'
 import MotionDiv from '@/components/motion/MotionDiv'
 
 export default function HomeCrane() {

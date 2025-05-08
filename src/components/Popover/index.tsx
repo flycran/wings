@@ -1,11 +1,11 @@
 'use client'
 import MotionDiv, { MotionDivProps } from '@/components/motion/MotionDiv'
 import { PortalBody } from '@/components/PortalBody'
-import { useDelay } from '@/hooks/time'
-import { offset, Placement, shift, useFloating } from '@floating-ui/react'
+import { usePopover } from '@/hooks/popover'
+import { Placement } from '@floating-ui/react'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
-import { cloneElement, HTMLAttributes, ReactElement, ReactNode, Ref, useState } from 'react'
+import { cloneElement, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react'
 
 export interface PopoverProps extends MotionDivProps {
   children: ReactElement<
@@ -26,43 +26,17 @@ export default function Popover({
   panel,
   ...rest
 }: PopoverProps) {
-  const [open, setOpen] = useState(false)
-  const { refs, floatingStyles } = useFloating({
+  const {open, refs, floatingStyles, enter, leave} = usePopover({
     placement,
-    open,
-    onOpenChange: setOpen,
-    middleware: [
-      offset(8),
-      shift({
-        padding: 8,
-      }),
-    ],
+    delay,
   })
-
-  const [startEnter, cancelEnter] = useDelay(() => {
-    setOpen(true)
-  }, delay)
-
-  const [startLeave, cancelLeave] = useDelay(() => {
-    setOpen(false)
-  }, 150)
-
-  const mouseEnter = () => {
-    startEnter()
-    cancelLeave()
-  }
-
-  const mouseLeave = () => {
-    startLeave()
-    cancelEnter()
-  }
 
   return (
     <>
       {cloneElement(children, {
         ref: refs.setReference,
-        onMouseEnter: mouseEnter,
-        onMouseLeave: mouseLeave,
+        onMouseEnter: enter,
+        onMouseLeave: leave,
       })}
       <PortalBody>
         <AnimatePresence>
@@ -71,8 +45,8 @@ export default function Popover({
               className="z-10"
               ref={refs.setFloating}
               style={floatingStyles}
-              onMouseEnter={mouseEnter}
-              onMouseLeave={mouseLeave}
+              onMouseEnter={enter}
+              onMouseLeave={leave}
             >
               <MotionDiv
                 initial={{
