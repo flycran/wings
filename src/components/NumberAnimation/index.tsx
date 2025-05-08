@@ -9,22 +9,19 @@ export interface NumberScrollProps {
   className?: string
 }
 
-export function NumberScroll({
-                               value = 0,
-                               className,
-                             }: NumberScrollProps) {
+export function NumberScroll({ value = 0, className }: NumberScrollProps) {
   const v = String(value).split('')
 
   return (
     <span
-      className={ clsx(
+      className={clsx(
         'inline-block overflow-hidden h-[1.5em] box-content mask-number-scroll',
-        className,
-      ) }
+        className
+      )}
     >
-      { v.map((e, i) => (
-        <SingleNumber key={ i } value={ e } />
-      )) }
+      {v.map((e, i) => (
+        <SingleNumber key={i} value={e} />
+      ))}
     </span>
   )
 }
@@ -37,30 +34,30 @@ function SingleNumber({ value }: SingleNumberProps) {
   const nodes: ReactNode[] = []
   const v = +value
 
-  for(let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     nodes.push(
-      <span className="h-[1.5em] leading-[1.5em] shrink-0" key={ i }>
-        { i }
-      </span>,
+      <span className="h-[1.5em] leading-[1.5em] shrink-0" key={i}>
+        {i}
+      </span>
     )
   }
 
-  if(Number.isNaN(v)) {
-    return <span className="inline-flex flex-col h-[1.5em]">{ value }</span>
+  if (Number.isNaN(v)) {
+    return <span className="inline-flex flex-col h-[1.5em]">{value}</span>
   }
 
   return (
     <motion.span
-      transition={ {
+      transition={{
         type: 'tween',
         ease: 'easeOut',
-      } }
-      animate={ {
-        y: `-${ v }00%`,
-      } }
+      }}
+      animate={{
+        y: `-${v}00%`,
+      }}
       className="inline-flex items-center flex-col h-[1.5em]"
     >
-      { nodes }
+      {nodes}
     </motion.span>
   )
 }
@@ -72,22 +69,21 @@ export interface NumberAnimationProps extends NumberScrollProps {
   delay?: number
 }
 
-export default function NumberAnimation(
-  {
-    value: newValue = 0,
-    format,
-    initial,
-    delay,
-    ...rest
-  }: NumberAnimationProps) {
-  const [ value, setValue ] = useState(initial ?? 0)
+export default function NumberAnimation({
+  value: newValue = 0,
+  format,
+  initial,
+  delay,
+  ...rest
+}: NumberAnimationProps) {
+  const [value, setValue] = useState(initial ?? 0)
   const animateRef = useRef<AnimationPlaybackControlsWithThen>(null)
 
   useEffect(() => {
-    if(animateRef.current) {
+    if (animateRef.current) {
       animateRef.current.stop()
     }
-    if(delay && value !== newValue) {
+    if (delay && value !== newValue) {
       animateRef.current = animate(
         { number: value },
         { number: newValue },
@@ -99,17 +95,17 @@ export default function NumberAnimation(
             animateRef.current = null
           },
           duration: delay,
-        },
+        }
       )
     } else {
       setValue(newValue)
     }
     return () => {
-      if(animateRef.current) {
+      if (animateRef.current) {
         animateRef.current.stop()
       }
     }
-  }, [ newValue ])
+  }, [newValue])
 
-  return <NumberScroll { ...rest } value={ format ? format(value) : value } />
+  return <NumberScroll {...rest} value={format ? format(value) : value} />
 }

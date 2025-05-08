@@ -26,7 +26,7 @@ export default function Popover({
   panel,
   ...rest
 }: PopoverProps) {
-  const {open, refs, floatingStyles, enter, leave} = usePopover({
+  const { open, refs, floatingStyles, enter, leave } = usePopover({
     placement,
     delay,
   })

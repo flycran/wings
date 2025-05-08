@@ -23,13 +23,10 @@ export interface PlatformMate {
 }
 
 export default function FirstScreen({
-                                      data,
-                                    }: { data: Pick<HomeData, 'platforms' | 'visitCount'> }) {
+  data,
+}: { data: Pick<HomeData, 'platforms' | 'visitCount'> }) {
   const {
-    platforms: {
-      juejin,
-      github,
-    },
+    platforms: { juejin, github },
   } = data
 
   const platformList: PlatformMate[] = [
@@ -40,7 +37,7 @@ export default function FirstScreen({
       icon: <Juejin />,
       description: juejin && (
         <Description
-          items={ [
+          items={[
             {
               label: '粉丝',
               value: countUnit.format(juejin.followerCount),
@@ -57,7 +54,7 @@ export default function FirstScreen({
               label: '文章数',
               value: juejin.articleCount,
             },
-          ] }
+          ]}
         />
       ),
     },
@@ -68,7 +65,7 @@ export default function FirstScreen({
       icon: <Github />,
       description: github && (
         <Description
-          items={ [
+          items={[
             {
               label: '粉丝',
               value: countUnit.format(github.followers),
@@ -85,7 +82,7 @@ export default function FirstScreen({
               label: '仓库',
               value: github.repos,
             },
-          ] }
+          ]}
         />
       ),
     },
@@ -106,39 +103,39 @@ export default function FirstScreen({
     <>
       <div className="-z-2 absolute top-0 left-0 h-screen w-full overflow-hidden">
         <MotionDiv
-          initial={ {
+          initial={{
             opacity: 0,
             x: -100,
             y: 80,
-          } }
-          animate={ {
+          }}
+          animate={{
             x: 0,
             y: 0,
             opacity: 1,
-          } }
-          transition={ {
+          }}
+          transition={{
             type: 'tween',
             ease: 'easeOut',
             duration: 0.6,
-          } }
+          }}
           className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-100 aspect-square"
         />
         <MotionDiv
-          initial={ {
+          initial={{
             opacity: 0,
             x: 100,
             y: -80,
-          } }
-          animate={ {
+          }}
+          animate={{
             x: 0,
             y: 0,
             opacity: 1,
-          } }
-          transition={ {
+          }}
+          transition={{
             type: 'tween',
             ease: 'easeOut',
             duration: 0.6,
-          } }
+          }}
           className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-150 aspect-square"
         />
       </div>
@@ -149,44 +146,46 @@ export default function FirstScreen({
           <HomeCrane />
         </div>
         <MotionDiv
-          initial={ {
+          initial={{
             opacity: 0,
             x: -50,
-          } }
-          animate={ {
+          }}
+          animate={{
             opacity: 1,
             x: 0,
-          } }
-          transition={ {
+          }}
+          transition={{
             type: 'tween',
             ease: 'easeOut',
             delay: 0.2,
-          } }
+          }}
           className="absolute bottom-8 left-4"
         >
           <div
             className="grid grid-cols-4 grid-rows-2 gap-3"
-            style={ {
+            style={{
               gridTemplateAreas: `"big big juejin github"\n"big big csdn bilibili"`,
-            } }
+            }}
           >
             <div
-              style={ {
+              style={{
                 gridArea: 'big',
-              } }
+              }}
               className="flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
             >
               <div className="font-bold text-2xl text-crane-blue">
-                <NumberAnimation value={ data.visitCount }
-                                 delay={ 3 }
-                                 format={ v => countUnit.format(v, '-1') } />
+                <NumberAnimation
+                  value={data.visitCount}
+                  delay={3}
+                  format={(v) => countUnit.format(v, '-1')}
+                />
               </div>
               <div className="h-1" />
               <div className="text-sm ">总访问量</div>
             </div>
-            { platformList.map((platform) => (
-              <Platform key={ platform.key } platform={ platform } />
-            )) }
+            {platformList.map((platform) => (
+              <Platform key={platform.key} platform={platform} />
+            ))}
           </div>
         </MotionDiv>
         <WheelNext />
