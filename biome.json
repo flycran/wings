@@ -88,10 +88,10 @@
         "noUnsafeNegation": "off",
         "useGetterReturn": "off",
         "useNamespaceKeyword": "error",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noEmptyInterface": "off"
       },
       "nursery": {
-        "noImgElement": "warn",
         "noCommonJs": "error",
         "noDuplicateElseIf": "error",
         "noHeadElement": "error"

@@ -1,6 +1,6 @@
 'use client'
-import { usePortal } from '@/hooks/portal'
-import { Key, ReactNode } from 'react'
+import { Key, ReactNode, useLayoutEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 export interface PortalBodyProps {
   children: ReactNode
@@ -8,5 +8,9 @@ export interface PortalBodyProps {
 }
 
 export function PortalBody({ children, key }: PortalBodyProps) {
-  return usePortal(children, () => document.body, key)
+  const [mounted, setMounted] = useState(false)
+  useLayoutEffect(() => {
+    setMounted(true)
+  }, [])
+  return mounted && createPortal(children, document.body, key)
 }

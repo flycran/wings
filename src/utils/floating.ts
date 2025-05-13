@@ -5,23 +5,20 @@ type ReX = 'left' | 'right'
 type ReY = 'top' | 'bottom'
 
 export type Relatively = `${ReX}-${ReY}`
+const CHECK_TAG = new Set(['TABLE', 'TD', 'TH', 'BODY'])
 // 获取最近的定位元素
 const getPositioningParent = (element: HTMLElement) => {
-  let curele: Element | null = element
+  let curele: HTMLElement | null = element.offsetParent as HTMLElement
+
   while (curele) {
-    if (curele instanceof HTMLElement) {
-      curele = curele.offsetParent
-      if (!curele) break
-    } else {
-      break
-    }
     // 这些元素可能影响判断，使用getComputedStyle再此确认是否定位
-    if (/^TABLE|TD|TH|BODY$/.test(curele.tagName)) {
+    if (CHECK_TAG.has(curele.tagName)) {
       const position = window.getComputedStyle(curele).position
       if (position !== 'static') {
         return curele
       }
     }
+    curele = curele.offsetParent as HTMLElement | null
   }
   return document.documentElement
 }

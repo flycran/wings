@@ -1,8 +1,7 @@
 'use client'
 import MotionDiv, { MotionDivProps } from '@/components/motion/MotionDiv'
-import { PortalBody } from '@/components/PortalBody'
 import { usePopover } from '@/hooks/popover'
-import { Placement } from '@floating-ui/react'
+import { FloatingPortal, Placement } from '@floating-ui/react'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
 import { cloneElement, HTMLAttributes, ReactElement, ReactNode, Ref } from 'react'
@@ -38,9 +37,9 @@ export default function Popover({
         onMouseEnter: enter,
         onMouseLeave: leave,
       })}
-      <PortalBody>
-        <AnimatePresence>
-          {open && (
+      <AnimatePresence>
+        {open && (
+          <FloatingPortal>
             <div
               className="z-10"
               ref={refs.setFloating}
@@ -70,9 +69,9 @@ export default function Popover({
                 {panel}
               </MotionDiv>
             </div>
-          )}
-        </AnimatePresence>
-      </PortalBody>
+          </FloatingPortal>
+        )}
+      </AnimatePresence>
     </>
   )
 }

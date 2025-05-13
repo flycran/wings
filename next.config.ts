@@ -6,11 +6,7 @@ const nextConfig: NextConfig = {
   devIndicators: {
     buildActivityPosition: 'bottom-right',
   },
-  logging: {
-    fetches: {
-      hmrRefreshes: false,
-    },
-  },
+  logging: false,
   images: {
     unoptimized: true,
   },

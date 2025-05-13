@@ -36,7 +36,7 @@ export const getVariants = (variants: Variants = 'solid') => {
   }
 }
 // 尺寸
-export type Size = 'large' | 'default' | 'small'
+export type Size = 'large' | 'default' | 'small' | 'responsive'
 
 export const sizes: Size[] = ['small', 'default', 'large']
 
@@ -48,5 +48,22 @@ export const getSize = (size: Size = 'default') => {
       return 'size-default'
     case 'small':
       return 'size-small'
+    case 'responsive':
+      return 'size-responsive'
+  }
+}
+// 形状
+export type Shape = 'default' | 'circle' | 'round'
+
+export const shapes: Shape[] = ['default', 'circle', 'round']
+
+export const getShape = (shape: Shape = 'default') => {
+  switch (shape) {
+    case 'default':
+      return 'shape-default'
+    case 'circle':
+      return 'shape-circle'
+    case 'round':
+      return 'shape-round'
   }
 }

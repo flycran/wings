@@ -27,7 +27,7 @@
   --color-preset-a15: hsl(from var(--color-preset) h s calc(l + 15));
   --color-preset-a20: hsl(from var(--color-preset) h s calc(l + 20));
 }
-
+/*变体*/
 @custom-variant vt-solid {
   &:where(.vt-solid, .vt-solid *) {
     @slot;
@@ -53,6 +53,7 @@
     @slot;
   }
 }
+/*尺寸*/
 @custom-variant size-large {
   &:where(.size-large, .size-large *) {
     @slot;
@@ -65,6 +66,28 @@
 }
 @custom-variant size-small {
   &:where(.size-small, .size-small *) {
+    @slot;
+  }
+}
+@custom-variant size-responsive {
+  &:where(.size-responsive, .size-responsive *) {
+    @slot;
+  }
+}
+
+/*形状*/
+@custom-variant shape-default {
+  &:where(.shape-default, .shape-default *) {
+    @slot;
+  }
+}
+@custom-variant shape-circle {
+  &:where(.shape-circle, .shape-circle *) {
+    @slot;
+  }
+}
+@custom-variant shape-round {
+  &:where(.shape-round, .shape-round *) {
     @slot;
   }
 }

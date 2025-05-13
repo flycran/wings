@@ -25,10 +25,12 @@
     "ahooks": "^3.8.4",
     "auto-unit": "^3.0.4",
     "clsx": "^2.1.1",
+    "dynami-cursor": "file:C:/Project/dynami-cursor/packages/core",
+    "dynami-cursor-react": "file:C:/Project/dynami-cursor/packages/react",
     "flexsearch": "^0.8.161",
     "js-cookie": "^3.0.5",
     "mermaid": "^11.6.0",
-    "motion": "^12.8.0",
+    "motion": "^12.10.5",
     "next": "15.3.1",
     "nextjs-toploader": "^3.8.16",
     "react": "^19.1.0",
@@ -57,6 +59,6 @@
     "@xmldom/xmldom": "^0.9.8",
     "husky": "^9.1.7",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }

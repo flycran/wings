@@ -22,7 +22,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "dynami-cursor": ["C:/Project/dynami-cursor/packages/core"],
+      "dynami-cursor-react": ["C:/Project/dynami-cursor/packages/react"],
+      "dynami-cursor-react/lib/index.css": ["C:/Project/dynami-cursor/packages/react/lib/index.css"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
