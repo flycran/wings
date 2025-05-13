@@ -39,7 +39,8 @@
       "complexity": {
         "noUselessThisAlias": "error",
         "noUselessTypeConstraint": "error",
-        "noWith": "off"
+        "noWith": "off",
+        "noForEach": "off"
       },
       "correctness": {
         "noChildrenProp": "error",
