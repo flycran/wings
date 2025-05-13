@@ -5,10 +5,7 @@ interface LockScrollOptions {
   locked?: boolean
 }
 
-export function useLockScroll({
-  element = document.body,
-  locked = true,
-}: LockScrollOptions = {}) {
+export function useLockScroll({ element = document.body, locked = true }: LockScrollOptions = {}) {
   useEffect(() => {
     if (!element || !locked) return
 

@@ -13,9 +13,11 @@ export default function AnimatedDialog() {
   const buttonRounded = 'rounded-lg' // Border radius class
 
   return (
-    <MotionConfig transition={{
-      duration: 2
-    }}>
+    <MotionConfig
+      transition={{
+        duration: 2,
+      }}
+    >
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
         <AnimatePresence>
           {!isOpen && (

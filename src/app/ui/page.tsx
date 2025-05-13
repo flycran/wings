@@ -32,7 +32,7 @@ export default function Ui() {
           )
         )}
       </div>
-      <Popconfirm/>
+      <Popconfirm />
       <div className="text-5xl flex flex-col items-center justify-center font-bold">
         <NumberAnimation className="m-3" value={number} />
         <div className="flex items-center">
