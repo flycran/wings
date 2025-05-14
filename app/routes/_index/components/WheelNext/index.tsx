@@ -1,4 +1,4 @@
-import MotionDiv from '@/components/motion/MotionDiv'
+import MotionDiv from '~/components/motion/MotionDiv'
 import { AnimatePresence } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { GoTriangleDown } from 'react-icons/go'

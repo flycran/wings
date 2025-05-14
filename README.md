@@ -1,38 +1,15 @@
-# Welcome to Remix!
+# Wings blog
 
-- [Remix Docs](https://remix.run/docs)
+## 开发环境
 
-## Development
+- nodejs >=20
+- bun >= 1.2
 
-From your terminal:
+Wings在开发环境默认使用`bun`提升启动速度。但在生产环境使用`npm`以兼容不支持`bun`的环境。
 
-```sh
-npm run dev
+## 启动
+
+```bash
+bun i
+bun run dev
 ```
-
-This starts your app in development mode, rebuilding assets on file changes.
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/server`
-- `build/client`

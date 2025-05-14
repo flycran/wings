@@ -1,4 +1,4 @@
-import config from '@/config'
+import config from '~/config'
 
 export interface HomeData {
   carousels: GridViewData[]
@@ -106,7 +106,7 @@ export const getHomeData = async (): Promise<HomeData> => {
     .fill(null)
     .map((_) => ({
       title: 'Flycran',
-      cover: `https://picsum.photos/800/600?random=${random(0, 10000)}`,
+      cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
       href: '/',
       color: `hsl(${random(0, 360)},${random(50, 100)}%,${random(30, 70)}%)`,
     }))
@@ -116,12 +116,12 @@ export const getHomeData = async (): Promise<HomeData> => {
     fixeds: [
       {
         title: 'Flycran',
-        cover: `https://picsum.photos/800/600?random=${random(0, 10000)}`,
+        cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
         href: '/',
       },
       {
         title: 'Flycran2',
-        cover: `https://picsum.photos/800/600?random=${random(0, 10000)}`,
+        cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
         href: '/',
       },
     ],

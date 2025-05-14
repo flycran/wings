@@ -1,5 +1,5 @@
-import { useDelay } from '@/hooks/time'
 import { useState } from 'react'
+import { useDelay } from '~/hooks/time'
 
 export const useDelayOpen = (enterDelay = 0, leaveDelay = 100) => {
   const [open, setOpen] = useState(false)

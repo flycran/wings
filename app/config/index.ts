@@ -3,8 +3,11 @@ const platforms = {
   github_username: process.env.PLATFORM_GITHUB_USERNAME,
 }
 
-const index = {
+const config = {
   platforms,
+  supabase: {
+    url: process.env.SUPABASE_URL as string,
+  },
 }
 
-export default index as DeepReadonly<typeof index>
+export default config as DeepReadonly<typeof config>

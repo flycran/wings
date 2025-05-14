@@ -1,9 +1,9 @@
-import { GridViewData, HomeData } from '@/server/home'
-import { Link } from '@remix-run/react'
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
-import NoData from '@/components/NoData'
+import NoData from '~/components/NoData'
+import { GridViewData, HomeData } from '~/server/home'
 
 interface PaginationProps {
   index: number
@@ -164,7 +164,11 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
       >
         {fixeds[0] ? (
           <Link to={fixeds[0].href} className="relative inline-block h-full w-full">
-            <img src={fixeds[0].cover} alt={fixeds[0].title} className="object-cover" />
+            <img
+              className="object-cover w-full h-full"
+              src={fixeds[0].cover}
+              alt={fixeds[0].title}
+            />
           </Link>
         ) : (
           <NoData />
@@ -178,7 +182,11 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
       >
         {fixeds[1] ? (
           <Link to={fixeds[0].href} className="relative inline-block h-full w-full">
-            <img src={fixeds[1].cover} alt={fixeds[1].title} className="object-cover" />
+            <img
+              className="object-cover w-full h-full"
+              src={fixeds[1].cover}
+              alt={fixeds[1].title}
+            />
           </Link>
         ) : (
           <NoData />

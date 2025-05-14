@@ -1,4 +1,4 @@
-import Mermaid from '@/components/Markdown/Mermaid'
+import Mermaid from '~/components/Markdown/Mermaid'
 import { ComponentProps } from 'react'
 import ReactMarkdown from 'react-markdown'
 import SyntaxHighlighter from 'react-syntax-highlighter'

@@ -1,6 +1,6 @@
-import Markdown from '@/components/Markdown'
-import { LoaderFunctionArgs } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import Markdown from '~/components/Markdown'
+import { LoaderFunctionArgs } from 'react-router'
+import { useLoaderData } from 'react-router'
 
 export async function loader({ params }: LoaderFunctionArgs) {
   return {

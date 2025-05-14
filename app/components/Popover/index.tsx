@@ -1,5 +1,5 @@
-import MotionDiv, { MotionDivProps } from '@/components/motion/MotionDiv'
-import { usePopover } from '@/hooks/popover'
+import MotionDiv, { MotionDivProps } from '~/components/motion/MotionDiv'
+import { usePopover } from '~/hooks/popover'
 import { FloatingPortal, Placement } from '@floating-ui/react'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'

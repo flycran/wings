@@ -1,4 +1,4 @@
-import { chunkGenerator } from '@/utils'
+import { chunkGenerator } from '~/utils'
 import clsx from 'clsx'
 import { Fragment, HTMLAttributes, ReactNode } from 'react'
 

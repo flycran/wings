@@ -1,5 +1,5 @@
-import LightBulb from '@/components/Sidebar/LightBulb'
-import MotionDiv from '@/components/motion/MotionDiv'
+import LightBulb from '~/components/Sidebar/LightBulb'
+import MotionDiv from '~/components/motion/MotionDiv'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
 

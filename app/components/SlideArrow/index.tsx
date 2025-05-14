@@ -1,4 +1,4 @@
-import MotionDiv from '@/components/motion/MotionDiv'
+import MotionDiv from '~/components/motion/MotionDiv'
 import clsx from 'clsx'
 import { useAnimate } from 'motion/react'
 import { Ref, useImperativeHandle } from 'react'

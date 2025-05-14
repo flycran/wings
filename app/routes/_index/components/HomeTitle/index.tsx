@@ -1,4 +1,4 @@
-import MotionDiv from '@/components/motion/MotionDiv'
+import MotionDiv from '~/components/motion/MotionDiv'
 
 export default function HomeTitle() {
   return (

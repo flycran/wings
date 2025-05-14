@@ -1,4 +1,4 @@
-import { Key, ReactNode, useEffect, useLayoutEffect, useState } from 'react'
+import { Key, ReactNode, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export const usePortal = (

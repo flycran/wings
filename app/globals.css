@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@import "@/assets/highlight/atom-one-light.css";
-@import "@/assets/highlight/atom-one-dark.css";
-/*@import "../src/ui/globals.ui.css";*/
+@import "./assets/highlight/atom-one-light.css";
+@import "./assets/highlight/atom-one-dark.css";
+@import "./components/ui/globals.ui.css";
 @plugin "@tailwindcss/typography";
 
 /*暗色模式*/

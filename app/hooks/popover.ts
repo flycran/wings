@@ -1,5 +1,3 @@
-import { useDelayOpen } from '@/hooks/delayOpen'
-import { relatively, Relatively } from '@/utils/floating'
 import {
   autoUpdate,
   offset,
@@ -8,6 +6,8 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react'
+import { useDelayOpen } from '~/hooks/delayOpen'
+import { relatively, Relatively } from '~/utils/floating'
 
 export interface PopoverOptions {
   placement?: Placement
