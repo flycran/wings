@@ -1,6 +1,6 @@
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom'
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 // 为平台图标生成 React 组件
 // 将 SVG 文件内容转换为 React 组件
 function svgToReactComponent(svgContent: string, componentName: string) {
@@ -55,8 +55,8 @@ export default function ${componentName}({ className, size, ...rest }: ${compone
 
 // 扫描目录并处理每个 SVG 文件
 async function processSvgFiles() {
-  const inputDir = path.join(__dirname, '../src/assets/platforms')
-  const outputDir = path.join(__dirname, '../src/icons')
+  const inputDir = path.join(__dirname, '../icons')
+  const outputDir = path.join(__dirname, '../app/icons')
 
   try {
     const files = await fs.readdir(inputDir)

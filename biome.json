@@ -94,8 +94,7 @@
       },
       "nursery": {
         "noCommonJs": "error",
-        "noDuplicateElseIf": "error",
-        "noHeadElement": "error"
+        "noDuplicateElseIf": "error"
       }
     }
   },
