@@ -1,9 +1,9 @@
-import Button from '@/ui/Button'
-import Popconfirm from '@/ui/Popconfirm'
-import { presetColors, sizes, variants } from '@/ui/utils'
+import Button from '~/components/ui/Button'
+import Popconfirm from '~/components/ui/Popconfirm'
+import { presetColors, sizes, variants } from '~/components/ui/utils'
 import { useEffect, useState } from 'react'
 import { GoDash, GoMortarBoard, GoPlus } from 'react-icons/go'
-import NumberAnimation from '../../../app/components/NumberAnimation'
+import NumberAnimation from '~/components/NumberAnimation'
 
 export default function Ui() {
   const [number, setNumber] = useState(0)
