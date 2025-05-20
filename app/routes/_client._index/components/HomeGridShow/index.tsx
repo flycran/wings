@@ -129,7 +129,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
             carousels.map((item, index) => (
               <SwiperSlide key={index}>
                 <Link to={item.href} className="relative inline-block h-full w-full bg-skeleton">
-                  <img src={item.cover} alt={item.title} className="object-cover" />
+                  <img src={item.cover} alt={item.title} className="object-cover w-full h-full" />
                 </Link>
               </SwiperSlide>
             ))

@@ -1,12 +1,11 @@
-import MotionDiv from '~/components/motion/MotionDiv'
-import { PortalBody } from '~/components/PortalBody'
-import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
 import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react'
-import { Link, useLocation } from 'react-router'
-import { useRequest } from 'ahooks'
 import { AnimatePresence } from 'motion/react'
 import { ReactNode, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
+import { Link, useLocation } from 'react-router'
+import MotionDiv from '~/components/motion/MotionDiv'
+import { PortalBody } from '~/components/PortalBody'
+import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
 import SlideArrow, { SlideArrowRef } from '../SlideArrow'
 
 interface MenuItemProps {
@@ -21,7 +20,7 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   const { pathname } = useLocation()
   const SARef = useRef<SlideArrowRef>(null)
 
-  const match = pathname === href
+  const match = href === '/' ? pathname === href : pathname.startsWith(href)
 
   function handleHover() {
     if (match || !SARef.current) return

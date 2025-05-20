@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { useDelay } from '~/hooks/time'
 
-export const useDelayOpen = (enterDelay = 0, leaveDelay = 100) => {
-  const [open, setOpen] = useState(false)
+export const useDelayActive = (enterDelay = 0, leaveDelay = 100) => {
+  const [active, setActive] = useState(false)
 
   const [startEnter, cancelEnter] = useDelay(() => {
-    setOpen(true)
+    setActive(true)
   }, enterDelay)
 
   const [startLeave, cancelLeave] = useDelay(() => {
-    setOpen(false)
+    setActive(false)
   }, leaveDelay ?? 100)
 
   const enter = () => {
@@ -22,5 +22,5 @@ export const useDelayOpen = (enterDelay = 0, leaveDelay = 100) => {
     cancelEnter()
   }
 
-  return { open, setOpen, enter, leave }
+  return { active, setActive, enter, leave }
 }

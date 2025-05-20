@@ -1,49 +1,59 @@
 import cookies from 'cookie'
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
+import { useAtom } from 'jotai'
+import { useEffect, useMemo } from 'react'
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import './globals.css'
 import 'swiper/css'
 import '~/assets/font.css'
-import Sidebar from '~/components/Sidebar'
+import Topbar from '~/components/Topbar'
+import { themeAtom, ThemeMode } from '~/store/system'
+import { Route } from './+types/root'
 
 export async function loader({ request }: { request: Request }) {
   const cookie = cookies.parse(request.headers.get('Cookie') ?? '')
-  const theme = cookie.THEME_MODE || 'system'
+  const theme = (cookie.THEME_MODE || 'system') as ThemeMode
 
   return { theme }
 }
 
-export const metadata = {
-  title: 'Wings | 插上梦想的翅膀',
-  description: 'Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。',
-}
+export default function App({ loaderData }: Route.ComponentProps) {
+  const [theme, setTheme] = useAtom(themeAtom)
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-}
+  useEffect(() => {
+    setTheme(loaderData.theme)
+  }, [])
 
-export default function App() {
-  const { theme } = useLoaderData<typeof loader>()
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
 
-  return (
-    <html
-      lang="zh"
-      data-theme={theme}
-      className="bg-back-light text-zinc-900 dark:bg-back-dark dark:text-zinc-50"
-    >
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/public/favicon.svg" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Sidebar />
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+  return useMemo(
+    () => (
+      <html
+        lang="zh"
+        data-theme={loaderData.theme}
+        className="bg-back text-fore dark:bg-back-dark dark:text-fore-dark dark:scrollbar-dark"
+      >
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>Wings | 插上梦想的翅膀</title>
+          <meta
+            name="description"
+            content="Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。"
+          />
+          <link rel="icon" href="/public/favicon.svg" />
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <Topbar />
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </html>
+    ),
+    []
   )
 }

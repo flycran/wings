@@ -1,6 +1,5 @@
 'use server'
 import { Document } from 'flexsearch'
-import { createClient } from '@supabase/supabase-js'
 
 export type Article = {
   id: string
@@ -8,19 +7,6 @@ export type Article = {
   tags: string[]
   category: string
   articleContent: string
-}
-
-export const getArticle = async (id: string) => {
-  const data = articles.find((e) => e.id === id)
-
-  if (!data) {
-    return null
-  }
-
-  return {
-    ...data,
-    articleContent: '',
-  }
 }
 
 const articleDocument = new Document<Article>({

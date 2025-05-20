@@ -5,9 +5,11 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
+    "**/.client/**/*.tsx",
+    ".react-router/types/**/*"
   ],
   "compilerOptions": {
+    "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@react-router/node", "vite/client"],
     "isolatedModules": true,
@@ -25,6 +27,7 @@
     "paths": {
       "~/*": ["./app/*"]
     },
-    "noEmit": true
+    "noEmit": true,
+    "rootDirs": [".", "./.react-router/types"]
   }
 }

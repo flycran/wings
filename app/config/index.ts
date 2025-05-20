@@ -1,12 +1,15 @@
+import { env } from 'node:process'
+
 const platforms = {
-  juejin_id: process.env.PLATFORM_JUEJIN_ID,
-  github_username: process.env.PLATFORM_GITHUB_USERNAME,
+  juejin_id: env.PLATFORM_JUEJIN_ID,
+  github_username: env.PLATFORM_GITHUB_USERNAME,
 }
 
 const config = {
   platforms,
   supabase: {
-    url: process.env.SUPABASE_URL as string,
+    url: env.SUPABASE_URL,
+    key: env.SUPABASE_KEY,
   },
 }
 

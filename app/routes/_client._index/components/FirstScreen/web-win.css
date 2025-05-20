@@ -1,0 +1,37 @@
+/* Web Win Component Color Utilities */
+
+/* Light Mode - Primary Color: #00abff */
+@utility web-win-light {
+  /* Base colors */
+  --color-primary: #65c6f6;
+  --color-primary-light: #a6e0ff;
+
+  /* UI elements */
+  --color-header: #f6f6f6;
+  --color-bg: #ffffff;
+  --color-secondary-ui: var(--color-header);
+  --color-text: #cccccc;
+
+  /* Control buttons */
+  --color-close-btn: #ff5f57;
+  --color-minimize-btn: #febc2e;
+  --color-maximize-btn: #2bc840;
+}
+
+/* Dark Mode - Primary Color: #ffb22f */
+@utility web-win-dark {
+  /* Base colors */
+  --color-primary: #ffbe50;
+  --color-primary-light: #725323;
+
+  /* UI elements */
+  --color-header: #2c2c2e;
+  --color-bg: #1c1c1e;
+  --color-secondary-ui: #2c2c2e;
+  --color-text: #bababa;
+
+  /* Control buttons */
+  --color-close-btn: #ff5f57;
+  --color-minimize-btn: #febc2e;
+  --color-maximize-btn: #2bc840;
+}

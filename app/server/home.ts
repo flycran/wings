@@ -1,4 +1,11 @@
+import axios, { Axios } from 'axios'
 import config from '~/config'
+
+const extRequest = new Axios({
+  ...axios.defaults,
+  headers: undefined,
+  timeout: 5 * 1000,
+})
 
 export interface HomeData {
   carousels: GridViewData[]
@@ -43,17 +50,15 @@ export interface GridViewData {
 const getPlatformInfo = {
   async juejin() {
     const [res, res2] = await Promise.all([
-      fetch(`https://api.juejin.cn/user_api/v1/user/get?user_id=${config.platforms.juejin_id}`),
-      fetch('https://api.juejin.cn/content_api/v1/article/query_list', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
+      extRequest.get('https://api.juejin.cn/user_api/v1/user/get', {
+        params: {
           user_id: config.platforms.juejin_id,
-          cursor: '0',
-          sort_type: 2,
-        }),
+        },
+      }),
+      extRequest.post('https://api.juejin.cn/content_api/v1/article/query_list', {
+        user_id: config.platforms.juejin_id,
+        cursor: '0',
+        sort_type: 2,
       }),
     ])
     if (res.status !== 200) {
@@ -64,8 +69,8 @@ const getPlatformInfo = {
       console.error(res2)
       return null
     }
-    const body = await res.json()
-    const body2 = await res2.json()
+    const body = await res.data
+    const body2 = await res2.data
     return {
       href: `https://juejin.cn/user/${config.platforms.juejin_id}`,
       username: body.data.user_name,
@@ -77,12 +82,14 @@ const getPlatformInfo = {
     }
   },
   async github() {
-    const res = await fetch(`https://api.github.com/users/${config.platforms.github_username}`)
+    const res = await extRequest.get(
+      `https://api.github.com/users/${config.platforms.github_username}`
+    )
     if (res.status !== 200) {
       console.error(res)
       return null
     }
-    const body = await res.json()
+    const body = await res.data
     return {
       href: `https://github.com/${config.platforms.github_username}`,
       name: body.name,
@@ -96,17 +103,25 @@ const getPlatformInfo = {
 
 export const getHomeData = async (): Promise<HomeData> => {
   const [juejin, github] = await Promise.all([
-    getPlatformInfo.juejin().catch(() => null),
-    getPlatformInfo.github().catch(() => null),
+    getPlatformInfo.juejin().catch((e) => {
+      console.error(String(e))
+      return null
+    }),
+    getPlatformInfo.github().catch((e) => {
+      console.error(String(e))
+      return null
+    }),
   ])
+
+  const url = 'https://t.alcy.cc/moez'
 
   const random = (min: number, max: number) => Math.floor(Math.random() * (max - min) + min)
 
-  const carousels = Array(random(1, 10))
+  const carousels = Array(random(3, 10))
     .fill(null)
     .map((_) => ({
       title: 'Flycran',
-      cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
+      cover: `${url}?random=${random(0, 10000)}`,
       href: '/',
       color: `hsl(${random(0, 360)},${random(50, 100)}%,${random(30, 70)}%)`,
     }))
@@ -116,12 +131,12 @@ export const getHomeData = async (): Promise<HomeData> => {
     fixeds: [
       {
         title: 'Flycran',
-        cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
+        cover: `${url}?random=${random(0, 10000)}`,
         href: '/',
       },
       {
         title: 'Flycran2',
-        cover: `https://api.boxmoe.com/random.php?random=${random(0, 10000)}`,
+        cover: `${url}?random=${random(0, 10000)}`,
         href: '/',
       },
     ],

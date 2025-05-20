@@ -9,7 +9,7 @@ export interface MarkdownProps extends ComponentProps<typeof ReactMarkdown> {}
 
 export default function Markdown({ children, ...rest }: MarkdownProps) {
   return (
-    <>
+    <div className="prose dark:prose-invert max-w-none">
       <ReactMarkdown
         {...rest}
         remarkPlugins={[remarkGfm]}
@@ -53,6 +53,6 @@ export default function Markdown({ children, ...rest }: MarkdownProps) {
       >
         {children}
       </ReactMarkdown>
-    </>
+    </div>
   )
 }

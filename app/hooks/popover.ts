@@ -6,7 +6,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react'
-import { useDelayOpen } from '~/hooks/delayOpen'
+import { useDelayActive } from '~/hooks/delayOpen'
 import { relatively, Relatively } from '~/utils/floating'
 
 export interface PopoverOptions {
@@ -29,12 +29,12 @@ export const usePopover = ({
   relatively: relativelyOptions,
   transform,
 }: PopoverOptions) => {
-  const { open, setOpen, enter, leave } = useDelayOpen(delay, leaveDelay)
+  const { active, setActive, enter, leave } = useDelayActive(delay, leaveDelay)
   const { refs, floatingStyles, context, update } = useFloating({
     transform,
     placement,
-    open,
-    onOpenChange: setOpen,
+    open: active,
+    onOpenChange: setActive,
     middleware: [
       offset(offsetOptions),
       shift({
@@ -49,8 +49,8 @@ export const usePopover = ({
     : floatingStyles
 
   return {
-    open,
-    setOpen,
+    open: active,
+    setOpen: setActive,
     refs,
     floatingStyles: style,
     enter,

@@ -1,20 +1,21 @@
+import { AnimatePresence, MotionConfig } from 'motion/react'
+import { ReactNode } from 'react'
+import { GoLink } from 'react-icons/go'
+import { Link } from 'react-router'
 import Description from '~/components/Description'
 import MotionDiv from '~/components/motion/MotionDiv'
 import NumberAnimation from '~/components/NumberAnimation'
-import { useDelayOpen } from '~/hooks/delayOpen'
+import { useDelayActive } from '~/hooks/delayOpen'
 import Bilibili from '~/icons/Bilibili'
 import Csdn from '~/icons/Csdn'
 import Github from '~/icons/Github'
 import Juejin from '~/icons/Juejin'
-import HomeCrane from '~/routes/_index/components/HomeCrane'
-import HomeTitle from '~/routes/_index/components/HomeTitle'
-import WheelNext from '~/routes/_index/components/WheelNext'
+import WebWin from '~/routes/_client._index/components/FirstScreen/WebWin'
+import HomeCrane from '~/routes/_client._index/components/HomeCrane'
+import HomeTitle from '~/routes/_client._index/components/HomeTitle'
+import WheelNext from '~/routes/_client._index/components/WheelNext'
 import { HomeData } from '~/server/home'
 import { countUnit } from '~/utils/unit'
-import { Link } from 'react-router'
-import { AnimatePresence } from 'motion/react'
-import { ReactNode } from 'react'
-import { GoLink } from 'react-icons/go'
 
 export interface PlatformMate {
   key: string
@@ -101,51 +102,51 @@ export default function FirstScreen({
       icon: <Bilibili />,
     },
   ]
+
   return (
     <>
       <div className="-z-2 absolute top-0 left-0 h-screen w-full overflow-hidden">
-        <MotionDiv
-          initial={{
-            opacity: 0,
-            x: -100,
-            y: 80,
-          }}
-          animate={{
-            x: 0,
-            y: 0,
-            opacity: 1,
-          }}
+        <MotionConfig
           transition={{
             type: 'tween',
             ease: 'easeOut',
             duration: 0.6,
           }}
-          className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-100 aspect-square"
-        />
-        <MotionDiv
-          initial={{
-            opacity: 0,
-            x: 100,
-            y: -80,
-          }}
-          animate={{
-            x: 0,
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{
-            type: 'tween',
-            ease: 'easeOut',
-            duration: 0.6,
-          }}
-          className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-150 aspect-square"
-        />
+        >
+          <MotionDiv
+            initial={{
+              opacity: 0,
+              x: -100,
+              y: 80,
+            }}
+            animate={{
+              x: 0,
+              y: 0,
+              opacity: 1,
+            }}
+            className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-100 aspect-square"
+          />
+          <MotionDiv
+            initial={{
+              opacity: 0,
+              x: 100,
+              y: -80,
+            }}
+            animate={{
+              x: 0,
+              y: 0,
+              opacity: 1,
+            }}
+            className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-150 aspect-square"
+          />
+        </MotionConfig>
       </div>
       <div className="relative flex min-h-screen flex-col justify-evenly">
         <HomeTitle />
         <div className="flex justify-between">
           <div />
           <HomeCrane />
+          <WebWin />
         </div>
         <MotionDiv
           initial={{
@@ -201,7 +202,7 @@ export interface PlatformProps {
 }
 
 export function Platform({ platform }: PlatformProps) {
-  const { open, enter, leave } = useDelayOpen(500)
+  const { active, enter, leave } = useDelayActive(500)
   const icon = (
     <div className="cursor-pointer inline-flex text-2xl aspect-square w-10 items-center justify-center">
       {platform.icon}
@@ -225,7 +226,7 @@ export function Platform({ platform }: PlatformProps) {
         <div className="inline-flex h-full w-full items-center justify-center">{icon}</div>
       )}
       <AnimatePresence>
-        {open && (
+        {active && (
           <MotionDiv
             initial={{
               width: '2.5rem',

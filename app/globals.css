@@ -2,6 +2,8 @@
 @import "./assets/highlight/atom-one-light.css";
 @import "./assets/highlight/atom-one-dark.css";
 @import "./components/ui/globals.ui.css";
+@import "./routes/_client._index/components/FirstScreen/web-win.css";
+@import "routes/admin.article.editor.($id)/components/MarkdownEditor/index.css";
 @plugin "@tailwindcss/typography";
 
 /*暗色模式*/
@@ -27,15 +29,19 @@ input {
   --color-crane-red: #fb658b;
   --color-skeleton: var(--color-gray-100);
   --shadow-card: 0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
-  --color-back-light: #fffdfc;
-  --color-back-dark: #171717;
-  --color-back: var(--color-back-light);
+  --color-back-dark: #1f2020;
+  --color-back: #fffdfc;
+  --color-fore: #29292b;
+  --color-fore-dark: #eeeeef;
   --color-popover: #f6f5f4;
   --color-popover-dark: #1f1f1f;
 }
 
-@utility bg-back-dark {
-  --color-back: var(--color-back-dark);
+.scroll-none {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 @layer components {
@@ -148,18 +154,34 @@ input {
   animation: none;
 }
 
+/* 滚动条 */
+
+@theme {
+  --scrollbar-bg-color: var(--color-back);
+  --scrollbar-bg-color-dark: var(--color-back-dark);
+  --scrollbar-thumb-color: var(--color-zinc-400);
+  --scrollbar-thumb-color-dark: var(--color-zinc-600);
+}
+
+@theme scrollbar-dark {
+  --scrollbar-bg-color: var(--scrollbar-bg-color-dark);
+  --scrollbar-thumb-color: var(--scrollbar-thumb-color-dark);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
+  background-color: var(--scrollbar-bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-zinc-400);
+  background: var(--scrollbar-thumb-color);
   border-radius: 4px;
   transition: background 0.5s;
 }
 
-:where(.dark-mode) ::-webkit-scrollbar-thumb {
-  background: var(--color-zinc-600);
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(from var(--scrollbar-thumb-color) h s calc(l - 10));
   border-radius: 4px;
+  transition: background 0.5s;
 }

@@ -1,3 +1,5 @@
+///
+
 // 递归只读
 type DeepReadonly<T> = T extends (infer R)[]
   ? DeepReadonlyArray<R>

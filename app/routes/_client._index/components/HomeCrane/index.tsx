@@ -1,5 +1,5 @@
 import MotionDiv from '~/components/motion/MotionDiv'
-import Crane from '~/routes/_index/components/HomeCrane/Crane'
+import Crane from '~/routes/_client._index/components/HomeCrane/Crane'
 
 export default function HomeCrane() {
   return (
