@@ -24,7 +24,9 @@
     "enabled": true
   },
   "linter": {
-    "ignore": ["env.d.ts"],
+    "ignore": [
+      "env.d.ts"
+    ],
     "enabled": true,
     "rules": {
       "recommended": true,
@@ -56,7 +58,17 @@
         "noUnreachableSuper": "off",
         "noUnusedVariables": "error",
         "useArrayLiterals": "off",
-        "useExhaustiveDependencies": "warn",
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "options": {
+            "hooks": [
+              {
+                "name": "useKey",
+                "stableResult": true
+              }
+            ]
+          }
+        },
         "useHookAtTopLevel": "error",
         "useJsxKeyInIterable": "error"
       },

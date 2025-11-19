@@ -1,20 +1,13 @@
-import Button from '~/components/ui/Button'
-import Popconfirm from '~/components/ui/Popconfirm'
-import { presetColors, sizes, variants } from '~/components/ui/utils'
 import { useEffect, useState } from 'react'
 import { GoDash, GoMortarBoard, GoPlus } from 'react-icons/go'
 import NumberAnimation from '~/components/NumberAnimation'
+import Button from '~/components/ui/Button'
+import Select from '~/components/ui/Select'
+import { presetColors, sizes, variants } from '~/components/ui/utils'
 
 export default function Ui() {
-  const [number, setNumber] = useState(0)
   const [number2, setNumber2] = useState(100)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNumber((prev) => prev + 1)
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+  const [select, setSelect] = useState(0)
 
   return (
     <div className="m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl 2xl:w-6xl p-8">
@@ -31,9 +24,26 @@ export default function Ui() {
           )
         )}
       </div>
-      <Popconfirm />
+      <Select
+        placeholder="选择"
+        value={select}
+        onChange={setSelect}
+        options={[
+          {
+            value: 1,
+            label: '选项1',
+          },
+          {
+            value: 2,
+            label: '选项2',
+          },
+          {
+            value: 3,
+            label: '选项3',
+          },
+        ]}
+      />
       <div className="text-5xl flex flex-col items-center justify-center font-bold">
-        <NumberAnimation className="m-3" value={number} />
         <div className="flex items-center">
           <Button
             className="text-base"

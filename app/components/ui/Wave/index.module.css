@@ -1,0 +1,25 @@
+.wave {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@property --wave-color {
+  inherits: true;
+  syntax: "<color>";
+  initial-value: unset;
+}
+
+.waveFocus {
+  box-shadow: 0 0 0 0 rgb(from var(--wave-color) r g b / 40%);
+  transition: box-shadow 0.1s ease-out;
+}
+
+:focus-visible > .waveFocus {
+  box-shadow: 0 0 0 .35em rgb(from var(--wave-color) r g b / 20%);
+}

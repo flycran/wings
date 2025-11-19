@@ -1,5 +1,6 @@
-import { cloneElement, ReactElement, Ref, useRef } from 'react'
+import { cloneElement, ReactElement, Ref, useEffect, useRef } from 'react'
 import { mergeRefs } from 'react-merge-refs'
+import styles from './index.module.css'
 
 export interface WaveProps {
   children: ReactElement<{
@@ -13,20 +14,24 @@ export interface WaveProps {
 export default function Wave({ children, color }: WaveProps) {
   const buttonRef = useRef<HTMLElement>(null)
 
-  const handleClick = (...args: unknown[]) => {
+  const createAnimateElement = () => {
     const div = document.createElement('div')
-    div.style = `
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      --wave-color: ${color ?? 'inherit'};
-      border-radius: inherit;
-      z-index: -1;
-      pointer-events: none;`
+    div.style = `--wave-color: ${color ?? 'inherit'};`
+    div.className = styles.wave
 
     buttonRef.current!.appendChild(div)
+
+    return div
+  }
+
+  useEffect(() => {
+    const div = createAnimateElement()
+    div.classList.add(styles.waveFocus)
+    return () => div.remove()
+  }, [])
+
+  const handleClick = (...args: unknown[]) => {
+    const div = createAnimateElement()
 
     div
       .animate(

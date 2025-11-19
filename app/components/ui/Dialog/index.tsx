@@ -1,13 +1,14 @@
+import { ReactNode, useEffect, useRef } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useLockScroll } from '~/hooks/lockScroll'
-import { ReactNode, useEffect, useRef } from 'react'
 
 export interface MaskProps {
   children?: ReactNode
   modal?: boolean
+  onClickMask?: (e: React.MouseEvent) => void
 }
 
-export default function Dialog({ children, modal }: MaskProps) {
+export default function Dialog({ children, modal = true, onClickMask }: MaskProps) {
   const modalRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Dialog({ children, modal }: MaskProps) {
 
     return () => {
       if (modal) {
-        modalRef.current!.close()
+        modalRef.current?.close()
       }
     }
   }, [])
@@ -25,9 +26,8 @@ export default function Dialog({ children, modal }: MaskProps) {
   return (
     <>
       <dialog
-        open
         ref={modalRef}
-        className="fixed bg-transparent z-1000 top-0 left-0 w-full h-full backdrop:hidden  flex justify-center items-center overflow-hidden"
+        className="fixed bg-transparent z-1000 top-0 left-0 w-full h-full max-w-none max-h-none backdrop:hidden  flex justify-center items-center overflow-hidden text-inherit"
       >
         <MotionDiv
           initial={{
@@ -39,11 +39,13 @@ export default function Dialog({ children, modal }: MaskProps) {
           exit={{
             opacity: 0,
           }}
-          className="bg-black/50 absolute backdrop-blur-xs -z-1 top-0 left-0 w-full h-full"
+          className="bg-black/20 absolute backdrop-blur-xs -z-1 top-0 left-0 w-full h-full"
           transition={{
             type: 'tween',
             ease: 'linear',
+            duration: 0.12,
           }}
+          onClick={onClickMask}
         />
         {children}
       </dialog>

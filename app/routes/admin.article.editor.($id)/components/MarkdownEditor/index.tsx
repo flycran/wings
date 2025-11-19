@@ -36,23 +36,19 @@ export interface MarkdownEditorProps {
   className?: string
 }
 
-export default function MarkdownEditor({
-                                         value = '',
-                                         className,
-                                         ...rest
-                                       }: MarkdownEditorProps) {
+export default function MarkdownEditor({ value = '', className, ...rest }: MarkdownEditorProps) {
   const theme = useTheme()
 
   return (
     <MdEditor
-      { ...rest }
-      theme={ theme }
-      value={ value }
-      codeStyleReverse={ false }
-      className={ clsx('md-editor dark:md-editor-dark', className) }
+      {...rest}
+      theme={theme}
+      value={value}
+      codeStyleReverse={false}
+      className={clsx('md-editor dark:md-editor-dark', className)}
       language="zh_CN"
-      toolbars={ toolbars }
-      footers={ [] }
+      toolbars={toolbars}
+      footers={[]}
       autoFocus
       placeholder="在这里开始创作"
     />

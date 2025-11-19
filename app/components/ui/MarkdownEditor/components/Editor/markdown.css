@@ -1,0 +1,34 @@
+.heading {
+  font-weight: bold;
+}
+
+.heading1 {
+  font-size: calc(1em + 0.125rem * 6);
+}
+.heading2 {
+  font-size: calc(1em + 0.125rem * 5);
+}
+.heading3 {
+  font-size: calc(1em + 0.125rem * 4);
+}
+.heading4 {
+  font-size: calc(1em + 0.125rem * 3);
+}
+.heading5 {
+  font-size: calc(1em + 0.125rem * 2);
+}
+.heading6 {
+  font-size: calc(1em + 0.125rem * 1);
+}
+
+.quote {
+  color: #77787a;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.cm-focused.cm-focused {
+  outline: none;
+}

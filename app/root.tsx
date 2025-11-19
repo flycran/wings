@@ -6,6 +6,7 @@ import './globals.css'
 import 'swiper/css'
 import '~/assets/font.css'
 import Topbar from '~/components/Topbar'
+import DialogProvider from '~/components/ui/DialogProvider/DialogProvider'
 import { themeAtom, ThemeMode } from '~/store/system'
 import { Route } from './+types/root'
 
@@ -47,10 +48,12 @@ export default function App({ loaderData }: Route.ComponentProps) {
           <Links />
         </head>
         <body>
-          <Topbar />
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
+          <DialogProvider>
+            <Topbar />
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+          </DialogProvider>
         </body>
       </html>
     ),

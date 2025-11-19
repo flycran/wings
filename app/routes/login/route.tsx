@@ -23,7 +23,7 @@ const login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Login>({
+  } = useForm({
     resolver: zodResolver(loginSchema),
   })
 

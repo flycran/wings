@@ -1,17 +1,8 @@
-import {
-  Color,
-  getPresetColor,
-  getShape,
-  getSize,
-  getVariants,
-  Shape,
-  Size,
-  Variants,
-} from '../utils'
-import Wave from '../Wave'
-import { customVar } from '~/utils'
 import clsx from 'clsx'
 import { HTMLAttributes, ReactNode, Ref } from 'react'
+import { customVar } from '~/utils'
+import { Color, cva, getPresetColor, Shape, Size, Variants } from '../utils'
+import Wave from '../Wave'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode
@@ -27,11 +18,11 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 export default function Button({
   children,
   className,
-  size,
+  size = 'default',
   color,
   icon,
-  variant,
-  shape,
+  variant = 'solid',
+  shape = 'default',
   block,
   ...rest
 }: ButtonProps) {
@@ -40,27 +31,38 @@ export default function Button({
       {...rest}
       className={clsx(
         className,
-        'relative rounded-lg duration-200 transition-background cursor-pointer preset-color-primary items-center justify-center gap-[.6em]',
-        'text-center whitespace-nowrap',
-        // 尺寸
-        'size-small:h-6 size-small:px-2 size-small:text-xs',
-        'size-default:h-8 size-default:px-3 size-default:text-sm size-default:gap-2',
-        'size-large:h-10 size-large:px-4 size-large:text-base',
-        'size-responsive:h-[calc(2em)] size-responsive:px-[.5em]',
-        // 变体
-        'vt-solid:text-white vt-solid:border-preset vt-solid:border vt-solid:bg-preset',
-        'vt-solid:hover:bg-preset-a10 hover:border-preset-a10  vt-solid:active:bg-preset active:border-preset-s5',
-        'vt-outlined:text-preset vt-outlined:bg-back vt-outlined:border vt-outlined:border-preset',
-        'hover:border-preset-a10 active:border-preset-s5',
-        'vt-dashed:text-preset vt-dashed:bg-back vt-dashed:border vt-dashed:border-preset vt-dashed:border-dashed ',
-        'vt-filled:text-preset vt-filled:bg-preset/12 vt-filled:hover:bg-preset-s10/18 vt-filled:active:bg-preset-s15/24',
-        'vt-text:text-preset vt-text:hover:text-preset-a10 vt-text:active:text-preset-s5',
-        // 形状
-        'shape-round:rounded-full',
-        'shape-circle:rounded-full shape-circle:p-0 shape-circle:aspect-square shape-circle:w-auto shape-circle:justify-center',
-        getVariants(variant),
-        getSize(size),
-        getShape(shape),
+        'relative rounded-lg transition-[background_color_150sm] cursor-pointer preset-color-primary items-center justify-center gap-[.6em]',
+        'text-center whitespace-nowrap outline-none',
+        cva(
+          {
+            size: {
+              small: 'h-6 px-2 text-xs',
+              default: 'h-8 px-3 text-sm gap-2',
+              large: 'h-10 px-4 text-base',
+              responsive: 'h-[calc(2em)] px-[.5em]',
+            },
+            variant: {
+              solid:
+                'text-white border-preset border bg-preset hover:bg-preset-a10 hover:border-preset-a10 active:bg-preset',
+              outlined:
+                'text-preset bg-back border border-preset hover:border-preset-a10 active:border-preset-s5',
+              dashed: 'text-preset bg-back border border-preset border-dashed',
+              filled:
+                'text-preset bg-preset/12 hover:bg-preset-s10/18 active:bg-preset-s15/24 focus-visible:bg-preset-s10/18',
+              text: 'text-preset hover:text-preset-a15 active:text-preset-s5 focus-visible:text-preset-a15',
+            },
+            shape: {
+              default: '',
+              round: 'rounded-full',
+              circle: 'rounded-full p-0 aspect-square w-auto justify-center',
+            },
+          },
+          {
+            size,
+            variant,
+            shape,
+          }
+        ),
         block ? 'flex w-full' : 'inline-flex'
       )}
       style={customVar({
@@ -72,7 +74,7 @@ export default function Button({
     </button>
   )
 
-  return variant === 'solid' || variant === 'outlined' || variant === 'dashed' ? (
+  return variant !== 'text' && variant !== 'filled' ? (
     <Wave color="var(--color-preset-s10)">{node}</Wave>
   ) : (
     node

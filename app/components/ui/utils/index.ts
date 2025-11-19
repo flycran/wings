@@ -1,7 +1,7 @@
 // 预设颜色
-export type Color = 'primary' | 'success' | 'warning' | 'danger'
+export type Color = 'primary' | 'success' | 'warning' | 'danger' | 'text'
 
-export const presetColors: Color[] = ['primary', 'success', 'warning', 'danger']
+export const presetColors: Color[] = ['primary', 'success', 'warning', 'danger', 'text']
 
 export const getPresetColor = (color?: Color | string) => {
   switch (color) {
@@ -13,6 +13,8 @@ export const getPresetColor = (color?: Color | string) => {
       return 'var(--color-warning)'
     case 'danger':
       return 'var(--color-danger)'
+    case 'text':
+      return 'var(--color-fore)'
   }
   return color
 }
@@ -66,4 +68,21 @@ export const getShape = (shape: Shape = 'default') => {
     case 'round':
       return 'shape-round'
   }
+}
+
+export const cva = <T extends { [x: string]: string }>(
+  clas: { [K in keyof T]: { [L in T[K]]: string } },
+  apply: T
+) => {
+  const cs: string[] = []
+  for (const clasKey in clas) {
+    for (const vKey in clas[clasKey]) {
+      const p = apply[clasKey] as string
+      if (vKey === p) {
+        cs.push(clas[clasKey][vKey])
+        break
+      }
+    }
+  }
+  return cs.join(' ')
 }

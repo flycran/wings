@@ -201,6 +201,7 @@ export interface PlatformProps {
   platform: PlatformMate
 }
 
+// 社交平台
 export function Platform({ platform }: PlatformProps) {
   const { active, enter, leave } = useDelayActive(500)
   const icon = (
@@ -253,7 +254,7 @@ export function Platform({ platform }: PlatformProps) {
                   {platform.href ? (
                     <Link
                       target="_blank"
-                      className="inline-flex items-center font-bold"
+                      className="inline-flex items-center font-bold hover:underline"
                       to={platform.href}
                     >
                       {platform.name}

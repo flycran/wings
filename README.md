@@ -13,3 +13,7 @@ Wings在开发环境默认使用`bun`提升启动速度。但在生产环境使�
 bun i
 bun run dev
 ```
+
+## 部署地址
+
+[netlify](https://flycran.netlify.app/)

@@ -30,11 +30,11 @@ input {
   --color-skeleton: var(--color-gray-100);
   --shadow-card: 0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
   --color-back-dark: #1f2020;
-  --color-back: #fffdfc;
+  --color-back: #fdfcf8;
   --color-fore: #29292b;
   --color-fore-dark: #eeeeef;
   --color-popover: #f6f5f4;
-  --color-popover-dark: #1f1f1f;
+  --color-popover-dark: #1c1c1c;
 }
 
 .scroll-none {
@@ -155,33 +155,30 @@ input {
 }
 
 /* 滚动条 */
-
-@theme {
-  --scrollbar-bg-color: var(--color-back);
-  --scrollbar-bg-color-dark: var(--color-back-dark);
-  --scrollbar-thumb-color: var(--color-zinc-400);
-  --scrollbar-thumb-color-dark: var(--color-zinc-600);
+@layer components {
+  :root {
+    --scrollbar-color: #d8d8d8;
+    --scrollbar-thumb-color: #9e9e9e;
+  }
 }
 
-@theme scrollbar-dark {
-  --scrollbar-bg-color: var(--scrollbar-bg-color-dark);
-  --scrollbar-thumb-color: var(--scrollbar-thumb-color-dark);
+@utility scrollbar-dark {
+  --scrollbar-color: #393939;
+  --scrollbar-thumb-color: #777777;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: var(--scrollbar-bg-color);
+  background-color: var(--scrollbar-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-color);
-  border-radius: 4px;
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 0;
   transition: background 0.5s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(from var(--scrollbar-thumb-color) h s calc(l - 10));
-  border-radius: 4px;
-  transition: background 0.5s;
+  background-color: hsl(from var(--scrollbar-thumb-color) h s calc(l - 10));
 }

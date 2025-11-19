@@ -2,7 +2,7 @@ import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react'
 import { AnimatePresence } from 'motion/react'
 import { ReactNode, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { PortalBody } from '~/components/PortalBody'
 import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
@@ -46,11 +46,11 @@ const Search = () => {
   const [expand, setExpand] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const [keyword, setKeyword] = useState('')
-  // const router = useRouter()
+  const navigate = useNavigate()
 
   const search = () => {
     if (keyword) {
-      // router.push(`/?keyword=${keyword}`)
+      navigate(`article?w=${keyword}`)
       setKeyword('')
     }
     close()

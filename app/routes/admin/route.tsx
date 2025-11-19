@@ -7,17 +7,16 @@ import { supabaseClient } from '~/utils/supabase'
 
 const admin = () => {
   const [authed, setAuthed] = useState(false)
-  const [, setUser] = useAtom(userAtom)
+  const [user, setUser] = useAtom(userAtom)
   const navigate = useNavigate()
 
   const auth = async () => {
-    const {
-      data: { user },
-    } = await supabaseClient.auth.getUser()
+    if (user) return
+    const { data } = await supabaseClient.auth.getUser()
 
-    if (user) {
+    if (data.user) {
       setAuthed(true)
-      setUser(user)
+      setUser(data.user)
     } else {
       navigate('/login')
     }
