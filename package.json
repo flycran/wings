@@ -14,7 +14,8 @@
     "lint": "biome lint ./app --fix",
     "lint:unsafe": "biome lint ./app --fix --unsafe",
     "format": "biome format ./app --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "netlify:serve": "netlify serve"
   },
   "dependencies": {
     "@codemirror/commands": "^6.8.1",
@@ -61,7 +62,7 @@
     "react-icons": "^5.5.0",
     "react-merge-refs": "^3.0.2",
     "react-router": "^7.9.6",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "^15.6.6",
     "rehype": "^13.0.2",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",

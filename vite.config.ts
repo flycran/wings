@@ -22,4 +22,8 @@ export default defineConfig({
       typesFile: './types/env.d.ts',
     }),
   ],
+  ssr: {
+    // 强制在 SSR bundle 中包含这些依赖
+    noExternal: ['react-syntax-highlighter']
+  }
 })
