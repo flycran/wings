@@ -1,5 +1,4 @@
 import { createServerClient, parseCookieHeader, serializeCookieHeader } from '@supabase/ssr'
-import { createClient } from '@supabase/supabase-js'
 import { LoaderFunctionArgs } from 'react-router'
 import type { Database } from 'types/supabase'
 import config from '~/config'

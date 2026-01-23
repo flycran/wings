@@ -59,7 +59,7 @@
         "noUnusedVariables": "error",
         "useArrayLiterals": "off",
         "useExhaustiveDependencies": {
-          "level": "warn",
+          "level": "info",
           "options": {
             "hooks": [
               {

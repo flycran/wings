@@ -1,6 +1,6 @@
-import { Link } from 'react-router'
 import { ComponentProps, isValidElement, ReactNode } from 'react'
 import { GoLink } from 'react-icons/go'
+import { Link } from 'react-router'
 
 export interface ExteLinkProps extends ComponentProps<typeof Link> {
   icon?: ReactNode | boolean

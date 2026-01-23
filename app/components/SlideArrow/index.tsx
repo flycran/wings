@@ -1,8 +1,8 @@
-import MotionDiv from '~/components/motion/MotionDiv'
 import clsx from 'clsx'
 import { useAnimate } from 'motion/react'
 import { Ref, useImperativeHandle } from 'react'
 import { GoArrowRight } from 'react-icons/go'
+import MotionDiv from '~/components/motion/MotionDiv'
 
 export interface SlideArrowRef {
   play: () => void

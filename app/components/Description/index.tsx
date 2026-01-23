@@ -1,6 +1,6 @@
-import { chunkGenerator } from '~/utils'
 import clsx from 'clsx'
 import { Fragment, HTMLAttributes, ReactNode } from 'react'
+import { chunkGenerator } from '~/utils'
 
 export interface DescriptionProps extends HTMLAttributes<HTMLTableElement> {
   column?: number

@@ -1,5 +1,5 @@
-import MotionDiv from '~/components/motion/MotionDiv'
 import clsx from 'clsx'
+import MotionDiv from '~/components/motion/MotionDiv'
 import styles from './crane.module.css'
 
 export default function Crane() {

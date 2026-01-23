@@ -1,8 +1,8 @@
+import { AnimatePresence, motion, MotionConfig } from 'motion/react'
+import { ReactNode, useState } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
 import MotionSpan from '~/components/motion/MotionSpan'
 import Button from '../Button'
-import { AnimatePresence, motion, MotionConfig } from 'motion/react'
-import { ReactNode, useState } from 'react'
 
 const MotionButton = motion.create(Button)
 

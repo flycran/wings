@@ -1,7 +1,6 @@
 import { useRequest } from 'ahooks'
 import { useState } from 'react'
 import Form, { FormItem } from '~/components/ui/Form'
-import { useForm } from '~/components/ui/hooks/form'
 import Select, { SelectOption } from '~/components/ui/Select'
 import { supabaseClient } from '~/utils/supabase'
 

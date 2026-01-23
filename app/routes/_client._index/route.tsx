@@ -1,6 +1,6 @@
-import FirstScreen from './components/FirstScreen'
-import { getHomeData } from '~/server/home'
 import { useLoaderData } from 'react-router'
+import { getHomeData } from '~/server/home'
+import FirstScreen from './components/FirstScreen'
 import HomeGridShow from './components/HomeGridShow'
 
 export const loader = async () => {

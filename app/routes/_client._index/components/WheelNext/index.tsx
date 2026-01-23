@@ -1,7 +1,7 @@
-import MotionDiv from '~/components/motion/MotionDiv'
 import { AnimatePresence } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { GoTriangleDown } from 'react-icons/go'
+import MotionDiv from '~/components/motion/MotionDiv'
 
 export default function WheelNext() {
   const [scrollY, setScrollY] = useState(0)

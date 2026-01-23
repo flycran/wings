@@ -1,5 +1,5 @@
 import mermaid from 'mermaid'
-import { HTMLAttributes, useEffect, useLayoutEffect, useRef } from 'react'
+import { HTMLAttributes, useLayoutEffect, useRef } from 'react'
 
 export interface MermaidProps extends HTMLAttributes<HTMLElement> {
   children?: string

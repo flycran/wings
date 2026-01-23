@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { GoDash, GoMortarBoard, GoPlus } from 'react-icons/go'
 import NumberAnimation from '~/components/NumberAnimation'
 import Button from '~/components/ui/Button'

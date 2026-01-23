@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bunx --bun react-router dev",
     "build": "react-router build",
-    "build-bun": "bunx --bun react-router build",
+    "build:bunx": "bunx --bun react-router build",
     "start": "react-router-serve ./build/server/index.js",
     "generate-icon": "bun ./scripts/generate-icon.ts",
     "generate-supabase-types": "bun ./scripts/generate-supabase-types.ts",
@@ -14,8 +14,8 @@
     "lint": "biome lint ./app --fix",
     "lint:unsafe": "biome lint ./app --fix --unsafe",
     "format": "biome format ./app --write",
-    "prepare": "husky",
-    "netlify:serve": "netlify serve"
+    "netlify:serve": "netlify serve",
+    "prepare": "husky"
   },
   "dependencies": {
     "@codemirror/commands": "^6.8.1",

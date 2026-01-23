@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
 import Button from '~/components/ui/Button'
 import Dialog from '~/components/ui/Dialog'
