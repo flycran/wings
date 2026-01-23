@@ -13,9 +13,7 @@ import {
 } from '@codemirror/view'
 import clsx from 'clsx'
 import { HTMLAttributes, useEffect, useLayoutEffect, useRef } from 'react'
-import {
-  compatibleHljsHighlighter,
-} from '~/components/ui/MarkdownEditor/utils/compatibleHljsHighlighter'
+import { compatibleHljsHighlighter } from '~/components/ui/MarkdownEditor/utils/compatibleHljsHighlighter'
 
 export interface EditorProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
