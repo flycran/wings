@@ -19,7 +19,8 @@
     "typecheck": "react-router typegen && tsc",
     "lint": "biome lint ./app --diagnostic-level=error",
     "lint:fix": "biome lint ./app --fix --diagnostic-level=error",
-    "format": "biome format ./app --write",
+    "format": "biome format ./app",
+    "format:fix": "biome format ./app --fix",
     "netlify:serve": "netlify serve",
     "prepare": "husky"
   },
