@@ -15,7 +15,8 @@ export default defineConfig({
     tsconfigPaths(),
     netlifyReactRouter(),
     devtoolsJson(),
-    EnvironmentPlugin(['SUPABASE_URL', 'SUPABASE_KEY', 'ALGOLIA_ID', 'ALGOLIA_SEARCH_KEY'], {
+    // 前端需要访问的环境变量需要在此声明
+    EnvironmentPlugin(['SUPABASE_URL', 'SUPABASE_KEY', 'ALGOLIA_ID', 'ALGOLIA_SEARCH_KEY', 'ALGOLIA_AGENT_ID'], {
       defineOn: 'import.meta.env',
     }),
     envPlugin({

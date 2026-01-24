@@ -14,6 +14,8 @@ const config = {
   algolia: {
     id: env.ALGOLIA_ID,
     key: env.ALGOLIA_SEARCH_KEY,
+    riteKey: env.ALGOLIA_WRITE_KEY,
+    agentId: env.ALGOLIA_AGENT_ID,
   },
 }
 

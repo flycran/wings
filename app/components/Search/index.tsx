@@ -1,9 +1,10 @@
 import { AnimatePresence } from 'motion/react'
 import { GoSearch } from 'react-icons/go'
-import { InstantSearch, useHits, useSearchBox } from 'react-instantsearch'
+import { Chat, InstantSearch, useHits, useSearchBox } from 'react-instantsearch'
 import ArticleCard, { BaseArticle } from '~/components/ArticleCard'
 import MotionDiv from '~/components/motion/MotionDiv'
 import Input from '~/components/ui/Input'
+import webConfig from '~/config/web'
 import { algoliaClient } from '~/utils/algolia'
 import 'instantsearch.css/themes/algolia-min.css'
 

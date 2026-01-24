@@ -186,3 +186,7 @@ input {
     height: 0;
   }
 }
+
+.algolia-chat {
+  --ais-primary-color-rgb: 0, 171, 255;
+}

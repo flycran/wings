@@ -1,10 +1,14 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
+import { Chat, InstantSearch } from 'react-instantsearch'
+import 'instantsearch.css/components/chat.css'
 import { Link, useLocation } from 'react-router'
 import { PortalBody } from '~/components/PortalBody'
 import Search from '~/components/Search'
 import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
 import Dialog from '~/components/ui/Dialog'
+import webConfig from '~/config/web'
+import { algoliaClient } from '~/utils/algolia'
 import SlideArrow, { SlideArrowRef } from '../SlideArrow'
 
 interface MenuItemProps {
@@ -12,6 +16,37 @@ interface MenuItemProps {
   href: string
   color: string
   icon?: ReactNode
+}
+
+export function AgentChat() {
+  console.log(import.meta.env)
+  return (
+    <InstantSearch searchClient={algoliaClient}>
+      <Chat
+        classNames={{
+          container: 'algolia-chat',
+          toggleButton: {
+            root: 'algolia-chat',
+          },
+        }}
+        agentId={webConfig.algolia.agentId}
+        translations={{
+          header: {
+            clearLabel: '清理记录',
+            closeLabel: '关闭',
+            title: 'Wings助手',
+          },
+          messages: {
+            loaderText: '加载中...',
+          },
+          prompt: {
+            disclaimer: '人工智能可能会犯错。请核实回答内容。',
+            textareaPlaceholder: '输入你的消息',
+          },
+        }}
+      />
+    </InstantSearch>
+  )
 }
 
 // 菜单项
@@ -117,6 +152,8 @@ export default function Sidebar() {
     },
   ]
 
+  console.log(webConfig.algolia.agentId)
+
   return (
     <div className="-translate-y-1/2 fixed top-1/2 left-0 z-100">
       <nav className="flex flex-col items-start gap-2">
@@ -126,6 +163,9 @@ export default function Sidebar() {
         ))}
       </nav>
       <Switchdarkmode />
+      <PortalBody>
+        <AgentChat />
+      </PortalBody>
     </div>
   )
 }

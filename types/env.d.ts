@@ -16,6 +16,8 @@ declare module 'process' {
         readonly ALGOLIA_SEARCH_KEY: string
         // Write API Key
         readonly ALGOLIA_WRITE_KEY: string
+        // Agent Id
+        readonly ALGOLIA_AGENT_ID: string
       }
     }
   }

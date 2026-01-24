@@ -6,6 +6,7 @@ const webConfig = {
   algolia: {
     id: import.meta.env.ALGOLIA_ID,
     key: import.meta.env.ALGOLIA_SEARCH_KEY,
+    agentId: import.meta.env.ALGOLIA_AGENT_ID,
   },
 }
 
