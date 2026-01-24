@@ -145,7 +145,7 @@ input {
 /* biome-ignore lint/correctness/noUnknownTypeSelector: 已知的选择器 */
 ::view-transition-old(root),
 /* biome-ignore lint/correctness/noUnknownTypeSelector: 已知的选择器 */
-::view-transition-new(root) {
+  ::view-transition-new(root) {
   animation: none;
 }
 
