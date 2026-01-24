@@ -6,10 +6,16 @@ declare module 'process' {
         readonly PLATFORM_JUEJIN_ID: string
         // Github username
         readonly PLATFORM_GITHUB_USERNAME: string
-        // Supabase URL
+        // URL
         readonly SUPABASE_URL: string
-        // Supabase KEY
+        // KEY
         readonly SUPABASE_KEY: string
+        // Application ID
+        readonly ALGOLIA_ID: string
+        // Search API Key
+        readonly ALGOLIA_SEARCH_KEY: string
+        // Write API Key
+        readonly ALGOLIA_WRITE_KEY: string
       }
     }
   }

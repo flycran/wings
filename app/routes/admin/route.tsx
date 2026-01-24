@@ -27,11 +27,9 @@ const admin = () => {
   }, [])
 
   return (
-    <>
-      <FullScreenLoading loading={!authed} title="正在验证用户">
-        <Outlet />
-      </FullScreenLoading>
-    </>
+    <FullScreenLoading loading={!authed} title="正在验证用户">
+      <Outlet />
+    </FullScreenLoading>
   )
 }
 

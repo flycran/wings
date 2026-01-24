@@ -11,6 +11,10 @@ const config = {
     url: env.SUPABASE_URL,
     key: env.SUPABASE_KEY,
   },
+  algolia: {
+    id: env.ALGOLIA_ID,
+    key: env.ALGOLIA_SEARCH_KEY,
+  }
 }
 
 export default config as DeepReadonly<typeof config>

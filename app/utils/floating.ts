@@ -56,7 +56,6 @@ export const relatively = (option: Relatively, context: FloatingContext, transfo
       translate.y = y
     } else if (ry === 'bottom') {
       style.bottom = 0
-      console.log(y, fele.clientHeight, floating.clientHeight)
       translate.y = -(fele.clientHeight - y - floating.clientHeight)
     }
 

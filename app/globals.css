@@ -35,6 +35,8 @@ input {
   --color-fore-dark: #eeeeef;
   --color-popover: #f6f5f4;
   --color-popover-dark: #1c1c1c;
+  --color-fore-hover: #72767a;
+  --color-fore-hover-dark: #adb0b3;
 }
 
 @layer components {

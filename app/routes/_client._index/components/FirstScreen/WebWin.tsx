@@ -4,8 +4,6 @@ import MotionDiv from '~/components/motion/MotionDiv'
 import { useDelayActive } from '~/hooks/delayOpen'
 import code from '../../../../../plugins/env?raw'
 
-console.log(Object.keys(SyntaxHighlighter))
-
 export default function WebWin() {
   const svgElement = useMemo(
     () => (

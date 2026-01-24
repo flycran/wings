@@ -1,11 +1,10 @@
-import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react'
-import { AnimatePresence } from 'motion/react'
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
-import { Link, useLocation, useNavigate } from 'react-router'
-import MotionDiv from '~/components/motion/MotionDiv'
+import { Link, useLocation } from 'react-router'
 import { PortalBody } from '~/components/PortalBody'
+import Search from '~/components/Search'
 import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
+import Dialog from '~/components/ui/Dialog'
 import SlideArrow, { SlideArrowRef } from '../SlideArrow'
 
 interface MenuItemProps {
@@ -42,124 +41,51 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   )
 }
 // 搜索菜单
-const Search = () => {
+const SearchMenuItem = () => {
   const [expand, setExpand] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [keyword, setKeyword] = useState('')
-  const navigate = useNavigate()
+  const location = useLocation()
 
-  const search = () => {
-    if (keyword) {
-      navigate(`article?w=${keyword}`)
-      setKeyword('')
-    }
-    close()
-  }
-
-  // 搜索建议
-
-  const [open, setOpen] = useState(false)
-  // 搜索
-  // const { run, data } = useRequest(async (e: any) => 0, {
-  //   manual: true,
-  //   debounceWait: 350,
-  //   onFinally() {
-  //     setOpen(true)
-  //   },
-  // })
-
-  // 浮动元素
-  const { refs, floatingStyles } = useFloating({
-    strategy: 'fixed',
-    placement: 'bottom',
-    open,
-    onOpenChange: setOpen,
-    whileElementsMounted: autoUpdate,
-    middleware: [
-      offset(8),
-      shift({
-        padding: 8,
-      }),
-    ],
-  })
-
-  const onChange = (value: string) => {
-    setKeyword(value)
-    // run({
-    //   search: value,
-    // })
-  }
+  useEffect(() => {
+    setExpand(false)
+  }, [location])
 
   const close = () => {
     setExpand(false)
-    setOpen(false)
   }
 
   return (
     <>
       <div
-        ref={refs.setReference}
         className="flex h-12 cursor-pointer items-center rounded-r-xl bg-crane-red text-white shadow duration-300"
-        style={{ width: expand ? '14rem' : '6rem' }}
+        style={{ width: expand ? '10rem' : '6rem' }}
         onClick={() => setExpand(true)}
       >
         {expand ? (
           <input
             ref={inputRef}
-            value={keyword}
-            onChange={(e) => onChange(e.target.value)}
-            autoFocus
             placeholder="搜搜看有什么"
-            onBlur={() => Promise.resolve().then(close)}
-            onKeyDown={({ key }) => key === 'Enter' && search()}
             className="box-border h-full w-0 flex-1 px-3"
+            readOnly
           />
         ) : (
           <div className="flex-1 text-center">搜索</div>
         )}
         <GoSearch className="mr-3" size={20} />
       </div>
-      <PortalBody>
-        <AnimatePresence>
-          {open && (
-            <div ref={refs.setFloating} className="z-110" style={floatingStyles}>
-              <MotionDiv
-                initial={{
-                  opacity: 0,
-                  x: -50,
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  x: -50,
-                }}
-              >
-                {/*<div className="overflow-hidden rounded-lg bg-popover text-sm shadow-card dark:bg-popover-dark">*/}
-                {/*  {data ? (*/}
-                {/*    data.result.map((e) => (*/}
-                {/*      <Link*/}
-                {/*        href={`/article/${e.id}`}*/}
-                {/*        key={e.id}*/}
-                {/*        className="block p-2 transition hover:bg-zinc-500/10"*/}
-                {/*        onClick={close}*/}
-                {/*      >*/}
-                {/*        <div className="ellipsis-3">{e.title}</div>*/}
-                {/*      </Link>*/}
-                {/*    ))*/}
-                {/*  ) : (*/}
-                {/*    <div className="h-30">*/}
-                {/*      <NoData />*/}
-                {/*    </div>*/}
-                {/*  )}*/}
-                {/*</div>*/}
-              </MotionDiv>
-            </div>
+      {
+        <PortalBody>
+          {expand && (
+            <Dialog onCancel={close} onClickMask={close} className="items-start">
+              <div className="w-140 max-h-full overflow-auto scroll-none">
+                <div className="mt-30 mb-10 p-3 relative">
+                  <Search />
+                </div>
+              </div>
+            </Dialog>
           )}
-        </AnimatePresence>
-      </PortalBody>
+        </PortalBody>
+      }
     </>
   )
 }
@@ -191,7 +117,7 @@ export default function Sidebar() {
   return (
     <div className="-translate-y-1/2 fixed top-1/2 left-0 z-100">
       <nav className="flex flex-col items-start gap-2">
-        <Search />
+        <SearchMenuItem />
         {menus().map((menu) => (
           <MenuItem key={menu.href} {...menu} />
         ))}

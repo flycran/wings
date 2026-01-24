@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react'
+import { resolvePath } from 'react-router'
 
 export function* chunkGenerator<T>(arr: T[], n: number) {
   for (let i = 0; i < arr.length; i += n) {
@@ -45,4 +46,13 @@ export function omitKeys<T extends object, K extends keyof T>(obj: T, ...keys: K
   }
 
   return result
+}
+
+export const getAbsoluteUrl = (to: string) => {
+  const url = new URL(window.location.href)
+  const path = resolvePath(to)
+  url.pathname = path.pathname
+  url.search = path.search
+  url.hash = path.hash
+  return url.toString()
 }

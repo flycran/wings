@@ -28,14 +28,10 @@ const login = () => {
   })
 
   const onSubmit = async (values: Login) => {
-    const {
-      error,
-      data: { user },
-    } = await supabaseClient.auth.signInWithPassword(values)
+    const { error } = await supabaseClient.auth.signInWithPassword(values)
     if (error) {
       console.log(error)
     } else {
-      console.log(user)
       navigate('/')
     }
   }

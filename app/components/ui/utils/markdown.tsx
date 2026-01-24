@@ -54,9 +54,7 @@ export const treeNodeMap = (
         ...properties,
         className: className?.join(' '),
         key: getKey(),
-        // biome-ignore lint/correctness/noChildrenProp: createElement只支持通过props传递
-        children: children.length ? treeNodeMap(children, components) : undefined,
-      })
+      }, children.length ? treeNodeMap(children, components) : undefined)
     }
     if (node.type === 'text') return node.value
   }

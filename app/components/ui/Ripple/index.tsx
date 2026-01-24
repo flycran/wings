@@ -56,8 +56,6 @@ export default function Ripple({ children, color }: RippleProps) {
       Math.sqrt(right ** 2 + top ** 2) * 2
     )
 
-    console.log(size)
-
     div.style = `
       ${baseStyle}
       border-radius: 100vw;

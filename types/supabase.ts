@@ -53,6 +53,7 @@ export type Database = {
           content: string
           cover: string
           created_at: string
+          describe: string
           id: number
           title: string
           updated_at: string
@@ -63,6 +64,7 @@ export type Database = {
           content?: string
           cover?: string
           created_at?: string
+          describe?: string
           id?: number
           title?: string
           updated_at?: string
@@ -73,6 +75,7 @@ export type Database = {
           content?: string
           cover?: string
           created_at?: string
+          describe?: string
           id?: number
           title?: string
           updated_at?: string
