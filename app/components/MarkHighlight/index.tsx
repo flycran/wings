@@ -26,9 +26,7 @@ export default function MarkHighlight({ text, query = '' }: MarkHighlightProps) 
     }
 
     // 添加高亮的 mark 元素
-    nodes.push(
-      <mark className="text-crane-red bg-transparent">{ matchText }</mark>
-    )
+    nodes.push(<mark className="text-crane-red bg-transparent">{matchText}</mark>)
 
     lastIndex = matchIndex + matchText.length
   }

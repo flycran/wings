@@ -14,7 +14,7 @@ const config = {
   algolia: {
     id: env.ALGOLIA_ID,
     key: env.ALGOLIA_SEARCH_KEY,
-  }
+  },
 }
 
 export default config as DeepReadonly<typeof config>

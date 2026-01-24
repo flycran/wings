@@ -50,11 +50,15 @@ export const treeNodeMap = (
         if (index === undefined) return undefined
         return `${tagName}-${index}`
       }
-      return createElement(components[tagName] || tagName, {
-        ...properties,
-        className: className?.join(' '),
-        key: getKey(),
-      }, children.length ? treeNodeMap(children, components) : undefined)
+      return createElement(
+        components[tagName] || tagName,
+        {
+          ...properties,
+          className: className?.join(' '),
+          key: getKey(),
+        },
+        children.length ? treeNodeMap(children, components) : undefined
+      )
     }
     if (node.type === 'text') return node.value
   }

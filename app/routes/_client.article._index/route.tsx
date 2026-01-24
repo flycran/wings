@@ -5,7 +5,6 @@ import { supabaseClient } from '~/utils/supabase'
 import { Route } from './+types/route'
 
 export async function loader({ request }: Route.LoaderArgs) {
-
   const articles = await supabaseClient
     .from('articles')
     .select(`
