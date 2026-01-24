@@ -77,8 +77,11 @@ const SearchMenuItem = () => {
         <PortalBody>
           {expand && (
             <Dialog onCancel={close} onClickMask={close} className="items-start">
-              <div className="w-140 max-h-full overflow-auto scroll-none">
-                <div className="mt-30 mb-10 p-3 relative">
+              <div className="w-full max-h-full overflow-auto scroll-none" onClick={close}>
+                <div
+                  className="w-140 mt-30 mb-10 p-4 relative mx-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Search />
                 </div>
               </div>
