@@ -27,6 +27,10 @@ export default function WheelNext() {
     <AnimatePresence>
       {scrollY < 300 && (
         <MotionDiv
+          transition={{
+            delay: 0.6,
+            duration: 1,
+          }}
           initial={{
             y: -20,
             opacity: 0,
@@ -35,8 +39,8 @@ export default function WheelNext() {
             y: 10,
           }}
           animate={{
-            y: 0,
-            opacity: 1,
+            y: [-20, 0, -10, 0],
+            opacity: [0, 1],
           }}
           exit={{
             y: -20,

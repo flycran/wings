@@ -34,14 +34,20 @@ export function AgentChat() {
           header: {
             clearLabel: '清理记录',
             closeLabel: '关闭',
+            maximizeLabel: '最大化',
+            minimizeLabel: '最小化',
             title: 'Wings助手',
           },
           messages: {
+            copyToClipboardLabel: '复制到剪贴板',
             loaderText: '加载中...',
+            scrollToBottomLabel: '回到底部',
           },
           prompt: {
             disclaimer: '人工智能可能会犯错。请核实回答内容。',
             textareaPlaceholder: '输入你的消息',
+            emptyMessageTooltip: '消息为空',
+            stopResponseTooltip: '停止输出',
           },
         }}
       />
