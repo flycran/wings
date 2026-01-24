@@ -25,8 +25,8 @@ export const flattening = <T extends { children?: T[] }>(tree: T[]): FlattenNode
       const { children, ...rest } = node
       result.push(rest as T)
 
-      if (node.children) {
-        traverse(node.children)
+      if (children) {
+        traverse(children)
       }
     }
   }

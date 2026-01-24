@@ -27,7 +27,9 @@ export interface PlatformMate {
 
 export default function FirstScreen({
   data,
-}: { data: Pick<HomeData, 'platforms' | 'visitCount'> }) {
+}: {
+  data: Pick<HomeData, 'platforms' | 'visitCount'>
+}) {
   const {
     platforms: { juejin, github },
   } = data

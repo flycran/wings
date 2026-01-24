@@ -21,5 +21,5 @@
 }
 
 :focus-visible > .waveFocus {
-  box-shadow: 0 0 0 .35em rgb(from var(--wave-color) r g b / 20%);
+  box-shadow: 0 0 0 0.35em rgb(from var(--wave-color) r g b / 20%);
 }

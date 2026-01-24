@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
-import { supabaseSSR } from '~/server/supabase'
+import { supabaseClient } from '~/utils/supabase'
 import { Route } from './+types/route'
 
 interface TocItem {
@@ -16,10 +16,8 @@ interface TocItem {
   value: string
 }
 
-export async function loader({ params, request }: Route.LoaderArgs) {
-  const supabase = supabaseSSR(request)
-
-  const article = await supabase
+export async function loader({ params }: Route.LoaderArgs) {
+  const article = await supabaseClient
     .from('articles')
     .select(`
       *,

@@ -40,7 +40,7 @@ bun dev
 | generate-supabase-types | 从supabase生成数据库类型           |
 | typecheck               | 检查ts类型                     |
 | lint                    | 规范检查                       |
-| lint:unsafe             | 规范检查并执行安全的修复               |
+| lint:fix                | 规范检查并执行安全的修复               |
 | format                  | 格式化                        |
 | netlify:serve           | 以netlify模拟环境启动             |
 

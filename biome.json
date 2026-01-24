@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "includes": ["**"]
   },
   "formatter": {
     "enabled": true,
@@ -20,20 +20,15 @@
     "attributePosition": "auto",
     "bracketSpacing": true
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
-    "ignore": [
-      "env.d.ts"
-    ],
+    "includes": ["**", "!**/env.d.ts"],
     "enabled": true,
     "rules": {
       "recommended": true,
       "a11y": {
         "recommended": false,
         "noAriaUnsupportedElements": "warn",
-        "noBlankTarget": "off",
         "useAltText": "warn",
         "useAriaPropsForRole": "warn",
         "useValidAriaProps": "warn",
@@ -42,8 +37,8 @@
       "complexity": {
         "noUselessThisAlias": "error",
         "noUselessTypeConstraint": "error",
-        "noWith": "off",
-        "noForEach": "off"
+        "noForEach": "off",
+        "noArguments": "error"
       },
       "correctness": {
         "noChildrenProp": "error",
@@ -51,13 +46,11 @@
         "noGlobalObjectCalls": "off",
         "noInvalidBuiltinInstantiation": "off",
         "noInvalidConstructorSuper": "off",
-        "noNewSymbol": "off",
         "noSetterReturn": "off",
         "noUndeclaredVariables": "off",
         "noUnreachable": "off",
         "noUnreachableSuper": "off",
         "noUnusedVariables": "error",
-        "useArrayLiterals": "off",
         "useExhaustiveDependencies": {
           "level": "warn",
           "options": {
@@ -73,17 +66,18 @@
         "useJsxKeyInIterable": "error"
       },
       "security": {
-        "noDangerouslySetInnerHtmlWithChildren": "error"
+        "noDangerouslySetInnerHtmlWithChildren": "error",
+        "noBlankTarget": "off"
       },
       "style": {
-        "noArguments": "error",
         "noNamespace": "error",
-        "noVar": "error",
         "useAsConstAssertion": "error",
         "useBlockStatements": "off",
         "useConst": "error",
         "noNonNullAssertion": "off",
-        "useImportType": "off"
+        "useImportType": "off",
+        "useArrayLiterals": "off",
+        "noCommonJs": "error"
       },
       "suspicious": {
         "noClassAssign": "off",
@@ -103,12 +97,12 @@
         "useGetterReturn": "off",
         "useNamespaceKeyword": "error",
         "noArrayIndexKey": "off",
-        "noEmptyInterface": "off"
-      },
-      "nursery": {
-        "noCommonJs": "error",
+        "noEmptyInterface": "off",
+        "noWith": "off",
+        "noVar": "error",
         "noDuplicateElseIf": "error"
-      }
+      },
+      "nursery": {}
     }
   },
   "javascript": {
