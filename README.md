@@ -1,5 +1,12 @@
 # Wings | 插上翅膀去飞翔
 
+## 技术
+
+- [React](https://react.dev/)框架
+- [React Router](https://reactrouter.com/)路由+SSR
+- [Supabase](https://supabase.com/)数据存储
+- [Algolia](https://www.algolia.com/)搜索引擎
+
 ## 开发
 
 - nodejs=^20
