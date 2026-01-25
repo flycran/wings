@@ -1,4 +1,3 @@
-import { Link } from 'react-router'
 import ArticleCard from '~/components/ArticleCard'
 import { supabaseClient } from '~/utils/supabase'
 
@@ -31,7 +30,7 @@ export default function article({ loaderData }: Route.ComponentProps) {
       <div className="w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl">
         <div className="w-full flex flex-col gap-4">
           {loaderData?.map((item) => (
-            <ArticleCard key={item.id} article={item} />
+            <ArticleCard key={item.id} article={item} showOperatebar />
           ))}
         </div>
       </div>

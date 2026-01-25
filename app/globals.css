@@ -36,6 +36,8 @@ input {
   --color-back: #fdfcf8;
   --color-fore: #29292b;
   --color-fore-dark: #eeeeef;
+  --color-fore-describe: var(--color-zinc-600);
+  --color-fore-describe-dark: var(--color-zinc-400);
   --color-popover: #f3f2f1;
   --color-popover-dark: #232222;
   --color-fore-hover: #72767a;
