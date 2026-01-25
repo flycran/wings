@@ -31,7 +31,7 @@ export default function ArticleCard({ article, query, showOperatebar }: ArticleC
   return (
     <Link
       to={`/article/${article?.id}`}
-      className="flex p-4 gap-4 w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg shadow-card dark:shadow-card-dark"
+      className="flex p-4 gap-4 w-full bg-zinc-100 dark:bg-zinc-800 rounded-lg"
     >
       {article.cover && (
         <ImageHoverExpand
