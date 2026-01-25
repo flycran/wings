@@ -36,10 +36,10 @@ export default function Button({
         cva(
           {
             size: {
-              small: 'h-6 px-2 text-xs',
-              default: 'h-8 px-3 text-sm gap-2',
-              large: 'h-10 px-4 text-base',
-              responsive: 'h-[calc(2em)] px-[.5em]',
+              small: clsx('h-6 text-xs'),
+              default: clsx('h-8 text-sm gap-2'),
+              large: clsx('h-10 text-base'),
+              responsive: clsx('h-[calc(2em)]'),
             },
             variant: {
               solid:
@@ -63,13 +63,38 @@ export default function Button({
             shape,
           }
         ),
+        // 没有文字时渲染为正方形
+        children
+          ? cva(
+              {
+                size: {
+                  small: 'h-6',
+                  default: 'h-8',
+                  large: 'h-10',
+                  responsive: 'h-[calc(2em)]',
+                },
+              },
+              {
+                size,
+              }
+            )
+          : 'aspect-square container-size',
         block ? 'flex w-full' : 'inline-flex'
       )}
       style={customVar({
         colorPreset: getPresetColor(color),
       })}
     >
-      {icon ? <span>{icon}</span> : null}
+      {icon ? (
+        <span
+          className={clsx(
+            // 没有文字且变体为text时放大图标
+            !children && variant === 'text' ? 'text-[100cqw]' : 'text-[1.25em]'
+          )}
+        >
+          {icon}
+        </span>
+      ) : null}
       {children && <span>{children}</span>}
     </button>
   )

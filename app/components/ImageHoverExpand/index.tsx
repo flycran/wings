@@ -92,8 +92,8 @@ export default function ImageHoverExpand({
       <div
         className={clsx(
           imageClassName,
-          hover ? 'relative z-1 shadow-card' : '',
-          'overflow-hidden transition-2 transition-[width,height] inline-flex items-center justify-center shrink-0 w-full h-full'
+          hover ? 'shadow-card dark:shadow-card-dark' : '',
+          'overflow-hidden transition-2 transition-[width,height] inline-flex items-center justify-center shrink-0 w-full h-full relative z-1'
         )}
         style={hover ? coverSize : containerSize}
       >

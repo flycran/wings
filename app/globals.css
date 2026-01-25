@@ -30,6 +30,8 @@ input {
   --color-crane-red: #fb658b;
   --color-skeleton: var(--color-gray-100);
   --shadow-card: 0 2px 8px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+  --shadow-card-dark:
+    0 2px 8px 0 rgba(160, 160, 160, 0.08), 0 3px 6px -4px rgba(160, 160, 160, 0.12);
   --color-back-dark: #1f2020;
   --color-back: #fdfcf8;
   --color-fore: #29292b;
@@ -55,6 +57,10 @@ input {
   }
   .transition-background {
     transition-property: background, background-color, border-color;
+  }
+
+  .container-size {
+    container-type: size;
   }
 
   .mask-number-scroll {
