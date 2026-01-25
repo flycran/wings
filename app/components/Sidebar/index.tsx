@@ -19,7 +19,6 @@ interface MenuItemProps {
 }
 
 export function AgentChat() {
-  console.log(import.meta.env)
   return (
     <InstantSearch searchClient={algoliaClient}>
       <Chat
@@ -157,8 +156,6 @@ export default function Sidebar() {
       icon: <GoFileCode />,
     },
   ]
-
-  console.log(webConfig.algolia.agentId)
 
   return (
     <div className="-translate-y-1/2 fixed top-1/2 left-0 z-100">

@@ -1,6 +1,10 @@
+import { useAtom } from 'jotai'
 import { Link } from 'react-router'
+import { openLoginAtom } from '~/store/system'
 
 export default function Footer() {
+  const [_, setOpenLogin] = useAtom(openLoginAtom)
+
   return (
     <div className="bg-zinc-900 border-t border-zinc-700 text-zinc-200 text-sm">
       <div className="py-8 m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl 2xl:w-6xl flex">
@@ -9,6 +13,18 @@ export default function Footer() {
             <Link to="/admin" className="hover:underline">
               进入后台
             </Link>
+          </li>
+          <li>
+            <a
+              href=""
+              onClick={(e) => {
+                e.preventDefault()
+                setOpenLogin(true)
+              }}
+              className="hover:underline"
+            >
+              登录
+            </a>
           </li>
           <li>
             <Link to="/admin/article/editor" className="hover:underline">

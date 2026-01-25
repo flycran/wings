@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
 import { ReactNode } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
@@ -50,7 +51,7 @@ export default function Modal({
               opacity: 0,
               scale: 0.3,
             }}
-            className="p-4 rounded-xl bg-popover dark:bg-popover-dark shadow-popover min-w-50 xl:min-w-80"
+            className="p-4 rounded-xl bg-popover dark:bg-popover-dark shadow-popover dark:shadow-popover-dark min-w-50 xl:min-w-80"
           >
             <div>
               {children ?? (
@@ -60,8 +61,12 @@ export default function Modal({
                 </div>
               )}
             </div>
-            <div className="flex items-center justify-center mt-4 gap-2">
-              {operates || (
+            <div
+              className={clsx('flex items-center justify-center gap-2', {
+                'mt-4': operates !== false,
+              })}
+            >
+              {operates ?? (
                 <>
                   {!hiddenCancel && (
                     <Button

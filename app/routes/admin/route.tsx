@@ -2,6 +2,7 @@ import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router'
 import FullScreenLoading from '~/components/FullScreenLoading'
+import LoginDialog from '~/components/LoginDialog'
 import { userAtom } from '~/store/user'
 import { supabaseClient } from '~/utils/supabase'
 
@@ -28,6 +29,7 @@ const admin = () => {
 
   return (
     <FullScreenLoading loading={!authed} title="正在验证用户">
+      <LoginDialog />
       <Outlet />
     </FullScreenLoading>
   )

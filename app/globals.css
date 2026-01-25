@@ -23,6 +23,7 @@ input {
 }
 
 @theme {
+  /*App*/
   --color-crane-orange: #ffb22f;
   --color-crane-green: #21d486;
   --color-crane-blue: #00abff;
@@ -33,10 +34,17 @@ input {
   --color-back: #fdfcf8;
   --color-fore: #29292b;
   --color-fore-dark: #eeeeef;
-  --color-popover: #f6f5f4;
-  --color-popover-dark: #1c1c1c;
+  --color-popover: #f3f2f1;
+  --color-popover-dark: #232222;
   --color-fore-hover: #72767a;
   --color-fore-hover-dark: #adb0b3;
+}
+
+:root {
+  /*React Toastify*/
+  --toastify-color-success: var(--color-crane-green);
+  --toastify-color-warning: var(--color-crane-orange);
+  --toastify-color-error: var(--color-crane-red);
 }
 
 @layer components {

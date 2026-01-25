@@ -1,13 +1,17 @@
+import { createTheme, ThemeProvider } from '@mui/material'
+import 'react-toastify/ReactToastify.css'
 import cookies from 'cookie'
 import { useAtom } from 'jotai'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import './globals.css'
 import 'swiper/css'
 import '~/assets/font.css'
+import { ToastContainer } from 'react-toastify/unstyled'
 import Topbar from '~/components/Topbar'
 import DialogProvider from '~/components/ui/DialogProvider/DialogProvider'
-import { themeAtom, ThemeMode } from '~/store/system'
+import { toastOptions } from '~/config/toast'
+import { Theme, themeAtom, ThemeMode } from '~/store/system'
 import { Route } from './+types/root'
 
 export async function loader({ request }: { request: Request }) {
@@ -20,9 +24,31 @@ export async function loader({ request }: { request: Request }) {
 export default function App({ loaderData }: Route.ComponentProps) {
   const [theme, setTheme] = useAtom(themeAtom)
 
-  useEffect(() => {
+  const [absoluteTheme, setAbsoluteTheme] = useState<Theme>(
+    loaderData.theme === 'system' ? 'light' : loaderData.theme
+  )
+
+  useLayoutEffect(() => {
     setTheme(loaderData.theme)
   }, [])
+
+  useLayoutEffect(() => {
+    setAbsoluteTheme(
+      theme === 'system'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        : theme
+    )
+  }, [theme])
+
+  const muiTheme = useMemo(() => {
+    return createTheme({
+      palette: {
+        mode: absoluteTheme,
+      },
+    })
+  }, [theme])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -48,12 +74,15 @@ export default function App({ loaderData }: Route.ComponentProps) {
           <Links />
         </head>
         <body>
-          <DialogProvider>
-            <Topbar />
-            <Outlet />
-            <ScrollRestoration />
-            <Scripts />
-          </DialogProvider>
+          <ThemeProvider theme={muiTheme}>
+            <DialogProvider>
+              <Topbar />
+              <Outlet />
+              <ScrollRestoration />
+              <Scripts />
+            </DialogProvider>
+          </ThemeProvider>
+          <ToastContainer {...toastOptions} theme={absoluteTheme} />
         </body>
       </html>
     ),

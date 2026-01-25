@@ -22,7 +22,7 @@ export default function Dialog({
 
   useEffect(() => {
     if (modal) {
-      modalRef.current!.showModal()
+      modalRef.current!.show()
     }
 
     return () => {
@@ -58,7 +58,6 @@ export default function Dialog({
           duration: 0.12,
         }}
         onClick={(e) => {
-          console.log(11)
           onClickMask?.(e)
         }}
       />
