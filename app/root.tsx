@@ -48,7 +48,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
         mode: absoluteTheme,
       },
     })
-  }, [theme])
+  }, [absoluteTheme])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -86,6 +86,6 @@ export default function App({ loaderData }: Route.ComponentProps) {
         </body>
       </html>
     ),
-    []
+    [muiTheme, absoluteTheme]
   )
 }
