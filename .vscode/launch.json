@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Bun dev",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["dev"],
+      "console": "integratedTerminal"
+    },
+    {
+        "type": "node",
+        "request": "launch",
+        "name": "Bun format:fix",
+        "runtimeExecutable": "bun",
+        "runtimeArgs": ["format:fix"],
+        "console": "integratedTerminal"
+    }
+  ]
+}

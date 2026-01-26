@@ -4,7 +4,13 @@ node_modules
 /build
 .env
 /.react-router
+.history
 
 generated/prisma/
 
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+
 .idea
+!.idea/runConfigurations/
