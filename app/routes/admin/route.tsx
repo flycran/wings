@@ -1,30 +1,38 @@
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router'
+import { Outlet } from 'react-router'
 import FullScreenLoading from '~/components/FullScreenLoading'
 import LoginDialog from '~/components/LoginDialog'
+import { openLoginAtom } from '~/store/system'
 import { userAtom } from '~/store/user'
 import { supabaseClient } from '~/utils/supabase'
 
 const admin = () => {
   const [authed, setAuthed] = useState(false)
   const [user, setUser] = useAtom(userAtom)
-  const navigate = useNavigate()
+  const [_, setOpenLogin] = useAtom(openLoginAtom)
 
   const auth = async () => {
-    if (user) return
     const { data } = await supabaseClient.auth.getUser()
 
     if (data.user) {
       setAuthed(true)
       setUser(data.user)
     } else {
-      navigate('/login')
+      setOpenLogin(true)
     }
   }
 
   useEffect(() => {
-    auth()
+    if (user) {
+      setAuthed(true)
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (!user) {
+      auth()
+    }
   }, [])
 
   return (

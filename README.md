@@ -12,18 +12,18 @@
 - nodejs=^20
 - bun>=1.2
 
-> 推荐使用[volta](https://volta.sh/)管理NodeJS版本
+> 推荐使用[mise](https://mise.jdx.dev/)管理NodeJS版本
 
 ### 配置开发环境
 
 ```bash
-volta install node@20
-valta install bun@1
+mise use node@20
+mise use bun@1
 bun i
 # 配置环境变量
 cp .env.example .env # 手动配置必选的变量
 # 可选|生成数据库类型
-bunx supabase login # 每台设备只需运行一次
+bun x supabase login # 每台设备只需运行一次
 bun generate-supabase-types
 ```
 

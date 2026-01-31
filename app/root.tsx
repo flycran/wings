@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material'
 import 'react-toastify/ReactToastify.css'
+import { QueryClientProvider } from '@tanstack/react-query'
 import cookies from 'cookie'
 import { useAtom } from 'jotai'
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
@@ -11,6 +12,7 @@ import { ToastContainer } from 'react-toastify/unstyled'
 import Topbar from '~/components/Topbar'
 import DialogProvider from '~/components/ui/DialogProvider/DialogProvider'
 import { toastOptions } from '~/config/toast'
+import { queryClient } from '~/query'
 import { Theme, themeAtom, ThemeMode } from '~/store/system'
 import { Route } from './+types/root'
 
@@ -46,6 +48,12 @@ export default function App({ loaderData }: Route.ComponentProps) {
     return createTheme({
       palette: {
         mode: absoluteTheme,
+        primary: {
+          main: '#00abff',
+        },
+        secondary: {
+          main: '#3d5afe',
+        },
       },
     })
   }, [absoluteTheme])
@@ -76,10 +84,12 @@ export default function App({ loaderData }: Route.ComponentProps) {
         <body>
           <ThemeProvider theme={muiTheme}>
             <DialogProvider>
-              <Topbar />
-              <Outlet />
-              <ScrollRestoration />
-              <Scripts />
+              <QueryClientProvider client={queryClient}>
+                <Topbar />
+                <Outlet />
+                <ScrollRestoration />
+                <Scripts />
+              </QueryClientProvider>
             </DialogProvider>
           </ThemeProvider>
           <ToastContainer {...toastOptions} theme={absoluteTheme} />

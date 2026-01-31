@@ -150,7 +150,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      upsert_article_full: {
+        Args: {
+          category_id?: number
+          column_ids?: number[]
+          content: string
+          cover: string
+          describe: string
+          id?: number
+          title: string
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

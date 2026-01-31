@@ -68,10 +68,10 @@ export default function Button({
           ? cva(
               {
                 size: {
-                  small: 'h-6',
-                  default: 'h-8',
-                  large: 'h-10',
-                  responsive: 'h-[calc(2em)]',
+                  small: 'h-6 px-2',
+                  default: 'h-8 px-3',
+                  large: 'h-10 px-4',
+                  responsive: 'h-[calc(2em)] px-[.5em]',
                 },
               },
               {

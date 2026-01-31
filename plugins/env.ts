@@ -52,7 +52,7 @@ export default function envTypesPlugin({
         .join('\n')
       const typesContent = `declare module 'process'{global{namespace NodeJS {interface ProcessEnv{${types}}}}}`
       fs.writeFileSync(resolve(typesFile), typesContent)
-      execSync(`bunx biome format --write ${typesFile}`, { stdio: 'inherit' })
+      execSync(`bun x biome format --write ${typesFile}`, { stdio: 'inherit' })
       const exampleContent = envFile.replace(/^(\s*[A-Za-z_]\w*\s*=\s*).*?(?=\s*(#|$))/gm, '$1')
       fs.writeFileSync(resolve(exampleFile), exampleContent)
     } catch (e) {

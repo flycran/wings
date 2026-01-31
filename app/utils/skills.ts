@@ -17,7 +17,6 @@ export function splitIntoParts<T>(arr: T[], rows = 3) {
     .fill(base)
     .map((val, index) => val + (index < remainder ? 1 : 0))
 
-  // 修复关键错误：移除错误的 return
   const slicedParts = []
   let currentIndex = 0
 
@@ -26,5 +25,5 @@ export function splitIntoParts<T>(arr: T[], rows = 3) {
     currentIndex += size
   }
 
-  return slicedParts // 正确返回位置
+  return slicedParts
 }

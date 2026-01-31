@@ -51,7 +51,7 @@ export default function Modal({
               opacity: 0,
               scale: 0.3,
             }}
-            className="p-4 rounded-xl bg-popover dark:bg-popover-dark shadow-popover dark:shadow-popover-dark min-w-50 xl:min-w-80"
+            className="p-6 rounded-xl bg-popover dark:bg-popover-dark shadow-popover dark:shadow-popover-dark min-w-50 xl:min-w-80"
           >
             <div>
               {children ?? (

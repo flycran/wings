@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import ImageHoverExpand from '~/components/ImageHoverExpand'
 import MarkHighlight from '~/components/MarkHighlight'
 import Button from '~/components/ui/Button'
-import { getAbsoluteUrl } from '~/utils'
+import { getAbsoluteUrl, getImageUrl } from '~/utils'
 import { Tables } from '../../../types/supabase'
 
 export type BaseArticle = Pick<
@@ -38,7 +38,7 @@ export default function ArticleCard({ article, query, showOperatebar }: ArticleC
           className={clsx('aspect-square min-w-0 min-h-0', showOperatebar ? 'w-32' : 'w-24')}
           imageClassName="rounded"
         >
-          {(rest) => <img {...rest} src={article.cover} alt={article.title} />}
+          {(rest) => <img {...rest} src={getImageUrl(article.cover)} alt={article.title} />}
         </ImageHoverExpand>
       )}
       <div className="flex-1 min-w-0 flex flex-col">

@@ -1,10 +1,9 @@
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
-import { InputHTMLAttributes, Key, ReactNode, useContext, useMemo, useState } from 'react'
+import { InputHTMLAttributes, Key, ReactNode, Ref, useMemo, useState } from 'react'
 import Loading from '~/components/Loading'
 import MotionDiv from '~/components/motion/MotionDiv'
 import NoData from '~/components/NoData'
-import { FormContext } from '~/components/ui/hooks/form'
 import { cva, Size } from '~/components/ui/utils'
 import { useDelayActive } from '~/hooks/delayOpen'
 
@@ -23,6 +22,7 @@ export interface SelectProps<T extends string | number = number>
   onChange?: (value: T) => void
   search?: (value: string) => Promise<void> | void
   loading?: boolean
+  ref?: Ref<HTMLInputElement>
 }
 
 export default function Select<T extends string | number = number>({
@@ -35,14 +35,13 @@ export default function Select<T extends string | number = number>({
   search,
   loading,
   name,
+  ref,
   ...rest
 }: SelectProps<T>) {
   const { active: open, enter, leave } = useDelayActive(0, 10)
   const [focus, setFocus] = useState(false)
   const [selectedLabel, setSelectedLabel] = useState<ReactNode>('')
   const [searchValue, setSearchValue] = useState('')
-  const control = useContext(FormContext)
-  const register = control && name ? control.register(name) : undefined
 
   const inputCva = useMemo(
     () =>
@@ -93,7 +92,6 @@ export default function Select<T extends string | number = number>({
       <div className="relative h-full flex-1 w-0 shrink-0">
         <input
           {...rest}
-          {...register}
           onFocus={(e) => {
             setFocus(true)
             rest.onFocus?.(e)
@@ -116,6 +114,7 @@ export default function Select<T extends string | number = number>({
           className={clsx('h-full w-full relative rounded-lg', inputCva, {
             'opacity-0': !!selectedLabel && !focus,
           })}
+          ref={ref}
         />
         <div
           className={clsx(

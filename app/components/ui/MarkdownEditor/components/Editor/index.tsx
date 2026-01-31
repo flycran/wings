@@ -57,7 +57,6 @@ export default function Editor({ className, content = '', onChangeContent, ...re
 
     const effect = listenerCompartment.reconfigure(
       EditorView.updateListener.of((update) => {
-        console.log(update)
         if (update.docChanged) onChangeContent(editor.state.doc.toString())
       })
     )

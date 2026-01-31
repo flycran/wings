@@ -40,12 +40,12 @@ export const useModal = (props: Omit<ModalProps, 'open'>) => {
     setIsOpen(false)
   }, [])
 
-  return [
+  return {
     // 打开
     open,
     // 关闭
     close,
     // 状态
     isOpen,
-  ] as const
+  }
 }

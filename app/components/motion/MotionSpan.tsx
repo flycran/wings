@@ -1,11 +1,7 @@
 import { motion } from 'motion/react'
-import { ComponentProps, HTMLAttributes } from 'react'
+import { ComponentProps } from 'react'
 
-export type MotionSpanProps = Pick<
-  ComponentProps<typeof motion.span>,
-  'animate' | 'initial' | 'exit' | 'transition' | 'whileHover' | 'whileTap' | 'layout'
-> &
-  Omit<HTMLAttributes<HTMLSpanElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'>
+export type MotionSpanProps = ComponentProps<typeof motion.span>
 
 const MotionSpan = (props: MotionSpanProps) => {
   return <motion.span {...props} />

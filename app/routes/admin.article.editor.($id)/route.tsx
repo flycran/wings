@@ -1,106 +1,116 @@
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useRequest } from 'ahooks'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify/unstyled'
 import FullScreenLoading from '~/components/FullScreenLoading'
 import Loading from '~/components/Loading'
-import { useModal } from '~/components/ui/DialogProvider/dialogHooks'
+import Modal from '~/components/ui/Modal'
 import MarkdownEditor from '~/routes/admin.article.editor.($id)/components/MarkdownEditor'
-import SaveForm from '~/routes/admin.article.editor.($id)/components/SaveForm'
+import SaveForm, { ArticleInfo } from '~/routes/admin.article.editor.($id)/components/SaveForm'
 import { supabaseClient } from '~/utils/supabase'
-import { Tables } from '../../../types/supabase'
 import { Route } from './+types/route'
 
-export default function editor({ params: { id } }: Route.ComponentProps) {
+export default function editor({ params: { id: paramId = '' } }: Route.ComponentProps) {
   const navigate = useNavigate()
-  const [inited, setInited] = useState(false)
-  const [loading, setLoading] = useState(false)
 
+  const [id, setId] = useState<number | undefined>()
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
-  const [_columns, setColumns] = useState<Tables<'columns'>[]>([])
-  const [_category, setCategory] = useState<Tables<'categorys'> | null>()
 
-  const getArticle = useCallback(async () => {
-    if (id) {
-      const { error, data } = await supabaseClient
-        .from('articles')
-        .select(`
+  const {
+    isLoading,
+    data: article,
+    refetch,
+  } = useQuery({
+    queryFn: async ({ queryKey: [_, id] }) => {
+      if (id) {
+        const { error, data } = await supabaseClient
+          .from('articles')
+          .select(`
           *,
           article_columns!left(
             column_id,
-            columns!inner(*)
+            article_id
           ),
           categorys(*)
         `)
-        .eq('id', +id)
-      if (error) {
-        console.error(error)
-      } else if (data[0]) {
-        const article = data[0]
-        setContent(article.content)
-        setTitle(article.title)
-        setColumns(article.article_columns.map((e) => e.columns))
-        setCategory(article.categorys)
-      }
-    }
-    setInited(true)
-  }, [id])
-
-  useEffect(() => {
-    getArticle()
-  }, [getArticle])
-
-  const onSave = async () => {
-    setLoading(true)
-    try {
-      if (id) {
-        const { error } = await supabaseClient
-          .from('articles')
-          .update({
-            content,
-            title,
-          })
           .eq('id', +id)
-        if (error) {
-          console.error(error)
-          return
-        }
-      } else {
-        const { error, data } = await supabaseClient
-          .from('articles')
-          .insert({
-            title,
-            content,
-          })
-          .select('id')
           .single()
         if (error) {
+          toast.error('文章获取失败，请重试')
           console.error(error)
-          return
+        } else {
+          return data
         }
-        navigate(`./${data.id}`, { replace: true })
       }
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setLoading(false)
+    },
+    queryKey: ['article', +paramId],
+    retry: 3,
+  })
+
+  useEffect(() => {
+    if (article) {
+      if (id !== article.id) {
+        setTitle(article.title)
+        setContent(article.content)
+        setId(article.id)
+      }
     }
+  }, [article])
+
+  const { mutate: onSave, isPending } = useMutation({
+    mutationFn: async (articleInfo?: ArticleInfo) => {
+      const { error, data } = await supabaseClient.rpc('upsert_article_full', {
+        id,
+        title,
+        content,
+        describe: article?.describe ?? '',
+        cover: articleInfo?.cover ?? article?.cover ?? '',
+        category_id: articleInfo?.category_id ?? article?.category_id ?? undefined,
+        column_ids: articleInfo?.column_ids ?? article?.article_columns.map((e) => e.column_id),
+      })
+      if (error) {
+        throw error
+      }
+      if (!id) {
+        navigate(`/admin/article/editor/${id}`, { replace: true })
+        setId(data)
+      }
+      return data
+    },
+    onSuccess: (_, info) => {
+      if (info) {
+        setOpenSaveModal(false)
+        toast.success('保存成功')
+      }
+      refetch()
+    },
+    onError: () => {
+      toast.error('保存失败')
+    },
+  })
+
+  const [openSaveModal, setOpenSaveModal] = useState(false)
+
+  const closeSaveModal = () => {
+    setOpenSaveModal(false)
   }
 
-  const [openSaveModal] = useModal({
-    title: '发布文章',
-    describe: <SaveForm />,
-    onOk: onSave,
-    closeOnMaskClick: true,
-  })
-
-  const { run } = useRequest(onSave, {
-    manual: true,
-    debounceWait: 3000,
-  })
+  const { run } = useRequest(
+    async () => {
+      if (title !== article?.title || content !== article?.content) {
+        onSave({})
+      }
+    },
+    {
+      manual: true,
+      debounceWait: 3000,
+    }
+  )
 
   return (
-    <FullScreenLoading loading={!inited} title="正在获取文章">
+    <FullScreenLoading loading={isLoading} title="正在获取文章">
       <div className="relative flex flex-col h-screen">
         <div className="relative">
           <input
@@ -112,7 +122,7 @@ export default function editor({ params: { id } }: Route.ComponentProps) {
               run()
             }}
           />
-          {loading && (
+          {isPending && (
             <div className="absolute top-0 right-4 h-full flex items-center justify-center gap-2 text-sm">
               保存中
               <Loading className="w-6 h-6" />
@@ -126,9 +136,12 @@ export default function editor({ params: { id } }: Route.ComponentProps) {
             setContent(c)
             run()
           }}
-          onSave={openSaveModal}
+          onSave={() => setOpenSaveModal(true)}
         />
       </div>
+      <Modal open={openSaveModal} onClose={closeSaveModal} closeOnMaskClick operates={false}>
+        <SaveForm onSubmit={onSave} onClose={closeSaveModal} article={article} />
+      </Modal>
     </FullScreenLoading>
   )
 }

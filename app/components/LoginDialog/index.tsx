@@ -73,9 +73,20 @@ export default function LoginDialog(props: LoginDialogProps) {
           helperText={errors.password?.message}
           {...register('password', { required: true })}
         />
-        <Button type="submit" variant="contained">
-          登录
-        </Button>
+        <div className="flex gap-2">
+          <Button className="flex-1" type="submit" variant="contained">
+            登录
+          </Button>
+          <Button
+            variant="outlined"
+            className="flex-1"
+            onClick={() => {
+              setOpen(false)
+            }}
+          >
+            取消
+          </Button>
+        </div>
       </form>
     </Modal>
   )
