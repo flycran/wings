@@ -32,7 +32,6 @@
         "axios": "^1.13.2",
         "clsx": "^2.1.1",
         "cookie": "^1.0.2",
-        "flexsearch": "^0.8.164",
         "instantsearch.css": "^8.9.0",
         "isbot": "^4.4.0",
         "jotai": "^2.12.4",
@@ -1188,8 +1187,6 @@
     "finalhandler": ["finalhandler@1.3.1", "https://registry.npmmirror.com/finalhandler/-/finalhandler-1.3.1.tgz", { "dependencies": { "debug": "2.6.9", "encodeurl": "~2.0.0", "escape-html": "~1.0.3", "on-finished": "2.4.1", "parseurl": "~1.3.3", "statuses": "2.0.1", "unpipe": "~1.0.0" } }, "sha512-6BN9trH7bp3qvnrRyzsBz+g3lZxTNZTbVO2EV1CS0WIcDbawYVdYvGflME/9QP0h0pYlCDBCTjYa9nZzMDpyxQ=="],
 
     "find-root": ["find-root@1.1.0", "https://registry.npmmirror.com/find-root/-/find-root-1.1.0.tgz", {}, "sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng=="],
-
-    "flexsearch": ["flexsearch@0.8.166", "https://registry.npmmirror.com/flexsearch/-/flexsearch-0.8.166.tgz", {}, "sha512-X3GY9OfQyP1tjyy18PbGeFoxLNWlAedqv1dH/ikLS/6OYCGehX7LjJcR5Zuo0WSNqyqwbbhec1CucCwR+Rgfig=="],
 
     "follow-redirects": ["follow-redirects@1.15.9", "https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.9.tgz", {}, "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="],
 
