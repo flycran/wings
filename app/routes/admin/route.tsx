@@ -40,15 +40,17 @@ const admin = () => {
   }, [])
 
   return (
-    <FullScreenLoading loading={!authed} title="正在验证用户">
+    <>
       <LoginDialog />
-      <div className="flex">
-        <AdminMenu />
-        <div className="flex-1 shrink-0 ">
-          <Outlet />
+      <FullScreenLoading loading={!authed} title="正在验证用户">
+        <div className="flex">
+          <AdminMenu />
+          <div className="flex-1 shrink-0 min-h-screen">
+            <Outlet />
+          </div>
         </div>
-      </div>
-    </FullScreenLoading>
+      </FullScreenLoading>
+    </>
   )
 }
 

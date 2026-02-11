@@ -2,6 +2,8 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -31,7 +33,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { memo } from 'react'
+import clsx from 'clsx'
+import { memo, useState } from 'react'
 import {
   Controller,
   useFieldArray,
@@ -39,6 +42,8 @@ import {
   UseFieldArrayRemove,
   useFormContext,
 } from 'react-hook-form'
+import { AdminPageSubheadModule } from '~/components/AdminModule/AdminPageHeadModule'
+import { PortalBody } from '~/components/PortalBody'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { HomeConfig } from '~/routes/admin._index/route'
 
@@ -46,8 +51,8 @@ interface SortableCarouselCardProps {
   id: string
   index: number
   totalCount: number
-  move: UseFieldArrayMove
-  remove: UseFieldArrayRemove
+  move?: UseFieldArrayMove
+  remove?: UseFieldArrayRemove
 }
 
 function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableCarouselCardProps) {
@@ -64,35 +69,21 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
   }
 
   return (
-    <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+    <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} ref={setNodeRef} style={style}>
       <Card
-        ref={setNodeRef}
-        style={style}
-        elevation={isDragging ? 8 : 2}
-        sx={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          borderRadius: 3,
-          transition: 'transform 0.2s, box-shadow 0.2s',
-          '&:hover': { transform: isDragging ? undefined : 'translateY(-4px)' },
-          cursor: isDragging ? 'grabbing' : 'grab',
+        style={{
+          transition: 'transform 0.2s, box-shadow 0.2s, translate 0.2s',
         }}
+        elevation={isDragging ? 8 : 2}
+        className={clsx('h-full flex flex-col hover:-translate-y-1', [
+          isDragging ? 'cursor-grabbing z-20 opacity-30' : 'cursor-grab',
+        ])}
       >
-        <Box sx={{ position: 'relative', pt: '56.25%', bgcolor: 'action.hover' }}>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-            }}
-          >
+        <Box className="relative" sx={{ pt: '56.25%', bgcolor: 'action.hover' }}>
+          <div className="absolute top-0 left-0 w-full h-full">
             <Controller
               control={control}
               name={`carousel.${index}.cover`}
@@ -100,27 +91,28 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
                 <SingleImageUpload {...field} bucket="homepage" className="w-full h-full" />
               )}
             />
+          </div>
+          <Box
+            className="absolute top-2 left-2 h-8 w-8 rounded-lg backdrop-blur-sm z-1 flex items-center justify-center opacity-90 cursor-grab group-active:cursor-grabbing"
+            {...attributes}
+            {...listeners}
+            sx={{
+              bgcolor: 'background.paper',
+              boxShadow: 1,
+            }}
+          >
+            <DragIndicatorIcon fontSize="small" />
           </Box>
           <Box
+            className="absolute top-2 left-12 h-8 flex items-center gap-1 rounded-lg backdrop-blur-sm px-1 z-1 opacity-90"
             sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              display: 'flex',
-              gap: 0.5,
               bgcolor: 'background.paper',
-              backdropFilter: 'blur(8px)',
-              borderRadius: 1,
-              p: 0.5,
-              zIndex: 1,
-              boxShadow: 1,
-              opacity: 0.95,
             }}
           >
             <IconButton
               size="small"
               disabled={index === 0}
-              onClick={() => move(index, index - 1)}
+              onClick={() => move?.(index, index - 1)}
               title="向前移动"
             >
               <ArrowBackIcon fontSize="inherit" />
@@ -128,36 +120,14 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
             <IconButton
               size="small"
               disabled={index === totalCount - 1}
-              onClick={() => move(index, index + 1)}
+              onClick={() => move?.(index, index + 1)}
               title="向后移动"
             >
               <ArrowForwardIcon fontSize="inherit" />
             </IconButton>
-            <IconButton size="small" color="error" onClick={() => remove(index)} title="删除">
+            <IconButton size="small" color="error" onClick={() => remove?.(index)} title="删除">
               <DeleteIcon fontSize="inherit" />
             </IconButton>
-          </Box>
-          <Box
-            {...attributes}
-            {...listeners}
-            sx={{
-              position: 'absolute',
-              top: 8,
-              left: 8,
-              bgcolor: 'background.paper',
-              backdropFilter: 'blur(8px)',
-              borderRadius: 1,
-              p: 0.5,
-              zIndex: 1,
-              boxShadow: 1,
-              opacity: 0.95,
-              cursor: 'grab',
-              '&:active': {
-                cursor: 'grabbing',
-              },
-            }}
-          >
-            <DragIndicatorIcon fontSize="small" />
           </Box>
         </Box>
         <CardContent sx={{ flexGrow: 1 }}>
@@ -234,6 +204,7 @@ const SortableCarouselCardMemo = memo(SortableCarouselCard)
 
 export default function CarouselManager() {
   const { control } = useFormContext<HomeConfig>()
+  const [draggingId, setDraggingId] = useState('')
 
   const { fields, append, remove, move } = useFieldArray({
     control,
@@ -270,24 +241,29 @@ export default function CarouselManager() {
       }
     }
   }
+  const handleDragStart = (event: DragStartEvent) => {
+    setDraggingId(event.active.id as string)
+  }
 
   return (
     <>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5" fontWeight="medium">
-          轮播图设置 ({fields.length}/8)
-        </Typography>
-        {fields.length < 8 && (
-          <Button variant="outlined" startIcon={<AddIcon />} onClick={onAdd} size="small">
-            添加项
-          </Button>
-        )}
-      </Box>
-      <Typography variant="body2" color="text.secondary" mb={3}>
-        轮播图支持拖拽卡片进行排序，最多可添加 8 项。
-      </Typography>
-
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <AdminPageSubheadModule
+        title={`轮播图设置 (${fields.length}/8)`}
+        description="轮播图支持拖拽卡片进行排序，最多可添加 8 项。"
+        action={
+          fields.length < 8 && (
+            <Button variant="outlined" startIcon={<AddIcon />} onClick={onAdd} size="small">
+              添加项
+            </Button>
+          )
+        }
+      />
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
         <SortableContext items={fields.map((f) => f.id)} strategy={rectSortingStrategy}>
           <Grid container spacing={3}>
             {fields.map((field, index) => (
@@ -318,6 +294,19 @@ export default function CarouselManager() {
             )}
           </Grid>
         </SortableContext>
+        <PortalBody>
+          <DragOverlay>
+            {!!draggingId && (
+              <SortableCarouselCardMemo
+                id={draggingId}
+                index={fields.findIndex((field) => field.id === draggingId)}
+                totalCount={fields.length}
+                move={move}
+                remove={remove}
+              />
+            )}
+          </DragOverlay>
+        </PortalBody>
       </DndContext>
     </>
   )

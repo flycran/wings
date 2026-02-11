@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
+import { AdminPageSubheadModule } from '~/components/AdminModule/AdminPageHeadModule'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { HomeConfig } from '~/routes/admin._index/route'
 
@@ -12,12 +13,7 @@ export default function SlotsManager() {
 
   return (
     <>
-      <Typography variant="h5" fontWeight="medium" mb={1}>
-        固定展位设置
-      </Typography>
-      <Typography variant="body2" color="text.secondary" mb={4}>
-        轮播图左侧的固定内容块
-      </Typography>
+      <AdminPageSubheadModule title="固定展位设置" description="轮播图左侧的固定内容块" />
 
       <Grid container spacing={4}>
         {[0, 1].map((index) => (

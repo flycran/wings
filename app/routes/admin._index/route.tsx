@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import SaveIcon from '@mui/icons-material/Save'
-import { Box, Button, CircularProgress, Divider, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Divider } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import z from 'zod'
+import AdminPageHeadModule from '~/components/AdminModule/AdminPageHeadModule'
 import { CarouselData, SlotsData } from '~/server/home'
 import { supabaseClient } from '~/utils/supabase'
 import { CarouselItem, SlotItem } from '../../../types/supabase.additional'
@@ -114,40 +115,32 @@ export default function AdminHome() {
 
   return (
     <FormProvider {...methods}>
-      <Box p={4} component="form" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className="relative flex flex-col px-6" onSubmit={methods.handleSubmit(onSubmit)}>
         {/* 头部工具栏 */}
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
-          <Box>
-            <Typography variant="h4" fontWeight="bold">
-              首页管理
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              管理轮播图和底部固定展位的内容
-            </Typography>
-          </Box>
-          <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            type="submit"
-            disabled={!methods.formState.isDirty || saveMutation.isPending}
-            sx={{ px: 4, py: 1, borderRadius: 2 }}
-          >
-            {saveMutation.isPending ? '正在保存...' : '保存更改'}
-          </Button>
-        </Box>
+        <AdminPageHeadModule
+          title="首页管理"
+          description="管理轮播图和底部固定展位的内容"
+          action={
+            <Button
+              variant="contained"
+              startIcon={<SaveIcon />}
+              type="submit"
+              disabled={!methods.formState.isDirty || saveMutation.isPending}
+              sx={{ px: 4, py: 1, borderRadius: 2 }}
+            >
+              {saveMutation.isPending ? '正在保存...' : '保存更改'}
+            </Button>
+          }
+        />
 
         {/* 轮播图部分 */}
-        <Box mb={6}>
-          <CarouselManager />
-        </Box>
-
-        <Divider sx={{ mb: 6 }} />
-
+        <CarouselManager />
+        <div className="my-8">
+          <Divider />
+        </div>
         {/* 固定展位部分 */}
-        <Box>
-          <SlotsManager />
-        </Box>
-      </Box>
+        <SlotsManager />
+      </form>
     </FormProvider>
   )
 }

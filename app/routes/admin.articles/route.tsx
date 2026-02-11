@@ -20,6 +20,8 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import AdminPageFooterModule from '~/components/AdminModule/AdminPageFooterModule'
+import AdminPageHeadModule from '~/components/AdminModule/AdminPageHeadModule'
 import { getImageUrl } from '~/utils'
 import { supabaseClient } from '~/utils/supabase'
 import { Tables } from '../../../types/supabase'
@@ -149,35 +151,34 @@ export default function articles() {
   }
 
   return (
-    <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* flex布局 */}
+    <div className="relative flex flex-col px-6 min-h-full">
       {/* 头部 */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Box>
-          <Typography variant="h4" component="h1">
-            文章管理
-          </Typography>
-          {data && (
+      <AdminPageHeadModule
+        title="文章管理"
+        description={
+          data && (
             <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
               共 {data.count} 篇文章
             </Typography>
-          )}
-        </Box>
-        <IconButton
-          color="primary"
-          size="large"
-          onClick={handleCreate}
-          sx={{
-            backgroundColor: 'primary.main',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: 'primary.dark',
-            },
-          }}
-        >
-          <AddIcon />
-        </IconButton>
-      </Box>
+          )
+        }
+        action={
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={handleCreate}
+            sx={{
+              backgroundColor: 'primary.main',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+              },
+            }}
+          >
+            <AddIcon />
+          </IconButton>
+        }
+      />
 
       {/* 加载状态 */}
       {isLoading && (
@@ -281,7 +282,14 @@ export default function articles() {
 
                   {/* 专栏标签 */}
                   {article.article_columns.length > 0 && (
-                    <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: 1 }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        gap: 0.5,
+                        flexWrap: 'wrap',
+                        mb: 1,
+                      }}
+                    >
                       {article.article_columns.slice(0, 2).map((ac) => (
                         <Chip
                           key={ac.column_id}
@@ -362,33 +370,20 @@ export default function articles() {
       )}
 
       {/* 分页 - 粘性固定在容器底部 */}
-      {!isLoading && data && data.data.length > 0 && (
-        <Box
-          sx={{
-            position: 'sticky',
-            bottom: 0,
-            mt: 2,
-            pt: 3,
-            pb: 2,
-            backgroundColor: 'background.paper',
-            borderTop: 1,
-            borderColor: 'divider',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 10,
-          }}
-        >
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={handlePageChange}
-            color="primary"
-            size="large"
-            showFirstButton
-            showLastButton
-          />
-        </Box>
+      {data && data.data.length > 0 && (
+        <AdminPageFooterModule>
+          <div className="p-4 flex justify-center">
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handlePageChange}
+              color="primary"
+              size="large"
+              showFirstButton
+              showLastButton
+            />
+          </div>
+        </AdminPageFooterModule>
       )}
 
       {/* 删除确认 Popover */}
@@ -422,6 +417,6 @@ export default function articles() {
           </Box>
         </Box>
       </Popover>
-    </Box>
+    </div>
   )
 }

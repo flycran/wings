@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import { ReactNode, useEffect, useRef } from 'react'
+import { HTMLAttributes, ReactNode, useEffect, useRef } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useLockScroll } from '~/hooks/lockScroll'
 
-export interface MaskProps {
+export interface MaskProps extends HTMLAttributes<HTMLDialogElement> {
   children?: ReactNode
   modal?: boolean
   onClickMask?: (e: React.MouseEvent) => void
@@ -17,6 +17,7 @@ export default function Dialog({
   onClickMask,
   onCancel,
   className,
+  ...rest
 }: MaskProps) {
   const modalRef = useRef<HTMLDialogElement>(null)
 
@@ -34,6 +35,7 @@ export default function Dialog({
   useLockScroll()
   return (
     <dialog
+      {...rest}
       ref={modalRef}
       className={clsx(
         'fixed bg-transparent z-1000 top-0 left-0 w-full h-full max-w-none max-h-none backdrop:hidden  flex justify-center items-center overflow-hidden text-inherit',

@@ -18,6 +18,10 @@ export interface ModalProps {
   open?: boolean
   onClose?: () => void
   hiddenCancel?: boolean
+  modal?: boolean
+  classNames?: {
+    dialog: string
+  }
 }
 
 export default function Modal({
@@ -33,11 +37,17 @@ export default function Modal({
   closeOnMaskClick,
   title,
   describe,
+  modal,
+  classNames,
 }: ModalProps) {
   return (
     <AnimatePresence>
       {open && (
-        <Dialog onClickMask={closeOnMaskClick ? () => onClose?.() : undefined}>
+        <Dialog
+          modal={modal}
+          className={classNames?.dialog}
+          onClickMask={closeOnMaskClick ? () => onClose?.() : undefined}
+        >
           <MotionDiv
             initial={{
               opacity: 0,
