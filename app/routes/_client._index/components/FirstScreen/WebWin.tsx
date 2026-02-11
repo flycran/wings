@@ -428,7 +428,7 @@ export default function WebWin() {
       </div>
       <div
         className="absolute top-8 left-8 w-full h-full z-1 bg-zinc-50 dark:bg-zinc-800 rounded-xl
-        overflow-auto drop-shadow text-xs scroll-none duration-400 ease-out"
+        overflow-auto drop-shadow text-xs scroll-none duration-400 ease-out transition-transform"
         style={
           active
             ? {

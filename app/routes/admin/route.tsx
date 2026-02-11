@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import FullScreenLoading from '~/components/FullScreenLoading'
 import LoginDialog from '~/components/LoginDialog'
+import { useSubscribeTheme } from '~/hooks/subscribe-theme'
 import AdminMenu from '~/routes/admin/components/AdminMenu'
 import { openLoginAtom } from '~/store/system'
 import { userAtom } from '~/store/user'
@@ -12,6 +13,8 @@ const admin = () => {
   const [authed, setAuthed] = useState(false)
   const [user, setUser] = useAtom(userAtom)
   const [_, setOpenLogin] = useAtom(openLoginAtom)
+
+  useSubscribeTheme()
 
   const auth = async () => {
     const { data } = await supabaseClient.auth.getUser()

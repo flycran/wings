@@ -26,6 +26,7 @@ export async function loader({ request }: { request: Request }) {
 export default function App({ loaderData }: Route.ComponentProps) {
   const [theme, setTheme] = useAtom(themeAtom)
 
+  // For debug
   useEffect(() => {
     if (import.meta.env.DEV) window.__TANSTACK_QUERY_CLIENT__ = queryClient
   }, [])

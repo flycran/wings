@@ -2,8 +2,9 @@ import { useAtom } from 'jotai'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
-import LightBulb from '~/routes/_client/components/Sidebar/LightBulb'
+import { useSubscribeTheme } from '~/hooks/subscribe-theme'
 import { useTheme } from '~/hooks/theme'
+import LightBulb from '~/routes/_client/components/Sidebar/LightBulb'
 import { Theme, themeAtom } from '~/store/system'
 
 // 切换深色模式
@@ -58,16 +59,24 @@ export default function Switchdarkmode() {
     setIsDark(theme === 'dark')
   }, [])
 
+  useSubscribeTheme((newTheme) => {
+    const absoluteTheme =
+      newTheme === 'system'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        : newTheme
+    setIsDark(absoluteTheme === 'dark')
+  })
+
   const handleClick = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
     setIsDark(newTheme === 'dark')
     // * 等待灯泡下拉动画结束，避免灯泡闪动
-    setTimeout(
-      () => {
-        viewTransition(newTheme)
-      },
-      newTheme ? 200 : 100
-    )
+    setTimeout(() => {
+      console.log('newTheme', newTheme, 'theme', theme, 'isDark', isDark)
+      viewTransition(newTheme)
+    }, 150)
   }
 
   return (
