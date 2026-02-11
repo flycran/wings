@@ -1,4 +1,5 @@
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
+import BrokenImageIcon from '@mui/icons-material/BrokenImage'
 import CloseIcon from '@mui/icons-material/Close'
 import { Box, IconButton, Typography } from '@mui/material'
 import clsx from 'clsx'
@@ -24,12 +25,19 @@ export default function SingleImageUpload({
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const [previewUrl, setPreviewUrl] = useState<string>()
+  const [imageError, setImageError] = useState(false)
 
   const handleSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]
     if (f) {
+      if (inputRef.current) {
+        inputRef.current.files = null
+      }
       setPreviewUrl(URL.createObjectURL(f))
-      const { error, data } = await supabaseClient.storage.from(bucket).upload(f.name, f)
+      setImageError(false)
+      const { error, data } = await supabaseClient.storage
+        .from(bucket)
+        .upload(crypto.randomUUID(), f)
       if (error) {
         toast.error('图片上传失败')
         setPreviewUrl(undefined)
@@ -45,6 +53,7 @@ export default function SingleImageUpload({
     e.stopPropagation()
     onChange?.('')
     setPreviewUrl(undefined)
+    setImageError(false)
     if (inputRef.current) inputRef.current.value = ''
   }
 
@@ -77,16 +86,37 @@ export default function SingleImageUpload({
 
       {previewUrl || value ? (
         <>
-          <Box
-            component="img"
-            src={value ? getImageUrl(value) : previewUrl}
-            alt="preview"
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          />
+          {imageError ? (
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                bgcolor: 'action.hover',
+                color: 'text.disabled',
+              }}
+            >
+              <BrokenImageIcon fontSize="large" />
+              <Typography variant="caption" mt={1}>
+                图片加载失败
+              </Typography>
+            </Box>
+          ) : (
+            <Box
+              component="img"
+              src={previewUrl ? previewUrl : value && getImageUrl(value)}
+              alt="preview"
+              onError={() => setImageError(true)}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          )}
           <IconButton
             size="small"
             onClick={clear}

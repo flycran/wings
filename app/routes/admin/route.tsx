@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import FullScreenLoading from '~/components/FullScreenLoading'
 import LoginDialog from '~/components/LoginDialog'
+import AdminMenu from '~/routes/admin/components/AdminMenu'
 import { openLoginAtom } from '~/store/system'
 import { userAtom } from '~/store/user'
 import { supabaseClient } from '~/utils/supabase'
@@ -38,7 +39,12 @@ const admin = () => {
   return (
     <FullScreenLoading loading={!authed} title="正在验证用户">
       <LoginDialog />
-      <Outlet />
+      <div className="flex">
+        <AdminMenu />
+        <div className="flex-1 shrink-0 ">
+          <Outlet />
+        </div>
+      </div>
     </FullScreenLoading>
   )
 }

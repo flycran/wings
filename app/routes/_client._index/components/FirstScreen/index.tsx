@@ -38,7 +38,7 @@ export default function FirstScreen({
     {
       key: 'juejin',
       name: juejin?.username,
-      href: juejin?.href,
+      link: juejin?.href,
       icon: <Juejin />,
       description: juejin && (
         <Description
@@ -66,7 +66,7 @@ export default function FirstScreen({
     {
       key: 'github',
       name: github?.name,
-      href: github?.href,
+      link: github?.href,
       icon: <Github />,
       description: github && (
         <Description
@@ -94,13 +94,13 @@ export default function FirstScreen({
     {
       key: 'csdn',
       name: '',
-      href: '',
+      link: '',
       icon: <Csdn />,
     },
     {
       key: 'bilibili',
       name: '',
-      href: '',
+      link: '',
       icon: <Bilibili />,
     },
   ]

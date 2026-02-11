@@ -130,6 +130,30 @@ export type Database = {
         }
         Relationships: []
       }
+      homepage_singleton: {
+        Row: {
+          carousel: Json
+          created_at: string
+          id: number
+          slots: Json
+          updated_at: string
+        }
+        Insert: {
+          carousel?: Json
+          created_at?: string
+          id?: number
+          slots?: Json
+          updated_at?: string
+        }
+        Update: {
+          carousel?: Json
+          created_at?: string
+          id?: number
+          slots?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           id: string

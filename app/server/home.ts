@@ -1,5 +1,6 @@
 import axios, { Axios } from 'axios'
 import config from '~/config'
+import { supabaseClient } from '~/utils/supabase'
 
 const extRequest = new Axios({
   ...axios.defaults,
@@ -8,8 +9,8 @@ const extRequest = new Axios({
 })
 
 export interface HomeData {
-  carousels: GridViewData[]
-  fixeds: GridViewData[]
+  carousel: CarouselData[]
+  slots: SlotsData[]
   platforms: {
     juejin: {
       href: string
@@ -40,11 +41,14 @@ export interface HomeData {
   visitCount: number
 }
 
-export interface GridViewData {
+export interface SlotsData {
   title: string
   cover: string
-  href: string
-  color?: string
+  link?: string
+}
+
+export interface CarouselData extends SlotsData {
+  color: string
 }
 
 const getPlatformInfo = {
@@ -102,7 +106,7 @@ const getPlatformInfo = {
 }
 
 export const getHomeData = async (): Promise<HomeData> => {
-  const [juejin, github] = await Promise.all([
+  const [juejin, github, homepageSingleton] = await Promise.all([
     getPlatformInfo.juejin().catch((e) => {
       console.error(String(e))
       return null
@@ -111,35 +115,12 @@ export const getHomeData = async (): Promise<HomeData> => {
       console.error(String(e))
       return null
     }),
+    supabaseClient.from('homepage_singleton').select('*').eq('id', 1).single(),
   ])
 
-  const url = 'https://t.alcy.cc/moez'
-
-  const random = (min: number, max: number) => Math.floor(Math.random() * (max - min) + min)
-
-  const carousels = Array(random(3, 10))
-    .fill(null)
-    .map((_) => ({
-      title: 'Flycran',
-      cover: `${url}?random=${random(0, 10000)}`,
-      href: '/',
-      color: `hsl(${random(0, 360)},${random(50, 100)}%,${random(30, 70)}%)`,
-    }))
-
   return {
-    carousels,
-    fixeds: [
-      {
-        title: 'Flycran',
-        cover: `${url}?random=${random(0, 10000)}`,
-        href: '/',
-      },
-      {
-        title: 'Flycran2',
-        cover: `${url}?random=${random(0, 10000)}`,
-        href: '/',
-      },
-    ],
+    carousel: homepageSingleton.data!.carousel as unknown as CarouselData[],
+    slots: homepageSingleton.data!.slots as unknown as SlotsData[],
     platforms: {
       juejin,
       github,

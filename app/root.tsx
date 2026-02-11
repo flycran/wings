@@ -26,6 +26,10 @@ export async function loader({ request }: { request: Request }) {
 export default function App({ loaderData }: Route.ComponentProps) {
   const [theme, setTheme] = useAtom(themeAtom)
 
+  useEffect(() => {
+    if (import.meta.env.DEV) window.__TANSTACK_QUERY_CLIENT__ = queryClient
+  }, [])
+
   const [absoluteTheme, setAbsoluteTheme] = useState<Theme>(
     loaderData.theme === 'system' ? 'light' : loaderData.theme
   )
@@ -62,40 +66,37 @@ export default function App({ loaderData }: Route.ComponentProps) {
     document.documentElement.dataset.theme = theme
   }, [theme])
 
-  return useMemo(
-    () => (
-      <html
-        lang="zh"
-        data-theme={loaderData.theme}
-        className="bg-back text-fore dark:bg-back-dark dark:text-fore-dark dark:scrollbar-dark"
-      >
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Wings | 插上梦想的翅膀</title>
-          <meta
-            name="description"
-            content="Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。"
-          />
-          <link rel="icon" href="/public/favicon.svg" />
-          <Meta />
-          <Links />
-        </head>
-        <body>
-          <ThemeProvider theme={muiTheme}>
-            <DialogProvider>
-              <QueryClientProvider client={queryClient}>
-                <Topbar />
-                <Outlet />
-                <ScrollRestoration />
-                <Scripts />
-              </QueryClientProvider>
-            </DialogProvider>
-          </ThemeProvider>
-          <ToastContainer {...toastOptions} theme={absoluteTheme} />
-        </body>
-      </html>
-    ),
-    [muiTheme, absoluteTheme]
+  return (
+    <html
+      lang="zh"
+      data-theme={loaderData.theme}
+      className="bg-back text-fore dark:bg-back-dark dark:text-fore-dark dark:scrollbar-dark"
+    >
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Wings | 插上梦想的翅膀</title>
+        <meta
+          name="description"
+          content="Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。"
+        />
+        <link rel="icon" href="/public/favicon.svg" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ThemeProvider theme={muiTheme}>
+          <DialogProvider>
+            <QueryClientProvider client={queryClient}>
+              <Topbar />
+              <Outlet />
+              <ScrollRestoration />
+              <Scripts />
+            </QueryClientProvider>
+          </DialogProvider>
+        </ThemeProvider>
+        <ToastContainer {...toastOptions} theme={absoluteTheme} />
+      </body>
+    </html>
   )
 }

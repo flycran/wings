@@ -5,11 +5,11 @@ import 'instantsearch.css/components/chat.css'
 import { Link, useLocation } from 'react-router'
 import { PortalBody } from '~/components/PortalBody'
 import Search from '~/components/Search'
-import Switchdarkmode from '~/components/Sidebar/SwitchDarkMode'
+import Switchdarkmode from '~/routes/_client/components/Sidebar/SwitchDarkMode'
 import Dialog from '~/components/ui/Dialog'
 import webConfig from '~/config/web'
 import { algoliaClient } from '~/utils/algolia'
-import SlideArrow, { SlideArrowRef } from '../SlideArrow'
+import SlideArrow, { SlideArrowRef } from '../../../../components/SlideArrow'
 
 interface MenuItemProps {
   text: string

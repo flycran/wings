@@ -111,7 +111,7 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
 
   return (
     <FullScreenLoading loading={isLoading} title="正在获取文章">
-      <div className="relative flex flex-col h-screen">
+      <div className="relative flex flex-col h-full">
         <div className="relative">
           <input
             placeholder="取一个有趣的标题吧"

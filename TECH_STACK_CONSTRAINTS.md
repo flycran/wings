@@ -381,6 +381,14 @@ const client = supabaseSSR(request)
 - **swiper** (^11.2.6): 轮播组件
   - ✅ 轮播功能统一使用 Swiper
 
+### 拖拽交互
+- **@dnd-kit/core** (^6.3.1): 拖拽核心功能
+- **@dnd-kit/sortable** (^10.0.0): 可排序拖拽
+- **@dnd-kit/utilities** (^3.2.2): 拖拽工具函数
+  - ✅ 拖拽排序功能统一使用 dnd-kit
+  - 现有实现: `app/routes/admin._index/components/CarouselManager/` - 轮播图管理拖拽排序
+  - ❌ 禁止使用 react-dnd、react-beautiful-dnd 等其他拖拽库
+
 ### 通知提示
 - **react-toastify** (^11.0.5): Toast 通知
   - ✅ 消息提示统一使用 react-toastify

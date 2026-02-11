@@ -1,6 +1,8 @@
 import { useAtom } from 'jotai'
 import { Link } from 'react-router'
+import { toast } from 'react-toastify/unstyled'
 import { openLoginAtom } from '~/store/system'
+import { supabaseClient } from '~/utils/supabase'
 
 export default function Footer() {
   const [_, setOpenLogin] = useAtom(openLoginAtom)
@@ -32,6 +34,23 @@ export default function Footer() {
             </Link>
           </li>
         </ul>
+        <ul className="flex flex-col gap-3 flex-1">
+          <li>
+            <a
+              href=""
+              onClick={async (e) => {
+                e.preventDefault()
+                await supabaseClient.auth.signOut()
+                toast.info('已退出登陆')
+              }}
+              className="hover:underline"
+            >
+              退出登陆
+            </a>
+          </li>
+        </ul>
+        <ul className="flex flex-col gap-3 flex-1"></ul>
+        <ul className="flex flex-col gap-3 flex-1"></ul>
         <div>本站不开放注册</div>
       </div>
       <div className="text-center py-4">Wings | 插上翅膀去飞翔</div>

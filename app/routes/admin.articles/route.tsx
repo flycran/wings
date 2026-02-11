@@ -1,0 +1,427 @@
+import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import ImageIcon from '@mui/icons-material/Image'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Chip,
+  CircularProgress,
+  IconButton,
+  Pagination,
+  Popover,
+  Typography,
+} from '@mui/material'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { getImageUrl } from '~/utils'
+import { supabaseClient } from '~/utils/supabase'
+import { Tables } from '../../../types/supabase'
+
+interface ArticleWithRelations {
+  id: number
+  title: string
+  category_id: number | null
+  created_at: string
+  updated_at: string
+  cover: string
+  describe: string
+  categorys: Tables<'categorys'> | null
+  article_columns: Array<{
+    column_id: number
+    columns: Tables<'columns'>
+  }>
+}
+
+interface ArticlesResponse {
+  data: ArticleWithRelations[]
+  count: number
+}
+
+const PAGE_SIZE = 8
+
+export default function articles() {
+  const [page, setPage] = useState(1)
+  const [deleteAnchorEl, setDeleteAnchorEl] = useState<HTMLElement | null>(null)
+  const [articleToDelete, setArticleToDelete] = useState<number | null>(null)
+
+  const { data, isLoading, refetch } = useQuery<ArticlesResponse>({
+    queryKey: ['articles', { page, pageSize: PAGE_SIZE }],
+    queryFn: async () => {
+      const from = (page - 1) * PAGE_SIZE
+      const to = from + PAGE_SIZE - 1
+
+      const [articlesRes, countRes] = await Promise.all([
+        supabaseClient
+          .from('articles')
+          .select(
+            `
+            id, title, category_id, created_at, updated_at, cover, describe,
+            categorys(*),
+            article_columns!left(
+              column_id,
+              columns!inner(*)
+            )
+          `
+          )
+          .order('updated_at', { ascending: false })
+          .range(from, to),
+        supabaseClient.from('articles').select('*', { count: 'exact', head: true }),
+      ])
+
+      if (articlesRes.error) {
+        toast.error('获取文章列表失败')
+        throw articlesRes.error
+      }
+
+      return {
+        data: articlesRes.data as ArticleWithRelations[],
+        count: countRes.count ?? 0,
+      }
+    },
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const { error } = await supabaseClient.from('articles').delete().eq('id', id)
+      if (error) throw error
+    },
+    onSuccess: () => {
+      toast.success('删除成功')
+      refetch()
+    },
+    onError: () => {
+      toast.error('删除失败')
+    },
+  })
+
+  const handleEdit = (id: number) => {
+    window.open(`/admin/article/editor/${id}`, '_blank')
+  }
+
+  const handleView = (id: number) => {
+    window.open(`/article/${id}`, '_blank')
+  }
+
+  const handleDelete = (event: React.MouseEvent<HTMLElement>, id: number) => {
+    setArticleToDelete(id)
+    setDeleteAnchorEl(event.currentTarget)
+  }
+
+  const handleConfirmDelete = () => {
+    if (articleToDelete !== null) {
+      deleteMutation.mutate(articleToDelete)
+      setDeleteAnchorEl(null)
+      setArticleToDelete(null)
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setDeleteAnchorEl(null)
+    setArticleToDelete(null)
+  }
+
+  const handleCreate = () => {
+    window.open('/admin/article/editor', '_blank')
+  }
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value)
+  }
+
+  const totalPages = Math.ceil((data?.count ?? 0) / PAGE_SIZE)
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  }
+
+  return (
+    <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* flex布局 */}
+      {/* 头部 */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Box>
+          <Typography variant="h4" component="h1">
+            文章管理
+          </Typography>
+          {data && (
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+              共 {data.count} 篇文章
+            </Typography>
+          )}
+        </Box>
+        <IconButton
+          color="primary"
+          size="large"
+          onClick={handleCreate}
+          sx={{
+            backgroundColor: 'primary.main',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'primary.dark',
+            },
+          }}
+        >
+          <AddIcon />
+        </IconButton>
+      </Box>
+
+      {/* 加载状态 */}
+      {isLoading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+          <CircularProgress />
+        </Box>
+      )}
+
+      {/* 文章卡片列表 */}
+      {!isLoading && data && (
+        <Box sx={{ flexGrow: 1 }}>
+          {/* flex-grow 让内容区域填充剩余空间 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data.data.map((article) => (
+              <Card
+                key={article.id}
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: 6,
+                  },
+                }}
+              >
+                {/* 封面图片 */}
+                {article.cover ? (
+                  <CardMedia
+                    component="img"
+                    image={getImageUrl(article.cover)}
+                    alt={article.title}
+                    sx={{
+                      width: '100%',
+                      height: 180,
+                      objectFit: 'cover',
+                      backgroundColor: 'grey.200',
+                    }}
+                  />
+                ) : (
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: 180,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'grey.200',
+                    }}
+                  >
+                    <ImageIcon sx={{ fontSize: 60, color: 'grey.400' }} />
+                  </Box>
+                )}
+
+                {/* 内容区域 */}
+                <CardContent sx={{ flexGrow: 1, pb: 1 }}>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    sx={{
+                      fontWeight: 600,
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      minHeight: '3.6em',
+                    }}
+                  >
+                    {article.title || '无标题'}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      minHeight: '2.8em',
+                      mb: 1.5,
+                    }}
+                  >
+                    {article.describe || '暂无描述'}
+                  </Typography>
+
+                  {/* 类别标签 */}
+                  {article.categorys && (
+                    <Chip
+                      label={article.categorys.name}
+                      size="small"
+                      color="primary"
+                      variant="outlined"
+                      sx={{ mb: 1, fontSize: '0.7rem' }}
+                    />
+                  )}
+
+                  {/* 专栏标签 */}
+                  {article.article_columns.length > 0 && (
+                    <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: 1 }}>
+                      {article.article_columns.slice(0, 2).map((ac) => (
+                        <Chip
+                          key={ac.column_id}
+                          label={ac.columns.name}
+                          size="small"
+                          variant="outlined"
+                          sx={{ fontSize: '0.7rem' }}
+                        />
+                      ))}
+                      {article.article_columns.length > 2 && (
+                        <Chip
+                          label={`+${article.article_columns.length - 2}`}
+                          size="small"
+                          variant="outlined"
+                          sx={{ fontSize: '0.7rem' }}
+                        />
+                      )}
+                    </Box>
+                  )}
+
+                  {/* 时间信息 */}
+                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+                    更新: {formatDate(article.updated_at)}
+                  </Typography>
+                </CardContent>
+
+                {/* 操作按钮 */}
+                <CardActions sx={{ justifyContent: 'flex-end', pt: 0 }}>
+                  <IconButton
+                    size="small"
+                    color="default"
+                    onClick={() => handleView(article.id)}
+                    title="查看"
+                  >
+                    <VisibilityIcon fontSize="small" />
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    color="primary"
+                    onClick={() => handleEdit(article.id)}
+                    title="编辑"
+                  >
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    color="error"
+                    onClick={(e) => handleDelete(e, article.id)}
+                    title="删除"
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            ))}
+          </div>
+
+          {/* 空状态 */}
+          {data.data.length === 0 && (
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                py: 8,
+              }}
+            >
+              <Typography variant="h6" color="text.secondary" gutterBottom>
+                还没有文章
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                点击右上角的 + 按钮创建第一篇文章吧
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      )}
+
+      {/* 分页 - 粘性固定在容器底部 */}
+      {!isLoading && data && data.data.length > 0 && (
+        <Box
+          sx={{
+            position: 'sticky',
+            bottom: 0,
+            mt: 2,
+            pt: 3,
+            pb: 2,
+            backgroundColor: 'background.paper',
+            borderTop: 1,
+            borderColor: 'divider',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 10,
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+            size="large"
+            showFirstButton
+            showLastButton
+          />
+        </Box>
+      )}
+
+      {/* 删除确认 Popover */}
+      <Popover
+        open={Boolean(deleteAnchorEl)}
+        anchorEl={deleteAnchorEl}
+        onClose={handleCancelDelete}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
+        <Box sx={{ p: 2, maxWidth: 300 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            确认删除
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            确定要删除这篇文章吗？此操作不可恢复。
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+            <Button size="small" onClick={handleCancelDelete}>
+              取消
+            </Button>
+            <Button size="small" variant="contained" color="error" onClick={handleConfirmDelete}>
+              删除
+            </Button>
+          </Box>
+        </Box>
+      </Popover>
+    </Box>
+  )
+}

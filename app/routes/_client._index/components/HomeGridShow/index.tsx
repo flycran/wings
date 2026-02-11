@@ -3,11 +3,15 @@ import { Link } from 'react-router'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import NoData from '~/components/NoData'
-import { GridViewData, HomeData } from '~/server/home'
+import { CarouselData, HomeData, SlotsData } from '~/server/home'
+import { getImageUrl } from '~/utils'
+
+// 没有可跳转的链接
+const noLink = 'javascript:;'
 
 interface PaginationProps {
   index: number
-  list: GridViewData[]
+  list: CarouselData[]
   onChange?: (index: number) => void
   enableAutoplay?: boolean
   autoplayDelay: number
@@ -84,7 +88,7 @@ const Pagination = ({
   )
 }
 
-const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
+const SwiperView = ({ carousels }: { carousels: CarouselData[] }) => {
   const swiperRef = useRef<SwiperRef>(null)
   const [realIndex, setRealIndex] = useState(0)
   const [enableAutoplay, setEnableAutoplay] = useState(true)
@@ -128,8 +132,15 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
           {carousels.length ? (
             carousels.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link to={item.href} className="relative inline-block h-full w-full bg-skeleton">
-                  <img src={item.cover} alt={item.title} className="object-cover w-full h-full" />
+                <Link
+                  to={item.link ?? noLink}
+                  className="relative inline-block h-full w-full bg-skeleton"
+                >
+                  <img
+                    src={getImageUrl(item.cover)}
+                    alt={item.title}
+                    className="object-cover w-full h-full"
+                  />
                 </Link>
               </SwiperSlide>
             ))
@@ -153,7 +164,7 @@ const SwiperView = ({ carousels }: { carousels: GridViewData[] }) => {
   )
 }
 
-const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
+const FixedView = ({ fixeds }: { fixeds: SlotsData[] }) => {
   return (
     <>
       <div
@@ -163,10 +174,10 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
         }}
       >
         {fixeds[0] ? (
-          <Link to={fixeds[0].href} className="relative inline-block h-full w-full">
+          <Link to={fixeds[0].link ?? noLink} className="relative inline-block h-full w-full">
             <img
               className="object-cover w-full h-full"
-              src={fixeds[0].cover}
+              src={getImageUrl(fixeds[0].cover)}
               alt={fixeds[0].title}
             />
           </Link>
@@ -181,10 +192,10 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
         }}
       >
         {fixeds[1] ? (
-          <Link to={fixeds[0].href} className="relative inline-block h-full w-full">
+          <Link to={fixeds[1].link ?? noLink} className="relative inline-block h-full w-full">
             <img
               className="object-cover w-full h-full"
-              src={fixeds[1].cover}
+              src={getImageUrl(fixeds[1].cover)}
               alt={fixeds[1].title}
             />
           </Link>
@@ -196,11 +207,11 @@ const FixedView = ({ fixeds }: { fixeds: GridViewData[] }) => {
   )
 }
 
-export default function HomeGridShow({ data }: { data: Pick<HomeData, 'carousels' | 'fixeds'> }) {
+export default function HomeGridShow({ data }: { data: Pick<HomeData, 'carousel' | 'slots'> }) {
   return (
     <div className="grid aspect-[10/4] grid-cols-[2fr_5fr] grid-rows-2 gap-3">
-      <SwiperView carousels={data.carousels} />
-      <FixedView fixeds={data.fixeds} />
+      <SwiperView carousels={data.carousel} />
+      <FixedView fixeds={data.slots} />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { useAtom } from 'jotai'
 import Cookies from 'js-cookie'
 import { useEffect, useRef, useState } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
-import LightBulb from '~/components/Sidebar/LightBulb'
+import LightBulb from '~/routes/_client/components/Sidebar/LightBulb'
 import { useTheme } from '~/hooks/theme'
 import { Theme, themeAtom } from '~/store/system'
 
