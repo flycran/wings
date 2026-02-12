@@ -404,6 +404,12 @@ const client = supabaseSSR(request)
   - ✅ Cookie 操作使用 js-cookie
   - **cookie** (^1.0.2): 服务端 Cookie 解析
 
+### 颜色选择器
+- **react-colorful** (^5.6.1): 颜色选择器组件
+  - ✅ 颜色选择功能统一使用 react-colorful
+  - 现有实现: `app/routes/admin._index/components/CarouselManager/index.tsx` - 轮播图主题色选择
+  - ❌ 禁止引入其他颜色选择库（如 react-color-picker、chrome-picker 等）
+
 ### 字符串处理
 - **nanoid** (^5.1.5): 生成唯一 ID
 - **match-sorter** (^6.3.1): 模糊匹配排序
