@@ -29,12 +29,14 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Popover,
   Stack,
   TextField,
   Typography,
 } from '@mui/material'
 import clsx from 'clsx'
 import { memo, useState } from 'react'
+import { HexColorPicker } from 'react-colorful'
 import {
   Controller,
   useFieldArray,
@@ -56,6 +58,8 @@ interface SortableCarouselCardProps {
 }
 
 function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableCarouselCardProps) {
+  const [colorPickerAnchorEl, setColorPickerAnchorEl] = useState<HTMLElement | null>(null)
+
   const {
     control,
     register,
@@ -159,24 +163,10 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
                       endAdornment: (
                         <InputAdornment position="end">
                           <Box
-                            component="input"
-                            type="color"
-                            value={field.value || '#000000'}
-                            onChange={(e) => field.onChange(e.target.value)}
-                            sx={{
-                              width: 26,
-                              height: 26,
-                              border: 'none',
-                              borderRadius: 1,
-                              cursor: 'pointer',
-                              '&::-webkit-color-swatch-wrapper': {
-                                padding: 0,
-                              },
-                              '&::-webkit-color-swatch': {
-                                border: '1px solid',
-                                borderColor: 'divider',
-                                borderRadius: 1,
-                              },
+                            onClick={(e) => setColorPickerAnchorEl(e.currentTarget)}
+                            className="w-6 h-6 rounded cursor-pointer"
+                            style={{
+                              backgroundColor: field.value || '#000000',
                             }}
                           />
                         </InputAdornment>
@@ -196,6 +186,21 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
           </Stack>
         </CardContent>
       </Card>
+      <Popover
+        open={!!colorPickerAnchorEl}
+        anchorEl={colorPickerAnchorEl}
+        onClose={() => setColorPickerAnchorEl(null)}
+      >
+        <Controller
+          control={control}
+          name={`carousel.${index}.color`}
+          render={({ field }) => (
+            <div className="w-54 h-54 p-2">
+              <HexColorPicker color={field.value} onChange={field.onChange} />
+            </div>
+          )}
+        />
+      </Popover>
     </Grid>
   )
 }

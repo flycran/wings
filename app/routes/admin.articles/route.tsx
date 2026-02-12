@@ -369,7 +369,7 @@ export default function articles() {
         </Box>
       )}
 
-      {/* 分页 - 粘性固定在容器底部 */}
+      {/* 分页 */}
       {data && data.data.length > 0 && (
         <AdminPageFooterModule>
           <div className="p-4 flex justify-center">
@@ -388,7 +388,7 @@ export default function articles() {
 
       {/* 删除确认 Popover */}
       <Popover
-        open={Boolean(deleteAnchorEl)}
+        open={!!deleteAnchorEl}
         anchorEl={deleteAnchorEl}
         onClose={handleCancelDelete}
         anchorOrigin={{
