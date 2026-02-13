@@ -78,7 +78,6 @@ input {
 }
 
 @utility ellipsis-* {
-  width: 200px;
   word-break: break-all;
   display: -webkit-box;
   -webkit-line-clamp: --value(integer);

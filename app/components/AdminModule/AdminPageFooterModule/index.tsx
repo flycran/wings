@@ -7,14 +7,16 @@ export interface AdminPageFooterModuleProps {
 
 export default function AdminPageFooterModule({ children }: AdminPageFooterModuleProps) {
   return (
-    <Box
-      className="sticky bottom-0 mt-6 border-t z-10 mb-6"
-      sx={{
-        backgroundColor: 'background.paper',
-        borderColor: 'divider',
-      }}
-    >
-      {children}
-    </Box>
+    <div className="sticky bottom-0 top-0 mt-auto z-10 mb-6 pt-6">
+      <Box
+        className="border-t"
+        sx={{
+          backgroundColor: 'background.paper',
+          borderColor: 'divider',
+        }}
+      >
+        {children}
+      </Box>
+    </div>
   )
 }

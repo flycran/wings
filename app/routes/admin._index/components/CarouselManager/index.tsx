@@ -44,6 +44,7 @@ import {
   UseFieldArrayRemove,
   useFormContext,
 } from 'react-hook-form'
+import AdminCard from '~/components/AdminModule/AdminCard'
 import { AdminPageSubheadModule } from '~/components/AdminModule/AdminPageHeadModule'
 import { PortalBody } from '~/components/PortalBody'
 import SingleImageUpload from '~/components/SingleImageUpload'
@@ -77,12 +78,8 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} ref={setNodeRef} style={style}>
-      <Card
-        style={{
-          transition: 'transform 0.2s, box-shadow 0.2s, translate 0.2s',
-        }}
-        elevation={isDragging ? 8 : 2}
-        className={clsx('h-full flex flex-col hover:-translate-y-1', [
+      <AdminCard
+        className={clsx('h-full flex flex-col', [
           isDragging ? 'cursor-grabbing z-20 opacity-30' : 'cursor-grab',
         ])}
       >
@@ -185,7 +182,7 @@ function SortableCarouselCard({ id, index, totalCount, move, remove }: SortableC
             />
           </Stack>
         </CardContent>
-      </Card>
+      </AdminCard>
       <Popover
         open={!!colorPickerAnchorEl}
         anchorEl={colorPickerAnchorEl}

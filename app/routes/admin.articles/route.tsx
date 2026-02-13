@@ -6,12 +6,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import {
   Box,
   Button,
-  Card,
   CardActions,
   CardContent,
   CardMedia,
   Chip,
   CircularProgress,
+  Grid,
   IconButton,
   Pagination,
   Popover,
@@ -20,8 +20,10 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import AdminCard from '~/components/AdminModule/AdminCard'
 import AdminPageFooterModule from '~/components/AdminModule/AdminPageFooterModule'
 import AdminPageHeadModule from '~/components/AdminModule/AdminPageHeadModule'
+import { useSearchNumber } from '~/hooks'
 import { getImageUrl } from '~/utils'
 import { supabaseClient } from '~/utils/supabase'
 import { Tables } from '../../../types/supabase'
@@ -49,7 +51,7 @@ interface ArticlesResponse {
 const PAGE_SIZE = 8
 
 export default function articles() {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useSearchNumber('page', 1)
   const [deleteAnchorEl, setDeleteAnchorEl] = useState<HTMLElement | null>(null)
   const [articleToDelete, setArticleToDelete] = useState<number | null>(null)
 
@@ -163,20 +165,9 @@ export default function articles() {
           )
         }
         action={
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={handleCreate}
-            sx={{
-              backgroundColor: 'primary.main',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'primary.dark',
-              },
-            }}
-          >
-            <AddIcon />
-          </IconButton>
+          <Button variant="outlined" startIcon={<AddIcon />} size="small" onClick={handleCreate}>
+            新文章
+          </Button>
         }
       />
 
@@ -189,44 +180,25 @@ export default function articles() {
 
       {/* 文章卡片列表 */}
       {!isLoading && data && (
-        <Box sx={{ flexGrow: 1 }}>
-          {/* flex-grow 让内容区域填充剩余空间 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.data.map((article) => (
-              <Card
-                key={article.id}
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'all 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: 6,
-                  },
-                }}
-              >
+        <Grid container spacing={3}>
+          {data.data.map((article) => (
+            <Grid key={article.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+              <AdminCard className="flex flex-col h-full">
                 {/* 封面图片 */}
                 {article.cover ? (
                   <CardMedia
                     component="img"
                     image={getImageUrl(article.cover)}
                     alt={article.title}
+                    className="object-cover w-full h-45"
                     sx={{
-                      width: '100%',
-                      height: 180,
-                      objectFit: 'cover',
                       backgroundColor: 'grey.200',
                     }}
                   />
                 ) : (
                   <Box
+                    className="w-full h-45 flex items-center justify-center"
                     sx={{
-                      width: '100%',
-                      height: 180,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
                       backgroundColor: 'grey.200',
                     }}
                   >
@@ -236,38 +208,21 @@ export default function articles() {
 
                 {/* 内容区域 */}
                 <CardContent sx={{ flexGrow: 1, pb: 1 }}>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="h2"
-                    sx={{
-                      fontWeight: 600,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      minHeight: '3.6em',
-                    }}
-                  >
-                    {article.title || '无标题'}
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      minHeight: '2.8em',
-                      mb: 1.5,
-                    }}
-                  >
-                    {article.describe || '暂无描述'}
-                  </Typography>
+                  <div className="mb-2">
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="h2"
+                      className="font-bold ellipsis"
+                    >
+                      {article.title || '无标题'}
+                    </Typography>
+                  </div>
+                  <div className="mb-4">
+                    <Typography variant="body2" color="text.secondary" className="ellipsis-2">
+                      {article.describe || '暂无描述'}
+                    </Typography>
+                  </div>
 
                   {/* 类别标签 */}
                   {article.categorys && (
@@ -276,27 +231,19 @@ export default function articles() {
                       size="small"
                       color="primary"
                       variant="outlined"
-                      sx={{ mb: 1, fontSize: '0.7rem' }}
+                      className="mb-1"
                     />
                   )}
 
                   {/* 专栏标签 */}
                   {article.article_columns.length > 0 && (
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        gap: 0.5,
-                        flexWrap: 'wrap',
-                        mb: 1,
-                      }}
-                    >
+                    <div className="mb-1 flex gap-2 flex-wrap">
                       {article.article_columns.slice(0, 2).map((ac) => (
                         <Chip
                           key={ac.column_id}
                           label={ac.columns.name}
                           size="small"
                           variant="outlined"
-                          sx={{ fontSize: '0.7rem' }}
                         />
                       ))}
                       {article.article_columns.length > 2 && (
@@ -304,10 +251,9 @@ export default function articles() {
                           label={`+${article.article_columns.length - 2}`}
                           size="small"
                           variant="outlined"
-                          sx={{ fontSize: '0.7rem' }}
                         />
                       )}
-                    </Box>
+                    </div>
                   )}
 
                   {/* 时间信息 */}
@@ -317,7 +263,7 @@ export default function articles() {
                 </CardContent>
 
                 {/* 操作按钮 */}
-                <CardActions sx={{ justifyContent: 'flex-end', pt: 0 }}>
+                <CardActions className="justify-end">
                   <IconButton
                     size="small"
                     color="default"
@@ -343,48 +289,37 @@ export default function articles() {
                     <DeleteIcon fontSize="small" />
                   </IconButton>
                 </CardActions>
-              </Card>
-            ))}
-          </div>
-
+              </AdminCard>
+            </Grid>
+          ))}
           {/* 空状态 */}
           {data.data.length === 0 && (
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                py: 8,
-              }}
-            >
+            <div className="w-full h-full flex flex-col items-center py-32">
               <Typography variant="h6" color="text.secondary" gutterBottom>
                 还没有文章
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 点击右上角的 + 按钮创建第一篇文章吧
               </Typography>
-            </Box>
+            </div>
           )}
-        </Box>
+        </Grid>
       )}
 
       {/* 分页 */}
-      {data && data.data.length > 0 && (
-        <AdminPageFooterModule>
-          <div className="p-4 flex justify-center">
-            <Pagination
-              count={totalPages}
-              page={page}
-              onChange={handlePageChange}
-              color="primary"
-              size="large"
-              showFirstButton
-              showLastButton
-            />
-          </div>
-        </AdminPageFooterModule>
-      )}
+      <AdminPageFooterModule>
+        <div className="p-4 flex justify-center">
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+            size="large"
+            showFirstButton
+            showLastButton
+          />
+        </div>
+      </AdminPageFooterModule>
 
       {/* 删除确认 Popover */}
       <Popover
