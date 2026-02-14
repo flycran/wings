@@ -153,7 +153,7 @@ export default function articles() {
   }
 
   return (
-    <div className="relative flex flex-col px-6 min-h-full">
+    <div className="relative flex flex-col min-h-full">
       {/* 头部 */}
       <AdminPageHeadModule
         title="文章管理"
@@ -170,142 +170,142 @@ export default function articles() {
           </Button>
         }
       />
+      <div className="md:px-6 px-4">
+        {/* 加载状态 */}
+        {isLoading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+            <CircularProgress />
+          </Box>
+        )}
 
-      {/* 加载状态 */}
-      {isLoading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress />
-        </Box>
-      )}
-
-      {/* 文章卡片列表 */}
-      {!isLoading && data && (
-        <Grid container spacing={3}>
-          {data.data.map((article) => (
-            <Grid key={article.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <AdminCard className="flex flex-col h-full">
-                {/* 封面图片 */}
-                {article.cover ? (
-                  <CardMedia
-                    component="img"
-                    image={getImageUrl(article.cover)}
-                    alt={article.title}
-                    className="object-cover w-full h-45"
-                    sx={{
-                      backgroundColor: 'grey.200',
-                    }}
-                  />
-                ) : (
-                  <Box
-                    className="w-full h-45 flex items-center justify-center"
-                    sx={{
-                      backgroundColor: 'grey.200',
-                    }}
-                  >
-                    <ImageIcon sx={{ fontSize: 60, color: 'grey.400' }} />
-                  </Box>
-                )}
-
-                {/* 内容区域 */}
-                <CardContent sx={{ flexGrow: 1, pb: 1 }}>
-                  <div className="mb-2">
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="h2"
-                      className="font-bold ellipsis"
+        {/* 文章卡片列表 */}
+        {!isLoading && data && (
+          <Grid container spacing={3}>
+            {data.data.map((article) => (
+              <Grid key={article.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <AdminCard className="flex flex-col h-full">
+                  {/* 封面图片 */}
+                  {article.cover ? (
+                    <CardMedia
+                      component="img"
+                      image={getImageUrl(article.cover)}
+                      alt={article.title}
+                      className="object-cover w-full h-45"
+                      sx={{
+                        backgroundColor: 'grey.200',
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      className="w-full h-45 flex items-center justify-center"
+                      sx={{
+                        backgroundColor: 'grey.200',
+                      }}
                     >
-                      {article.title || '无标题'}
-                    </Typography>
-                  </div>
-                  <div className="mb-4">
-                    <Typography variant="body2" color="text.secondary" className="ellipsis-2">
-                      {article.describe || '暂无描述'}
-                    </Typography>
-                  </div>
+                      <ImageIcon sx={{ fontSize: 60, color: 'grey.400' }} />
+                    </Box>
+                  )}
 
-                  {/* 类别标签 */}
-                  {article.categorys && (
-                    <Chip
-                      label={article.categorys.name}
+                  {/* 内容区域 */}
+                  <CardContent sx={{ flexGrow: 1, pb: 1 }}>
+                    <div className="mb-2">
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="h2"
+                        className="font-bold ellipsis"
+                      >
+                        {article.title || '无标题'}
+                      </Typography>
+                    </div>
+                    <div className="mb-4">
+                      <Typography variant="body2" color="text.secondary" className="ellipsis-2">
+                        {article.describe || '暂无描述'}
+                      </Typography>
+                    </div>
+
+                    {/* 类别标签 */}
+                    {article.categorys && (
+                      <Chip
+                        label={article.categorys.name}
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                        className="mb-1"
+                      />
+                    )}
+
+                    {/* 专栏标签 */}
+                    {article.article_columns.length > 0 && (
+                      <div className="mb-1 flex gap-2 flex-wrap">
+                        {article.article_columns.slice(0, 2).map((ac) => (
+                          <Chip
+                            key={ac.column_id}
+                            label={ac.columns.name}
+                            size="small"
+                            variant="outlined"
+                          />
+                        ))}
+                        {article.article_columns.length > 2 && (
+                          <Chip
+                            label={`+${article.article_columns.length - 2}`}
+                            size="small"
+                            variant="outlined"
+                          />
+                        )}
+                      </div>
+                    )}
+
+                    {/* 时间信息 */}
+                    <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+                      更新: {formatDate(article.updated_at)}
+                    </Typography>
+                  </CardContent>
+
+                  {/* 操作按钮 */}
+                  <CardActions className="justify-end">
+                    <IconButton
+                      size="small"
+                      color="default"
+                      onClick={() => handleView(article.id)}
+                      title="查看"
+                    >
+                      <VisibilityIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton
                       size="small"
                       color="primary"
-                      variant="outlined"
-                      className="mb-1"
-                    />
-                  )}
-
-                  {/* 专栏标签 */}
-                  {article.article_columns.length > 0 && (
-                    <div className="mb-1 flex gap-2 flex-wrap">
-                      {article.article_columns.slice(0, 2).map((ac) => (
-                        <Chip
-                          key={ac.column_id}
-                          label={ac.columns.name}
-                          size="small"
-                          variant="outlined"
-                        />
-                      ))}
-                      {article.article_columns.length > 2 && (
-                        <Chip
-                          label={`+${article.article_columns.length - 2}`}
-                          size="small"
-                          variant="outlined"
-                        />
-                      )}
-                    </div>
-                  )}
-
-                  {/* 时间信息 */}
-                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
-                    更新: {formatDate(article.updated_at)}
-                  </Typography>
-                </CardContent>
-
-                {/* 操作按钮 */}
-                <CardActions className="justify-end">
-                  <IconButton
-                    size="small"
-                    color="default"
-                    onClick={() => handleView(article.id)}
-                    title="查看"
-                  >
-                    <VisibilityIcon fontSize="small" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    color="primary"
-                    onClick={() => handleEdit(article.id)}
-                    title="编辑"
-                  >
-                    <EditIcon fontSize="small" />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    color="error"
-                    onClick={(e) => handleDelete(e, article.id)}
-                    title="删除"
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
-                </CardActions>
-              </AdminCard>
-            </Grid>
-          ))}
-          {/* 空状态 */}
-          {data.data.length === 0 && (
-            <div className="w-full h-full flex flex-col items-center py-32">
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                还没有文章
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                点击右上角的 + 按钮创建第一篇文章吧
-              </Typography>
-            </div>
-          )}
-        </Grid>
-      )}
-
+                      onClick={() => handleEdit(article.id)}
+                      title="编辑"
+                    >
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      color="error"
+                      onClick={(e) => handleDelete(e, article.id)}
+                      title="删除"
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  </CardActions>
+                </AdminCard>
+              </Grid>
+            ))}
+            {/* 空状态 */}
+            {data.data.length === 0 && (
+              <div className="w-full h-full flex flex-col items-center py-32">
+                <Typography variant="h6" color="text.secondary" gutterBottom>
+                  还没有文章
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  点击右上角的 + 按钮创建第一篇文章吧
+                </Typography>
+              </div>
+            )}
+          </Grid>
+        )}
+      </div>
       {/* 分页 */}
       <AdminPageFooterModule>
         <div className="p-4 flex justify-center">
@@ -314,7 +314,6 @@ export default function articles() {
             page={page}
             onChange={handlePageChange}
             color="primary"
-            size="large"
             showFirstButton
             showLastButton
           />

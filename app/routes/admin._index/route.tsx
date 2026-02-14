@@ -115,7 +115,7 @@ export default function AdminHome() {
 
   return (
     <FormProvider {...methods}>
-      <form className="relative flex flex-col px-6" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className="relative flex flex-col" onSubmit={methods.handleSubmit(onSubmit)}>
         {/* 头部工具栏 */}
         <AdminPageHeadModule
           title="首页管理"

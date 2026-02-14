@@ -24,7 +24,6 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import {
   Box,
   Button,
-  Card,
   CardContent,
   Grid,
   IconButton,
@@ -260,56 +259,58 @@ export default function CarouselManager() {
           )
         }
       />
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={fields.map((f) => f.id)} strategy={rectSortingStrategy}>
-          <Grid container spacing={3}>
-            {fields.map((field, index) => (
-              <SortableCarouselCardMemo
-                key={field.id}
-                id={field.id}
-                index={index}
-                totalCount={fields.length}
-                move={move}
-                remove={remove}
-              />
-            ))}
-            {fields.length === 0 && (
-              <Grid size={{ xs: 12 }}>
-                <Box
-                  sx={{
-                    py: 8,
-                    textAlign: 'center',
-                    border: '2px dashed',
-                    borderColor: 'divider',
-                    borderRadius: 4,
-                    color: 'text.secondary',
-                  }}
-                >
-                  <Typography>暂无轮播图，点击右上角添加按钮创建</Typography>
-                </Box>
-              </Grid>
-            )}
-          </Grid>
-        </SortableContext>
-        <PortalBody>
-          <DragOverlay>
-            {!!draggingId && (
-              <SortableCarouselCardMemo
-                id={draggingId}
-                index={fields.findIndex((field) => field.id === draggingId)}
-                totalCount={fields.length}
-                move={move}
-                remove={remove}
-              />
-            )}
-          </DragOverlay>
-        </PortalBody>
-      </DndContext>
+      <div className="md:px-6 px-4">
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={fields.map((f) => f.id)} strategy={rectSortingStrategy}>
+            <Grid container spacing={3}>
+              {fields.map((field, index) => (
+                <SortableCarouselCardMemo
+                  key={field.id}
+                  id={field.id}
+                  index={index}
+                  totalCount={fields.length}
+                  move={move}
+                  remove={remove}
+                />
+              ))}
+              {fields.length === 0 && (
+                <Grid size={{ xs: 12 }}>
+                  <Box
+                    sx={{
+                      py: 8,
+                      textAlign: 'center',
+                      border: '2px dashed',
+                      borderColor: 'divider',
+                      borderRadius: 4,
+                      color: 'text.secondary',
+                    }}
+                  >
+                    <Typography>暂无轮播图，点击右上角添加按钮创建</Typography>
+                  </Box>
+                </Grid>
+              )}
+            </Grid>
+          </SortableContext>
+          <PortalBody>
+            <DragOverlay>
+              {!!draggingId && (
+                <SortableCarouselCardMemo
+                  id={draggingId}
+                  index={fields.findIndex((field) => field.id === draggingId)}
+                  totalCount={fields.length}
+                  move={move}
+                  remove={remove}
+                />
+              )}
+            </DragOverlay>
+          </PortalBody>
+        </DndContext>
+      </div>
     </>
   )
 }

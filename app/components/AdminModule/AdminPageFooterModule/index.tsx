@@ -7,9 +7,9 @@ export interface AdminPageFooterModuleProps {
 
 export default function AdminPageFooterModule({ children }: AdminPageFooterModuleProps) {
   return (
-    <div className="sticky bottom-0 top-0 mt-auto z-10 mb-6 pt-6">
+    <div className="sticky bottom-0 top-0 mt-auto z-10 md:pt-6 pt-4">
       <Box
-        className="border-t"
+        className="border-t md:px-6 px-4"
         sx={{
           backgroundColor: 'background.paper',
           borderColor: 'divider',

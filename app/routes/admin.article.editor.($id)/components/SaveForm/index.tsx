@@ -24,17 +24,18 @@ const articleInfoSchema = z.object({
 
 export type ArticleInfo = z.infer<typeof articleInfoSchema>
 
+type FormArticle = Partial<Pick<Tables<'articles'>, 'title' | 'category_id' | 'describe' | 'cover'>>
+
 export interface SaveFormProps {
   onSubmit: (articleInfo: ArticleInfo) => void
   onClose: () => void
+  saving?: boolean
   article?: FormArticle & {
     article_columns?: Pick<Tables<'article_columns'>, 'column_id' | 'article_id'>[]
   }
 }
 
-type FormArticle = Partial<Pick<Tables<'articles'>, 'title' | 'category_id' | 'describe' | 'cover'>>
-
-export default function SaveForm({ onSubmit, onClose, article }: SaveFormProps) {
+export default function SaveForm({ onSubmit, onClose, article, saving }: SaveFormProps) {
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       ...article,
@@ -153,7 +154,7 @@ export default function SaveForm({ onSubmit, onClose, article }: SaveFormProps) 
         )}
       />
       <div className="flex gap-4">
-        <Button className="flex-1" type="submit" variant="contained">
+        <Button className="flex-1" type="submit" variant="contained" loading={saving}>
           保存
         </Button>
         <Button className="flex-1" variant="outlined" onClick={onClose}>

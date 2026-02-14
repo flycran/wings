@@ -1,3 +1,6 @@
+import MenuIcon from '@mui/icons-material/Menu'
+import { IconButton, useMediaQuery } from '@mui/material'
+import clsx from 'clsx'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
@@ -13,6 +16,8 @@ const admin = () => {
   const [authed, setAuthed] = useState(false)
   const [user, setUser] = useAtom(userAtom)
   const [_, setOpenLogin] = useAtom(openLoginAtom)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const isMobile = useMediaQuery('(max-width: 768px)')
 
   useSubscribeTheme()
 
@@ -39,14 +44,35 @@ const admin = () => {
     }
   }, [])
 
+  // 侧边栏
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false)
+  }
+
+  const handleOpen = () => setMobileMenuOpen(true)
+
   return (
     <>
       <LoginDialog />
       <FullScreenLoading loading={!authed} title="正在验证用户">
-        <div className="flex">
-          <AdminMenu />
-          <div className="flex-1 shrink-0 min-h-screen">
-            <Outlet />
+        <div className="md:flex">
+          <AdminMenu
+            mobileOpen={mobileMenuOpen}
+            onMobileClose={handleMobileMenuClose}
+            onMobileOpen={handleOpen}
+          />
+          <div className="md:flex-1 shrink-0 min-h-screen md:h-auto h-screen flex flex-col md:block">
+            {/* 移动端汉堡菜单按钮 */}
+            {isMobile && (
+              <div className="sticky top-0 z-10 flex items-center h-12 px-4 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+                <IconButton onClick={handleOpen} edge="start" color="inherit" aria-label="menu">
+                  <MenuIcon />
+                </IconButton>
+              </div>
+            )}
+            <div className="flex-1 h-0 md:h-auto overflow-auto">
+              <Outlet />
+            </div>
           </div>
         </div>
       </FullScreenLoading>

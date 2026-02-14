@@ -23,19 +23,22 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
     data: article,
     refetch,
   } = useQuery({
-    queryFn: async ({ queryKey: [_, id] }) => {
-      if (id) {
+    queryFn: async () => {
+      const _id = id || +paramId
+      if (_id) {
         const { error, data } = await supabaseClient
           .from('articles')
-          .select(`
+          .select(
+            `
           *,
           article_columns!left(
             column_id,
             article_id
           ),
           categorys(*)
-        `)
-          .eq('id', +id)
+        `
+          )
+          .eq('id', _id)
           .single()
         if (error) {
           toast.error('文章获取失败，请重试')
@@ -45,7 +48,7 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
         }
       }
     },
-    queryKey: ['article', +paramId],
+    queryKey: ['article', id],
     retry: 3,
   })
 
@@ -59,7 +62,11 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
     }
   }, [article])
 
-  const { mutate: onSave, isPending } = useMutation({
+  const {
+    mutate: onSave,
+    mutateAsync: onAsyncSave,
+    isPending,
+  } = useMutation({
     mutationFn: async (articleInfo?: ArticleInfo) => {
       const { error, data } = await supabaseClient.rpc('upsert_article_full', {
         id,
@@ -82,7 +89,6 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
     onSuccess: (_, info) => {
       if (info) {
         setOpenSaveModal(false)
-        toast.success('保存成功')
       }
       refetch()
     },
@@ -90,6 +96,13 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
       toast.error('保存失败')
     },
   })
+
+  const manualSave = async (articleInfo?: ArticleInfo) => {
+    const data = await onAsyncSave(articleInfo)
+    if (data) {
+      toast.success('保存成功')
+    }
+  }
 
   const [openSaveModal, setOpenSaveModal] = useState(false)
 
@@ -100,7 +113,7 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
   const { run } = useRequest(
     async () => {
       if (title !== article?.title || content !== article?.content) {
-        onSave({})
+        onSave(undefined)
       }
     },
     {
@@ -140,7 +153,12 @@ export default function editor({ params: { id: paramId = '' } }: Route.Component
         />
       </div>
       <Modal open={openSaveModal} onClose={closeSaveModal} closeOnMaskClick operates={false}>
-        <SaveForm onSubmit={onSave} onClose={closeSaveModal} article={article} />
+        <SaveForm
+          onSubmit={manualSave}
+          onClose={closeSaveModal}
+          article={article}
+          saving={isPending}
+        />
       </Modal>
     </FullScreenLoading>
   )
