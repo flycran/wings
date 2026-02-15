@@ -589,7 +589,7 @@ export default function CategoriesPage() {
                         <SingleImageUpload
                           value={columnForm.cover}
                           onChange={(value) => setColumnForm({ ...columnForm, cover: value || '' })}
-                          bucket="columns"
+                          bucket="cover"
                           className="w-48 h-36"
                         />
                       </Box>

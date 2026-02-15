@@ -1,7 +1,7 @@
 import MotionDiv from '~/components/motion/MotionDiv'
 import Crane from '~/routes/_client._index/components/HomeCrane/Crane'
 
-export default function HomeCrane() {
+export default function HomeCrane({ className }: { className?: string }) {
   return (
     <MotionDiv
       initial={{
@@ -19,6 +19,7 @@ export default function HomeCrane() {
         visualDuration: 0.3,
       }}
       viewport={{ once: true }}
+      className={className}
     >
       <Crane />
     </MotionDiv>

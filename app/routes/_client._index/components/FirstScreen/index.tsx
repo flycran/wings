@@ -38,7 +38,7 @@ export default function FirstScreen({
     {
       key: 'juejin',
       name: juejin?.username,
-      link: juejin?.href,
+      href: juejin?.href,
       icon: <Juejin />,
       description: juejin && (
         <Description
@@ -66,7 +66,7 @@ export default function FirstScreen({
     {
       key: 'github',
       name: github?.name,
-      link: github?.href,
+      href: github?.href,
       icon: <Github />,
       description: github && (
         <Description
@@ -94,20 +94,21 @@ export default function FirstScreen({
     {
       key: 'csdn',
       name: '',
-      link: '',
+      href: '',
       icon: <Csdn />,
     },
     {
       key: 'bilibili',
       name: '',
-      link: '',
+      href: '',
       icon: <Bilibili />,
     },
   ]
 
   return (
     <>
-      <div className="-z-2 absolute top-0 left-0 h-screen w-full overflow-hidden">
+      <div className="-z-2 absolute top-0 left-0 h-screen w-full">
+        {/* 背景圆形图案 */}
         <MotionConfig
           transition={{
             type: 'tween',
@@ -144,11 +145,11 @@ export default function FirstScreen({
         </MotionConfig>
       </div>
       <div className="relative flex min-h-screen flex-col justify-evenly">
+        {/* 标题 */}
         <HomeTitle />
-        <div className="flex justify-between">
-          <div />
-          <HomeCrane />
-          <WebWin />
+        <div className="flex md:justify-between justify-center">
+          <WebWin className="lg:-translate-x-30 lg:-translate-y-20 lg:w-110 md:w-90 md:block hidden" />
+          <HomeCrane className="w-80 lg:w-120" />
         </div>
         <MotionDiv
           initial={{
@@ -164,7 +165,7 @@ export default function FirstScreen({
             ease: 'easeOut',
             delay: 0.2,
           }}
-          className="absolute bottom-8 left-0"
+          className="mb-8 left-0 flex"
         >
           <div
             className="grid grid-cols-4 grid-rows-2 gap-3"

@@ -9,13 +9,20 @@ export default function Footer() {
 
   return (
     <div className="bg-zinc-900 border-t border-zinc-700 text-zinc-200 text-sm">
-      <div className="py-8 m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl 2xl:w-6xl flex">
+      <div className="py-8 m-auto w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl 2xl:w-6xl flex gap-2">
         <ul className="flex flex-col gap-3 flex-1">
           <li>
             <Link to="/admin" className="hover:underline">
               进入后台
             </Link>
           </li>
+          <li>
+            <Link to="/admin/article/editor" className="hover:underline">
+              新建文章
+            </Link>
+          </li>
+        </ul>
+        <ul className="flex flex-col gap-3 flex-1">
           <li>
             <a
               href=""
@@ -28,13 +35,6 @@ export default function Footer() {
               登录
             </a>
           </li>
-          <li>
-            <Link to="/admin/article/editor" className="hover:underline">
-              新建文章
-            </Link>
-          </li>
-        </ul>
-        <ul className="flex flex-col gap-3 flex-1">
           <li>
             <a
               href=""
@@ -49,7 +49,6 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <ul className="flex flex-col gap-3 flex-1"></ul>
         <ul className="flex flex-col gap-3 flex-1"></ul>
         <div>本站不开放注册</div>
       </div>

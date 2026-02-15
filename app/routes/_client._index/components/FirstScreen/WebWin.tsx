@@ -1,10 +1,11 @@
+import clsx from 'clsx'
 import { useMemo } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useDelayActive } from '~/hooks/delayOpen'
 import code from '../../../../../plugins/env?raw'
 
-export default function WebWin() {
+export default function WebWin({ className }: { className?: string }) {
   const svgElement = useMemo(
     () => (
       <svg
@@ -410,7 +411,7 @@ export default function WebWin() {
         visualDuration: 0.2,
         type: 'spring',
       }}
-      className="absolute aspect-[253.86/227.11] left-[-10%] top-35/100 w-110 web-win-light dark:web-win-dark"
+      className={clsx('relative aspect-[253.86/227.11] web-win-light dark:web-win-dark', className)}
       onMouseEnter={enter}
       onMouseLeave={leave}
     >

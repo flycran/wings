@@ -150,7 +150,7 @@ export default function SaveForm({ onSubmit, onClose, article, saving }: SaveFor
         control={control}
         name="cover"
         render={({ field }) => (
-          <SingleImageUpload {...field} className="w-1/2 m-auto" bucket="article_covers" />
+          <SingleImageUpload {...field} className="w-1/2 m-auto" bucket="cover" />
         )}
       />
       <div className="flex gap-4">

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
 import { Chat, InstantSearch } from 'react-instantsearch'
@@ -5,9 +6,9 @@ import 'instantsearch.css/components/chat.css'
 import { Link, useLocation } from 'react-router'
 import { PortalBody } from '~/components/PortalBody'
 import Search from '~/components/Search'
-import Switchdarkmode from '~/routes/_client/components/Sidebar/SwitchDarkMode'
 import Dialog from '~/components/ui/Dialog'
 import webConfig from '~/config/web'
+import Switchdarkmode from '~/routes/_client/components/Sidebar/SwitchDarkMode'
 import { algoliaClient } from '~/utils/algolia'
 import SlideArrow, { SlideArrowRef } from '../../../../components/SlideArrow'
 
@@ -69,12 +70,15 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   return (
     <Link
       to={href}
-      className="flex h-12 cursor-pointer items-center rounded-r-xl text-white shadow duration-300"
-      style={{ backgroundColor: color, width: match ? '8rem' : '6rem' }}
+      className={clsx(
+        'flex text-sm md:text-base h-8 md:h-12 cursor-pointer items-center rounded-r-xl text-white transition-[width_200ms] shadow',
+        [match ? 'w-22 md:w-32' : 'w-18 md:w-24']
+      )}
+      style={{ backgroundColor: color }}
       onMouseEnter={handleHover}
     >
       <div className="flex-1 pl-2 text-center">{text}</div>
-      <div className="mr-3 aspect-square w-6 overflow-hidden pt-0.5 pl-0.5 text-[1.25rem]">
+      <div className="mr-3 aspect-square w-4 md:w-5 overflow-hidden text-base md:text-xl">
         {match ? icon || <GoCheck /> : <SlideArrow ref={SARef} />}
       </div>
     </Link>
@@ -97,8 +101,10 @@ const SearchMenuItem = () => {
   return (
     <>
       <div
-        className="flex h-12 cursor-pointer items-center rounded-r-xl bg-crane-red text-white shadow duration-300"
-        style={{ width: expand ? '10rem' : '6rem' }}
+        className={clsx(
+          'flex text-sm md:text-base h-8 md:h-12 cursor-pointer items-center rounded-r-xl bg-crane-red text-white shadow duration-300',
+          [expand ? 'w-18 md:w-24' : 'w-22 md:w-32']
+        )}
         onClick={() => setExpand(true)}
       >
         {expand ? (
@@ -111,7 +117,7 @@ const SearchMenuItem = () => {
         ) : (
           <div className="flex-1 text-center">搜索</div>
         )}
-        <GoSearch className="mr-3" size={20} />
+        <GoSearch className="mr-3 text-base md:text-xl" />
       </div>
       {
         <PortalBody>

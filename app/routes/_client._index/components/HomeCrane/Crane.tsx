@@ -5,7 +5,7 @@ import styles from './crane.module.css'
 export default function Crane() {
   return (
     <MotionDiv
-      className={clsx(styles.frameCraneContainer, 'w-60 md:w-90 lg:w-120')}
+      className={clsx(styles.frameCraneContainer)}
       initial={{
         '--angle': '50deg',
       }}

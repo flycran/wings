@@ -29,24 +29,21 @@ export default function WheelNext() {
         <MotionDiv
           transition={{
             delay: 0.6,
-            duration: 1,
+            duration: 0.3,
           }}
           initial={{
             y: -20,
             opacity: 0,
           }}
-          whileHover={{
-            y: 10,
-          }}
           animate={{
-            y: [-20, 0, -10, 0],
+            y: [-20, 0],
             opacity: [0, 1],
           }}
           exit={{
             y: -20,
             opacity: 0,
           }}
-          className="-translate-x-1/2 absolute bottom-3 left-1/2 z-1 flex cursor-pointer flex-col items-center gap-1 text-crane-orange drop-shadow"
+          className="-translate-x-1/2 absolute bottom-3 left-1/2 z-1 cursor-pointer flex-col items-center gap-1 text-crane-orange drop-shadow hidden md:flex"
           onClick={toNext}
         >
           <div className="flex h-15 w-6 justify-center rounded-full bg-current pt-7">

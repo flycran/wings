@@ -74,7 +74,6 @@ export default function Switchdarkmode() {
     setIsDark(newTheme === 'dark')
     // * 等待灯泡下拉动画结束，避免灯泡闪动
     setTimeout(() => {
-      console.log('newTheme', newTheme, 'theme', theme, 'isDark', isDark)
       viewTransition(newTheme)
     }, 150)
   }
