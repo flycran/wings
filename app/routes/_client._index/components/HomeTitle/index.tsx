@@ -19,7 +19,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="line select-none rounded-xl font-bold text-[4rem]/[1.3] text-white shadow-sm sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
+          className="line select-none rounded-xl font-bold text-[3.5rem]/[1.3] text-white shadow-sm sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
           style={{
             fontFamily: 'sans-serif',
           }}
