@@ -19,7 +19,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="line select-none rounded-xl font-bold text-[3rem]/[1.3] text-white shadow-sm sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
+          className="line select-none rounded-xl font-bold text-[4rem]/[1.3] text-white shadow-sm sm:text-[6rem]/[1.3] lg:text-[8rem]/[1.3]"
           style={{
             fontFamily: 'sans-serif',
           }}
@@ -43,7 +43,7 @@ export default function HomeTitle() {
             type: 'tween',
             ease: 'easeOut',
           }}
-          className="pt-3 pb-4 font-bold text-[1.75rem] text-zinc-600 sm:text-[2.5rem] lg:text-[3rem] dark:text-zinc-300"
+          className="pt-1 md:pt-3 pb-1 md:pb-4 font-bold text-[1.75rem] text-zinc-600 sm:text-[2.5rem] lg:text-[3rem] dark:text-zinc-300"
           style={{
             fontFamily: 'sans-serif',
           }}

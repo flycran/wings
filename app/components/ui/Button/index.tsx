@@ -1,18 +1,30 @@
 import clsx from 'clsx'
 import { HTMLAttributes, ReactNode, Ref } from 'react'
+import { mergeRefs } from 'react-merge-refs'
 import { customVar } from '~/utils'
 import { Color, cva, getPresetColor, Shape, Size, Variants } from '../utils'
-import Wave from '../Wave'
+import Wave, { WaveRenderProps } from '../Wave'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  /** 按钮图标 */
   icon?: ReactNode
-  ref?: Ref<HTMLButtonElement>
+  /** 按钮变体 */
   variant?: Variants
-  color?: Color | string
-  children?: ReactNode
+  /** 按钮颜色 */
+  color?: Color | (string & {})
+  /** 按钮大小 */
   size?: Size
+  /**
+   * 按钮形状
+   * - `default` 圆角矩形
+   * - `round` 半圆角矩形
+   * - `circle` 圆形
+   */
   shape?: Shape
+  /** 按钮是否为块级模式 */
   block?: boolean
+  children?: ReactNode
+  ref?: Ref<HTMLButtonElement>
 }
 
 export default function Button({
@@ -24,14 +36,21 @@ export default function Button({
   variant = 'solid',
   shape = 'default',
   block,
+  onClick,
   ...rest
 }: ButtonProps) {
-  const node = (
+  const needWave = variant !== 'text' && variant !== 'filled'
+
+  const renderButton = (waveProps?: WaveRenderProps) => (
     <button
       {...rest}
+      onClick={(e) => {
+        waveProps?.onClick(e)
+        onClick?.(e)
+      }}
       className={clsx(
         className,
-        'relative rounded-lg transition-[background_color_150sm] cursor-pointer preset-color-primary items-center justify-center gap-[.6em]',
+        'relative transition-[background_color_150sm] cursor-pointer preset-color-primary items-center justify-center gap-[.6em]',
         'text-center whitespace-nowrap outline-none',
         cva(
           {
@@ -52,9 +71,9 @@ export default function Button({
               text: 'text-preset hover:text-preset-a15 active:text-preset-s5 focus-visible:text-preset-a15',
             },
             shape: {
-              default: '',
+              default: 'rounded-lg',
               round: 'rounded-full',
-              circle: 'rounded-full p-0 aspect-square w-auto justify-center',
+              circle: 'rounded-full aspect-square w-auto justify-center',
             },
           },
           {
@@ -68,10 +87,10 @@ export default function Button({
           ? cva(
               {
                 size: {
-                  small: 'h-6 px-2',
-                  default: 'h-8 px-3',
-                  large: 'h-10 px-4',
-                  responsive: 'h-[calc(2em)] px-[.5em]',
+                  small: clsx('h-6', shape !== 'circle' && 'px-2'),
+                  default: clsx('h-8', shape !== 'circle' && 'px-3'),
+                  large: clsx('h-10', shape !== 'circle' && 'px-4'),
+                  responsive: clsx('h-[calc(2em)]', shape !== 'circle' && 'px-[.5em]'),
                 },
               },
               {
@@ -99,9 +118,5 @@ export default function Button({
     </button>
   )
 
-  return variant !== 'text' && variant !== 'filled' ? (
-    <Wave color="var(--color-preset-s10)">{node}</Wave>
-  ) : (
-    node
-  )
+  return needWave ? <Wave color="var(--color-preset-s10)">{renderButton}</Wave> : renderButton()
 }

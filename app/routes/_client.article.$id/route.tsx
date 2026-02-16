@@ -96,18 +96,18 @@ export default function articleId({ loaderData }: Route.ComponentProps) {
   )
 
   return (
-    <div className="flex justify-center gap-4">
-      <div className="flex-1" />
+    <div className="flex max-md:flex-col justify-center gap-4 max-md:px-4 max-md:pt-18">
+      <div className="md:flex-1" />
       <div className="w-[calc(100vw-2rem)] lg:w-2xl xl:w-4xl">
         <h1 className="my-6 font-bold text-4xl">{title}</h1>
         <div className="my-6 min-h-screen">
           <Markdown tree={tree} />
         </div>
       </div>
-      <div className="flex-1">
+      <div className="md:flex-1">
         <div
           ref={sildeRef}
-          className="sticky py-4 w-70"
+          className="sticky py-4 md:w-70"
           style={{
             top: `min(calc(100% - ${sildeHeight}px), 0px)`,
           }}

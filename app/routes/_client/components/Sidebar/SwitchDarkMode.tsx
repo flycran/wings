@@ -80,7 +80,7 @@ export default function Switchdarkmode() {
 
   return (
     <MotionDiv
-      className="-z-1 relative w-22"
+      className="-z-1 relative w-0 md:left-11"
       whileTap={{
         y: 15,
       }}

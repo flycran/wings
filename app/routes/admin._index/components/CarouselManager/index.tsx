@@ -43,8 +43,8 @@ import {
   UseFieldArrayRemove,
   useFormContext,
 } from 'react-hook-form'
-import AdminCard from '~/components/AdminModule/AdminCard'
-import { AdminPageSubheadModule } from '~/components/AdminModule/AdminPageHeadModule'
+import AdminCard from '~/components/admin-module/AdminCard'
+import { AdminPageSubheadModule } from '~/components/admin-module/AdminPageHeadModule'
 import { PortalBody } from '~/components/PortalBody'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { HomeConfig } from '~/routes/admin._index/route'

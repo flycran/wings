@@ -1,6 +1,7 @@
+import { useMediaQuery } from '@mui/material'
 import clsx from 'clsx'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
+import { GoArrowDown, GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
 import { Chat, InstantSearch } from 'react-instantsearch'
 import 'instantsearch.css/components/chat.css'
 import { Link, useLocation } from 'react-router'
@@ -60,6 +61,8 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   const { pathname } = useLocation()
   const SARef = useRef<SlideArrowRef>(null)
 
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   const match = href === '/' ? pathname === href : pathname.startsWith(href)
 
   function handleHover() {
@@ -71,15 +74,21 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
     <Link
       to={href}
       className={clsx(
-        'flex text-sm md:text-base h-8 md:h-12 cursor-pointer items-center rounded-r-xl text-white transition-[width_200ms] shadow',
-        [match ? 'w-22 md:w-32' : 'w-18 md:w-24']
+        'flex max-md:writing-vertical-lr text-sm md:text-base cursor-pointer items-center max-md:rounded-b-xl md:rounded-r-xl text-white transition-[width_200ms] shadow',
+        [match ? 'h-22 md:w-32 w-8 md:h-12' : 'h-18 md:w-24 w-8 md:h-12']
       )}
       style={{ backgroundColor: color }}
       onMouseEnter={handleHover}
     >
-      <div className="flex-1 pl-2 text-center">{text}</div>
-      <div className="mr-3 aspect-square w-4 md:w-5 overflow-hidden text-base md:text-xl">
-        {match ? icon || <GoCheck /> : <SlideArrow ref={SARef} />}
+      <div className="flex-1 md:pl-1 text-center">{text}</div>
+      <div className="max-md:mb-3 md:mr-3 aspect-square w-4 md:w-5 overflow-hidden text-base md:text-xl">
+        {match ? (
+          icon || <GoCheck />
+        ) : isMobile ? (
+          <GoArrowDown />
+        ) : (
+          <SlideArrow className="max-md:rotate-90 max-md:flex-col" ref={SARef} />
+        )}
       </div>
     </Link>
   )
@@ -102,8 +111,8 @@ const SearchMenuItem = () => {
     <>
       <div
         className={clsx(
-          'flex text-sm md:text-base h-8 md:h-12 cursor-pointer items-center rounded-r-xl bg-crane-red text-white shadow duration-300',
-          [expand ? 'w-18 md:w-24' : 'w-22 md:w-32']
+          'flex max-md:writing-vertical-lr text-sm md:text-base cursor-pointer items-center max-md:rounded-b-xl md:rounded-r-xl bg-crane-red text-white shadow duration-300',
+          [expand ? 'h-24 md:w-32 w-8 md:h-12' : 'h-18 md:w-24 w-8 md:h-12']
         )}
         onClick={() => setExpand(true)}
       >
@@ -111,13 +120,13 @@ const SearchMenuItem = () => {
           <input
             ref={inputRef}
             placeholder="搜搜看有什么"
-            className="box-border h-full w-0 flex-1 px-3"
+            className="box-border md:pl-1 h-full w-0 flex-1 px-3"
             readOnly
           />
         ) : (
-          <div className="flex-1 text-center">搜索</div>
+          <div className="flex-1 md:pl-1 text-center">搜索</div>
         )}
-        <GoSearch className="mr-3 text-base md:text-xl" />
+        <GoSearch className="max-md:mb-3 md:mr-3 text-base md:text-xl" />
       </div>
       {
         <PortalBody>
@@ -125,7 +134,7 @@ const SearchMenuItem = () => {
             <Dialog onCancel={close} onClickMask={close} className="items-start">
               <div className="w-full max-h-full overflow-auto scroll-none" onClick={close}>
                 <div
-                  className="w-140 mt-30 mb-10 p-4 relative mx-auto"
+                  className="w-full md:w-140 mt-30 mb-10 p-4 relative mx-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Search />
@@ -164,14 +173,14 @@ export default function Sidebar() {
   ]
 
   return (
-    <div className="-translate-y-1/2 fixed top-1/2 left-0 z-100">
-      <nav className="flex flex-col items-start gap-2">
+    <div className="max-md:-translate-x-1/2 md:-translate-y-1/2 fixed top-0 left-1/2 md:top-1/2 md:left-0 z-100">
+      <nav className="flex md:flex-col items-start gap-2">
         <SearchMenuItem />
         {menus().map((menu) => (
           <MenuItem key={menu.href} {...menu} />
         ))}
+        <Switchdarkmode />
       </nav>
-      <Switchdarkmode />
       <PortalBody>
         <AgentChat />
       </PortalBody>

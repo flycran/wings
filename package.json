@@ -19,7 +19,9 @@
     "format": "biome format ./app",
     "format:fix": "biome format ./app --fix",
     "netlify:serve": "netlify serve",
-    "prepare": "husky"
+    "prepare": "husky",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@codemirror/commands": "^6.8.1",
@@ -106,6 +108,16 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-environment": "^1.1.3",
-    "vite-tsconfig-paths": "^6.0.5"
+    "vite-tsconfig-paths": "^6.0.5",
+    "storybook": "^10.2.8",
+    "@storybook/react-vite": "^10.2.8",
+    "@chromatic-com/storybook": "^5.0.1",
+    "@storybook/addon-vitest": "^10.2.8",
+    "@storybook/addon-a11y": "^10.2.8",
+    "@storybook/addon-docs": "^10.2.8",
+    "@storybook/addon-onboarding": "^10.2.8",
+    "vitest": "4.0.18",
+    "playwright": "^1.58.2",
+    "@vitest/browser-playwright": "4.0.18"
   }
 }

@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
-import { AdminPageSubheadModule } from '~/components/AdminModule/AdminPageHeadModule'
+import { AdminPageSubheadModule } from '~/components/admin-module/AdminPageHeadModule'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { HomeConfig } from '~/routes/admin._index/route'
 

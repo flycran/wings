@@ -30,7 +30,7 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import AdminPageHeadModule from '~/components/AdminModule/AdminPageHeadModule'
+import AdminPageHeadModule from '~/components/admin-module/AdminPageHeadModule'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { supabaseClient } from '~/utils/supabase'
 import { Tables } from '../../../types/supabase'

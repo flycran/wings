@@ -4,6 +4,7 @@
 @import "./components/ui/globals.ui.css";
 @import "./routes/_client._index/components/FirstScreen/web-win.css";
 @import "routes/admin.article.editor.($id)/components/MarkdownEditor/index.css";
+
 @plugin "@tailwindcss/typography";
 
 /*暗色模式*/
@@ -57,6 +58,7 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .transition-background {
     transition-property: background, background-color, border-color;
   }
@@ -114,6 +116,22 @@ input {
   .hljs .linenumber {
     border-right: 1px solid var(--color-zinc-700);
   }
+}
+
+@utility writing-horizontal-tb {
+  writing-mode: horizontal-tb;
+}
+
+@utility writing-vertical-rl {
+  writing-mode: vertical-rl;
+}
+
+@utility writing-vertical-lr {
+  writing-mode: vertical-lr;
+}
+
+@utility writing-sideways-rl {
+  writing-mode: sideways-rl;
 }
 
 .prose :where(code):not(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {

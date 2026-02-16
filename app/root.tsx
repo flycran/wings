@@ -83,7 +83,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
         />
         <link rel="icon" href="/public/favicon.svg" />
         <Meta />
-        <Links />
+        {!import.meta.env.DEV && <Links />}
       </head>
       <body>
         <ThemeProvider theme={muiTheme}>

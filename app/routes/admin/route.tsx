@@ -1,6 +1,5 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import { IconButton, useMediaQuery } from '@mui/material'
-import clsx from 'clsx'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
@@ -70,7 +69,7 @@ const admin = () => {
                 </IconButton>
               </div>
             )}
-            <div className="flex-1 h-0 md:h-auto overflow-auto">
+            <div className="flex-1 md:h-auto max-md:overflow-auto">
               <Outlet />
             </div>
           </div>

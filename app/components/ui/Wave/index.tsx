@@ -1,61 +1,47 @@
-import { cloneElement, ReactElement, Ref, useEffect, useRef } from 'react'
-import { mergeRefs } from 'react-merge-refs'
+import { MouseEventHandler, ReactNode, useCallback, useMemo } from 'react'
 import styles from './index.module.css'
 
+export interface WaveRenderProps {
+  onClick: MouseEventHandler<HTMLElement>
+}
+
 export interface WaveProps {
-  children: ReactElement<{
-    ref: Ref<HTMLElement>
-    onClick: (...args: unknown[]) => void
-  }>
+  children: (props: WaveRenderProps) => ReactNode
   color?: string
   duration?: number
 }
 
 export default function Wave({ children, color }: WaveProps) {
-  const buttonRef = useRef<HTMLElement>(null)
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const div = document.createElement('div')
+      div.classList.add(styles.waveFocus)
+      div.style.cssText = `--wave-color: ${color ?? 'inherit'};`
+      div.className = styles.wave
 
-  const createAnimateElement = () => {
-    const div = document.createElement('div')
-    div.style = `--wave-color: ${color ?? 'inherit'};`
-    div.className = styles.wave
+      e.currentTarget.appendChild(div)
 
-    buttonRef.current!.appendChild(div)
-
-    return div
-  }
-
-  useEffect(() => {
-    const div = createAnimateElement()
-    div.classList.add(styles.waveFocus)
-    return () => div.remove()
-  }, [])
-
-  const handleClick = (...args: unknown[]) => {
-    const div = createAnimateElement()
-
-    div
-      .animate(
-        [
+      div
+        .animate(
+          [
+            {
+              boxShadow: '0 0 0 0 rgb(from var(--wave-color) r g b / 40%)',
+            },
+            {
+              boxShadow: '0 0 0 .6em rgb(from var(--wave-color) r g b / 0%)',
+            },
+          ],
           {
-            boxShadow: '0 0 0 0 rgb(from var(--wave-color) r g b / 40%)',
-          },
-          {
-            boxShadow: '0 0 0 .6em rgb(from var(--wave-color) r g b / 0%)',
-          },
-        ],
-        {
-          duration: 500,
-          easing: 'ease-out',
-        }
-      )
-      .addEventListener('finish', () => {
-        div.remove()
-      })
-    return children.props.onClick?.(...args)
-  }
+            duration: 500,
+            easing: 'ease-out',
+          }
+        )
+        .addEventListener('finish', () => {
+          div.remove()
+        })
+    },
+    [color]
+  )
 
-  return cloneElement(children, {
-    ref: mergeRefs([buttonRef, children.props.ref]),
-    onClick: handleClick,
-  })
+  return useMemo(() => children({ onClick: handleClick }), [children, handleClick])
 }

@@ -144,7 +144,7 @@ export default function FirstScreen({
           />
         </MotionConfig>
       </div>
-      <div className="relative flex min-h-screen flex-col justify-evenly">
+      <div className="relative flex md:min-h-screen pt-30 md:pt-0 gap-4 flex-col justify-evenly">
         {/* 标题 */}
         <HomeTitle />
         <div className="flex md:justify-between justify-center">
@@ -165,7 +165,7 @@ export default function FirstScreen({
             ease: 'easeOut',
             delay: 0.2,
           }}
-          className="mb-8 left-0 flex"
+          className="md:mb-8 left-0 flex"
         >
           <div
             className="grid grid-cols-4 grid-rows-2 gap-3"

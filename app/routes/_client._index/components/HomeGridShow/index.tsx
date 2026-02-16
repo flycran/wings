@@ -95,12 +95,7 @@ const SwiperView = ({ carousels }: { carousels: CarouselData[] }) => {
   const autoplayDelay = 5000
 
   return (
-    <div
-      className="overflow-hidden rounded-xl bg-skeleton shadow"
-      style={{
-        gridArea: '1 / 2 / 3 / 3',
-      }}
-    >
+    <div className="col-span-2 aspect-[25/14] md:aspect-auto md:col-span-1 md:row-span-2 md:row-start-1 md:col-start-2 overflow-hidden rounded-xl bg-skeleton shadow">
       <div
         className="h-full w-full"
         onMouseEnter={() => {
@@ -167,12 +162,7 @@ const SwiperView = ({ carousels }: { carousels: CarouselData[] }) => {
 const FixedView = ({ fixeds }: { fixeds: SlotsData[] }) => {
   return (
     <>
-      <div
-        className="overflow-hidden rounded-xl bg-skeleton shadow"
-        style={{
-          gridArea: '1 / 1 / 2 / 2',
-        }}
-      >
+      <div className="aspect-[10/7] md:aspect-auto overflow-hidden rounded-xl bg-skeleton shadow">
         {fixeds[0] ? (
           <Link to={fixeds[0].link ?? noLink} className="relative inline-block h-full w-full">
             <img
@@ -185,12 +175,7 @@ const FixedView = ({ fixeds }: { fixeds: SlotsData[] }) => {
           <NoData />
         )}
       </div>
-      <div
-        className="overflow-hidden rounded-xl bg-skeleton shadow"
-        style={{
-          gridArea: '2 / 1 / 3 / 2',
-        }}
-      >
+      <div className="aspect-[10/7] md:aspect-auto overflow-hidden rounded-xl bg-skeleton shadow">
         {fixeds[1] ? (
           <Link to={fixeds[1].link ?? noLink} className="relative inline-block h-full w-full">
             <img
@@ -209,9 +194,9 @@ const FixedView = ({ fixeds }: { fixeds: SlotsData[] }) => {
 
 export default function HomeGridShow({ data }: { data: Pick<HomeData, 'carousel' | 'slots'> }) {
   return (
-    <div className="grid aspect-[10/4] grid-cols-[2fr_5fr] grid-rows-2 gap-3">
-      <SwiperView carousels={data.carousel} />
+    <div className="grid grid-cols-2 gap-3 md:aspect-[10/4] md:grid-cols-[2fr_5fr] md:grid-rows-2">
       <FixedView fixeds={data.slots} />
+      <SwiperView carousels={data.carousel} />
     </div>
   )
 }

@@ -1,18 +1,33 @@
 import clsx from 'clsx'
 import MotionDiv from '~/components/motion/MotionDiv'
 import styles from './crane.module.css'
+import { useMediaQuery } from '@mui/material'
 
 export default function Crane() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   return (
     <MotionDiv
       className={clsx(styles.frameCraneContainer)}
       initial={{
         '--angle': '50deg',
       }}
-      whileHover={{
-        '--angle': '120deg',
-        y: -20,
-      }}
+      whileTap={
+        isMobile
+          ? {
+              '--angle': '120deg',
+              y: -20,
+            }
+          : undefined
+      }
+      whileHover={
+        isMobile
+          ? undefined
+          : {
+              '--angle': '120deg',
+              y: -20,
+            }
+      }
       transition={{ visualDuration: 0.2, type: 'spring' }}
     >
       <div className={styles.frameCraneAdjustView}>
