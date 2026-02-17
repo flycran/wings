@@ -1,5 +1,5 @@
 # Wings | 插上翅膀去飞翔
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/800dbccc-1747-4a93-a408-0705f6503a48/deploy-status)](https://app.netlify.com/projects/flycran/deploys)
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)

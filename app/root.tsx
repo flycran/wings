@@ -81,7 +81,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
           name="description"
           content="Wings Blog是Flycran设计、开发的个人博客网站，主要记录项目，文章、生活、随笔等。"
         />
-        <link rel="icon" href="/public/favicon.svg" />
+        <link rel="icon" href="/favicon.svg" />
         <Meta />
         {!import.meta.env.DEV && <Links />}
       </head>
