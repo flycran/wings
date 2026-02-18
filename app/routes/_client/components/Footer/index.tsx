@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <div className="bg-zinc-900 border-t border-zinc-700 text-zinc-200 text-sm">
-      <div className="py-4 md:py-8 m-auto mx-4 lg:w-2xl xl:w-4xl 2xl:w-6xl flex max-md:flex-col gap-1 md:gap-3">
+      <div className="py-4 md:py-8 mx-4 lg:mx-auto lg:w-2xl xl:w-4xl 2xl:w-6xl flex max-md:flex-col gap-1 md:gap-3">
         <ul className="flex flex-col gap-1 md:gap-3 flex-1">
           <li>
             <Link to="/admin" className="hover:underline">
