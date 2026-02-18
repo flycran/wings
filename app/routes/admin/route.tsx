@@ -69,7 +69,7 @@ const admin = () => {
                 </IconButton>
               </div>
             )}
-            <div className="flex-1 md:h-auto max-md:overflow-auto">
+            <div className="flex-1 md:h-full max-md:overflow-auto">
               <Outlet />
             </div>
           </div>
