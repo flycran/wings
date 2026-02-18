@@ -1,9 +1,12 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import SyntaxHighlighter from 'react-syntax-highlighter'
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useDelayActive } from '~/hooks/delayOpen'
 import code from '../../../../../plugins/env?raw'
+
+SyntaxHighlighter.registerLanguage('typescript', typescript)
 
 export default function WebWin({ className }: { className?: string }) {
   const svgElement = useMemo(
