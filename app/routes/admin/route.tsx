@@ -1,10 +1,11 @@
 import MenuIcon from '@mui/icons-material/Menu'
-import { IconButton, useMediaQuery } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 import FullScreenLoading from '~/components/FullScreenLoading'
 import LoginDialog from '~/components/LoginDialog'
+import { useIsMobile } from '~/hooks'
 import { useSubscribeTheme } from '~/hooks/subscribe-theme'
 import AdminMenu from '~/routes/admin/components/AdminMenu'
 import { openLoginAtom } from '~/store/system'
@@ -16,7 +17,7 @@ const admin = () => {
   const [user, setUser] = useAtom(userAtom)
   const [_, setOpenLogin] = useAtom(openLoginAtom)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useIsMobile()
 
   useSubscribeTheme()
 

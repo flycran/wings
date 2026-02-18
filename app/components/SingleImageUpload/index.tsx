@@ -1,11 +1,12 @@
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined'
 import BrokenImageIcon from '@mui/icons-material/BrokenImage'
+import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined'
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined'
-import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
 import {
   Box,
+  Button,
   CircularProgress,
   Dialog,
   DialogContent,
@@ -21,8 +22,8 @@ import { useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { AnimatePresence } from 'motion/react'
 import React, { useRef, useState } from 'react'
-import MotionDiv from '~/components/motion/MotionDiv'
 import { toast } from 'react-toastify/unstyled'
+import MotionDiv from '~/components/motion/MotionDiv'
 import { getImageUrl } from '~/utils'
 import { supabaseClient } from '~/utils/supabase'
 
@@ -69,7 +70,10 @@ export default function SingleImageUpload({
     queryFn: async () => {
       const { data, error } = await supabaseClient.storage.from(bucket).list('', {
         limit: 100,
-        sortBy: { column: 'created_at', order: 'desc' },
+        sortBy: {
+          column: 'created_at',
+          order: 'desc',
+        },
       })
       if (error) {
         toast.error('获取图片列表失败')
@@ -141,7 +145,7 @@ export default function SingleImageUpload({
         onMouseLeave={() => setHovered(false)}
         onClick={hasImage ? undefined : handleUploadClick}
         className={clsx(
-          'relative overflow-hidden min-w-20 aspect-square flex items-center justify-center rounded',
+          'relative overflow-hidden aspect-square flex items-center justify-center rounded',
           uploading ? 'cursor-wait' : hasImage ? 'cursor-default' : 'cursor-pointer',
           className
         )}
@@ -233,7 +237,7 @@ export default function SingleImageUpload({
                         '&:hover': { bgcolor: 'rgba(255,255,255,0.2)' },
                       }}
                     >
-                      <CollectionsOutlinedIcon fontSize="small" />
+                      <CloudDownloadOutlinedIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
                   {!imageError && (
@@ -267,11 +271,30 @@ export default function SingleImageUpload({
             </AnimatePresence>
           </>
         ) : (
-          <Box textAlign="center" color="text.secondary">
-            <AddPhotoAlternateOutlinedIcon fontSize="large" />
-            <Typography variant="body2" mt={1}>
-              点击上传图片
-            </Typography>
+          <Box className="flex flex-col items-center gap-2">
+            <Box
+              textAlign="center"
+              color="text.secondary"
+              onClick={handleUploadClick}
+              className="cursor-pointer"
+            >
+              <AddPhotoAlternateOutlinedIcon fontSize="large" />
+              <Typography variant="body2" mt={1}>
+                点击上传图片
+              </Typography>
+            </Box>
+            <Tooltip title="从服务器选择">
+              <Button
+                endIcon={<CloudDownloadOutlinedIcon />}
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setSelectOpen(true)
+                }}
+              >
+                或者从服务器选择
+              </Button>
+            </Tooltip>
           </Box>
         )}
       </Box>
@@ -298,14 +321,23 @@ export default function SingleImageUpload({
             <ImageList cols={4} gap={8}>
               {Array.from({ length: 8 }).map((_, index) => (
                 <ImageListItem key={index}>
-                  <Skeleton variant="rectangular" sx={{ aspectRatio: '1', width: '100%' }} />
+                  <Skeleton
+                    variant="rectangular"
+                    sx={{
+                      aspectRatio: '1',
+                      width: '100%',
+                    }}
+                  />
                 </ImageListItem>
               ))}
             </ImageList>
           ) : serverImages.length === 0 ? (
             <Box
               className="flex items-center justify-center"
-              sx={{ height: 200, color: 'text.secondary' }}
+              sx={{
+                height: 200,
+                color: 'text.secondary',
+              }}
             >
               <Typography>暂无图片</Typography>
             </Box>

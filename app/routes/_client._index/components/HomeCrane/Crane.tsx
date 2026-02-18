@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import MotionDiv from '~/components/motion/MotionDiv'
+import { useIsMobile } from '~/hooks'
 import styles from './crane.module.css'
-import { useMediaQuery } from '@mui/material'
 
 export default function Crane() {
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useIsMobile()
 
   return (
     <MotionDiv
@@ -28,7 +28,10 @@ export default function Crane() {
               y: -20,
             }
       }
-      transition={{ visualDuration: 0.2, type: 'spring' }}
+      transition={{
+        visualDuration: 0.2,
+        type: 'spring',
+      }}
     >
       <div className={styles.frameCraneAdjustView}>
         <div className={styles.frameCrane}>

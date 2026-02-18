@@ -1,10 +1,11 @@
 import { AnimatePresence, MotionConfig } from 'motion/react'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { GoLink } from 'react-icons/go'
 import { Link } from 'react-router'
 import Description from '~/components/Description'
 import MotionDiv from '~/components/motion/MotionDiv'
 import NumberAnimation from '~/components/NumberAnimation'
+import { useIsMobile } from '~/hooks'
 import { useDelayActive } from '~/hooks/delayOpen'
 import Bilibili from '~/icons/Bilibili'
 import Csdn from '~/icons/Csdn'
@@ -206,7 +207,31 @@ export interface PlatformProps {
 
 // 社交平台
 export function Platform({ platform }: PlatformProps) {
-  const { active, enter, leave } = useDelayActive(500)
+  const isMobile = useIsMobile()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const { active, setActive, enter, leave } = useDelayActive(500)
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (active) return
+    e.preventDefault()
+    setActive(true)
+  }
+
+  useEffect(() => {
+    const handleClose = (e: MouseEvent) => {
+      if (!active) return
+      if (containerRef.current?.contains(e.target as Node)) return
+      setActive(false)
+    }
+    if (isMobile && active) {
+      document.addEventListener('click', handleClose)
+    }
+    return () => {
+      document.removeEventListener('click', handleClose)
+    }
+  }, [isMobile, active])
+
   const icon = (
     <div className="cursor-pointer inline-flex text-2xl aspect-square w-10 items-center justify-center">
       {platform.icon}
@@ -219,11 +244,17 @@ export function Platform({ platform }: PlatformProps) {
       style={{
         gridArea: platform.key,
       }}
-      onMouseEnter={enter}
-      onMouseLeave={leave}
+      ref={containerRef}
+      onMouseEnter={isMobile ? undefined : enter}
+      onMouseLeave={isMobile ? undefined : leave}
+      onClick={isMobile ? handleClick : undefined}
     >
       {platform.href ? (
-        <Link target="_blank" to={platform.href}>
+        <Link
+          target="_blank"
+          onClick={isMobile ? (e) => e.preventDefault() : undefined}
+          to={platform.href}
+        >
           {icon}
         </Link>
       ) : (
@@ -252,7 +283,9 @@ export function Platform({ platform }: PlatformProps) {
             <div className="shrink-0 min-w-max">
               {platform.description && <div className="p-2 pb-0">{platform.description}</div>}
               <div className="flex mr-4 items-center">
-                {icon}
+                <Link target="_blank" to={platform.href!}>
+                  {icon}
+                </Link>
                 <div className="text-center flex-1">
                   {platform.href ? (
                     <Link

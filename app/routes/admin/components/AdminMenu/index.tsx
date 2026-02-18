@@ -1,8 +1,9 @@
-import { SwipeableDrawer, Tab, Tabs, useMediaQuery } from '@mui/material'
+import { SwipeableDrawer, Tab, Tabs } from '@mui/material'
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { menus } from '~/config/admin-menu'
+import { useIsMobile } from '~/hooks'
 
 interface AdminMenuProps {
   mobileOpen?: boolean
@@ -17,7 +18,7 @@ export default function AdminMenu({
 }: AdminMenuProps) {
   const location = useLocation()
   const navigate = useNavigate()
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useIsMobile()
 
   const menu = useMemo(() => {
     const m = menus.slice(1).find((menu) => location.pathname.startsWith(menu.value))
@@ -40,7 +41,10 @@ export default function AdminMenu({
   const menuContent = (
     <Tabs
       variant="scrollable"
-      sx={{ borderRight: 1, borderColor: 'divider' }}
+      sx={{
+        borderRight: 1,
+        borderColor: 'divider',
+      }}
       className={clsx('h-screen', !isMobile && 'w-40 fixed')}
       orientation="vertical"
       value={location.pathname}

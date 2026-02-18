@@ -9,6 +9,7 @@ import { PortalBody } from '~/components/PortalBody'
 import Search from '~/components/Search'
 import Dialog from '~/components/ui/Dialog'
 import webConfig from '~/config/web'
+import { useIsMobile } from '~/hooks'
 import Switchdarkmode from '~/routes/_client/components/Sidebar/SwitchDarkMode'
 import { algoliaClient } from '~/utils/algolia'
 import SlideArrow, { SlideArrowRef } from '../../../../components/SlideArrow'
@@ -61,7 +62,7 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   const { pathname } = useLocation()
   const SARef = useRef<SlideArrowRef>(null)
 
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useIsMobile()
 
   const match = href === '/' ? pathname === href : pathname.startsWith(href)
 

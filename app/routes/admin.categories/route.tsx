@@ -571,7 +571,7 @@ export default function CategoriesPage() {
                           control={columnForm.control}
                           name="cover"
                           render={({ field }) => (
-                            <SingleImageUpload {...field} bucket="cover" className="w-48 h-36" />
+                            <SingleImageUpload {...field} bucket="cover" className="max-w-80" />
                           )}
                         />
                       </Box>
