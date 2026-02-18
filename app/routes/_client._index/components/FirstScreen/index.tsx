@@ -145,7 +145,7 @@ export default function FirstScreen({
           />
         </MotionConfig>
       </div>
-      <div className="relative flex md:min-h-screen pt-30 md:pt-0 gap-4 flex-col justify-evenly">
+      <div className="relative flex md:min-h-screen pt-32 md:pt-0 gap-4 flex-col justify-evenly">
         {/* 标题 */}
         <HomeTitle />
         <div className="flex md:justify-between justify-center">
