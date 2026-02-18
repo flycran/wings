@@ -112,19 +112,19 @@ export type Database = {
       columns: {
         Row: {
           cover: string
-          description: string | null
+          description: string
           id: number
           name: string
         }
         Insert: {
           cover?: string
-          description?: string | null
+          description?: string
           id?: number
           name: string
         }
         Update: {
           cover?: string
-          description?: string | null
+          description?: string
           id?: number
           name?: string
         }

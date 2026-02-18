@@ -27,34 +27,54 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { z } from 'zod'
 import AdminPageHeadModule from '~/components/admin-module/AdminPageHeadModule'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { supabaseClient } from '~/utils/supabase'
-import { Tables, TablesInsert } from '../../../types/supabase'
+import { Tables } from '../../../types/supabase'
 
 type Category = Tables<'categorys'>
 type Column = Tables<'columns'>
 
 type TabValue = 'categories' | 'columns'
 
-type CategoryFormData = TablesInsert<'categorys'>
-type ColumnFormData = TablesInsert<'columns'>
+// Zod 校验规则
+const categorySchema = z.object({
+  id: z.number().optional(),
+  name: z.string().min(1, '类别名称不能为空').max(50, '类别名称不能超过50个字符'),
+  created_at: z.string().optional(),
+})
+
+const columnSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().min(1, '专栏名称不能为空').max(50, '专栏名称不能超过50个字符'),
+  description: z.string().max(200, '描述不能超过200个字符').optional(),
+  cover: z.string().optional(),
+})
+
+type CategoryFormData = z.infer<typeof categorySchema>
+type ColumnFormData = z.infer<typeof columnSchema>
 
 export default function CategoriesPage() {
   const [activeTab, setActiveTab] = useState<TabValue>('categories')
 
   // 类别表单
   const categoryForm = useForm<CategoryFormData>({
+    resolver: zodResolver(categorySchema),
     defaultValues: { name: '' },
+    mode: 'onChange',
   })
 
   // 专栏表单
   const columnForm = useForm<ColumnFormData>({
+    resolver: zodResolver(columnSchema),
     defaultValues: { name: '', description: '' },
+    mode: 'onChange',
   })
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -180,7 +200,7 @@ export default function CategoriesPage() {
       toast.success('删除成功')
       refetchColumns()
       if (columnForm.getValues('id') === itemToDelete?.id) {
-        columnForm.reset({ name: '', description: null })
+        columnForm.reset({ name: '', description: '' })
       }
       setDeleteDialogOpen(false)
       setItemToDelete(null)
@@ -220,18 +240,10 @@ export default function CategoriesPage() {
   }
 
   const handleSaveCategory = (data: CategoryFormData) => {
-    if (!data.name.trim()) {
-      toast.error('名称不能为空')
-      return
-    }
     categoryMutation.mutate(data)
   }
 
   const handleSaveColumn = (data: ColumnFormData) => {
-    if (!data.name.trim()) {
-      toast.error('名称不能为空')
-      return
-    }
     columnMutation.mutate(data)
   }
 
@@ -502,7 +514,11 @@ export default function CategoriesPage() {
                         placeholder="输入类别名称"
                         fullWidth
                         {...categoryForm.register('name')}
-                        helperText="类别用于对文章进行基础分类"
+                        error={!!categoryForm.formState.errors.name}
+                        helperText={
+                          categoryForm.formState.errors.name?.message ||
+                          '类别用于对文章进行基础分类'
+                        }
                       />
                       <Box>
                         <Typography variant="subtitle2" color="text.secondary" gutterBottom>
@@ -524,6 +540,8 @@ export default function CategoriesPage() {
                         placeholder="输入专栏名称"
                         fullWidth
                         {...columnForm.register('name')}
+                        error={!!columnForm.formState.errors.name}
+                        helperText={columnForm.formState.errors.name?.message}
                       />
                       <TextField
                         label="专栏描述"
@@ -532,7 +550,11 @@ export default function CategoriesPage() {
                         multiline
                         rows={3}
                         {...columnForm.register('description')}
-                        helperText="简短描述专栏的内容主题"
+                        error={!!columnForm.formState.errors.description}
+                        helperText={
+                          columnForm.formState.errors.description?.message ||
+                          '简短描述专栏的内容主题'
+                        }
                       />
                       <Box>
                         <Typography variant="subtitle2" gutterBottom>
