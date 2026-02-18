@@ -1,7 +1,6 @@
-import { useMediaQuery } from '@mui/material'
 import clsx from 'clsx'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { GoArrowDown, GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
+import { GoCheck, GoChecklist, GoFileCode, GoHome, GoSearch } from 'react-icons/go'
 import { Chat, InstantSearch } from 'react-instantsearch'
 import 'instantsearch.css/components/chat.css'
 import { Link, useLocation } from 'react-router'
@@ -9,7 +8,6 @@ import { PortalBody } from '~/components/PortalBody'
 import Search from '~/components/Search'
 import Dialog from '~/components/ui/Dialog'
 import webConfig from '~/config/web'
-import { useIsMobile } from '~/hooks'
 import Switchdarkmode from '~/routes/_client/components/Sidebar/SwitchDarkMode'
 import { algoliaClient } from '~/utils/algolia'
 import SlideArrow, { SlideArrowRef } from '../../../../components/SlideArrow'
@@ -62,8 +60,6 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
   const { pathname } = useLocation()
   const SARef = useRef<SlideArrowRef>(null)
 
-  const isMobile = useIsMobile()
-
   const match = href === '/' ? pathname === href : pathname.startsWith(href)
 
   function handleHover() {
@@ -82,13 +78,14 @@ const MenuItem = ({ text, href, color, icon }: MenuItemProps) => {
       onMouseEnter={handleHover}
     >
       <div className="flex-1 md:pl-1 text-center">{text}</div>
-      <div className="max-md:mb-3 md:mr-3 aspect-square w-4 md:w-5 overflow-hidden text-base md:text-xl">
+      <div className="max-md:mb-2 md:mr-3 aspect-square w-4 md:w-5 overflow-hidden text-base md:text-xl">
         {match ? (
           icon || <GoCheck />
-        ) : isMobile ? (
-          <GoArrowDown />
         ) : (
-          <SlideArrow className="max-md:rotate-90 max-md:flex-col" ref={SARef} />
+          <SlideArrow
+            className="max-md:rotate-90 max-md:flex-col max-md:origin-[25%_50%]"
+            ref={SARef}
+          />
         )}
       </div>
     </Link>
@@ -127,7 +124,7 @@ const SearchMenuItem = () => {
         ) : (
           <div className="flex-1 md:pl-1 text-center">搜索</div>
         )}
-        <GoSearch className="max-md:mb-3 md:mr-3 text-base md:text-xl" />
+        <GoSearch className="max-md:mb-2 md:mr-3 text-base md:text-xl" />
       </div>
       {
         <PortalBody>

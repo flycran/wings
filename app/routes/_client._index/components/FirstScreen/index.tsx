@@ -128,7 +128,7 @@ export default function FirstScreen({
               y: 0,
               opacity: 1,
             }}
-            className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-100 aspect-square"
+            className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-60 md:w-100 aspect-square"
           />
           <MotionDiv
             initial={{
@@ -141,7 +141,7 @@ export default function FirstScreen({
               y: 0,
               opacity: 1,
             }}
-            className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-150 aspect-square"
+            className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-80 md:w-150 aspect-square"
           />
         </MotionConfig>
       </div>
@@ -149,7 +149,7 @@ export default function FirstScreen({
         {/* 标题 */}
         <HomeTitle />
         <div className="flex md:justify-between justify-center">
-          <WebWin className="lg:-translate-x-30 lg:-translate-y-20 lg:w-110 md:w-90 md:block hidden" />
+          <WebWin className="lg:-translate-x-30 lg:-translate-y-20 lg:w-110 md:w-90" />
           <HomeCrane className="w-80 lg:w-120" />
         </div>
         <MotionDiv
