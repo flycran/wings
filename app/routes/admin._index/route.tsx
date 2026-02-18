@@ -54,8 +54,16 @@ export default function AdminHome() {
       return {
         carousel: (data.carousel as unknown as CarouselData[]) || [],
         slots: (data.slots as unknown as SlotsData[]) || [
-          { title: '', cover: '', link: '' },
-          { title: '', cover: '', link: '' },
+          {
+            title: '',
+            cover: '',
+            link: '',
+          },
+          {
+            title: '',
+            cover: '',
+            link: '',
+          },
         ],
       }
     },
@@ -67,8 +75,16 @@ export default function AdminHome() {
     defaultValues: {
       carousel: [],
       slots: [
-        { title: '', cover: '', link: '' },
-        { title: '', cover: '', link: '' },
+        {
+          title: '',
+          cover: '',
+          link: '',
+        },
+        {
+          title: '',
+          cover: '',
+          link: '',
+        },
       ],
     },
   })
@@ -81,14 +97,7 @@ export default function AdminHome() {
 
   const saveMutation = useMutation({
     mutationFn: async (data: HomeConfig) => {
-      const { error } = await supabaseClient
-        .from('homepage_singleton')
-        .update({
-          carousel: data.carousel,
-          slots: data.slots,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', 1)
+      const { error } = await supabaseClient.from('homepage_singleton').update(data).eq('id', 1)
       if (error) throw error
     },
     onSuccess: () => {
@@ -126,7 +135,11 @@ export default function AdminHome() {
               startIcon={<SaveIcon />}
               type="submit"
               disabled={!methods.formState.isDirty || saveMutation.isPending}
-              sx={{ px: 4, py: 1, borderRadius: 2 }}
+              sx={{
+                px: 4,
+                py: 1,
+                borderRadius: 2,
+              }}
             >
               {saveMutation.isPending ? '正在保存...' : '保存更改'}
             </Button>

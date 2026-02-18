@@ -29,41 +29,32 @@ import {
 } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import AdminPageHeadModule from '~/components/admin-module/AdminPageHeadModule'
 import SingleImageUpload from '~/components/SingleImageUpload'
 import { supabaseClient } from '~/utils/supabase'
-import { Tables } from '../../../types/supabase'
+import { Tables, TablesInsert } from '../../../types/supabase'
 
 type Category = Tables<'categorys'>
 type Column = Tables<'columns'>
 
 type TabValue = 'categories' | 'columns'
 
-interface CategoryFormData {
-  id?: number
-  name: string
-}
-
-interface ColumnFormData {
-  id?: number
-  name: string
-  description: string
-  cover: string
-}
+type CategoryFormData = TablesInsert<'categorys'>
+type ColumnFormData = TablesInsert<'columns'>
 
 export default function CategoriesPage() {
   const [activeTab, setActiveTab] = useState<TabValue>('categories')
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
-  const [selectedColumn, setSelectedColumn] = useState<Column | null>(null)
-  const [isCreating, setIsCreating] = useState(false)
 
-  // 表单状态
-  const [categoryForm, setCategoryForm] = useState<CategoryFormData>({ name: '' })
-  const [columnForm, setColumnForm] = useState<ColumnFormData>({
-    name: '',
-    description: '',
-    cover: '',
+  // 类别表单
+  const categoryForm = useForm<CategoryFormData>({
+    defaultValues: { name: '' },
+  })
+
+  // 专栏表单
+  const columnForm = useForm<ColumnFormData>({
+    defaultValues: { name: '', description: '' },
   })
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
@@ -117,22 +108,18 @@ export default function CategoriesPage() {
   const categoryMutation = useMutation({
     mutationFn: async (data: CategoryFormData) => {
       if (data.id) {
-        const { error } = await supabaseClient
-          .from('categorys')
-          .update({ name: data.name })
-          .eq('id', data.id)
+        const { error } = await supabaseClient.from('categorys').update(data).eq('id', data.id)
         if (error) throw error
       } else {
-        const { error } = await supabaseClient.from('categorys').insert({ name: data.name })
+        const { error } = await supabaseClient.from('categorys').insert(data)
         if (error) throw error
       }
     },
-    onSuccess: () => {
-      toast.success(selectedCategory || isCreating ? '保存成功' : '创建成功')
+    onSuccess: (_, data) => {
+      toast.success(data.id ? '保存成功' : '创建成功')
       refetchCategories()
-      if (isCreating) {
-        setIsCreating(false)
-        setCategoryForm({ name: '' })
+      if (!data.id) {
+        categoryForm.reset({ name: '' })
       }
     },
     onError: () => {
@@ -144,30 +131,18 @@ export default function CategoriesPage() {
   const columnMutation = useMutation({
     mutationFn: async (data: ColumnFormData) => {
       if (data.id) {
-        const { error } = await supabaseClient
-          .from('columns')
-          .update({
-            name: data.name,
-            description: data.description || null,
-            cover: data.cover || null,
-          })
-          .eq('id', data.id)
+        const { error } = await supabaseClient.from('columns').update(data).eq('id', data.id)
         if (error) throw error
       } else {
-        const { error } = await supabaseClient.from('columns').insert({
-          name: data.name,
-          description: data.description || null,
-          cover: data.cover || null,
-        })
+        const { error } = await supabaseClient.from('columns').insert(data)
         if (error) throw error
       }
     },
-    onSuccess: () => {
-      toast.success(selectedColumn || isCreating ? '保存成功' : '创建成功')
+    onSuccess: (_, data) => {
+      toast.success(data.id ? '保存成功' : '创建成功')
       refetchColumns()
-      if (isCreating) {
-        setIsCreating(false)
-        setColumnForm({ name: '', description: '', cover: '' })
+      if (!data.id) {
+        columnForm.reset({ name: '', description: '' })
       }
     },
     onError: () => {
@@ -184,9 +159,8 @@ export default function CategoriesPage() {
     onSuccess: () => {
       toast.success('删除成功')
       refetchCategories()
-      if (selectedCategory?.id === itemToDelete?.id) {
-        setSelectedCategory(null)
-        setCategoryForm({ name: '' })
+      if (categoryForm.getValues('id') === itemToDelete?.id) {
+        categoryForm.reset({ name: '' })
       }
       setDeleteDialogOpen(false)
       setItemToDelete(null)
@@ -205,9 +179,8 @@ export default function CategoriesPage() {
     onSuccess: () => {
       toast.success('删除成功')
       refetchColumns()
-      if (selectedColumn?.id === itemToDelete?.id) {
-        setSelectedColumn(null)
-        setColumnForm({ name: '', description: '', cover: '' })
+      if (columnForm.getValues('id') === itemToDelete?.id) {
+        columnForm.reset({ name: '', description: null })
       }
       setDeleteDialogOpen(false)
       setItemToDelete(null)
@@ -219,65 +192,47 @@ export default function CategoriesPage() {
 
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab)
-    setSelectedCategory(null)
-    setSelectedColumn(null)
-    setIsCreating(false)
-    setCategoryForm({ name: '' })
-    setColumnForm({ name: '', description: '', cover: '' })
+    categoryForm.reset({ name: '' })
+    columnForm.reset({ name: '', description: '' })
   }
 
   const handleSelectCategory = (category: Category) => {
-    setSelectedCategory(category)
-    setSelectedColumn(null)
-    setIsCreating(false)
-    setCategoryForm({ id: category.id, name: category.name })
+    categoryForm.reset(category)
   }
 
   const handleSelectColumn = (column: Column) => {
-    setSelectedColumn(column)
-    setSelectedCategory(null)
-    setIsCreating(false)
-    setColumnForm({
-      id: column.id,
-      name: column.name,
-      description: column.description || '',
-      cover: column.cover || '',
-    })
+    setIsCreate(false)
+    columnForm.reset(column)
   }
 
   const handleCreate = () => {
-    setIsCreating(true)
-    setSelectedCategory(null)
-    setSelectedColumn(null)
+    setIsCreate(true)
     if (activeTab === 'categories') {
-      setCategoryForm({ name: '' })
+      categoryForm.reset({ name: '' })
     } else {
-      setColumnForm({ name: '', description: '', cover: '' })
+      columnForm.reset({ name: '', description: '' })
     }
   }
 
   const handleCancelEdit = () => {
-    setIsCreating(false)
-    setSelectedCategory(null)
-    setSelectedColumn(null)
-    setCategoryForm({ name: '' })
-    setColumnForm({ name: '', description: '', cover: '' })
+    categoryForm.reset({ name: '' })
+    columnForm.reset({ name: '', description: '' })
   }
 
-  const handleSaveCategory = () => {
-    if (!categoryForm.name.trim()) {
+  const handleSaveCategory = (data: CategoryFormData) => {
+    if (!data.name.trim()) {
       toast.error('名称不能为空')
       return
     }
-    categoryMutation.mutate(categoryForm)
+    categoryMutation.mutate(data)
   }
 
-  const handleSaveColumn = () => {
-    if (!columnForm.name.trim()) {
+  const handleSaveColumn = (data: ColumnFormData) => {
+    if (!data.name.trim()) {
       toast.error('名称不能为空')
       return
     }
-    columnMutation.mutate(columnForm)
+    columnMutation.mutate(data)
   }
 
   const handleDelete = (id: number, name: string) => {
@@ -301,7 +256,11 @@ export default function CategoriesPage() {
     deleteCategoryMutation.isPending ||
     deleteColumnMutation.isPending
 
-  const isEditing = isCreating || selectedCategory !== null || selectedColumn !== null
+  const isEditingCategory = !!categoryForm.watch('id')
+  const isEditingColumn = !!columnForm.watch('id')
+  const isEditing = activeTab === 'categories' ? isEditingCategory : isEditingColumn
+
+  const [isCreate, setIsCreate] = useState(false)
 
   return (
     <div className="relative flex flex-col px-6 min-h-full">
@@ -326,10 +285,7 @@ export default function CategoriesPage() {
                     <FolderOutlinedIcon />
                   )}
                 </ListItemIcon>
-                <ListItemText
-                  primary={`类别 (${categories?.length || 0})`}
-                  primaryTypographyProps={{ fontWeight: activeTab === 'categories' ? 600 : 400 }}
-                />
+                <ListItemText primary={`类别 (${categories?.length || 0})`} />
               </ListItemButton>
               <Divider orientation="vertical" flexItem />
               <ListItemButton
@@ -358,7 +314,7 @@ export default function CategoriesPage() {
                 variant="outlined"
                 startIcon={<AddIcon />}
                 onClick={handleCreate}
-                disabled={isCreating}
+                disabled={isCreate}
               >
                 新建{activeTab === 'categories' ? '类别' : '专栏'}
               </Button>
@@ -391,13 +347,13 @@ export default function CategoriesPage() {
                       }
                     >
                       <ListItemButton
-                        selected={selectedCategory?.id === category.id}
+                        selected={categoryForm.watch('id') === category.id}
                         onClick={() => handleSelectCategory(category)}
                       >
                         <ListItemIcon sx={{ minWidth: 36 }}>
                           <FolderIcon
                             fontSize="small"
-                            color={selectedCategory?.id === category.id ? 'primary' : 'inherit'}
+                            color={categoryForm.watch('id') === category.id ? 'primary' : 'inherit'}
                           />
                         </ListItemIcon>
                         <ListItemText
@@ -436,13 +392,13 @@ export default function CategoriesPage() {
                       }
                     >
                       <ListItemButton
-                        selected={selectedColumn?.id === column.id}
+                        selected={columnForm.watch('id') === column.id}
                         onClick={() => handleSelectColumn(column)}
                       >
                         <ListItemIcon sx={{ minWidth: 36 }}>
                           <NewspaperIcon
                             fontSize="small"
-                            color={selectedColumn?.id === column.id ? 'primary' : 'inherit'}
+                            color={columnForm.watch('id') === column.id ? 'primary' : 'inherit'}
                           />
                         </ListItemIcon>
                         <ListItemText
@@ -469,7 +425,7 @@ export default function CategoriesPage() {
         {/* 右侧：编辑区域 */}
         <Grid size={{ xs: 12, md: 7, lg: 8 }}>
           <Card sx={{ height: 'calc(100vh - 200px)' }}>
-            {!isEditing ? (
+            {!isEditing && !isCreate ? (
               // 空状态
               <Box
                 sx={{
@@ -508,7 +464,11 @@ export default function CategoriesPage() {
                   }}
                 >
                   <Typography variant="h6" fontWeight={600}>
-                    {isCreating
+                    {(
+                      activeTab === 'categories'
+                        ? !categoryForm.watch('id')
+                        : !columnForm.watch('id')
+                    )
                       ? `新建${activeTab === 'categories' ? '类别' : '专栏'}`
                       : '编辑信息'}
                   </Typography>
@@ -520,7 +480,11 @@ export default function CategoriesPage() {
                       variant="contained"
                       size="small"
                       startIcon={<SaveIcon />}
-                      onClick={activeTab === 'categories' ? handleSaveCategory : handleSaveColumn}
+                      onClick={
+                        activeTab === 'categories'
+                          ? categoryForm.handleSubmit(handleSaveCategory)
+                          : columnForm.handleSubmit(handleSaveColumn)
+                      }
                       disabled={isMutating}
                     >
                       {isMutating ? <CircularProgress size={20} /> : '保存'}
@@ -537,8 +501,7 @@ export default function CategoriesPage() {
                         label="类别名称"
                         placeholder="输入类别名称"
                         fullWidth
-                        value={categoryForm.name}
-                        onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
+                        {...categoryForm.register('name')}
                         helperText="类别用于对文章进行基础分类"
                       />
                       <Box>
@@ -546,7 +509,7 @@ export default function CategoriesPage() {
                           预览
                         </Typography>
                         <Chip
-                          label={categoryForm.name || '未命名类别'}
+                          label={categoryForm.watch('name') || '未命名类别'}
                           color="primary"
                           variant="outlined"
                           size="medium"
@@ -560,8 +523,7 @@ export default function CategoriesPage() {
                         label="专栏名称"
                         placeholder="输入专栏名称"
                         fullWidth
-                        value={columnForm.name}
-                        onChange={(e) => setColumnForm({ ...columnForm, name: e.target.value })}
+                        {...columnForm.register('name')}
                       />
                       <TextField
                         label="专栏描述"
@@ -569,10 +531,7 @@ export default function CategoriesPage() {
                         fullWidth
                         multiline
                         rows={3}
-                        value={columnForm.description}
-                        onChange={(e) =>
-                          setColumnForm({ ...columnForm, description: e.target.value })
-                        }
+                        {...columnForm.register('description')}
                         helperText="简短描述专栏的内容主题"
                       />
                       <Box>
@@ -586,11 +545,12 @@ export default function CategoriesPage() {
                         >
                           建议尺寸 400x300，用于专栏展示
                         </Typography>
-                        <SingleImageUpload
-                          value={columnForm.cover}
-                          onChange={(value) => setColumnForm({ ...columnForm, cover: value || '' })}
-                          bucket="cover"
-                          className="w-48 h-36"
+                        <Controller
+                          control={columnForm.control}
+                          name="cover"
+                          render={({ field }) => (
+                            <SingleImageUpload {...field} bucket="cover" className="w-48 h-36" />
+                          )}
                         />
                       </Box>
                     </Stack>

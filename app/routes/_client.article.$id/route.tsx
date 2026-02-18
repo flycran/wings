@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
+import { getImageUrl } from '~/utils'
 import { supabaseClient } from '~/utils/supabase'
 import { Route } from './+types/route'
 
@@ -76,7 +77,7 @@ export default function articleId({ loaderData }: Route.ComponentProps) {
       <div key={id} className="flex h-26 p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800">
         <div className="h-full aspect-square">
           <img
-            src={cover ?? '/no-data.svg'}
+            src={cover ? getImageUrl(cover) : '/no-data.svg'}
             alt={name}
             className="object-cover w-full h-full rounded-xl"
           />
