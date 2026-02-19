@@ -1,5 +1,4 @@
 node_modules
-.netlify
 /.cache
 /build
 .env
@@ -13,7 +12,13 @@ generated/prisma/
 !.vscode/launch.json
 
 .idea
-!.idea/runConfigurations/
 
 *storybook.log
 storybook-static
+
+# netlify
+.netlify
+
+# next.js
+.next
+

@@ -2,16 +2,24 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/.server/**/*.ts",
-    "**/.server/**/*.tsx",
-    "**/.client/**/*.ts",
-    "**/.client/**/*.tsx",
-    ".react-router/types/**/*"
+    "next.config.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
   ],
   "compilerOptions": {
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@react-router/node", "vite/client"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+    "types": [
+      "node"
+    ],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
@@ -25,9 +33,19 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": [
+        "./src/*"
+      ],
+      "@/*": [
+        "./src/pages/*"
+      ]
     },
     "noEmit": true,
-    "rootDirs": [".", "./.react-router/types"]
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }

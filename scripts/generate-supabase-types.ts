@@ -9,7 +9,7 @@ const url = process.env.SUPABASE_URL
 const match = url.match(/^(https|http):\/\/([a-z]+?)\./)
 
 if (match) {
-  const command = `bun x supabase gen types typescript --project-id ${match[2]} > ./types/supabase.ts`
+  const command = `bun x supabase gen types typescript --project-id ${match[2]} > ./src/types/supabase.ts`
   console.log(`run: ${command}`)
   execSync(command, {
     stdio: 'inherit'
