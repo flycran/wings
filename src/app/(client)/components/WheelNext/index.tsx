@@ -1,3 +1,4 @@
+'use client'
 import { AnimatePresence } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { GoTriangleDown } from 'react-icons/go'

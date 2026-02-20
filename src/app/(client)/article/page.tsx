@@ -14,7 +14,6 @@ export default async function ArticlesPage() {
     .limit(20)
 
   if (error) {
-    console.log(error)
     throw new Error('Failed to fetch articles')
   }
 

@@ -1,16 +1,16 @@
+'use client'
 import clsx from 'clsx'
-import { useMemo } from 'react'
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
+import { ReactNode, useMemo } from 'react'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useDelayActive } from '~/hooks/delayOpen'
-// import code from '../../../../../plugins/env?raw'
 
-const code = `console.log('Hello, world!')`
-
-SyntaxHighlighter.registerLanguage('typescript', typescript)
-
-export default function WebWin({ className }: { className?: string }) {
+export default function WebWin({
+  className,
+  codeNode,
+}: {
+  className?: string
+  codeNode: ReactNode
+}) {
   const svgElement = useMemo(
     () => (
       <svg
@@ -384,17 +384,6 @@ export default function WebWin({ className }: { className?: string }) {
     []
   )
 
-  const codeElement = useMemo(
-    () => (
-      <div className="hljs max-w-full max-h-full atom-light dark:atom-dark p-2">
-        <SyntaxHighlighter useInlineStyles={false} PreTag="div" language="typescript">
-          {code}
-        </SyntaxHighlighter>
-      </div>
-    ),
-    []
-  )
-
   const { active, enter, leave } = useDelayActive(100, 200)
 
   return (
@@ -443,7 +432,7 @@ export default function WebWin({ className }: { className?: string }) {
             : {}
         }
       >
-        {codeElement}
+        {codeNode}
       </div>
     </MotionDiv>
   )

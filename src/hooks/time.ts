@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useRef } from 'react'
 
 export const useDelay = <T extends unknown[]>(call: (...args: T) => unknown, delay = 0) => {

@@ -1,20 +1,18 @@
-'use client'
-import { AnimatePresence, MotionConfig } from 'motion/react'
-import { ReactNode, useEffect, useRef } from 'react'
+import Visits from '~/app/(client)/components/FirstScreen/Visits'
+import WebWinCode from '~/app/(client)/components/FirstScreen/WebWinCode'
 import { Platform, PlatformMate } from '~/app/(client)/components/Platform'
 import Description from '~/components/Description'
 import MotionDiv from '~/components/motion/MotionDiv'
-import NumberAnimation from '~/components/NumberAnimation'
 import Bilibili from '~/icons/Bilibili'
 import Csdn from '~/icons/Csdn'
 import Github from '~/icons/Github'
 import Juejin from '~/icons/Juejin'
-import WebWin from './WebWin'
+import { HomeData } from '~/server/home'
+import { countUnit } from '~/utils/unit'
 import HomeCrane from '../HomeCrane'
 import HomeTitle from '../HomeTitle'
 import WheelNext from '../WheelNext'
-import { HomeData } from '~/server/home'
-import { countUnit } from '~/utils/unit'
+import WebWin from './WebWin'
 
 export default function FirstScreen({
   data,
@@ -100,46 +98,17 @@ export default function FirstScreen({
     <>
       <div className="-z-2 absolute top-0 left-0 h-screen w-full">
         {/* 背景圆形图案 */}
-        <MotionConfig
-          transition={{
-            type: 'tween',
-            ease: 'easeOut',
-            duration: 0.6,
-          }}
-        >
-          <MotionDiv
-            initial={{
-              opacity: 0,
-              x: -100,
-              y: 80,
-            }}
-            animate={{
-              x: 0,
-              y: 0,
-              opacity: 1,
-            }}
-            className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-60 md:w-100 aspect-square"
-          />
-          <MotionDiv
-            initial={{
-              opacity: 0,
-              x: 100,
-              y: -80,
-            }}
-            animate={{
-              x: 0,
-              y: 0,
-              opacity: 1,
-            }}
-            className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-80 md:w-150 aspect-square"
-          />
-        </MotionConfig>
+        <div className="absolute right-30/100 top-50/100 rounded-full bg-crane-green/5 dark:bg-crane-blue/5 w-60 md:w-100 aspect-square" />
+        <div className="absolute right-10/100 top-20/100 rounded-full bg-crane-blue/8 dark:bg-crane-orange/5 w-80 md:w-150 aspect-square" />
       </div>
       <div className="relative flex md:min-h-screen pt-32 md:pt-0 gap-4 flex-col justify-evenly">
         {/* 标题 */}
         <HomeTitle />
         <div className="flex md:justify-between justify-center">
-          <WebWin className="lg:-translate-x-30 lg:-translate-y-20 lg:w-110 md:w-90" />
+          <WebWin
+            className="lg:-translate-x-30 lg:-translate-y-20 lg:w-110 md:w-90"
+            codeNode={<WebWinCode />}
+          />
           <HomeCrane className="w-80 lg:w-120" />
         </div>
         <MotionDiv
@@ -171,11 +140,7 @@ export default function FirstScreen({
               className="flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800"
             >
               <div className="font-bold text-2xl text-crane-blue">
-                <NumberAnimation
-                  value={data.visitCount}
-                  delay={2}
-                  format={(v) => countUnit.format(v, '-1')}
-                />
+                <Visits visitCount={data.visitCount} />
               </div>
               <div className="h-1" />
               <div className="text-sm ">总访问量</div>

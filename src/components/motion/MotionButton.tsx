@@ -1,3 +1,4 @@
+'use client'
 import { motion } from 'motion/react'
 import { ComponentProps, HTMLAttributes } from 'react'
 

@@ -1,3 +1,4 @@
+'use client'
 import clsx from 'clsx'
 import { animate, AnimationPlaybackControlsWithThen, motion, Transition } from 'motion/react'
 import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react'

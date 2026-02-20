@@ -67,7 +67,7 @@ export function Platform({ platform }: PlatformProps) {
         <Link
           target="_blank"
           onClick={isMobile ? (e) => e.preventDefault() : undefined}
-          href={platform.href}
+          href={platform.href || ''}
         >
           {icon}
         </Link>
@@ -97,7 +97,7 @@ export function Platform({ platform }: PlatformProps) {
             <div className="shrink-0 min-w-max">
               {platform.description && <div className="p-2 pb-0">{platform.description}</div>}
               <div className="flex mr-4 items-center">
-                <Link target="_blank" href={platform.href!}>
+                <Link target="_blank" href={platform.href || ''}>
                   {icon}
                 </Link>
                 <div className="text-center flex-1">

@@ -1,3 +1,4 @@
+'use client'
 import clsx from 'clsx'
 import MotionDiv from '~/components/motion/MotionDiv'
 import { useIsMobile } from '~/hooks'
