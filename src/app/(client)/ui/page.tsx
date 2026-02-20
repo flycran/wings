@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { GoDash, GoMortarBoard, GoPlus } from 'react-icons/go'
 import NumberAnimation from '~/components/NumberAnimation'
