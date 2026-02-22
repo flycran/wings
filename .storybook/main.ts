@@ -1,8 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite'
 
-// 传递给vite.config.ts
-process.env.STORYBOOK = 'true'
-
 const config: StorybookConfig = {
   'stories': [
     '../stories/**/*.mdx',

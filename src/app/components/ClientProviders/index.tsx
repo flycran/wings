@@ -64,7 +64,6 @@ export default function ClientProviders({ children, initialTheme }: ClientProvid
   return (
     <ThemeProvider theme={muiTheme}>
       <QueryClientProvider client={queryClient}>
-        <Topbar />
         {children}
         <ToastContainer {...toastOptions} theme={absoluteTheme} />
       </QueryClientProvider>

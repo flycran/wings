@@ -1,4 +1,3 @@
-import { QueryClientProvider } from '@tanstack/react-query'
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import '../globals.css'
@@ -6,8 +5,8 @@ import 'swiper/css'
 import '~/assets/font.css'
 import { ReactNode } from 'react'
 import ClientProviders from '~/app/components/ClientProviders'
+import Topbar from '~/components/Topbar'
 import DialogProvider from '~/components/ui/DialogProvider/DialogProvider'
-import { queryClient } from '~/query'
 import { ThemeMode } from '~/store/system'
 
 export const metadata: Metadata = {
@@ -33,6 +32,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        <Topbar />
         <DialogProvider>
           <ClientProviders initialTheme={initialTheme}>{children}</ClientProviders>
         </DialogProvider>

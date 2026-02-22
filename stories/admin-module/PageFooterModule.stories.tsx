@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const Main: Story = {
   args: {
-    children: 'Page Footer Module',
+    children: <div className="p-6">Page Footer Module</div>,
   },
 }
 

@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite'
 
 import '~/globals.css'
+import ClientProviders from '~/app/components/ClientProviders'
 
 const preview: Preview = {
   parameters: {
@@ -14,8 +15,8 @@ const preview: Preview = {
     backgrounds: {
       options: {
         // 👇 Default options
-        dark: { name: 'Dark', value: '#333' },
-        light: { name: 'Light', value: '#F7F9F2' },
+        dark: { name: 'Dark', value: '#1f2020' },
+        light: { name: 'Light', value: '#fdfcf8' },
       },
     },
 
@@ -26,6 +27,19 @@ const preview: Preview = {
       test: 'todo',
     },
   },
+  decorators: [
+    (Story, { parameters, globals }) => {
+      console.log(globals)
+      return (
+
+        <div className="bg-back text-fore dark:bg-back-dark dark:text-fore-dark dark:scrollbar-dark">
+          <ClientProviders initialTheme={globals.backgrounds?.value || 'system'}>
+            <Story />
+          </ClientProviders>
+        </div>
+      )
+    },
+  ],
 }
 
 export default preview
