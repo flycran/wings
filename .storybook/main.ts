@@ -16,5 +16,9 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
   ],
   'framework': '@storybook/react-vite',
+  'managerHead': (head) => `
+    ${head}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  `,
 }
 export default config

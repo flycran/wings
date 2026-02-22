@@ -24,7 +24,7 @@ export const Main: Story = {
 /** 展示底部粘性定位效果，滚动页面时底部保持固定在底部 */
 export const StickyDemo: Story = {
   render: (args) => (
-    <div className="h-[400px] overflow-auto flex flex-col bg-back dark:bg-back-dark">
+    <div className="h-100 overflow-auto flex flex-col bg-back dark:bg-back-dark">
       <div className="px-6 py-4 space-y-4">
         {Array.from({ length: 20 }, (_, i) => (
           <div key={i} className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800">

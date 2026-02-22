@@ -37,5 +37,5 @@
 }
 
 @layer components {
-  @import "../../../../../../../node_modules/md-editor-rt/lib/style.css";
+  @import "md-editor-rt/lib/style.css";
 }
