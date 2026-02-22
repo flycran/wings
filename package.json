@@ -11,6 +11,7 @@
     "build": "next build",
     "build:bunx": "bun x --bun next build",
     "start": "bun x --bun next start",
+    "clean": "rm -rf .next node_modules/.cache node_modules/.vite-temp ",
     "generate-icon": "bun ./scripts/generate-icon.ts",
     "generate-supabase-types": "bun ./scripts/generate-supabase-types.ts",
     "generate-env-types": "bun ./scripts/generate-env-types.ts",

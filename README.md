@@ -110,20 +110,22 @@ bun run generate-supabase-types
 
 ## 📋 可用脚本
 
-| 脚本                                | 描述 |
-|-----------------------------------|------|
-| `bun dev`                         | 启动开发服务器 |
-| `npm run build`                   | 生产环境打包 |
-| `bun run build:bunx`              | 使用 bun 快速打包 |
-| `bun run start`                   | 预览生产构建 |
-| `bun run generate-icon`           | 从 SVG 生成图标组件 |
+| 脚本                                | 描述                |
+|-----------------------------------|-------------------|
+| `bun run dev`                     | 启动开发服务器           |
+| `npm run build`                   | 生产环境打包            |
+| `bun run build:bunx`              | 使用 bun 快速打包       |
+| `bun run start`                   | 预览生产构建            |
+| `bun run clean`                   | 清理缓存              |
+| `bun run generate-env-types`      | 生成环境变量类型        |
+| `bun run generate-icon`           | 从 SVG 生成图标组件      |
 | `bun run generate-supabase-types` | 生成 Supabase 数据库类型 |
-| `bun run typecheck`               | TypeScript 类型检查 |
-| `bun run lint`                    | 代码规范检查 |
-| `bun run lint:fix`                | 自动修复代码规范问题 |
-| `bun run format`                  | 代码格式化检查 |
-| `bun run format:fix`              | 自动格式化代码 |
-| `bun run netlify:serve`           | 以 Netlify 环境启动 |
+| `bun run typecheck`               | TypeScript 类型检查   |
+| `bun run lint`                    | 代码规范检查            |
+| `bun run lint:fix`                | 自动修复代码规范问题        |
+| `bun run format`                  | 代码格式化检查           |
+| `bun run format:fix`              | 自动格式化代码           |
+| `bun run netlify:serve`           | 以 Netlify 环境启动    |
 
 ## 🏗️ 构建与部署
 
