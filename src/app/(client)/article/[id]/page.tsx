@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getArticle } from '~/server/article'
 import { supabaseClient } from '~/utils/supabase'
 import ArticleContent from './components/ArticleContent'
-import { notFound } from 'next/navigation'
 
 interface ArticlePageProps {
   params: Promise<{
@@ -25,17 +26,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { id } = await params
-  const { data: article, error } = await supabaseClient
-    .from('articles')
-    .select(`
-      *,
-      article_columns!left(
-        column_id,
-        columns!inner(*)
-      )
-    `)
-    .eq('id', +id)
-    .single()
+
+  const { data: article, error } = await getArticle(id)
 
   if (error || !article) {
     notFound()

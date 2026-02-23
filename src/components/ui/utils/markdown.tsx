@@ -1,4 +1,4 @@
-import { ElementContent, RootContent } from 'hast'
+import type { ElementContent, RootContent } from 'hast'
 import { createElement, HTMLAttributes, memo, ReactNode } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import Mermaid from '~/components/ui/Markdown/Mermaid'
@@ -41,33 +41,26 @@ export const defaultComponents: Components = {
 export const treeNodeMap = (
   nodes: RootContent[],
   components: Components = defaultComponents
-): ReactNode => {
-  const process = (node: RootContent, index?: number) => {
+): ReactNode[] => {
+  const process = (node: RootContent) => {
     if (node.type === 'element') {
       const { tagName, children, properties } = node
       const className = properties?.className as string[] | undefined
-      const getKey = () => {
-        if (index === undefined) return undefined
-        return `${tagName}-${index}`
-      }
+      const childrenNodes = children.length ? treeNodeMap(children, components) : []
       return createElement(
         components[tagName] || tagName,
         {
           ...properties,
           className: className?.join(' '),
-          key: getKey(),
         },
-        children.length ? treeNodeMap(children, components) : undefined
+        ...childrenNodes
       )
     }
     if (node.type === 'text') return node.value
   }
-  if (nodes.length === 1) {
-    return process(nodes[0])
-  }
   const rns: ReactNode[] = []
   for (let i = 0; i < nodes.length; i++) {
-    const element = process(nodes[i], i)
+    const element = process(nodes[i])
 
     if (element) {
       rns.push(element)

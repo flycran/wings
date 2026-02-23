@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 
-export default function ArticleSilde({ children }: { children: ReactNode }) {
+export default function ArticleSildeContainer({ children }: { children: ReactNode }) {
   const [sildeHeight, setSildeHeight] = useState(0)
   const sildeRef = useRef<HTMLDivElement>(null)
 

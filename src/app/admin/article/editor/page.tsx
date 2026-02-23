@@ -16,28 +16,22 @@ export default function EditorPage() {
   const router = useRouter()
   const params = useSearchParams()
 
-  const [paramId, setParamId] = useState<string>(params.get('id') || '')
-  const [id, setId] = useState<number | undefined>()
+  const [id, setId] = useState<number>()
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
 
   // 解析 params
   useEffect(() => {
-    setParamId(params.get('id') || '')
+    const idStr = params.get('id') || ''
+    setId(idStr ? +idStr : undefined)
   }, [params])
 
-  const {
-    isLoading,
-    data: article,
-    refetch,
-  } = useQuery({
+  const { isLoading, data: article } = useQuery({
     queryFn: async () => {
-      const _id = id || +paramId
-      if (_id) {
-        const { error, data } = await supabaseClient
-          .from('articles')
-          .select(
-            `
+      const { error, data } = await supabaseClient
+        .from('articles')
+        .select(
+          `
           *,
           article_columns!left(
             column_id,
@@ -45,15 +39,14 @@ export default function EditorPage() {
           ),
           categorys(*)
         `
-          )
-          .eq('id', _id)
-          .single()
-        if (error) {
-          toast.error('文章获取失败，请重试')
-          console.error(error)
-        } else {
-          return data
-        }
+        )
+        .eq('id', id!)
+        .single()
+      if (error) {
+        toast.error('文章获取失败，请重试')
+        throw error
+      } else {
+        return data
       }
     },
     queryKey: ['article', id],
@@ -63,11 +56,9 @@ export default function EditorPage() {
 
   useEffect(() => {
     if (article) {
-      if (id !== article.id) {
-        setTitle(article.title)
-        setContent(article.content)
-        setId(article.id)
-      }
+      setTitle(article.title)
+      setContent(article.content)
+      setId(article.id)
     }
   }, [article])
 
@@ -99,7 +90,6 @@ export default function EditorPage() {
       if (info) {
         setOpenSaveModal(false)
       }
-      refetch()
     },
     onError: () => {
       toast.error('保存失败')
