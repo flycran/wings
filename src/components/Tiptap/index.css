@@ -1,0 +1,13 @@
+@reference "../../globals.css";
+
+.tiptap {
+  width: 100%;
+  outline: 0;
+
+  @apply p-4 md:p-8;
+
+  li > p,
+  td > p {
+    margin: 0;
+  }
+}

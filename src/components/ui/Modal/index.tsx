@@ -19,6 +19,7 @@ export interface ModalProps {
   onClose?: () => void
   hiddenCancel?: boolean
   modal?: boolean
+  className?: string
   classNames?: {
     dialog: string
   }
@@ -38,6 +39,7 @@ export default function Modal({
   title,
   describe,
   modal,
+  className,
   classNames,
 }: ModalProps) {
   return (
@@ -61,7 +63,10 @@ export default function Modal({
               opacity: 0,
               scale: 0.3,
             }}
-            className="p-6 rounded-xl bg-popover dark:bg-popover-dark shadow-popover dark:shadow-popover-dark min-w-50 xl:min-w-80"
+            className={clsx(
+              'my-auto p-6 rounded-xl bg-popover dark:bg-popover-dark shadow-popover dark:shadow-popover-dark min-w-50 xl:min-w-80',
+              className
+            )}
           >
             <div>
               {children ?? (

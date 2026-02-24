@@ -39,7 +39,7 @@ export default function Dialog({
       {...rest}
       ref={modalRef}
       className={clsx(
-        'fixed bg-transparent z-1000 top-0 left-0 w-full h-full max-w-none max-h-none backdrop:hidden  flex justify-center items-center overflow-hidden text-inherit',
+        'p-4 overflow-y-auto fixed bg-transparent z-1000 top-0 left-0 w-full h-full max-w-none max-h-none backdrop:hidden flex justify-center items-start overflow-hidden text-inherit',
         className
       )}
       onCancel={onCancel}
@@ -54,7 +54,7 @@ export default function Dialog({
         exit={{
           opacity: 0,
         }}
-        className="bg-black/20 absolute backdrop-blur-xs -z-1 top-0 left-0 w-full h-full"
+        className="bg-black/20 fixed backdrop-blur-xs -z-1 top-0 left-0 w-full h-full"
         transition={{
           type: 'tween',
           ease: 'linear',

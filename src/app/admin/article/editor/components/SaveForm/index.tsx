@@ -12,8 +12,8 @@ import { useQuery } from '@tanstack/react-query'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
 import SingleImageUpload from '~/components/SingleImageUpload'
-import { supabaseClient } from '~/utils/supabase'
 import { Tables } from '~/types/supabase'
+import { supabaseClient } from '~/utils/supabase'
 
 const articleInfoSchema = z.object({
   category_id: z.number().optional(),
@@ -69,7 +69,7 @@ export default function SaveForm({ onSubmit, onClose, article, saving }: SaveFor
   })
 
   return (
-    <form onSubmitCapture={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-120">
+    <form onSubmitCapture={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
       <div className="ellipsis">准备上传文章: {article?.title}</div>
       <FormControl fullWidth>
         <TextField
@@ -81,7 +81,7 @@ export default function SaveForm({ onSubmit, onClose, article, saving }: SaveFor
           {...register('describe')}
         />
       </FormControl>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <FormControl fullWidth>
           <InputLabel id="category-label">分类</InputLabel>
           <Controller
@@ -150,7 +150,7 @@ export default function SaveForm({ onSubmit, onClose, article, saving }: SaveFor
         control={control}
         name="cover"
         render={({ field }) => (
-          <SingleImageUpload {...field} className="w-1/2 m-auto" bucket="cover" />
+          <SingleImageUpload {...field} className="max-w-60 m-auto" bucket="cover" />
         )}
       />
       <div className="flex gap-4">

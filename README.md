@@ -1,4 +1,5 @@
 # Wings | 插上翅膀去飞翔
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/800dbccc-1747-4a93-a408-0705f6503a48/deploy-status)](https://app.netlify.com/projects/flycran/deploys)
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
@@ -35,26 +36,31 @@ app/
 ## 🛠️ 技术栈
 
 ### 核心框架
+
 - [React 19.1.0](https://react.dev/) - 前端框架
 - [React Router v7](https://reactrouter.com/) - 路由管理 + SSR
 - [TypeScript 5.9.3](https://www.typescriptlang.org/) - 类型安全
 
 ### 状态管理
+
 - [Jotai 2.12.4](https://jotai.org/) - 原子化状态管理
 - [TanStack Query 5.90.20](https://tanstack.com/query) - 服务端状态管理
 
 ### UI 组件
+
 - [Material-UI 7.3.7](https://mui.com/) - 基础 UI 组件
 - [Tailwind CSS 4.1.6](https://tailwindcss.com/) - 原子化 CSS
 - [Motion 12.11.0](https://motion.dev/) - 动画库
 
 ### 表单与数据
+
 - [React Hook Form 7.71.1](https://react-hook-form.com/) - 表单处理
 - [Zod 4.3.6](https://zod.dev/) - 表单验证
 - [Supabase 2.49.4](https://supabase.com/) - 后端服务
 - [Algolia 5.47.0](https://www.algolia.com/) - 搜索引擎
 
 ### 开发工具
+
 - [Biome 2.0.6](https://biomejs.dev/) - 代码格式化和 Lint
 - [Vite 7.3.1](https://vitejs.dev/) - 构建工具
 - [Netlify](https://netlify.com/) - 部署平台
@@ -117,7 +123,7 @@ bun run generate-supabase-types
 | `bun run build:bunx`              | 使用 bun 快速打包       |
 | `bun run start`                   | 预览生产构建            |
 | `bun run clean`                   | 清理缓存              |
-| `bun run generate-env-types`      | 生成环境变量类型        |
+| `bun run generate-env-types`      | 生成环境变量类型          |
 | `bun run generate-icon`           | 从 SVG 生成图标组件      |
 | `bun run generate-supabase-types` | 生成 Supabase 数据库类型 |
 | `bun run typecheck`               | TypeScript 类型检查   |
@@ -148,19 +154,24 @@ bun run start
 ## 🔧 开发规范
 
 ### 项目模块
+
 项目功能模块按路由划分，具体路由结构请查看 `app/routes` 目录：
+
 - 客户端页面 (routes/_client/)
 - 管理后台 (routes/admin/)
 
 ### 代码风格
+
 - 使用 Biome 进行代码格式化和 Lint 检查
 - 严格遵循 TypeScript 类型安全
 - 统一使用单引号和 2 空格缩进
 
 ### 技术约束
+
 项目有严格的技术栈约束，详细信息请查看 [TECH_STACK_CONSTRAINTS.md](./TECH_STACK_CONSTRAINTS.md)
 
 ### 提交规范
+
 - 提交前自动执行格式化和 Lint 检查
 - 遵循 conventional commits 规范
 
