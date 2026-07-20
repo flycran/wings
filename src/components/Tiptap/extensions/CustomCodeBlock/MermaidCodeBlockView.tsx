@@ -17,7 +17,7 @@ export default function MermaidCodeBlockView(props: ReactNodeViewProps) {
     <NodeViewWrapper className="flex flex-col">
       <pre>
         <Mermaid className="flex justify-center p-4">{props.node.textContent}</Mermaid>
-        <div className="border-t border-gray-200 dark:border-gray-700 my-2"/>
+        <div className="border-t border-gray-200 dark:border-gray-700 my-2" />
         <NodeViewContent />
       </pre>
     </NodeViewWrapper>

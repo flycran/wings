@@ -15,7 +15,7 @@ lowlight.register('javascript', js)
 lowlight.register('typescript', ts)
 lowlight.register('json', json)
 
-export const CustomCodeBlock  = CodeBlockLowlight.configure({
+export const CustomCodeBlock = CodeBlockLowlight.configure({
   lowlight,
 }).extend({
   addNodeView() {
