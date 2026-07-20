@@ -3,8 +3,6 @@ import { Table } from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
-import TaskItem from '@tiptap/extension-task-item'
-import TaskList from '@tiptap/extension-task-list'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { Markdown } from '@tiptap/markdown'
 import { Editor, EditorContent, EditorContext, EditorEvents, useEditor } from '@tiptap/react'
@@ -13,6 +11,7 @@ import './index.css'
 import clsx from 'clsx'
 import { Ref, useEffect, useImperativeHandle } from 'react'
 import Toolbar from '~/components/Tiptap/components/Toolbar'
+import { CustomCodeBlock } from '~/components/Tiptap/extensions/CustomCodeBlock'
 
 export type TiptapRef = Editor | null
 
@@ -36,14 +35,15 @@ export default function Tiptap({
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      CustomCodeBlock,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
       Table,
       TableRow,
       TableCell,
       TableHeader,
-      TaskList,
-      TaskItem,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
       Markdown.configure({
         markedOptions: {
           gfm: true,

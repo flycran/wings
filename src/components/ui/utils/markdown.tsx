@@ -20,7 +20,7 @@ const Code = (props: HTMLAttributes<HTMLElement>) => {
 
       return (
         <div className="hljs atom-light dark:atom-dark">
-          <SyntaxHighlighter showLineNumbers useInlineStyles={false} PreTag="div" language={lang}>
+          <SyntaxHighlighter useInlineStyles={false} PreTag="div" language={lang}>
             {text}
           </SyntaxHighlighter>
         </div>
