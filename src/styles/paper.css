@@ -814,7 +814,7 @@ html[data-theme="dark"] .p-night-tag::after {
   border-top: 1px dashed var(--p-rule);
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.03em;
 }
 
@@ -1072,7 +1072,7 @@ html[data-theme="dark"] .p-night-tag::after {
   background: var(--p-paper);
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.02em;
 }
 
@@ -1161,7 +1161,7 @@ html[data-theme="dark"] .p-night-tag::after {
   display: block;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.04em;
 }
 
@@ -1209,7 +1209,7 @@ html[data-theme="dark"] .p-night-tag::after {
   gap: 8px;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .p-unit-locale {
@@ -1224,7 +1224,7 @@ html[data-theme="dark"] .p-night-tag::after {
   background: none;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .p-unit-locale button.is-active {
@@ -1340,7 +1340,7 @@ html[data-theme="dark"] .p-night-tag::after {
   border-bottom: 1px solid #2a3038;
   color: #8fa3b8;
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.04em;
 }
 
@@ -1477,7 +1477,7 @@ html[data-theme="dark"] .p-work-note {
   margin: 8px 0;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.16em;
 }
 
@@ -1559,7 +1559,7 @@ html[data-theme="dark"] .p-work-note {
   margin-top: 10px;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.03em;
   text-align: center;
 }
@@ -1737,7 +1737,7 @@ html[data-theme="dark"] .p-work-note {
 .p-platform-copy span {
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .p-platform-copy small {
@@ -1810,7 +1810,7 @@ html[data-theme="dark"] .p-writing-row:hover {
   border-radius: 2px;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .p-writing-arrow {
@@ -1827,7 +1827,7 @@ html[data-theme="dark"] .p-writing-row:hover {
   margin: 12px 0 0;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   text-align: right;
 }
 
@@ -1875,7 +1875,7 @@ html[data-theme="dark"] .p-writing-row:hover {
   margin: 15px 0 0;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 /* Footer */
@@ -1906,7 +1906,7 @@ html[data-theme="dark"] .p-footer {
   margin-bottom: 18px;
   color: var(--p-muted);
   font-family: var(--p-mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .p-footer-top p {
@@ -2221,7 +2221,7 @@ html[data-theme="dark"] .p-footer {
     bottom: 24px;
     width: 62px;
     height: 62px;
-    font-size: 10.5px;
+    font-size: 11px;
   }
 }
 
