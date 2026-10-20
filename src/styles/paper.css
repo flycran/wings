@@ -1188,6 +1188,18 @@ html[data-theme="dark"] .p-night-tag::after {
   letter-spacing: 0.04em;
 }
 
+.p-demo-action {
+  background: transparent;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  cursor: pointer;
+}
+
+.p-demo-action:hover {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+
 /* smart-unit demo */
 .p-demo--unit label {
   display: block;
@@ -1279,6 +1291,15 @@ html[data-theme="dark"] .p-night-tag::after {
   border-color: rgba(216, 226, 240, 0.22);
 }
 
+.p-demo--gravity .p-demo-action {
+  color: rgba(216, 226, 240, 0.65);
+}
+
+.p-demo--gravity .p-demo-action:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
 .p-gravity-stage {
   position: relative;
   height: 148px;
@@ -1326,6 +1347,9 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-gravity-cell.is-falling {
   background: rgba(33, 212, 134, 0.55);
+}
+
+.p-demo--gravity.is-running .p-gravity-cell.is-falling {
   animation: p-block-drop 0.95s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   animation-delay: var(--d);
 }
@@ -2359,7 +2383,7 @@ html[data-theme="dark"] .p-footer {
     transition: none;
   }
 
-  .p-gravity-cell.is-falling,
+  .p-demo--gravity.is-running .p-gravity-cell.is-falling,
   .p-ide-cursor {
     animation: none;
   }

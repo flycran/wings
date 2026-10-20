@@ -23,7 +23,8 @@
     "astro": "^7.1.1",
     "motion": "^14.4.0",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "react-dom": "^19.3.1",
+    "smart-unit": "^2.1.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",

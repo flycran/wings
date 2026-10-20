@@ -50,7 +50,12 @@ src/
 │   ├── Crane.tsx              # 纸鹤（React + Motion）
 │   ├── Crane.module.css
 │   ├── ThemeBookmark.tsx      # 夜页书签（React + Motion）
-│   └── CodeTabs.astro         # profile.ts / now.ts / principles.ts
+│   ├── CodeTabs.astro         # profile.ts / now.ts / principles.ts
+│   ├── ProjectCard.astro      # 项目卡（服务端渲染介绍内容）
+│   ├── ProjectDemo.astro      # demo 注册与懒加载
+│   ├── SmartUnitDemo.tsx      # smart-unit 真实包 demo
+│   ├── GravityDemo.tsx        # 贡献图动画 demo
+│   └── RtkEndpointsDemo.tsx   # RTK Query 跳转 demo
 ├── data/site.ts               # 示例资料、项目、平台、文章
 └── styles/
     ├── base.css               # reset、toast、reveal
@@ -60,8 +65,9 @@ src/
 ## 技术
 
 - Astro 静态输出，默认零框架运行时。
-- React 只用于重交互岛：纸鹤、夜页书签；动画使用 `motion`。
-- 其余交互为原生 TypeScript：代码 tab、单位 demo、导航高亮、滚动 reveal。
+- 项目介绍、标题、摘要、标签和链接由 Astro 服务端渲染，保证 SEO。
+- 项目演示区是 React 岛，使用 `client:visible` 懒加载；smart-unit demo 直接使用真实包。
+- 纸鹤、夜页书签使用 React + `motion`；其余交互为原生 TypeScript：代码 tab、导航高亮、滚动 reveal、WebView 倾斜。
 - 字体自托管：Noto Serif SC / Noto Sans SC / JetBrains Mono / Space Grotesk。
 - 无数据库、无后台、无 Supabase。
 

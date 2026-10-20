@@ -1,0 +1,16 @@
+---
+import type { ProjectDemo as ProjectDemoId } from '../data/site'
+import GravityDemo from './GravityDemo'
+import RtkEndpointsDemo from './RtkEndpointsDemo'
+import SmartUnitDemo from './SmartUnitDemo'
+
+interface Props {
+  demo: ProjectDemoId
+}
+
+const { demo } = Astro.props
+---
+
+{demo === 'unit' && <SmartUnitDemo client:visible />}
+{demo === 'gravity' && <GravityDemo client:visible />}
+{demo === 'ide' && <RtkEndpointsDemo client:visible />}

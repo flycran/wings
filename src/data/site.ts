@@ -11,14 +11,32 @@ export const profile = {
     '我是 Flycran。做过 TypeScript Language Service 插件、Vite 插件、CLI 和几个有人用的小工具；喜欢把团队里反复出现的问题，变成一次性的解决方案。',
   availability: '开放全职 / 远程机会',
   location: '深圳 · 中国',
-  email: 'hello@flycran.xyz',
+  email: 'flycran@163.com',
   links: [
     { label: 'GitHub', href: 'https://github.com/flycran', handle: '@flycran' },
     { label: '掘金', href: 'https://juejin.cn/user/1737682330585838', handle: 'Flycran' },
   ],
 }
 
-export const projects = [
+export type ProjectDemo = 'unit' | 'gravity' | 'ide'
+
+export interface Project {
+  id: string
+  index: string
+  title: string
+  subtitle: string
+  summary: string
+  role: string
+  year: string
+  stack: string[]
+  accent: Accent
+  category: string
+  outcome: string
+  href: string
+  demo: ProjectDemo
+}
+
+export const projects: Project[] = [
   {
     id: 'smart-unit',
     index: '01',
@@ -29,6 +47,7 @@ export const projects = [
     year: '2025',
     stack: ['TypeScript', 'Rollup', 'i18n'],
     accent: 'green' as Accent,
+    category: 'OPEN SOURCE',
     outcome: '12 个单位 · 3 种语言 · 0 依赖',
     href: 'https://github.com/flycran/smart-unit',
     demo: 'unit',
@@ -43,6 +62,7 @@ export const projects = [
     year: '2025',
     stack: ['TypeScript', 'GitHub Actions', 'SVG'],
     accent: 'blue' as Accent,
+    category: 'CREATIVE',
     outcome: '1 个 Action · 8 个配置项 · 纯 SVG',
     href: 'https://github.com/flycran/github-gravity',
     demo: 'gravity',
@@ -57,6 +77,7 @@ export const projects = [
     year: '2025',
     stack: ['TypeScript', 'LSP', 'VS Code'],
     accent: 'orange' as Accent,
+    category: 'DEVELOPER TOOL',
     outcome: '3 种 hook 模式 · 2 层 import',
     href: 'https://github.com/flycran/rtk-to-endpoints',
     demo: 'ide',

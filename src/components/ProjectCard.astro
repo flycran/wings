@@ -1,0 +1,77 @@
+---
+import type { Project } from '../data/site'
+import ProjectDemo from './ProjectDemo.astro'
+
+interface Props {
+  project: Project
+  featured?: boolean
+}
+
+const { project, featured = false } = Astro.props
+---
+
+<article
+  class:list={['p-project', { 'p-project--wide': featured }]}
+  style={`--accent: var(--p-${project.accent}); --accent-bright: var(--p-${project.accent}-bright);`}
+>
+  <div class="p-project-top">
+    <span>{project.index} / {project.category}</span>
+    <span>{project.year}</span>
+  </div>
+
+  {
+    featured ? (
+      <div class="p-project-main">
+        <div class="p-project-copy">
+          <h3>{project.title}</h3>
+          <p class="p-project-sub">{project.subtitle}</p>
+          <p>{project.summary}</p>
+          <p class="p-project-outcome">{project.outcome}</p>
+          <div class="p-tags">
+            {project.stack.map((item) => (
+              <span>{item}</span>
+            ))}
+          </div>
+          <a
+            class="p-project-link"
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="p-project-visual">
+          <ProjectDemo demo={project.demo} />
+        </div>
+      </div>
+    ) : (
+      <>
+        <div class="p-project-copy">
+          <h3>{project.title}</h3>
+          <p class="p-project-sub">{project.subtitle}</p>
+          <p>{project.summary}</p>
+          <p class="p-project-outcome">{project.outcome}</p>
+        </div>
+        <div class="p-project-visual">
+          <ProjectDemo demo={project.demo} />
+        </div>
+        <div class="p-project-foot">
+          <div class="p-tags">
+            {project.stack.map((item) => (
+              <span>{item}</span>
+            ))}
+          </div>
+          <a
+            class="p-project-link"
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </>
+    )
+  }
+</article>

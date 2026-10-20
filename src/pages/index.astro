@@ -2,6 +2,7 @@
 import CodeTabs from '../components/CodeTabs.astro'
 import PaperCrane from '../components/Crane'
 import PlatformLogo from '../components/PlatformLogo.astro'
+import ProjectCard from '../components/ProjectCard.astro'
 import ThemeBookmark from '../components/ThemeBookmark'
 import { colophon, now, platforms, principles, profile, projects, writing } from '../data/site'
 import Layout from '../layouts/Layout.astro'
@@ -197,145 +198,9 @@ const nav = [
         </div>
 
         <div class="p-work-grid">
-          <article
-            class="p-project p-project--wide"
-            style="--accent: var(--p-green); --accent-bright: var(--p-green-bright);"
-            data-reveal
-          >
-            <div class="p-project-top">
-              <span>{projects[0].index} / OPEN SOURCE</span>
-              <span>{projects[0].year}</span>
-            </div>
-            <div class="p-project-main">
-              <div class="p-project-copy">
-                <h3>{projects[0].title}</h3>
-                <p class="p-project-sub">{projects[0].subtitle}</p>
-                <p>{projects[0].summary}</p>
-                <p class="p-project-outcome">{projects[0].outcome}</p>
-                <div class="p-tags">
-                  {projects[0].stack.map((item) => <span>{item}</span>)}
-                </div>
-                <a class="p-project-link" href={projects[0].href} target="_blank" rel="noopener noreferrer">
-                  GitHub <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-              <div class="p-project-visual">
-                <div class="p-demo p-demo--unit" data-unit-demo>
-                  <div class="p-demo-head">
-                    <span>LIVE / smart-unit</span>
-                    <span class="p-demo-badge">示例</span>
-                  </div>
-                  <label for="unit-input">输入一个数字</label>
-                  <input id="unit-input" data-unit-input value="1234567" inputmode="decimal" />
-                  <div class="p-unit-output">
-                    <span data-unit-output>1.23</span><span data-unit-suffix>M</span>
-                  </div>
-                  <div class="p-unit-meta">
-                    <span>自动选择单位</span>
-                    <div class="p-unit-locale">
-                      <button class="is-active" type="button" data-locale="en">EN</button>
-                      <button type="button" data-locale="zh">中文</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article
-            class="p-project"
-            style="--accent: var(--p-blue); --accent-bright: var(--p-blue-bright);"
-            data-reveal
-          >
-            <div class="p-project-top">
-              <span>{projects[1].index} / CREATIVE</span>
-              <span>{projects[1].year}</span>
-            </div>
-            <div class="p-project-copy">
-              <h3>{projects[1].title}</h3>
-              <p class="p-project-sub">{projects[1].subtitle}</p>
-              <p>{projects[1].summary}</p>
-            </div>
-            <div class="p-project-visual">
-              <div class="p-demo p-demo--gravity" aria-label="贡献图物理动画示意">
-                <div class="p-demo-head">
-                  <span>LIVE SVG / github-gravity</span>
-                  <span class="p-demo-badge">示例</span>
-                </div>
-                <div class="p-gravity-stage" aria-hidden="true">
-                  <div class="p-gravity-text">FLY</div>
-                  <div class="p-gravity-grid">
-                    {
-                      Array.from({ length: 112 }).map((_, index) => (
-                        <span
-                          class:list={[
-                            'p-gravity-cell',
-                            index % 17 < 3 ? 'is-falling' : '',
-                            index % 11 === 0 ? 'is-bright' : '',
-                          ]}
-                          style={`--d:${(index % 13) * 55}ms`}
-                        />
-                      ))
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="p-project-foot">
-              <div class="p-tags">
-                {projects[1].stack.map((item) => <span>{item}</span>)}
-              </div>
-              <a class="p-project-link" href={projects[1].href} target="_blank" rel="noopener noreferrer">
-                GitHub <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="p-project"
-            style="--accent: var(--p-orange); --accent-bright: var(--p-orange-bright);"
-            data-reveal
-          >
-            <div class="p-project-top">
-              <span>{projects[2].index} / DEVELOPER TOOL</span>
-              <span>{projects[2].year}</span>
-            </div>
-            <div class="p-project-copy">
-              <h3>{projects[2].title}</h3>
-              <p class="p-project-sub">{projects[2].subtitle}</p>
-              <p>{projects[2].summary}</p>
-            </div>
-            <div class="p-project-visual">
-              <div class="p-demo p-demo--ide">
-                <div class="p-ide-top">
-                  <span>endpoints.ts</span>
-                  <span>TS</span>
-                </div>
-                <div class="p-ide-code" aria-hidden="true">
-                  <div><span class="p-ide-ln">12</span><span class="tk-key">export const</span> api = createApi(&#123;</div>
-                  <div><span class="p-ide-ln">13</span>  endpoints: (build) =&gt; (&#123;</div>
-                  <div><span class="p-ide-ln">14</span>    getUser: build.query&lt;User, string&gt;(&#123;</div>
-                  <div><span class="p-ide-ln">15</span>      query: (id) =&gt; <span class="tk-str">`/api/user/&#36;&#123;id&#125;`</span>,</div>
-                  <div><span class="p-ide-ln">16</span>    &#125;),</div>
-                  <div class="p-ide-highlight"><span class="p-ide-ln">20</span>  <span class="p-ide-hook">useGetUserQuery</span>(id)</div>
-                </div>
-                <div class="p-ide-tip">
-                  <span class="p-ide-method">GET</span>
-                  <span>/api/user/:id</span>
-                  <span class="p-ide-tip-note">跳转到 endpoint · hover 查看 URL</span>
-                </div>
-                <div class="p-ide-cursor" aria-hidden="true"></div>
-              </div>
-            </div>
-            <div class="p-project-foot">
-              <div class="p-tags">
-                {projects[2].stack.map((item) => <span>{item}</span>)}
-              </div>
-              <a class="p-project-link" href={projects[2].href} target="_blank" rel="noopener noreferrer">
-                GitHub <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </article>
+          <ProjectCard project={projects[0]} featured />
+          <ProjectCard project={projects[1]} />
+          <ProjectCard project={projects[2]} />
 
           <aside class="p-work-note" data-reveal>
             <span class="p-work-note-index">04 / REFERENCE</span>
@@ -534,37 +399,6 @@ const nav = [
       )
       sections.forEach((section) => observer.observe(section))
     }
-
-    // smart-unit mock demo
-    document.querySelectorAll<HTMLElement>('[data-unit-demo]').forEach((demo) => {
-      const input = demo.querySelector<HTMLInputElement>('[data-unit-input]')
-      const output = demo.querySelector<HTMLElement>('[data-unit-output]')
-      const suffix = demo.querySelector<HTMLElement>('[data-unit-suffix]')
-      const buttons = Array.from(demo.querySelectorAll<HTMLButtonElement>('[data-locale]'))
-      let locale = 'en'
-
-      const format = () => {
-        if (!input || !output || !suffix) return
-        const value = Number(input.value.replace(/,/g, '')) || 0
-        const formatted = new Intl.NumberFormat(locale === 'zh' ? 'zh-CN' : 'en-US', {
-          notation: 'compact',
-          maximumFractionDigits: 2,
-        }).format(value)
-        const match = formatted.match(/^([\d.,]+)(.*)$/)
-        output.textContent = match?.[1] ?? formatted
-        suffix.textContent = match?.[2] ?? ''
-      }
-
-      input?.addEventListener('input', format)
-      buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-          locale = button.dataset.locale || 'en'
-          buttons.forEach((item) => item.classList.toggle('is-active', item === button))
-          format()
-        })
-      })
-      format()
-    })
 
     // WebView paper tilt
     const codeSheet = document.querySelector<HTMLElement>('.p-code-sheet')
