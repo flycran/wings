@@ -256,8 +256,12 @@ html[data-theme='dark'] .p-grain {
 .p-theme-cord {
   width: 1px;
   height: 102px;
-  background: var(--p-muted);
-  opacity: 0.55;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--p-muted) 0 4px,
+    transparent 4px 8px
+  );
+  opacity: 0.6;
 }
 
 .p-theme-tag-wrap {
