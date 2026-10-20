@@ -653,6 +653,7 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-code-sheet {
   position: relative;
+  top: 10px;
   z-index: 2;
   width: min(100%, 470px);
   margin-bottom: 4px;
@@ -820,7 +821,7 @@ html[data-theme="dark"] .p-night-tag::after {
 .p-hero-crane {
   position: absolute;
   top: -100px;
-  right: 0;
+  right: 20px;
   z-index: 3;
   width: 340px;
   filter: drop-shadow(12px 20px 26px rgba(29, 27, 23, 0.16));
@@ -2012,7 +2013,7 @@ html[data-theme="dark"] .p-footer {
 
   .p-hero-crane {
     top: -95px;
-    right: 12px;
+    right: 32px;
     width: 280px;
   }
 
@@ -2161,7 +2162,7 @@ html[data-theme="dark"] .p-footer {
 
   .p-hero-crane {
     top: -120px;
-    right: 8px;
+    right: 28px;
     width: 250px;
   }
 
@@ -2298,7 +2299,7 @@ html[data-theme="dark"] .p-footer {
 
   .p-hero-crane {
     top: -90px;
-    right: 0;
+    right: 20px;
     width: 180px;
   }
 
@@ -2381,7 +2382,7 @@ html[data-theme="dark"] .p-code-sheet::before {
 
   .p-hero-crane {
     top: -130px;
-    right: 8px;
+    right: 28px;
     width: 270px !important;
   }
 }
