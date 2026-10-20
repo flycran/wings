@@ -147,11 +147,13 @@ html[data-theme='dark'] .p-grain {
   width: 76px;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   transform: translateY(-50%);
 }
 
 .p-rail-tabs {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -237,30 +239,14 @@ html[data-theme='dark'] .p-grain {
   transform: translateX(0);
 }
 
-.p-rail-line {
-  position: relative;
-  width: 1px;
-  height: 66px;
-  margin-top: 2px;
-  border-left: 1px dashed var(--p-rule);
-}
-
-.p-rail-crane {
-  position: absolute;
-  bottom: -10px;
-  left: -7px;
-  color: var(--p-orange);
-  font-family: var(--p-serif);
-  font-size: 15px;
-  transform: rotate(18deg);
-}
-
 .p-bulb {
   position: relative;
+  z-index: 0;
   display: flex;
   width: 60px;
   flex-direction: column;
   align-items: center;
+  margin-top: -16px;
   padding: 0;
   border: 0;
   background: none;
@@ -269,21 +255,15 @@ html[data-theme='dark'] .p-grain {
 
 .p-bulb-cord {
   width: 1px;
-  height: 30px;
-  background: var(--p-rule);
-  transform-origin: top;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  height: 102px;
+  background: var(--p-muted);
+  opacity: 0.55;
 }
 
 .p-bulb-lamp {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.p-bulb:active .p-bulb-cord {
-  transform: scaleY(1.45);
-  transition-duration: 0.16s;
 }
 
 .p-bulb-glass {
