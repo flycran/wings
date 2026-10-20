@@ -656,6 +656,8 @@ html[data-theme="dark"] .p-night-tag::after {
   top: 10px;
   z-index: 2;
   width: min(100%, 470px);
+  align-self: flex-start;
+  margin-top: 113px;
   margin-bottom: 4px;
   flex: 0 0 auto;
   border: 1px solid var(--p-rule);
@@ -2133,6 +2135,7 @@ html[data-theme="dark"] .p-footer {
 
   .p-code-sheet {
     width: min(92%, 430px);
+    margin-top: 33px;
   }
 
   .p-hero-crane {
@@ -2244,6 +2247,7 @@ html[data-theme="dark"] .p-footer {
 
   .p-code-sheet {
     width: 100%;
+    margin-top: 9px;
   }
 
   .p-code-sheet::before {
@@ -2340,6 +2344,7 @@ html[data-theme="dark"] .p-code-sheet::before {
 @media (min-width: 541px) and (max-width: 900px) {
   .p-code-sheet {
     width: min(86%, 440px);
+    margin-top: 33px;
     margin-right: auto;
     margin-left: 0;
   }

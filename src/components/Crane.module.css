@@ -65,3 +65,17 @@
     transition: none;
   }
 }
+
+/* Let clicks pass through the transparent SVG background; only the paper shape is interactive. */
+.craneButton {
+  pointer-events: none;
+}
+
+.crane svg {
+  pointer-events: none;
+}
+
+.crane svg polygon {
+  pointer-events: auto;
+  cursor: pointer;
+}
