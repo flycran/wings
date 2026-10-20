@@ -25,6 +25,7 @@ bun run preview
 ```bash
 bun run typecheck   # astro check，全量类型检查
 bun run lint        # Biome lint，规则使用 recommended
+bun run check       # 类型检查 + biome check --fix（会改动文件）
 ```
 
 Biome 固定为 `2.5.15`，配置由 `biome init` 生成，未改动推荐规则。

@@ -1,5 +1,5 @@
-import { useRef, type MouseEvent } from 'react'
 import { motion } from 'motion/react'
+import { type MouseEvent, useRef } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -39,10 +39,7 @@ export default function ThemeBookmark() {
       if (next === 'dark') {
         document.documentElement.animate(
           {
-            clipPath: [
-              `circle(${diagonal}px at 50% 50%)`,
-              `circle(1rem at ${x}px ${y}px)`,
-            ],
+            clipPath: [`circle(${diagonal}px at 50% 50%)`, `circle(1rem at ${x}px ${y}px)`],
             zIndex: [1, 1],
           },
           {
@@ -54,10 +51,7 @@ export default function ThemeBookmark() {
       } else {
         document.documentElement.animate(
           {
-            clipPath: [
-              `circle(1.2rem at ${x}px ${y}px)`,
-              `circle(${diagonal}px at 50% 50%)`,
-            ],
+            clipPath: [`circle(1.2rem at ${x}px ${y}px)`, `circle(${diagonal}px at 50% 50%)`],
           },
           {
             duration: 600,

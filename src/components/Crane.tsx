@@ -1,5 +1,5 @@
-import { useEffect, useState, type CSSProperties } from 'react'
 import { motion } from 'motion/react'
+import { type CSSProperties, useEffect, useState } from 'react'
 import styles from './Crane.module.css'
 
 interface CraneProps {
@@ -60,7 +60,10 @@ export default function Crane({ className = '' }: CraneProps) {
               viewBox="0 0 348.57 294"
               aria-hidden="true"
             >
-              <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" className={styles.color2} />
+              <polygon
+                points="201.35 0 348.57 0 201.35 121.83 201.35 0"
+                className={styles.color2}
+              />
               <polygon
                 points="201.35 0 201.35 121.83 53.53 121.83 201.35 0"
                 className={styles.color1}
@@ -72,7 +75,10 @@ export default function Crane({ className = '' }: CraneProps) {
               viewBox="0 0 348.57 294"
               aria-hidden="true"
             >
-              <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" className={styles.color2} />
+              <polygon
+                points="201.35 0 348.57 0 201.35 121.83 201.35 0"
+                className={styles.color2}
+              />
               <polygon
                 points="201.35 0 201.35 121.83 53.53 121.83 201.35 0"
                 className={styles.color1}

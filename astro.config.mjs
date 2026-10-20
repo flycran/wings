@@ -1,7 +1,8 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import { codeInspectorPlugin } from 'code-inspector-plugin';
+
+import react from '@astrojs/react'
+import { defineConfig } from 'astro/config'
+import { codeInspectorPlugin } from 'code-inspector-plugin'
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,4 +13,4 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-});
+})
