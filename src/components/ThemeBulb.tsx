@@ -57,10 +57,14 @@ export default function ThemeBulb() {
     >
       <span className="p-bulb-cord" aria-hidden="true" />
       <span ref={lampRef} className="p-bulb-lamp">
-        <span className="p-bulb-glass" aria-hidden="true">
-          <span className="p-bulb-filament" />
+        <span className="p-lantern" aria-hidden="true">
+          <span className="p-lantern-cap p-lantern-cap--top" />
+          <span className="p-lantern-shade">
+            <span className="p-lantern-glow" />
+          </span>
+          <span className="p-lantern-cap p-lantern-cap--bottom" />
+          <span className="p-lantern-ring" />
         </span>
-        <span className="p-bulb-base" aria-hidden="true" />
         <span className="p-bulb-label">夜航</span>
       </span>
     </motion.button>
