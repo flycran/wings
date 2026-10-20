@@ -1,18 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import PaperCrane from '../components/Crane'
-import ThemeBookmark from '../components/ThemeBookmark'
 import CodeTabs from '../components/CodeTabs.astro'
+import PaperCrane from '../components/Crane'
 import PlatformLogo from '../components/PlatformLogo.astro'
-import {
-  profile,
-  projects,
-  principles,
-  now,
-  platforms,
-  writing,
-  colophon,
-} from '../data/site'
+import ThemeBookmark from '../components/ThemeBookmark'
+import { colophon, now, platforms, principles, profile, projects, writing } from '../data/site'
+import Layout from '../layouts/Layout.astro'
 import '../styles/paper.css'
 
 const nav = [
