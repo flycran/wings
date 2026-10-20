@@ -14,7 +14,7 @@ export const profile = {
   email: 'hello@flycran.xyz',
   links: [
     { label: 'GitHub', href: 'https://github.com/flycran', handle: '@flycran' },
-    { label: '掘金', href: 'https://juejin.cn', handle: 'Flycran' },
+    { label: '掘金', href: 'https://juejin.cn/user/1737682330585838', handle: 'Flycran' },
   ],
 }
 
@@ -106,7 +106,7 @@ export const platforms = [
     name: '掘金',
     handle: 'Flycran',
     description: '长文、工程实践、踩坑记录。',
-    href: 'https://juejin.cn',
+    href: 'https://juejin.cn/user/1737682330585838',
     accent: 'orange' as Accent,
   },
   {
