@@ -20,6 +20,12 @@ bun run build
 bun run preview
 ```
 
+### 源码定位
+
+已接入 `code-inspector-plugin`。开发模式下按住 `Option + Shift`（macOS）或 `Alt + Shift`（Windows/Linux）并点击页面元素，会打开编辑器对应源码位置。
+
+配置在 `astro.config.mjs` 的 `vite.plugins`，仅在开发模式生效；如果编辑器没有被自动识别，可以在插件参数里指定 `editor`。
+
 ## 页面
 
 - `/`：首页（单页叙事：首屏、作品、关于、技术写作、联系）
