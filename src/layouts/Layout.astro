@@ -8,16 +8,14 @@ import '@fontsource/jetbrains-mono/400.css'
 import '@fontsource/jetbrains-mono/500.css'
 import '@fontsource/space-grotesk/500.css'
 import '@fontsource/space-grotesk/700.css'
-import '../styles/draft-base.css'
-import DraftBar from '../components/drafts/DraftBar.astro'
+import '../styles/base.css'
 
 interface Props {
   title: string
   bodyClass: string
-  active: 'paper' | 'blueprint' | 'index'
 }
 
-const { title, bodyClass, active } = Astro.props
+const { title, bodyClass } = Astro.props
 ---
 
 <!doctype html>
@@ -25,14 +23,14 @@ const { title, bodyClass, active } = Astro.props
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Wings v2 视觉草稿：FLYCRAN 个人主页。示例数据，用于方向对比。" />
+    <meta name="description" content="FLYCRAN 的个人主页：前端架构、Developer Experience 与前端基础设施。" />
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <script is:inline>
       (() => {
         try {
-          const stored = localStorage.getItem('wings-draft-theme')
+          const stored = localStorage.getItem('wings-theme')
           document.documentElement.dataset.theme =
             stored === 'dark' || stored === 'light' ? stored : 'light'
         } catch {
@@ -44,8 +42,7 @@ const { title, bodyClass, active } = Astro.props
   <body class={bodyClass}>
     <a class="skip-link" href="#main">跳到主要内容</a>
     <slot />
-    <DraftBar active={active} />
-    <div class="draft-toast" data-toast role="status" aria-live="polite"></div>
+    <div class="site-toast" data-toast role="status" aria-live="polite"></div>
 
     <script>
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -92,20 +89,15 @@ const { title, bodyClass, active } = Astro.props
         })
       })
 
-      // Theme toggle (paper draft; blueprint simply ignores data-theme)
+      // Theme toggle for the mobile header; the desktop bulb is a React island.
       const themeButtons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]')
       themeButtons.forEach((button) => {
         button.addEventListener('click', () => {
-          button.dataset.pulling = 'true'
-          window.setTimeout(() => {
-            delete button.dataset.pulling
-          }, 620)
-
           const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
           const apply = () => {
             document.documentElement.dataset.theme = next
             try {
-              localStorage.setItem('wings-draft-theme', next)
+              localStorage.setItem('wings-theme', next)
             } catch {
               /* ignore */
             }

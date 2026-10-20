@@ -1,46 +1,57 @@
-# Astro Starter Kit: Basics
+# Wings / FLYCRAN
 
-```sh
-npm create astro@latest -- --template basics
+FLYCRAN 的个人主页：前端架构、Developer Experience 与前端基础设施。
+
+当前为“纸上飞行”视觉稿，页面内容仍是示例数据，等待替换为真实项目、简历和文章链接。
+
+## 开发
+
+```bash
+astro dev --background
+astro dev status
+astro dev logs
+astro dev stop
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+生产构建：
 
-## 🚀 Project Structure
+```bash
+bun run build
+bun run preview
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## 页面
+
+- `/`：首页（单页叙事：首屏、作品、关于、技术写作、联系）
+
+## 结构
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── pages/index.astro          # 首页
+├── layouts/Layout.astro       # HTML 壳、字体、主题初始化
+├── components/
+│   ├── Crane.tsx              # 纸鹤（React + Motion）
+│   ├── Crane.module.css
+│   ├── ThemeBulb.tsx          # 拉绳灯泡（React + Motion）
+│   └── CodeTabs.astro         # profile.ts / now.ts / principles.ts
+├── data/site.ts               # 示例资料、项目、平台、文章
+└── styles/
+    ├── base.css               # reset、toast、reveal
+    └── paper.css              # 纸上飞行视觉系统
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 技术
 
-## 🧞 Commands
+- Astro 静态输出，默认零框架运行时。
+- React 只用于重交互岛：纸鹤、灯泡；动画使用 `motion`。
+- 其余交互为原生 TypeScript：代码 tab、单位 demo、导航高亮、滚动 reveal。
+- 字体自托管：Noto Serif SC / Noto Sans SC / JetBrains Mono / Space Grotesk。
+- 无数据库、无后台、无 Supabase。
 
-All commands are run from the root of the project, from a terminal:
+## 待办
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- 替换 `src/data/site.ts` 中的示例信息。
+- 补齐真实项目案例、简历 PDF、文章链接和联系方式。
+- 统一响应式细节。
+- 多语言切换与时区自动识别（最后一轮）。

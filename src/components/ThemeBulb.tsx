@@ -11,7 +11,7 @@ export default function ThemeBulb() {
     const apply = () => {
       document.documentElement.dataset.theme = next
       try {
-        localStorage.setItem('wings-draft-theme', next)
+        localStorage.setItem('wings-theme', next)
       } catch {
         /* ignore */
       }

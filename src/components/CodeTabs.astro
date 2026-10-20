@@ -1,20 +1,19 @@
 ---
 interface Props {
-  variant?: 'paper' | 'blueprint'
   class?: string
 }
 
-const { variant = 'paper', class: className = '' } = Astro.props
+const { class: className = '' } = Astro.props
 ---
 
-<div class:list={['codecard', `codecard--${variant}`, className]} data-codecard>
+<div class:list={['codecard', className]} data-codecard>
   <div class="code-tabs" role="tablist" aria-label="个人资料代码页">
     <button
       class="code-tab is-active"
       type="button"
       role="tab"
-      id={`${variant}-tab-profile`}
-      aria-controls={`${variant}-panel-profile`}
+      id={`code-tab-profile`}
+      aria-controls={`code-panel-profile`}
       aria-selected="true"
       data-code-tab="profile">profile.ts</button
     >
@@ -22,8 +21,8 @@ const { variant = 'paper', class: className = '' } = Astro.props
       class="code-tab"
       type="button"
       role="tab"
-      id={`${variant}-tab-now`}
-      aria-controls={`${variant}-panel-now`}
+      id={`code-tab-now`}
+      aria-controls={`code-panel-now`}
       aria-selected="false"
       tabindex="-1"
       data-code-tab="now">now.ts</button
@@ -32,8 +31,8 @@ const { variant = 'paper', class: className = '' } = Astro.props
       class="code-tab"
       type="button"
       role="tab"
-      id={`${variant}-tab-principles`}
-      aria-controls={`${variant}-panel-principles`}
+      id={`code-tab-principles`}
+      aria-controls={`code-panel-principles`}
       aria-selected="false"
       tabindex="-1"
       data-code-tab="principles">principles.ts</button
@@ -42,9 +41,9 @@ const { variant = 'paper', class: className = '' } = Astro.props
 
   <div
     class="code-panel"
-    id={`${variant}-panel-profile`}
+    id={`code-panel-profile`}
     role="tabpanel"
-    aria-labelledby={`${variant}-tab-profile`}
+    aria-labelledby={`code-tab-profile`}
     data-code-panel="profile"
   >
     <pre><span class="code-line"><span class="tk-key">export const</span> <span class="tk-var">flycran</span> <span class="tk-pun">= &#123;</span></span>
@@ -58,9 +57,9 @@ const { variant = 'paper', class: className = '' } = Astro.props
 
   <div
     class="code-panel"
-    id={`${variant}-panel-now`}
+    id={`code-panel-now`}
     role="tabpanel"
-    aria-labelledby={`${variant}-tab-now`}
+    aria-labelledby={`code-tab-now`}
     data-code-panel="now"
     hidden
   >
@@ -74,9 +73,9 @@ const { variant = 'paper', class: className = '' } = Astro.props
 
   <div
     class="code-panel"
-    id={`${variant}-panel-principles`}
+    id={`code-panel-principles`}
     role="tabpanel"
-    aria-labelledby={`${variant}-tab-principles`}
+    aria-labelledby={`code-tab-principles`}
     data-code-panel="principles"
     hidden
   >

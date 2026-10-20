@@ -1,4 +1,4 @@
-/* Shared draft foundation. Page-specific visual systems live in paper.css / blueprint.css. */
+/* Shared foundation. The visual system lives in paper.css. */
 
 *,
 *::before,
@@ -90,70 +90,7 @@ svg {
   transform: none;
 }
 
-/* Draft toolbar */
-.draft-bar {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-  background: rgba(16, 16, 16, 0.92);
-  color: #f7f7f7;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-}
-
-.draft-bar-home {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.draft-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ffb22f;
-  box-shadow: 0 0 0 3px rgba(255, 178, 47, 0.16);
-}
-
-.draft-sep {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.draft-link {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  padding: 3px 4px;
-  border-radius: 4px;
-}
-
-.draft-link:hover,
-.draft-link.is-active {
-  color: #fff;
-}
-
-.draft-link.is-active {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.draft-note {
-  color: rgba(255, 255, 255, 0.42);
-}
-
-.draft-toast {
+.site-toast {
   position: fixed;
   left: 50%;
   bottom: 76px;
@@ -171,7 +108,7 @@ svg {
     transform 0.2s ease;
 }
 
-.draft-toast.is-visible {
+.site-toast.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -184,26 +121,7 @@ svg {
 }
 
 @media (max-width: 900px) {
-  .draft-bar {
-    top: auto;
-    right: 8px;
-    bottom: 64px;
-    gap: 4px;
-    padding: 5px 7px;
-    font-size: 9px;
-  }
-
-  .draft-bar-home span:last-child,
-  .draft-sep,
-  .draft-note {
-    display: none;
-  }
-
-  .draft-link {
-    padding: 2px 3px;
-  }
-
-  .draft-toast {
+  .site-toast {
     bottom: 108px;
   }
 }
@@ -219,7 +137,7 @@ svg {
     transition: none;
   }
 
-  .draft-toast {
+  .site-toast {
     transition: none;
   }
 }

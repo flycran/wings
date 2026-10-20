@@ -1,88 +1,587 @@
 ---
-import DraftLayout from '../layouts/DraftLayout.astro'
-import '../styles/chooser.css'
+import Layout from '../layouts/Layout.astro'
+import PaperCrane from '../components/Crane'
+import ThemeBulb from '../components/ThemeBulb'
+import CodeTabs from '../components/CodeTabs.astro'
+import {
+  profile,
+  projects,
+  capabilities,
+  principles,
+  now,
+  platforms,
+  writing,
+  colophon,
+} from '../data/site'
+import '../styles/paper.css'
+
+const nav = [
+  { label: '首页', href: '#home', key: 'home' },
+  { label: '作品', href: '#work', key: 'work' },
+  { label: '关于', href: '#about', key: 'about' },
+  { label: '写作', href: '#writing', key: 'writing' },
+]
 ---
 
-<DraftLayout title="Wings v2 · 视觉方向草稿" bodyClass="chooser-body" active="index">
-  <main id="main" class="c-main">
-    <header class="c-header">
-      <div class="c-meta">
-        <span>WINGS v2 / VISUAL DRAFTS</span>
-        <span>2026.10 / SAMPLE DATA</span>
+<Layout title="FLYCRAN · 前端架构工程师" bodyClass="paper-body">
+  <div class="p-root">
+    <div class="p-grain" aria-hidden="true"></div>
+
+    <header class="p-topbar">
+      <a class="p-logo" href="#home" aria-label="FLYCRAN 首页">
+        <span class="p-logo-mark" aria-hidden="true">F</span>
+        <span class="p-logo-text">FLYCRAN <em>/ WINGS</em></span>
+      </a>
+      <div class="p-topbar-right">
+        <span class="p-topbar-note">示例简历 · 待替换</span>
+        <a class="p-topbar-cta" href="#contact">简历 / 联系 <span aria-hidden="true">↓</span></a>
       </div>
-      <h1>选一个方向，<br />再往下走。</h1>
-      <p class="c-sub">
-        同一套内容、信息架构和交互，两种视觉语言。先看气质，再决定细节。两版都可以点开、滚动、摸一摸。
-      </p>
     </header>
 
-    <div class="c-cards">
-      <a class="c-card c-card--paper" href="/drafts/paper/">
-        <div class="c-card-head">
-          <span>A / PAPER FLIGHT</span>
-          <span>OPEN DRAFT ↗</span>
-        </div>
-        <div class="c-preview c-preview--paper" aria-hidden="true">
-          <div class="c-paper-sheet">
-            <span class="c-paper-kicker">FRONTEND ARCHITECT</span>
-            <strong>把重复劳动<br />变成工具。</strong>
-            <span class="c-paper-line"></span>
-            <span class="c-paper-crane">⌁</span>
-            <span class="c-paper-tag">profile.ts</span>
-          </div>
-          <span class="c-paper-scrap c-paper-scrap--one"></span>
-          <span class="c-paper-scrap c-paper-scrap--two"></span>
-        </div>
-        <div class="c-card-copy">
-          <h2>纸上飞行</h2>
-          <p>一本会飞的工作笔记。暖纸色、宋体标题、错位纸张阴影，把书签导航和纸鹤收进同一个叙事。</p>
-          <ul>
-            <li>暖纸色 / 墨色 / 四色点缀</li>
-            <li>宋体标题 + 等宽标注</li>
-            <li>纸感卡片 / 折角 / 印章</li>
-            <li>气质：手作、编辑感、温度</li>
-          </ul>
-        </div>
-      </a>
+    <aside class="p-rail" aria-label="书签导航">
+      <nav class="p-rail-tabs">
+        {
+          nav.map((item, index) => (
+            <a
+              class:list={['p-tab', { 'is-active': index === 0 }]}
+              href={item.href}
+              data-nav-link={item.key}
+              aria-current={index === 0 ? 'page' : undefined}
+            >
+              <span class="p-tab-label">{item.label}</span>
+              <span class="p-tab-arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </nav>
+      <div class="p-rail-line" aria-hidden="true">
+        <span class="p-rail-crane">⌁</span>
+      </div>
+      <ThemeBulb client:load />
+    </aside>
 
-      <a class="c-card c-card--blueprint" href="/drafts/blueprint/">
-        <div class="c-card-head">
-          <span>B / BLUEPRINT</span>
-          <span>OPEN DRAFT ↗</span>
-        </div>
-        <div class="c-preview c-preview--blueprint" aria-hidden="true">
-          <div class="c-grid"></div>
-          <span class="c-blueprint-coord">X 128.0 / Y 256.0</span>
-          <div class="c-blueprint-crane">
-            <svg viewBox="0 0 348.57 294">
-              <polygon points="53.53 121.83 201.35 121.83 161.87 210.48 53.53 121.83" />
-              <polygon points="0 65.73 45.56 81.27 38.18 43.69 0 65.73" />
-              <polygon points="38.18 43.69 201.35 121.83 53.53 121.83 38.18 43.69" />
-              <polygon points="154.54 227.01 215.53 294 201.35 121.83 154.54 227.01" />
-              <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" />
-              <polygon points="201.35 0 201.35 121.83 53.53 121.83 201.35 0" />
-            </svg>
-          </div>
-          <span class="c-blueprint-label">FIG. 01 / ORIGAMI CRANE</span>
-          <span class="c-blueprint-dim">348.57</span>
-        </div>
-        <div class="c-card-copy">
-          <h2>蓝图</h2>
-          <p>一张工程师的图纸。深蓝网格、线框纸鹤、尺寸标注和规格卡，把“基础设施”做成看得见的语言。</p>
-          <ul>
-            <li>深蓝 / 青色 / 橙绿标注</li>
-            <li>无衬线大标题 + 等宽标注</li>
-            <li>图纸卡片 / 角标 / 尺寸线</li>
-            <li>气质：精确、冷静、工程感</li>
-          </ul>
-        </div>
-      </a>
-    </div>
+    <nav class="p-mobilebar" aria-label="移动端导航">
+      {
+        nav.map((item, index) => (
+          <a
+            class:list={['p-mobile-tab', { 'is-active': index === 0 }]}
+            href={item.href}
+            data-nav-link={item.key}
+            aria-current={index === 0 ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <button class="p-mobile-theme" type="button" data-theme-toggle aria-label="切换深色模式">
+        ◐
+      </button>
+    </nav>
 
-    <footer class="c-footer">
-      <p>两版都保留：书签导航、伪 3D 纸鹤、真实项目 demo、外部文章索引、可打印简历。</p>
-      <p>多语言切换与时区自动识别已记录，放在最后一步；不影响这次视觉选型。</p>
-      <p class="c-footer-meta">DRAFT / NOINDEX / SAMPLE DATA / 2026.10</p>
+    <main id="main" class="p-main">
+      <section class="p-hero" id="home">
+        <svg
+          class="p-sketch"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="pencil-rough" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.012"
+                numOctaves="2"
+                seed="11"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="1.8"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+
+          <g class="p-sketch-lines" filter="url(#pencil-rough)">
+            <path
+              class="sk sk-muted"
+              d="M 742 430 C 752 258 916 158 1092 174 C 1278 192 1392 318 1362 500 C 1334 668 1176 736 1014 712 C 852 688 744 590 752 438 C 757 360 782 302 820 256"
+            />
+            <path
+              class="sk sk-muted sk-dash"
+              d="M 806 246 L 1258 246 L 1258 704 L 806 704 Z"
+            />
+            <path class="sk sk-muted" d="M 806 218 L 1258 218" />
+            <path class="sk sk-muted" d="M 806 211 L 806 225 M 1258 211 L 1258 225" />
+            <path class="sk sk-muted" d="M 778 250 L 778 700" />
+            <path class="sk sk-muted" d="M 771 250 L 785 250 M 771 700 L 785 700" />
+
+            <path class="sk sk-orange" d="M 1248 118 L 1362 166 L 1296 232 Z" />
+            <path class="sk sk-orange sk-dash" d="M 1248 118 L 1296 232 M 1362 166 L 1296 232" />
+
+            <path class="sk sk-blue" d="M 632 676 C 686 666 728 636 762 600" />
+            <path class="sk sk-blue" d="M 750 604 L 762 600 L 758 613" />
+
+            <path class="sk sk-muted" d="M 126 420 L 136 398 M 126 420 L 136 442 M 126 420 L 104 410 M 126 420 L 104 432" />
+            <path class="sk sk-muted" d="M 1120 708 L 1140 680 M 1134 714 L 1154 686 M 1148 720 L 1168 692 M 1162 726 L 1182 698" />
+            <path class="sk sk-muted" d="M 90 812 L 110 812 M 100 802 L 100 822" />
+            <path class="sk sk-muted" d="M 1330 84 L 1348 84 M 1339 75 L 1339 93" />
+            <circle class="sk sk-muted" cx="1310" cy="770" r="2.5" />
+            <circle class="sk sk-muted" cx="700" cy="190" r="2" />
+            <circle class="sk sk-muted" cx="1390" cy="610" r="1.8" />
+            <path class="sk sk-muted sk-dash" d="M 60 300 C 90 286 120 292 138 312" />
+          </g>
+
+          <g class="p-sketch-labels">
+            <text x="1024" y="208">440</text>
+            <text x="764" y="480" transform="rotate(-90 764 480)">A</text>
+            <text x="1240" y="842">NOTE / 01</text>
+          </g>
+        </svg>
+
+        <div class="p-hero-copy" data-reveal>
+          <div class="p-status">
+            <span class="p-status-dot" aria-hidden="true"></span>
+            <span>{profile.availability}</span>
+            <span class="p-status-sep" aria-hidden="true">·</span>
+            <span>{profile.location}</span>
+          </div>
+          <p class="p-kicker">{profile.kicker}</p>
+          <h1>
+            <span class="p-h1-line">把重复劳动变成<span class="p-mark">工具</span>，</span>
+            <span class="p-h1-line">把复杂系统变成<span class="p-mark p-mark--orange">体验</span>。</span>
+          </h1>
+          <p class="p-intro">{profile.intro}</p>
+          <div class="p-actions">
+            <a class="p-btn p-btn--primary" href="#work">看作品 <span aria-hidden="true">↘</span></a>
+            <a class="p-btn p-btn--ghost" href="#contact">下载简历 <span aria-hidden="true">↓</span></a>
+            <button class="p-copy" type="button" data-copy-email={profile.email}>
+              复制邮箱
+            </button>
+          </div>
+          <div class="p-hero-links">
+            {
+              profile.links.map((link) => (
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label} <span aria-hidden="true">↗</span>
+                </a>
+              ))
+            }
+            <span class="p-hero-links-note">示例数据，等待替换</span>
+          </div>
+        </div>
+
+        <div class="p-hero-stage" data-reveal>
+          <div class="p-bigword" aria-hidden="true">FLY<br />CRAN</div>
+          <div class="p-scrap p-scrap--orange" aria-hidden="true"></div>
+          <div class="p-scrap p-scrap--blue" aria-hidden="true"></div>
+          <div class="p-code-sheet">
+            <div class="p-code-sheet-head">
+              <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>FLYCRAN / PROFILE</span>
+              <span class="p-code-sheet-tag">v2.0</span>
+            </div>
+            <CodeTabs variant="paper" />
+            <div class="p-code-sheet-foot">
+              <span>没有数据库，也没有后台</span>
+              <span>纯静态 / Astro</span>
+            </div>
+          </div>
+          <PaperCrane client:load className="p-hero-crane" />
+          <div class="p-crane-note">
+            <span>点一下纸鹤</span>
+            <span class="p-crane-note-line" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <a class="p-scroll" href="#work" aria-label="向下翻到作品">
+          <span>向下翻一页</span>
+          <span class="p-scroll-line" aria-hidden="true"></span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <section class="p-section" id="work">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">01</span>
+          <div class="p-section-title">
+            <p class="p-kicker">SELECTED WORK</p>
+            <h2>做过的东西</h2>
+          </div>
+          <p class="p-section-note">每张卡都带一个可玩的证据，不是截图。</p>
+        </div>
+
+        <div class="p-work-grid">
+          <article
+            class="p-project p-project--wide"
+            style="--accent: var(--p-green); --accent-bright: var(--p-green-bright);"
+            data-reveal
+          >
+            <div class="p-project-top">
+              <span>{projects[0].index} / OPEN SOURCE</span>
+              <span>{projects[0].year}</span>
+            </div>
+            <div class="p-project-main">
+              <div class="p-project-copy">
+                <h3>{projects[0].title}</h3>
+                <p class="p-project-sub">{projects[0].subtitle}</p>
+                <p>{projects[0].summary}</p>
+                <p class="p-project-outcome">{projects[0].outcome}</p>
+                <div class="p-tags">
+                  {projects[0].stack.map((item) => <span>{item}</span>)}
+                </div>
+                <a class="p-project-link" href={projects[0].href} target="_blank" rel="noopener noreferrer">
+                  GitHub <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+              <div class="p-project-visual">
+                <div class="p-demo p-demo--unit" data-unit-demo>
+                  <div class="p-demo-head">
+                    <span>LIVE / smart-unit</span>
+                    <span class="p-demo-badge">示例</span>
+                  </div>
+                  <label for="unit-input">输入一个数字</label>
+                  <input id="unit-input" data-unit-input value="1234567" inputmode="decimal" />
+                  <div class="p-unit-output">
+                    <span data-unit-output>1.23</span><span data-unit-suffix>M</span>
+                  </div>
+                  <div class="p-unit-meta">
+                    <span>自动选择单位</span>
+                    <div class="p-unit-locale">
+                      <button class="is-active" type="button" data-locale="en">EN</button>
+                      <button type="button" data-locale="zh">中文</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="p-project"
+            style="--accent: var(--p-blue); --accent-bright: var(--p-blue-bright);"
+            data-reveal
+          >
+            <div class="p-project-top">
+              <span>{projects[1].index} / CREATIVE</span>
+              <span>{projects[1].year}</span>
+            </div>
+            <div class="p-project-copy">
+              <h3>{projects[1].title}</h3>
+              <p class="p-project-sub">{projects[1].subtitle}</p>
+              <p>{projects[1].summary}</p>
+            </div>
+            <div class="p-project-visual">
+              <div class="p-demo p-demo--gravity" aria-label="贡献图物理动画示意">
+                <div class="p-demo-head">
+                  <span>LIVE SVG / github-gravity</span>
+                  <span class="p-demo-badge">示例</span>
+                </div>
+                <div class="p-gravity-stage" aria-hidden="true">
+                  <div class="p-gravity-text">FLY</div>
+                  <div class="p-gravity-grid">
+                    {
+                      Array.from({ length: 112 }).map((_, index) => (
+                        <span
+                          class:list={[
+                            'p-gravity-cell',
+                            index % 17 < 3 ? 'is-falling' : '',
+                            index % 11 === 0 ? 'is-bright' : '',
+                          ]}
+                          style={`--d:${(index % 13) * 55}ms`}
+                        />
+                      ))
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-project-foot">
+              <div class="p-tags">
+                {projects[1].stack.map((item) => <span>{item}</span>)}
+              </div>
+              <a class="p-project-link" href={projects[1].href} target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article
+            class="p-project"
+            style="--accent: var(--p-orange); --accent-bright: var(--p-orange-bright);"
+            data-reveal
+          >
+            <div class="p-project-top">
+              <span>{projects[2].index} / DEVELOPER TOOL</span>
+              <span>{projects[2].year}</span>
+            </div>
+            <div class="p-project-copy">
+              <h3>{projects[2].title}</h3>
+              <p class="p-project-sub">{projects[2].subtitle}</p>
+              <p>{projects[2].summary}</p>
+            </div>
+            <div class="p-project-visual">
+              <div class="p-demo p-demo--ide">
+                <div class="p-ide-top">
+                  <span>endpoints.ts</span>
+                  <span>TS</span>
+                </div>
+                <div class="p-ide-code" aria-hidden="true">
+                  <div><span class="p-ide-ln">12</span><span class="tk-key">export const</span> api = createApi(&#123;</div>
+                  <div><span class="p-ide-ln">13</span>  endpoints: (build) =&gt; (&#123;</div>
+                  <div><span class="p-ide-ln">14</span>    getUser: build.query&lt;User, string&gt;(&#123;</div>
+                  <div><span class="p-ide-ln">15</span>      query: (id) =&gt; <span class="tk-str">`/api/user/&#36;&#123;id&#125;`</span>,</div>
+                  <div><span class="p-ide-ln">16</span>    &#125;),</div>
+                  <div class="p-ide-highlight"><span class="p-ide-ln">20</span>  <span class="p-ide-hook">useGetUserQuery</span>(id)</div>
+                </div>
+                <div class="p-ide-tip">
+                  <span class="p-ide-method">GET</span>
+                  <span>/api/user/:id</span>
+                  <span class="p-ide-tip-note">跳转到 endpoint · hover 查看 URL</span>
+                </div>
+                <div class="p-ide-cursor" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="p-project-foot">
+              <div class="p-tags">
+                {projects[2].stack.map((item) => <span>{item}</span>)}
+              </div>
+              <a class="p-project-link" href={projects[2].href} target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <aside class="p-work-note" data-reveal>
+            <span class="p-work-note-index">04 / REFERENCE</span>
+            <h3>Wings / 本站</h3>
+            <p>Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。</p>
+            <span class="p-work-note-link">案例页待写 →</span>
+          </aside>
+        </div>
+      </section>
+
+      <div class="p-fold" aria-hidden="true">
+        <span>FOLD HERE</span>
+      </div>
+
+      <section class="p-section" id="about">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">02</span>
+          <div class="p-section-title">
+            <p class="p-kicker">ABOUT / HOW I WORK</p>
+            <h2>关于我</h2>
+          </div>
+          <p class="p-section-note">不是简历摘要；是为什么做工具、怎么合作。</p>
+        </div>
+
+        <div class="p-about-grid">
+          <figure class="p-portrait" data-reveal>
+            <div class="p-portrait-inner">
+              <span class="p-portrait-char">飞</span>
+              <span class="p-portrait-seal">FLYCRAN<br />飞鹤</span>
+              <span class="p-portrait-caption">示例头像<br />待替换</span>
+            </div>
+            <figcaption>照片 / 纸鹤插画 · 待替换</figcaption>
+          </figure>
+
+          <div class="p-about-copy" data-reveal>
+            <p class="p-lead">
+              我从写页面开始，慢慢对“为什么每次都要手动做这件事”更感兴趣。
+            </p>
+            <p>
+              现在我做前端架构和开发者工具：让类型、构建、编辑器替人记住规则，让团队把时间花在产品上。我喜欢把反复出现的问题，变成一次性的解决方案；也喜欢把复杂的东西画清楚、讲明白。
+            </p>
+            <p>
+              我想找的团队：重视工程质量，也愿意为体验多走一步；有真实的用户和反馈；不把“能跑”当成终点。
+            </p>
+
+            <div class="p-principles">
+              <p class="p-kicker">PRINCIPLES / 04</p>
+              {
+                principles.map((item, index) => (
+                  <div class="p-principle">
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <p>{item}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="p-now">
+              <p class="p-kicker">NOW / 现在</p>
+              {
+                now.map((item) => (
+                  <div class="p-now-row">
+                    <span>{item.label}</span>
+                    <p>{item.value}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="p-ask">
+              <span>Ask me about</span>
+              <div>
+                <em>TypeScript</em><em>构建工具</em><em>设计系统</em><em>独立开发</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-section" id="writing">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">03</span>
+          <div class="p-section-title">
+            <p class="p-kicker">WRITING / SELECTED POSTS</p>
+            <h2>技术写作</h2>
+          </div>
+          <p class="p-section-note">精选文章索引 · 外链至原文。</p>
+        </div>
+
+        <p class="p-writing-intro" data-reveal>
+          长文主要发布在掘金，本站仅保留平台入口与精选索引。
+        </p>
+
+        <div class="p-platforms" data-reveal>
+          {
+            platforms.map((platform) => (
+              <a
+                class="p-platform"
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={`--accent: var(--p-${platform.accent}); --accent-bright: var(--p-${platform.accent}-bright);`}
+              >
+                <span class="p-platform-mark">{platform.mark}</span>
+                <span class="p-platform-copy">
+                  <strong>{platform.name}</strong>
+                  <span>{platform.handle}</span>
+                  <small>{platform.description}</small>
+                </span>
+                <span class="p-platform-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="p-writing-list" data-reveal>
+          {
+            writing.map((item, index) => (
+              <a class="p-writing-row" href="https://juejin.cn" target="_blank" rel="noopener noreferrer">
+                <span class="p-writing-index">{String(index + 1).padStart(2, '0')}</span>
+                <span class="p-writing-title">{item.title}</span>
+                <span class="p-writing-meta">{item.platform} · {item.date}</span>
+                <span class="p-writing-tag">{item.tag}</span>
+                <span class="p-writing-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))
+          }
+        </div>
+        <p class="p-writing-foot">示例链接 · 最后同步 2026.10 · 之后可接 GitHub Action</p>
+      </section>
+
+      <section class="p-contact" id="contact">
+        <p class="p-kicker" data-reveal>04 / CONTACT</p>
+        <h2 data-reveal>
+          如果你在找一个能把工具做好、<br />
+          也愿意把界面做有趣的人，聊聊。
+        </h2>
+        <a class="p-email" href={`mailto:${profile.email}`} data-reveal>{profile.email}</a>
+        <div class="p-contact-actions" data-reveal>
+          <button class="p-btn p-btn--primary" type="button" data-copy-email={profile.email}>
+            复制邮箱
+          </button>
+          <a class="p-btn p-btn--ghost" href="https://github.com/flycran" target="_blank" rel="noopener noreferrer">
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+          <a class="p-btn p-btn--ghost" href="https://juejin.cn" target="_blank" rel="noopener noreferrer">
+            掘金 <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p class="p-contact-note" data-reveal>示例邮箱 · 之后换成你的真实邮箱 / 微信二维码</p>
+      </section>
+    </main>
+
+    <footer class="p-footer">
+      <div class="p-footer-top">
+        <p>Wings / 飞鹤 / 自由</p>
+        <p>{colophon.note}</p>
+      </div>
+      <div class="p-footer-wordmark" aria-label="FLYCRAN">
+        <span class="p-footer-fly">FLY</span><span class="p-footer-cran">CRAN</span>
+      </div>
+      <div class="p-footer-grid">
+        <p>Built with {colophon.builtWith}<br />No database. No tracking.</p>
+        <p>© {colophon.year} FLYCRAN<br />All mistakes are mine.</p>
+        <p><a href="#home">回到顶部 ↑</a><br /><a href="#work">看作品</a></p>
+      </div>
+      <span class="p-footer-seal" aria-hidden="true">飞鹤<br />FLYCRAN</span>
     </footer>
-  </main>
-</DraftLayout>
+  </div>
+
+  <script>
+    // Mobile/desktop bookmark nav active state
+    const navLinks = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-link]'))
+    const sections = ['home', 'work', 'about', 'writing']
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el))
+
+    const setActive = (key: string) => {
+      navLinks.forEach((link) => {
+        const active = link.dataset.navLink === key
+        link.classList.toggle('is-active', active)
+        if (active) link.setAttribute('aria-current', 'page')
+        else link.removeAttribute('aria-current')
+      })
+    }
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+          if (visible?.target.id) setActive(visible.target.id)
+        },
+        { rootMargin: '-24% 0px -58% 0px', threshold: [0.01, 0.2, 0.5] }
+      )
+      sections.forEach((section) => observer.observe(section))
+    }
+
+    // smart-unit mock demo
+    document.querySelectorAll<HTMLElement>('[data-unit-demo]').forEach((demo) => {
+      const input = demo.querySelector<HTMLInputElement>('[data-unit-input]')
+      const output = demo.querySelector<HTMLElement>('[data-unit-output]')
+      const suffix = demo.querySelector<HTMLElement>('[data-unit-suffix]')
+      const buttons = Array.from(demo.querySelectorAll<HTMLButtonElement>('[data-locale]'))
+      let locale = 'en'
+
+      const format = () => {
+        if (!input || !output || !suffix) return
+        const value = Number(input.value.replace(/,/g, '')) || 0
+        const formatted = new Intl.NumberFormat(locale === 'zh' ? 'zh-CN' : 'en-US', {
+          notation: 'compact',
+          maximumFractionDigits: 2,
+        }).format(value)
+        const match = formatted.match(/^([\d.,]+)(.*)$/)
+        output.textContent = match?.[1] ?? formatted
+        suffix.textContent = match?.[2] ?? ''
+      }
+
+      input?.addEventListener('input', format)
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          locale = button.dataset.locale || 'en'
+          buttons.forEach((item) => item.classList.toggle('is-active', item === button))
+          format()
+        })
+      })
+      format()
+    })
+  </script>
+</Layout>
