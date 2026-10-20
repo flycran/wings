@@ -24,24 +24,52 @@ export default function ThemeBookmark() {
       return
     }
 
-    const rect = origin.getBoundingClientRect()
-    const x = rect.left + rect.width / 2
-    const y = rect.top + rect.height / 2
-    const radius = Math.hypot(window.innerWidth, window.innerHeight)
-    const transition = document.startViewTransition(apply)
+    const startTransition = () => {
+      const transition = document.startViewTransition(apply)
 
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        {
-          clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
-        },
-        {
-          duration: 560,
-          easing: 'cubic-bezier(.22,.61,.36,1)',
-          pseudoElement: '::view-transition-new(root)',
+      transition.ready.then(() => {
+        const currentOrigin = tagRef.current ?? buttonRef.current
+        if (!currentOrigin) return
+
+        const rect = currentOrigin.getBoundingClientRect()
+        const x = rect.left + rect.width / 2
+        const y = rect.top + rect.height / 2
+        const diagonal = Math.hypot(window.innerWidth, window.innerHeight) / 2
+
+        if (next === 'dark') {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(${diagonal}px at 50% 50%)`,
+                `circle(1rem at ${x}px ${y}px)`,
+              ],
+              zIndex: [1, 1],
+            },
+            {
+              duration: 600,
+              easing: 'ease-in-out',
+              pseudoElement: '::view-transition-old(root)',
+            }
+          )
+        } else {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(1.2rem at ${x}px ${y}px)`,
+                `circle(${diagonal}px at 50% 50%)`,
+              ],
+            },
+            {
+              duration: 600,
+              easing: 'ease-in',
+              pseudoElement: '::view-transition-new(root)',
+            }
+          )
         }
-      )
-    })
+      })
+    }
+
+    window.setTimeout(startTransition, 150)
   }
 
   return (
