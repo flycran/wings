@@ -1,0 +1,53 @@
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  BUN_VERSION = "1.4.2"
+
+[dev]
+  command = "bun run dev"
+  targetPort = 4321
+
+# Legacy routes from the old article-first site.
+[[redirects]]
+  from = "/article"
+  to = "/#writing"
+  status = 301
+
+[[redirects]]
+  from = "/article/*"
+  to = "/#writing"
+  status = 301
+
+[[redirects]]
+  from = "/project"
+  to = "/#work"
+  status = 301
+
+[[redirects]]
+  from = "/project/*"
+  to = "/#work"
+  status = 301
+
+[[redirects]]
+  from = "/admin"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "/ui"
+  to = "/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

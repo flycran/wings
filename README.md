@@ -36,6 +36,10 @@ Biome 固定为 `2.5.15`，配置由 `biome init` 生成，未改动推荐规则
 
 配置在 `astro.config.mjs` 的 `vite.plugins`，仅在开发模式生效；如果编辑器没有被自动识别，可以在插件参数里指定 `editor`。
 
+## 部署
+
+已添加 `netlify.toml`：使用 `bun run build` 构建，发布目录为 `dist`，并将旧站的 `/article`、`/project`、`/admin` 等路由重定向到当前页面锚点。
+
 ## 页面
 
 - `/`：首页（单页叙事：首屏、作品、关于、技术写作、联系）
