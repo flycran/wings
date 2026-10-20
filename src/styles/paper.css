@@ -254,7 +254,7 @@ html[data-theme='dark'] .p-grain {
 }
 
 .p-theme-cord {
-  width: 2px;
+  width: 1px;
   height: 102px;
   border-radius: 1px;
   background-color: var(--p-muted);
@@ -263,7 +263,7 @@ html[data-theme='dark'] .p-grain {
     transparent 0 5px,
     color-mix(in srgb, var(--p-muted) 55%, var(--p-paper)) 5px 7px
   );
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 .p-theme-tag-wrap {

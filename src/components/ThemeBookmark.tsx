@@ -53,7 +53,7 @@ export default function ThemeBookmark() {
       aria-label="拉下夜页书签，切换深色模式"
       onClick={toggle}
       whileTap={{ y: 12 }}
-      transition={{ type: 'spring', visualDuration: 0.18, bounce: 0.2 }}
+      transition={{ type: 'spring', visualDuration: 0.15 }}
     >
       <span className="p-theme-cord" aria-hidden="true" />
       <span ref={tagRef} className="p-theme-tag-wrap">
