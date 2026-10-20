@@ -39,7 +39,7 @@ export default function Crane({ className = '' }: CraneProps) {
       >
         <div className={styles.craneViewport}>
           <div className={styles.crane}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348.57 294">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348.57 294" aria-hidden="true">
               <polygon
                 points="53.53 121.83 201.35 121.83 161.87 210.48 53.53 121.83"
                 className={styles.color2}
@@ -58,6 +58,7 @@ export default function Crane({ className = '' }: CraneProps) {
               className={styles.wingOne}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 348.57 294"
+              aria-hidden="true"
             >
               <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" className={styles.color2} />
               <polygon
@@ -69,6 +70,7 @@ export default function Crane({ className = '' }: CraneProps) {
               className={styles.wingTwo}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 348.57 294"
+              aria-hidden="true"
             >
               <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" className={styles.color2} />
               <polygon

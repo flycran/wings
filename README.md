@@ -20,6 +20,15 @@ bun run build
 bun run preview
 ```
 
+质量检查：
+
+```bash
+bun run typecheck   # astro check，全量类型检查
+bun run lint        # Biome lint，规则使用 recommended
+```
+
+Biome 固定为 `2.5.15`，配置由 `biome init` 生成，未改动推荐规则。
+
 ### 源码定位
 
 已接入 `code-inspector-plugin`。开发模式下按住 `Option + Shift`（macOS）或 `Alt + Shift`（Windows/Linux）并点击页面元素，会打开编辑器对应源码位置。
