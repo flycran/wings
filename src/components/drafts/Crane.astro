@@ -1,0 +1,173 @@
+---
+interface Props {
+  variant?: 'paper' | 'blueprint'
+  class?: string
+  label?: string
+}
+
+const { variant = 'paper', class: className = '', label = '纸鹤，点一下扇动翅膀' } = Astro.props
+---
+
+<button
+  type="button"
+  class:list={['crane', `crane--${variant}`, className]}
+  data-crane
+  aria-label={label}
+  title={label}
+>
+  <span class="crane-float">
+    <span class="crane-inner">
+      <svg class="crane-svg crane-body" viewBox="0 0 348.57 294" aria-hidden="true">
+        <polygon class="crane-c2" points="53.53 121.83 201.35 121.83 161.87 210.48 53.53 121.83" />
+        <polygon class="crane-c1" points="0 65.73 45.56 81.27 38.18 43.69 0 65.73" />
+        <polygon class="crane-c2" points="38.18 43.69 201.35 121.83 53.53 121.83 38.18 43.69" />
+        <polygon class="crane-c1" points="154.54 227.01 215.53 294 201.35 121.83 154.54 227.01" />
+      </svg>
+      <svg class="crane-svg crane-wing crane-wing--one" viewBox="0 0 348.57 294" aria-hidden="true">
+        <polygon class="crane-c2" points="201.35 0 348.57 0 201.35 121.83 201.35 0" />
+        <polygon class="crane-c1" points="201.35 0 201.35 121.83 53.53 121.83 201.35 0" />
+      </svg>
+      <svg class="crane-svg crane-wing crane-wing--two" viewBox="0 0 348.57 294" aria-hidden="true">
+        <polygon class="crane-c2" points="201.35 0 348.57 0 201.35 121.83 201.35 0" />
+        <polygon class="crane-c1" points="201.35 0 201.35 121.83 53.53 121.83 201.35 0" />
+      </svg>
+    </span>
+  </span>
+</button>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-crane]').forEach((crane) => {
+    let timer = 0
+    const flap = () => {
+      crane.dataset.flap = 'true'
+      window.clearTimeout(timer)
+      timer = window.setTimeout(() => {
+        delete crane.dataset.flap
+      }, 680)
+    }
+
+    crane.addEventListener('click', flap)
+    crane.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        flap()
+      }
+    })
+  })
+</script>
+
+<style>
+  .crane {
+    --angle: 26deg;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    aspect-ratio: 348.57 / 294;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .crane-float {
+    position: absolute;
+    inset: 0;
+    animation: crane-float 5.5s ease-in-out infinite alternate;
+  }
+
+  .crane-inner {
+    position: absolute;
+    inset: 0;
+    transform: rotate3d(0, 1, 0, 15deg) rotate3d(0, 0, 1, -15deg);
+    transform-style: preserve-3d;
+    perspective: 1400px;
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .crane-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .crane-wing {
+    transform-origin: 0 41.43%;
+    transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .crane-wing--one {
+    transform: rotate3d(1, 0, 0, calc(-1 * var(--angle)));
+  }
+
+  .crane-wing--two {
+    transform: rotate3d(1, 0, 0, var(--angle));
+  }
+
+  .crane:hover,
+  .crane:focus-visible,
+  .crane[data-flap='true'] {
+    --angle: 96deg;
+  }
+
+  .crane:hover .crane-inner,
+  .crane:focus-visible .crane-inner,
+  .crane[data-flap='true'] .crane-inner {
+    transform: rotate3d(0, 1, 0, 15deg) rotate3d(0, 0, 1, -15deg) translateY(-8px);
+  }
+
+  .crane:focus-visible {
+    outline: 2px solid var(--focus, #00abff);
+    outline-offset: 8px;
+  }
+
+  .crane-c1,
+  .crane-c2 {
+    filter: drop-shadow(0 10px 14px rgba(18, 26, 38, 0.16));
+    transition: fill 0.35s ease;
+  }
+
+  .crane--paper .crane-c1 {
+    fill: #6ed1ff;
+  }
+
+  .crane--paper .crane-c2 {
+    fill: #24b6ff;
+  }
+
+  .crane--blueprint .crane-c1 {
+    fill: rgba(89, 214, 255, 0.08);
+    stroke: #59d6ff;
+    stroke-width: 1.15;
+    filter: drop-shadow(0 0 10px rgba(89, 214, 255, 0.34));
+  }
+
+  .crane--blueprint .crane-c2 {
+    fill: rgba(89, 214, 255, 0.15);
+    stroke: #59d6ff;
+    stroke-width: 1.15;
+    filter: drop-shadow(0 0 10px rgba(89, 214, 255, 0.42));
+  }
+
+  @keyframes crane-float {
+    from {
+      transform: translateY(0) rotate(-0.4deg);
+    }
+    to {
+      transform: translateY(-7px) rotate(0.5deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crane-float {
+      animation: none;
+    }
+
+    .crane-wing,
+    .crane-inner {
+      transition: none;
+    }
+  }
+</style>

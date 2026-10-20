@@ -1,0 +1,88 @@
+---
+import DraftLayout from '../layouts/DraftLayout.astro'
+import '../styles/chooser.css'
+---
+
+<DraftLayout title="Wings v2 · 视觉方向草稿" bodyClass="chooser-body" active="index">
+  <main id="main" class="c-main">
+    <header class="c-header">
+      <div class="c-meta">
+        <span>WINGS v2 / VISUAL DRAFTS</span>
+        <span>2026.10 / SAMPLE DATA</span>
+      </div>
+      <h1>选一个方向，<br />再往下走。</h1>
+      <p class="c-sub">
+        同一套内容、信息架构和交互，两种视觉语言。先看气质，再决定细节。两版都可以点开、滚动、摸一摸。
+      </p>
+    </header>
+
+    <div class="c-cards">
+      <a class="c-card c-card--paper" href="/drafts/paper/">
+        <div class="c-card-head">
+          <span>A / PAPER FLIGHT</span>
+          <span>OPEN DRAFT ↗</span>
+        </div>
+        <div class="c-preview c-preview--paper" aria-hidden="true">
+          <div class="c-paper-sheet">
+            <span class="c-paper-kicker">FRONTEND ARCHITECT</span>
+            <strong>把重复劳动<br />变成工具。</strong>
+            <span class="c-paper-line"></span>
+            <span class="c-paper-crane">⌁</span>
+            <span class="c-paper-tag">profile.ts</span>
+          </div>
+          <span class="c-paper-scrap c-paper-scrap--one"></span>
+          <span class="c-paper-scrap c-paper-scrap--two"></span>
+        </div>
+        <div class="c-card-copy">
+          <h2>纸上飞行</h2>
+          <p>一本会飞的工作笔记。暖纸色、宋体标题、错位纸张阴影，把书签导航和纸鹤收进同一个叙事。</p>
+          <ul>
+            <li>暖纸色 / 墨色 / 四色点缀</li>
+            <li>宋体标题 + 等宽标注</li>
+            <li>纸感卡片 / 折角 / 印章</li>
+            <li>气质：手作、编辑感、温度</li>
+          </ul>
+        </div>
+      </a>
+
+      <a class="c-card c-card--blueprint" href="/drafts/blueprint/">
+        <div class="c-card-head">
+          <span>B / BLUEPRINT</span>
+          <span>OPEN DRAFT ↗</span>
+        </div>
+        <div class="c-preview c-preview--blueprint" aria-hidden="true">
+          <div class="c-grid"></div>
+          <span class="c-blueprint-coord">X 128.0 / Y 256.0</span>
+          <div class="c-blueprint-crane">
+            <svg viewBox="0 0 348.57 294">
+              <polygon points="53.53 121.83 201.35 121.83 161.87 210.48 53.53 121.83" />
+              <polygon points="0 65.73 45.56 81.27 38.18 43.69 0 65.73" />
+              <polygon points="38.18 43.69 201.35 121.83 53.53 121.83 38.18 43.69" />
+              <polygon points="154.54 227.01 215.53 294 201.35 121.83 154.54 227.01" />
+              <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" />
+              <polygon points="201.35 0 201.35 121.83 53.53 121.83 201.35 0" />
+            </svg>
+          </div>
+          <span class="c-blueprint-label">FIG. 01 / ORIGAMI CRANE</span>
+          <span class="c-blueprint-dim">348.57</span>
+        </div>
+        <div class="c-card-copy">
+          <h2>蓝图</h2>
+          <p>一张工程师的图纸。深蓝网格、线框纸鹤、尺寸标注和规格卡，把“基础设施”做成看得见的语言。</p>
+          <ul>
+            <li>深蓝 / 青色 / 橙绿标注</li>
+            <li>无衬线大标题 + 等宽标注</li>
+            <li>图纸卡片 / 角标 / 尺寸线</li>
+            <li>气质：精确、冷静、工程感</li>
+          </ul>
+        </div>
+      </a>
+    </div>
+
+    <footer class="c-footer">
+      <p>两版都保留：书签导航、伪 3D 纸鹤、真实项目 demo、外部文章索引、可打印简历。</p>
+      <p>多语言切换与时区自动识别已记录，放在最后一步；不影响这次视觉选型。</p>
+      <p class="c-footer-meta">DRAFT / NOINDEX / SAMPLE DATA / 2026.10</p>
+    </footer>
+  </main>
+</DraftLayout>

@@ -1,0 +1,123 @@
+---
+interface Props {
+  variant?: 'paper' | 'blueprint'
+  class?: string
+}
+
+const { variant = 'paper', class: className = '' } = Astro.props
+---
+
+<div class:list={['codecard', `codecard--${variant}`, className]} data-codecard>
+  <div class="code-tabs" role="tablist" aria-label="个人资料代码页">
+    <button
+      class="code-tab is-active"
+      type="button"
+      role="tab"
+      id={`${variant}-tab-profile`}
+      aria-controls={`${variant}-panel-profile`}
+      aria-selected="true"
+      data-code-tab="profile">profile.ts</button
+    >
+    <button
+      class="code-tab"
+      type="button"
+      role="tab"
+      id={`${variant}-tab-now`}
+      aria-controls={`${variant}-panel-now`}
+      aria-selected="false"
+      tabindex="-1"
+      data-code-tab="now">now.ts</button
+    >
+    <button
+      class="code-tab"
+      type="button"
+      role="tab"
+      id={`${variant}-tab-principles`}
+      aria-controls={`${variant}-panel-principles`}
+      aria-selected="false"
+      tabindex="-1"
+      data-code-tab="principles">principles.ts</button
+    >
+  </div>
+
+  <div
+    class="code-panel"
+    id={`${variant}-panel-profile`}
+    role="tabpanel"
+    aria-labelledby={`${variant}-tab-profile`}
+    data-code-panel="profile"
+  >
+    <pre><span class="code-line"><span class="tk-key">export const</span> <span class="tk-var">flycran</span> <span class="tk-pun">= &#123;</span></span>
+<span class="code-line">  <span class="tk-prop">role</span><span class="tk-pun">:</span> <span class="tk-str">'前端架构工程师'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-prop">focus</span><span class="tk-pun">:</span> <span class="tk-pun">[</span><span class="tk-str">'DX'</span><span class="tk-pun">,</span> <span class="tk-str">'前端基础设施'</span><span class="tk-pun">],</span></span>
+<span class="code-line">  <span class="tk-prop">stack</span><span class="tk-pun">:</span> <span class="tk-pun">[</span><span class="tk-str">'TypeScript'</span><span class="tk-pun">,</span> <span class="tk-str">'React'</span><span class="tk-pun">,</span></span>
+<span class="code-line">    <span class="tk-str">'Astro'</span><span class="tk-pun">,</span> <span class="tk-str">'Vite'</span><span class="tk-pun">,</span> <span class="tk-str">'Bun'</span><span class="tk-pun">],</span></span>
+<span class="code-line">  <span class="tk-prop">openTo</span><span class="tk-pun">:</span> <span class="tk-str">'全职 / 远程'</span><span class="tk-pun">,</span></span>
+<span class="code-line"><span class="tk-pun">&#125;</span> <span class="tk-key">as const</span></span></pre>
+  </div>
+
+  <div
+    class="code-panel"
+    id={`${variant}-panel-now`}
+    role="tabpanel"
+    aria-labelledby={`${variant}-tab-now`}
+    data-code-panel="now"
+    hidden
+  >
+    <pre><span class="code-line"><span class="tk-key">export const</span> <span class="tk-var">now</span> <span class="tk-pun">= &#123;</span></span>
+<span class="code-line">  <span class="tk-prop">building</span><span class="tk-pun">:</span> <span class="tk-str">'Wings v2'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-prop">learning</span><span class="tk-pun">:</span> <span class="tk-str">'Rust + WASM'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-prop">reading</span><span class="tk-pun">:</span> <span class="tk-str">'The Design of Everyday Things'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-prop">listening</span><span class="tk-pun">:</span> <span class="tk-str">'lo-fi &amp; 雨声'</span><span class="tk-pun">,</span></span>
+<span class="code-line"><span class="tk-pun">&#125;</span></span></pre>
+  </div>
+
+  <div
+    class="code-panel"
+    id={`${variant}-panel-principles`}
+    role="tabpanel"
+    aria-labelledby={`${variant}-tab-principles`}
+    data-code-panel="principles"
+    hidden
+  >
+    <pre><span class="code-line"><span class="tk-key">export const</span> <span class="tk-var">principles</span> <span class="tk-pun">= [</span></span>
+<span class="code-line">  <span class="tk-str">'工具应该减少思考成本'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-str">'文档是产品的一部分'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-str">'先正确，再优雅'</span><span class="tk-pun">,</span></span>
+<span class="code-line">  <span class="tk-str">'动效必须有用'</span><span class="tk-pun">,</span></span>
+<span class="code-line"><span class="tk-pun">]</span> <span class="tk-key">as const</span></span></pre>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-codecard]').forEach((card) => {
+    const tabs = Array.from(card.querySelectorAll<HTMLButtonElement>('[data-code-tab]'))
+    const panels = Array.from(card.querySelectorAll<HTMLElement>('[data-code-panel]'))
+
+    const activate = (tab: HTMLButtonElement) => {
+      const name = tab.dataset.codeTab
+      tabs.forEach((item) => {
+        const active = item === tab
+        item.classList.toggle('is-active', active)
+        item.setAttribute('aria-selected', String(active))
+        item.tabIndex = active ? 0 : -1
+      })
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.codePanel !== name
+      })
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(tab))
+      tab.addEventListener('keydown', (event) => {
+        const delta =
+          event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+        if (!delta) return
+        event.preventDefault()
+        const next = tabs[(index + delta + tabs.length) % tabs.length]
+        next.focus()
+        activate(next)
+      })
+    })
+  })
+</script>

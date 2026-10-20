@@ -1,0 +1,138 @@
+---
+import '@fontsource/noto-serif-sc/600.css'
+import '@fontsource/noto-serif-sc/700.css'
+import '@fontsource/noto-sans-sc/400.css'
+import '@fontsource/noto-sans-sc/500.css'
+import '@fontsource/noto-sans-sc/700.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/500.css'
+import '@fontsource/space-grotesk/500.css'
+import '@fontsource/space-grotesk/700.css'
+import '../styles/draft-base.css'
+import DraftBar from '../components/drafts/DraftBar.astro'
+
+interface Props {
+  title: string
+  bodyClass: string
+  active: 'paper' | 'blueprint' | 'index'
+}
+
+const { title, bodyClass, active } = Astro.props
+---
+
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Wings v2 视觉草稿：FLYCRAN 个人主页。示例数据，用于方向对比。" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('wings-draft-theme')
+          document.documentElement.dataset.theme =
+            stored === 'dark' || stored === 'light' ? stored : 'light'
+        } catch {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <slot />
+    <DraftBar active={active} />
+    <div class="draft-toast" data-toast role="status" aria-live="polite"></div>
+
+    <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      // Scroll reveal
+      const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]')
+      if (reduced) {
+        revealItems.forEach((el) => el.classList.add('is-visible'))
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible')
+                io.unobserve(entry.target)
+              }
+            })
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.06 }
+        )
+        revealItems.forEach((el) => io.observe(el))
+      }
+
+      // Copy email
+      const toast = document.querySelector<HTMLElement>('[data-toast]')
+      let toastTimer = 0
+      const showToast = (message: string) => {
+        if (!toast) return
+        toast.textContent = message
+        toast.classList.add('is-visible')
+        window.clearTimeout(toastTimer)
+        toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 1800)
+      }
+
+      document.querySelectorAll<HTMLElement>('[data-copy-email]').forEach((el) => {
+        el.addEventListener('click', async () => {
+          const email = el.dataset.copyEmail || ''
+          try {
+            await navigator.clipboard.writeText(email)
+            showToast('邮箱已复制')
+          } catch {
+            showToast(email)
+          }
+        })
+      })
+
+      // Theme toggle (paper draft; blueprint simply ignores data-theme)
+      const themeButtons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]')
+      themeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+          const apply = () => {
+            document.documentElement.dataset.theme = next
+            try {
+              localStorage.setItem('wings-draft-theme', next)
+            } catch {
+              /* ignore */
+            }
+          }
+
+          if (!document.startViewTransition || reduced) {
+            apply()
+            return
+          }
+
+          const rect = button.getBoundingClientRect()
+          const x = rect.left + rect.width / 2
+          const y = rect.top + rect.height / 2
+          const radius = Math.hypot(window.innerWidth, window.innerHeight)
+          const transition = document.startViewTransition(apply)
+          transition.ready.then(() => {
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `circle(0px at ${x}px ${y}px)`,
+                  `circle(${radius}px at ${x}px ${y}px)`,
+                ],
+              },
+              {
+                duration: 560,
+                easing: 'cubic-bezier(.22,.61,.36,1)',
+                pseudoElement: '::view-transition-new(root)',
+              }
+            )
+          })
+        })
+      })
+    </script>
+  </body>
+</html>
