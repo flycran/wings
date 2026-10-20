@@ -96,6 +96,11 @@ const { title, bodyClass, active } = Astro.props
       const themeButtons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]')
       themeButtons.forEach((button) => {
         button.addEventListener('click', () => {
+          button.dataset.pulling = 'true'
+          window.setTimeout(() => {
+            delete button.dataset.pulling
+          }, 620)
+
           const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
           const apply = () => {
             document.documentElement.dataset.theme = next

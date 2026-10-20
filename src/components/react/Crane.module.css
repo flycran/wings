@@ -1,0 +1,67 @@
+.craneButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.craneButton:focus-visible {
+  outline: 2px solid var(--focus, #006fb9);
+  outline-offset: 8px;
+  border-radius: 12px;
+}
+
+.craneViewport {
+  width: 100%;
+  overflow: visible;
+  padding-left: 3%;
+  padding-top: 4%;
+}
+
+.crane {
+  position: relative;
+  width: 90%;
+  aspect-ratio: 348.57 / 294;
+  transform: rotate3d(0, 1, 0, 15deg) rotate3d(0, 0, 1, -15deg);
+  perspective: 1600px;
+  transform-style: preserve-3d;
+}
+
+.crane svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+.crane polygon {
+  filter: drop-shadow(0 0 4px rgba(127, 127, 127, 0.35));
+}
+
+.wingOne {
+  transform: rotate3d(1, 0, 0, calc(-1 * var(--angle)));
+  transform-origin: 0 41.43%;
+}
+
+.wingTwo {
+  transform: rotate3d(1, 0, 0, var(--angle));
+  transform-origin: 0 41.43%;
+}
+
+.color1 {
+  fill: #6ed1ff;
+}
+
+.color2 {
+  fill: #24b6ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crane {
+    transition: none;
+  }
+}

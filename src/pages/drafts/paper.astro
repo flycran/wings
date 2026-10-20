@@ -1,6 +1,7 @@
 ---
 import DraftLayout from '../../layouts/DraftLayout.astro'
-import Crane from '../../components/drafts/Crane.astro'
+import PaperCrane from '../../components/react/Crane'
+import ThemeBulb from '../../components/react/ThemeBulb'
 import CodeTabs from '../../components/drafts/CodeTabs.astro'
 import {
   profile,
@@ -56,14 +57,7 @@ const nav = [
       <div class="p-rail-line" aria-hidden="true">
         <span class="p-rail-crane">⌁</span>
       </div>
-      <button class="p-bulb" type="button" data-theme-toggle aria-label="切换深色模式">
-        <span class="p-bulb-cord" aria-hidden="true"></span>
-        <span class="p-bulb-glass" aria-hidden="true">
-          <span class="p-bulb-filament"></span>
-        </span>
-        <span class="p-bulb-base" aria-hidden="true"></span>
-        <span class="p-bulb-label">夜航</span>
-      </button>
+      <ThemeBulb client:load />
     </aside>
 
     <nav class="p-mobilebar" aria-label="移动端导航">
@@ -86,6 +80,68 @@ const nav = [
 
     <main id="main" class="p-main">
       <section class="p-hero" id="home">
+        <svg
+          class="p-sketch"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="pencil-rough" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.012"
+                numOctaves="2"
+                seed="11"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="1.8"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+
+          <g class="p-sketch-lines" filter="url(#pencil-rough)">
+            <path
+              class="sk sk-muted"
+              d="M 742 430 C 752 258 916 158 1092 174 C 1278 192 1392 318 1362 500 C 1334 668 1176 736 1014 712 C 852 688 744 590 752 438 C 757 360 782 302 820 256"
+            />
+            <path
+              class="sk sk-muted sk-dash"
+              d="M 806 246 L 1258 246 L 1258 704 L 806 704 Z"
+            />
+            <path class="sk sk-muted" d="M 806 218 L 1258 218" />
+            <path class="sk sk-muted" d="M 806 211 L 806 225 M 1258 211 L 1258 225" />
+            <path class="sk sk-muted" d="M 778 250 L 778 700" />
+            <path class="sk sk-muted" d="M 771 250 L 785 250 M 771 700 L 785 700" />
+
+            <path class="sk sk-orange" d="M 1248 118 L 1362 166 L 1296 232 Z" />
+            <path class="sk sk-orange sk-dash" d="M 1248 118 L 1296 232 M 1362 166 L 1296 232" />
+
+            <path class="sk sk-blue" d="M 632 676 C 686 666 728 636 762 600" />
+            <path class="sk sk-blue" d="M 750 604 L 762 600 L 758 613" />
+
+            <path class="sk sk-muted" d="M 126 420 L 136 398 M 126 420 L 136 442 M 126 420 L 104 410 M 126 420 L 104 432" />
+            <path class="sk sk-muted" d="M 1120 708 L 1140 680 M 1134 714 L 1154 686 M 1148 720 L 1168 692 M 1162 726 L 1182 698" />
+            <path class="sk sk-muted" d="M 90 812 L 110 812 M 100 802 L 100 822" />
+            <path class="sk sk-muted" d="M 1330 84 L 1348 84 M 1339 75 L 1339 93" />
+            <circle class="sk sk-muted" cx="1310" cy="770" r="2.5" />
+            <circle class="sk sk-muted" cx="700" cy="190" r="2" />
+            <circle class="sk sk-muted" cx="1390" cy="610" r="1.8" />
+            <path class="sk sk-muted sk-dash" d="M 60 300 C 90 286 120 292 138 312" />
+          </g>
+
+          <g class="p-sketch-labels">
+            <text x="1024" y="208">440</text>
+            <text x="764" y="480" transform="rotate(-90 764 480)">A</text>
+            <text x="1240" y="842">NOTE / 01</text>
+          </g>
+        </svg>
+
         <div class="p-hero-copy" data-reveal>
           <div class="p-status">
             <span class="p-status-dot" aria-hidden="true"></span>
@@ -134,7 +190,7 @@ const nav = [
               <span>纯静态 / Astro</span>
             </div>
           </div>
-          <Crane class="p-hero-crane" />
+          <PaperCrane client:load className="p-hero-crane" />
           <div class="p-crane-note">
             <span>点一下纸鹤</span>
             <span class="p-crane-note-line" aria-hidden="true"></span>
@@ -381,14 +437,14 @@ const nav = [
         <div class="p-section-head" data-reveal>
           <span class="p-section-index">03</span>
           <div class="p-section-title">
-            <p class="p-kicker">WRITING ELSEWHERE</p>
-            <h2>文章写在别处</h2>
+            <p class="p-kicker">WRITING / SELECTED POSTS</p>
+            <h2>技术写作</h2>
           </div>
-          <p class="p-section-note">这里只做索引，长文和讨论都在原文。</p>
+          <p class="p-section-note">精选文章索引 · 外链至原文。</p>
         </div>
 
         <p class="p-writing-intro" data-reveal>
-          我把长文主要放在掘金。这个页面只保留平台入口和几篇精选，不再维护站内文章系统。
+          长文主要发布在掘金，本站仅保留平台入口与精选索引。
         </p>
 
         <div class="p-platforms" data-reveal>
