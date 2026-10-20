@@ -881,7 +881,7 @@ html[data-theme='dark'] .p-night-tag::after {
 
 .p-scroll-arrow {
   position: absolute;
-  top: -2px;
+  bottom: -2px;
   left: 50%;
   width: 12px;
   height: 18px;
@@ -899,11 +899,11 @@ html[data-theme='dark'] .p-night-tag::after {
 
 .p-scroll-line {
   position: absolute;
-  top: 16px;
-  bottom: 0;
+  top: 0;
+  bottom: 14px;
   left: 50%;
   width: 1px;
-  background: linear-gradient(to bottom, var(--p-muted), transparent);
+  background: linear-gradient(to bottom, transparent, var(--p-muted));
   opacity: 0.6;
   transform: translateX(-50%);
 }
