@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187.75 187.75">
   <title>FLYCRAN — Wings</title>
-  <rect width="64" height="64" rx="14" fill="#F4EFE4" />
-  <g transform="translate(7.6 11.4) scale(0.14)">
-    <polygon points="53.53 121.83 201.35 121.83 161.87 210.48 53.53 121.83" fill="#24B6FF" />
-    <polygon points="0 65.73 45.56 81.27 38.18 43.69 0 65.73" fill="#6ED1FF" />
-    <polygon points="38.18 43.69 201.35 121.83 53.53 121.83 38.18 43.69" fill="#24B6FF" />
-    <polygon points="154.54 227.01 215.53 294 201.35 121.83 154.54 227.01" fill="#6ED1FF" />
-    <polygon points="201.35 0 348.57 0 201.35 121.83 201.35 0" fill="#24B6FF" />
-    <polygon points="201.35 0 201.35 121.83 53.53 121.83 201.35 0" fill="#6ED1FF" />
+  <g>
+    <circle cx="93.88" cy="93.88" r="93.88" style="fill: #e0eaff; stroke-width: 0px;"/>
+    <g>
+      <polygon points="43.22 48.23 96.62 53.56 82.78 90.32 43.22 48.23" style="fill: #ffb22f; stroke: #231815; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;"/>
+      <polygon points="96.62 53.56 134.63 117.45 66.53 133.52 96.62 53.56" style="fill: #21d486; stroke: #231815; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;"/>
+      <path d="M42.03,112.83l32.08.53-7.58,20.16s-16.67-10.87-17-11.06-16.47,4.35-16.47,4.35l8.96-13.97Z" style="fill: #fff; stroke: #231815; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;"/>
+      <polygon points="134.63 117.45 143.85 92.24 164.02 95.03 144.86 73.68 116.48 86.94 134.63 117.45" style="fill: #00abff; stroke: #231815; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;"/>
+    </g>
   </g>
-  <circle cx="52.5" cy="11.5" r="2.2" fill="#FFB22F" />
 </svg>
