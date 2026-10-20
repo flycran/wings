@@ -3,8 +3,9 @@ import CodeTabs from '../components/CodeTabs.astro'
 import PaperCrane from '../components/Crane'
 import PlatformLogo from '../components/PlatformLogo.astro'
 import ProjectCard from '../components/ProjectCard.astro'
+import ProjectReference from '../components/ProjectReference.astro'
 import ThemeBookmark from '../components/ThemeBookmark'
-import { colophon, now, platforms, principles, profile, projects, writing } from '../data/site'
+import { colophon, isWingsProject, now, platforms, principles, profile, projects, writing } from '../data/site'
 import Layout from '../layouts/Layout.astro'
 import '../styles/paper.css'
 
@@ -198,16 +199,13 @@ const nav = [
         </div>
 
         <div class="p-work-grid">
-          <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[1]} />
-          <ProjectCard project={projects[2]} />
-
-          <aside class="p-work-note" data-reveal>
-            <span class="p-work-note-index">04 / REFERENCE</span>
-            <h3>Wings / 本站</h3>
-            <p>Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。</p>
-            <span class="p-work-note-link">案例页待写 →</span>
-          </aside>
+          {projects.map((project) =>
+            isWingsProject(project) ? (
+              <ProjectReference project={project} />
+            ) : (
+              <ProjectCard project={project} />
+            )
+          )}
         </div>
       </section>
 

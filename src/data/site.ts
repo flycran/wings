@@ -36,7 +36,21 @@ export interface Project {
   demo: ProjectDemo
 }
 
-export const projects: Project[] = [
+export interface WingsProject {
+  id: 'wings'
+  index: string
+  title: string
+  description: string
+  linkLabel: string
+  href?: string
+}
+
+export type ProjectEntry = Project | WingsProject
+
+export const isWingsProject = (entry: ProjectEntry): entry is WingsProject =>
+  entry.id === 'wings'
+
+export const projects: ProjectEntry[] = [
   {
     id: 'smart-unit',
     index: '01',
@@ -81,6 +95,14 @@ export const projects: Project[] = [
     outcome: '3 种 hook 模式 · 2 层 import',
     href: 'https://github.com/flycran/rtk-to-endpoints',
     demo: 'ide',
+  },
+  {
+    id: 'wings',
+    index: '04',
+    title: 'Wings / 本站',
+    description:
+      'Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。',
+    linkLabel: '案例页待写 →',
   },
 ]
 
