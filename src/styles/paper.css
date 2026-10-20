@@ -663,9 +663,9 @@ html[data-theme="dark"] .p-night-tag::after {
   background: var(--p-sheet);
   box-shadow: 12px 12px 0 var(--p-rule);
   transform: rotate(-1.4deg);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transform-origin: center center;
+  transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
 }
 
 .p-code-sheet::before {
@@ -681,9 +681,9 @@ html[data-theme="dark"] .p-night-tag::after {
   transform: translateX(-50%) rotate(-2deg);
 }
 
-.p-code-sheet:hover {
-  box-shadow: 16px 16px 0 var(--p-rule);
-  transform: rotate(0deg) translateY(-4px);
+.p-code-sheet.is-tilting,
+.p-code-sheet:focus-within {
+  box-shadow: 18px 20px 0 var(--p-rule);
 }
 
 .p-code-sheet-head {

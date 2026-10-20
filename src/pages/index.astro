@@ -565,5 +565,71 @@ const nav = [
       })
       format()
     })
+
+    // WebView paper tilt
+    const codeSheet = document.querySelector<HTMLElement>('.p-code-sheet')
+    const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (codeSheet && canTilt && !reduceMotion) {
+      const state = { x: 0, y: 0, lift: 0 }
+      const target = { x: 0, y: 0, lift: 0 }
+      let frame = 0
+
+      const render = () => {
+        codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
+      }
+
+      const tick = () => {
+        state.x += (target.x - state.x) * 0.14
+        state.y += (target.y - state.y) * 0.14
+        state.lift += (target.lift - state.lift) * 0.14
+        render()
+
+        const settled =
+          Math.abs(target.x - state.x) < 0.01 &&
+          Math.abs(target.y - state.y) < 0.01 &&
+          Math.abs(target.lift - state.lift) < 0.01
+
+        if (settled) {
+          state.x = target.x
+          state.y = target.y
+          state.lift = target.lift
+          frame = 0
+          if (target.x === 0 && target.y === 0 && target.lift === 0) {
+            codeSheet.style.removeProperty('transform')
+          }
+          return
+        }
+
+        frame = requestAnimationFrame(tick)
+      }
+
+      const start = () => {
+        if (!frame) frame = requestAnimationFrame(tick)
+      }
+
+      codeSheet.addEventListener('pointerenter', () => {
+        codeSheet.classList.add('is-tilting')
+        target.lift = 8
+        start()
+      })
+
+      codeSheet.addEventListener('pointermove', (event) => {
+        const rect = codeSheet.getBoundingClientRect()
+        target.x = (0.5 - (event.clientY - rect.top) / rect.height) * 7
+        target.y = ((event.clientX - rect.left) / rect.width - 0.5) * 8
+        target.lift = 8
+        start()
+      })
+
+      codeSheet.addEventListener('pointerleave', () => {
+        codeSheet.classList.remove('is-tilting')
+        target.x = 0
+        target.y = 0
+        target.lift = 0
+        start()
+      })
+    }
   </script>
 </Layout>
