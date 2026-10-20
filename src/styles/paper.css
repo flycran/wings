@@ -239,7 +239,7 @@ html[data-theme='dark'] .p-grain {
   transform: translateX(0);
 }
 
-.p-bulb {
+.p-theme-hanger {
   position: relative;
   z-index: 0;
   display: flex;
@@ -253,146 +253,92 @@ html[data-theme='dark'] .p-grain {
   color: var(--p-muted);
 }
 
-.p-bulb-cord {
+.p-theme-cord {
   width: 1px;
   height: 102px;
   background: var(--p-muted);
   opacity: 0.55;
 }
 
-.p-bulb-lamp {
+.p-theme-tag-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.p-lantern {
+.p-night-tag {
   position: relative;
   display: flex;
-  width: 40px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.p-lantern-cap {
-  position: relative;
-  z-index: 2;
-  width: 13px;
-  height: 4px;
-  border: 1px solid var(--p-orange);
-  border-radius: 2px;
-  background: var(--p-orange);
-}
-
-.p-lantern-cap--top {
-  margin-bottom: -1px;
-}
-
-.p-lantern-cap--bottom {
-  width: 17px;
-  margin-top: -1px;
-  border-color: var(--p-muted);
-  background: var(--p-paper);
-}
-
-.p-lantern-shade {
-  position: relative;
-  width: 38px;
-  height: 44px;
-  overflow: hidden;
-  border: 1px solid var(--p-rule);
-  border-radius: 46% 46% 38% 38% / 28% 28% 52% 52%;
+  width: 22px;
+  height: 54px;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 13px;
   background: var(--p-sheet);
-  box-shadow: inset 0 0 10px rgba(29, 27, 23, 0.06);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 11px), 50% 100%, 0 calc(100% - 11px));
+  color: var(--p-ink);
+  filter: drop-shadow(2px 2px 0 var(--p-rule));
+  transform: rotate(-2deg);
+  transform-origin: top center;
   transition:
+    transform 0.3s ease,
     background-color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    color 0.35s ease,
+    filter 0.35s ease;
 }
 
-.p-lantern-shade::before {
+.p-night-tag::before {
   position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0 5px,
-    rgba(110, 103, 91, 0.17) 5px 6px
-  );
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--p-orange);
   content: '';
+  opacity: 0.8;
 }
 
-.p-lantern-shade::after {
+.p-night-tag::after {
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 10px rgba(29, 27, 23, 0.08);
-  content: '';
-}
-
-.p-lantern-glow {
-  position: absolute;
-  top: 50%;
+  top: 4px;
   left: 50%;
-  width: 26px;
-  height: 26px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--p-rule);
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 231, 166, 0.95),
-    rgba(255, 178, 47, 0.45) 55%,
-    transparent 72%
-  );
-  filter: blur(2px);
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.35s ease;
+  background: var(--p-paper);
+  content: '';
+  transform: translateX(-50%);
 }
 
-.p-lantern-ring {
-  width: 7px;
-  height: 7px;
-  margin-top: 2px;
-  border: 1px solid var(--p-muted);
-  border-radius: 50%;
+.p-night-tag-text {
+  font-family: var(--p-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
 }
 
-.p-bulb-label {
-  margin-top: 6px;
-  font-family: var(--p-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
+.p-theme-hanger:hover .p-night-tag {
+  transform: rotate(1.5deg) translateY(2px);
 }
 
-.p-bulb:hover .p-lantern-shade {
-  border-color: #d39a2f;
-  background: #ffe8b0;
-  box-shadow:
-    0 0 20px rgba(255, 178, 47, 0.25),
-    inset 0 0 10px rgba(255, 178, 47, 0.18);
+html[data-theme='dark'] .p-night-tag {
+  background: #211e18;
+  color: #f2ede3;
+  filter: drop-shadow(2px 2px 0 #000);
 }
 
-.p-bulb:hover .p-lantern-glow {
-  opacity: 0.7;
-}
-
-html[data-theme='dark'] .p-lantern-shade {
-  border-color: #d99a2b;
-  background: #f6c96e;
-  box-shadow:
-    0 0 24px rgba(255, 178, 47, 0.38),
-    inset 0 0 12px rgba(255, 255, 255, 0.28);
-}
-
-html[data-theme='dark'] .p-lantern-shade::before {
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0 5px,
-    rgba(180, 95, 0, 0.28) 5px 6px
-  );
-}
-
-html[data-theme='dark'] .p-lantern-glow {
+html[data-theme='dark'] .p-night-tag::before {
+  background: var(--p-orange-bright);
   opacity: 1;
+}
+
+html[data-theme='dark'] .p-night-tag::after {
+  border-color: #4a4438;
+  background: #171512;
 }
 
 /* Mobile nav */

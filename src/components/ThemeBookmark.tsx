@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 import { motion } from 'motion/react'
 
-export default function ThemeBulb() {
+export default function ThemeBookmark() {
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const lampRef = useRef<HTMLSpanElement>(null)
+  const tagRef = useRef<HTMLSpanElement>(null)
 
   const toggle = () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
@@ -18,7 +18,7 @@ export default function ThemeBulb() {
       }
     }
 
-    const origin = lampRef.current ?? buttonRef.current
+    const origin = tagRef.current ?? buttonRef.current
     if (!document.startViewTransition || reduced || !origin) {
       apply()
       return
@@ -47,25 +47,19 @@ export default function ThemeBulb() {
   return (
     <motion.button
       ref={buttonRef}
-      className="p-bulb"
+      className="p-theme-hanger"
       type="button"
-      data-theme-bulb
-      aria-label="拉一下灯绳，切换深色模式"
+      data-theme-bookmark
+      aria-label="拉下夜页书签，切换深色模式"
       onClick={toggle}
       whileTap={{ y: 16 }}
       transition={{ type: 'spring', visualDuration: 0.15 }}
     >
-      <span className="p-bulb-cord" aria-hidden="true" />
-      <span ref={lampRef} className="p-bulb-lamp">
-        <span className="p-lantern" aria-hidden="true">
-          <span className="p-lantern-cap p-lantern-cap--top" />
-          <span className="p-lantern-shade">
-            <span className="p-lantern-glow" />
-          </span>
-          <span className="p-lantern-cap p-lantern-cap--bottom" />
-          <span className="p-lantern-ring" />
+      <span className="p-theme-cord" aria-hidden="true" />
+      <span ref={tagRef} className="p-theme-tag-wrap">
+        <span className="p-night-tag" aria-hidden="true">
+          <span className="p-night-tag-text">夜页</span>
         </span>
-        <span className="p-bulb-label">夜航</span>
       </span>
     </motion.button>
   )

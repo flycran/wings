@@ -33,7 +33,7 @@ src/
 ├── components/
 │   ├── Crane.tsx              # 纸鹤（React + Motion）
 │   ├── Crane.module.css
-│   ├── ThemeBulb.tsx          # 拉绳灯泡（React + Motion）
+│   ├── ThemeBookmark.tsx      # 夜页书签（React + Motion）
 │   └── CodeTabs.astro         # profile.ts / now.ts / principles.ts
 ├── data/site.ts               # 示例资料、项目、平台、文章
 └── styles/
@@ -44,7 +44,7 @@ src/
 ## 技术
 
 - Astro 静态输出，默认零框架运行时。
-- React 只用于重交互岛：纸鹤、灯泡；动画使用 `motion`。
+- React 只用于重交互岛：纸鹤、夜页书签；动画使用 `motion`。
 - 其余交互为原生 TypeScript：代码 tab、单位 demo、导航高亮、滚动 reveal。
 - 字体自托管：Noto Serif SC / Noto Sans SC / JetBrains Mono / Space Grotesk。
 - 无数据库、无后台、无 Supabase。
