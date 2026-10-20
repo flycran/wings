@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import PaperCrane from '../components/Crane'
 import ThemeBookmark from '../components/ThemeBookmark'
 import CodeTabs from '../components/CodeTabs.astro'
+import PlatformLogo from '../components/PlatformLogo.astro'
 import {
   profile,
   projects,
@@ -447,7 +448,7 @@ const nav = [
                 rel="noopener noreferrer"
                 style={`--accent: var(--p-${platform.accent}); --accent-bright: var(--p-${platform.accent}-bright);`}
               >
-                <span class="p-platform-mark">{platform.mark}</span>
+                <span class="p-platform-mark" aria-hidden="true"><PlatformLogo id={platform.id} /></span>
                 <span class="p-platform-copy">
                   <strong>{platform.name}</strong>
                   <span>{platform.handle}</span>

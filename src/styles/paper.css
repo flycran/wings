@@ -1731,13 +1731,15 @@ html[data-theme='dark'] .p-work-note {
   height: 40px;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid var(--p-ink);
+  border: 1px solid var(--p-rule);
   border-radius: 50%;
-  background: var(--accent-bright);
+  background: var(--p-paper);
   color: var(--p-ink);
-  font-family: var(--p-serif);
-  font-size: 1.05rem;
-  font-weight: 600;
+}
+
+.p-platform-mark svg {
+  width: 22px;
+  height: 22px;
 }
 
 .p-platform-copy {

@@ -108,7 +108,6 @@ export const platforms = [
     description: '长文、工程实践、踩坑记录。',
     href: 'https://juejin.cn',
     accent: 'orange' as Accent,
-    mark: '掘',
   },
   {
     id: 'github',
@@ -117,7 +116,6 @@ export const platforms = [
     description: '开源项目、源码、实验。',
     href: 'https://github.com/flycran',
     accent: 'blue' as Accent,
-    mark: 'GH',
   },
 ]
 
