@@ -409,7 +409,7 @@ const nav = [
       let frame = 0
 
       const render = () => {
-        codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
+        codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-2.1deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
       }
 
       const tick = () => {
@@ -443,15 +443,15 @@ const nav = [
 
       codeSheet.addEventListener('pointerenter', () => {
         codeSheet.classList.add('is-tilting')
-        target.lift = 8
+        target.lift = 12
         start()
       })
 
       codeSheet.addEventListener('pointermove', (event) => {
         const rect = codeSheet.getBoundingClientRect()
-        target.x = (0.5 - (event.clientY - rect.top) / rect.height) * 7
-        target.y = ((event.clientX - rect.left) / rect.width - 0.5) * 8
-        target.lift = 8
+        target.x = (0.5 - (event.clientY - rect.top) / rect.height) * 10.5
+        target.y = ((event.clientX - rect.left) / rect.width - 0.5) * 12
+        target.lift = 12
         start()
       })
 
