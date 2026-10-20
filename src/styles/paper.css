@@ -969,14 +969,13 @@ html[data-theme="dark"] .p-night-tag::after {
 /* Work */
 .p-work-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
 .p-project {
   position: relative;
   display: flex;
-  grid-column: span 5;
   flex-direction: column;
   gap: 16px;
   padding: 19px;
@@ -987,14 +986,6 @@ html[data-theme="dark"] .p-night-tag::after {
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease;
-}
-
-.p-project--wide {
-  grid-column: span 7;
-}
-
-.p-work-grid > .p-project:nth-child(3) {
-  grid-column: span 7;
 }
 
 .p-project:hover {
@@ -1033,41 +1024,6 @@ html[data-theme="dark"] .p-night-tag::after {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.p-project-main {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: center;
-  gap: 18px;
-}
-
-.p-project--wide .p-project-main {
-  align-items: stretch;
-}
-
-.p-project--wide .p-project-copy {
-  display: flex;
-  flex-direction: column;
-}
-
-.p-project--wide .p-project-copy .p-project-link {
-  align-self: flex-start;
-  margin-top: auto;
-}
-
-.p-project--wide .p-project-visual {
-  align-items: stretch;
-}
-
-.p-project--wide .p-demo {
-  display: flex;
-  flex-direction: column;
-}
-
-.p-project--wide .p-unit-output {
-  margin-top: auto;
-  padding-top: 14px;
 }
 
 .p-project-copy h3 {
@@ -1472,7 +1428,6 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-work-note {
   display: flex;
-  grid-column: span 5;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
@@ -2041,10 +1996,6 @@ html[data-theme="dark"] .p-footer {
     width: 280px;
   }
 
-  .p-project-main {
-    grid-template-columns: 1fr;
-  }
-
   .p-about-grid {
     grid-template-columns: 260px 1fr;
     gap: 34px;
@@ -2217,19 +2168,8 @@ html[data-theme="dark"] .p-footer {
     gap: 18px;
   }
 
-  .p-project,
-  .p-project--wide,
-  .p-work-grid > .p-project:nth-child(3),
-  .p-work-note {
-    grid-column: auto;
-  }
-
   .p-project {
     padding: 16px;
-  }
-
-  .p-project-main {
-    grid-template-columns: 1fr;
   }
 
   .p-about-grid {
