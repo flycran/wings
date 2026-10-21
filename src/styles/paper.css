@@ -1532,15 +1532,6 @@ html[data-theme="dark"] .p-work-note {
   opacity: 0.75;
 }
 
-.p-portrait-caption {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  color: var(--p-muted);
-  font-family: var(--p-mono);
-  font-size: 10px;
-  line-height: 1.5;
-}
 
 .p-portrait figcaption {
   margin-top: 10px;
