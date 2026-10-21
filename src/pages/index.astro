@@ -418,7 +418,7 @@ const nav = [
       let frame = 0
 
       const render = () => {
-        codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
+        codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg)`
       }
 
       const tick = () => {
