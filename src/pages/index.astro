@@ -27,14 +27,14 @@ const nav = [
 ]
 ---
 
-<Layout title="FLYCRAN · 前端架构工程师" bodyClass="paper-body">
+<Layout title={`${profile.name} · ${profile.role}`} bodyClass="paper-body">
   <div class="p-root">
     <div class="p-grain" aria-hidden="true"></div>
 
     <header class="p-topbar">
-      <a class="p-logo" href="#home" aria-label="FLYCRAN 首页">
+      <a class="p-logo" href="#home" aria-label={`${profile.name} 首页`}>
         <span class="p-logo-mark" aria-hidden="true">F</span>
-        <span class="p-logo-text">FLYCRAN <em>/ WINGS</em></span>
+        <span class="p-logo-text">{profile.name} <em>/ WINGS</em></span>
       </a>
       <div class="p-topbar-right">
         <a class="p-topbar-cta" href="#contact">简历 / 联系 <span aria-hidden="true">↓</span></a>
@@ -169,7 +169,7 @@ const nav = [
           <div class="p-code-sheet">
             <div class="p-code-sheet-head">
               <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span>FLYCRAN / PROFILE</span>
+              <span>{profile.name} / PROFILE</span>
               <span class="p-code-sheet-tag">v2.0</span>
             </div>
             <CodeTabs />
@@ -235,9 +235,9 @@ const nav = [
           <figure class="p-portrait" data-reveal>
             <div class="p-portrait-inner">
               <span class="p-portrait-char">飞</span>
-              <span class="p-portrait-seal">FLYCRAN<br />飞鹤</span>
+              <span class="p-portrait-seal">{profile.name}<br />{profile.cn}</span>
             </div>
-            <figcaption>FLYCRAN · 2026</figcaption>
+            <figcaption>{profile.name} · {colophon.year}</figcaption>
           </figure>
 
           <div class="p-about-copy" data-reveal>
@@ -360,18 +360,18 @@ const nav = [
 
     <footer class="p-footer">
       <div class="p-footer-top">
-        <p>Wings / 飞鹤 / 自由</p>
+        <p>Wings / {profile.cn} / 自由</p>
         <p>{colophon.note}</p>
       </div>
-      <div class="p-footer-wordmark" aria-label="FLYCRAN">
-        <span class="p-footer-fly">FLY</span><span class="p-footer-cran">CRAN</span>
+      <div class="p-footer-wordmark" aria-label={profile.name}>
+        <span class="p-footer-fly">{profile.name.slice(0, 3)}</span><span class="p-footer-cran">{profile.name.slice(3)}</span>
       </div>
       <div class="p-footer-grid">
         <p>Built with {colophon.builtWith}<br />No database. No tracking.</p>
-        <p>© {colophon.year} FLYCRAN<br />All mistakes are mine.</p>
+        <p>© {colophon.year} {profile.name}<br />All mistakes are mine.</p>
         <p><a href="#home">回到顶部 ↑</a><br /><a href="#work">看作品</a></p>
       </div>
-      <span class="p-footer-seal" aria-hidden="true">飞鹤<br />FLYCRAN</span>
+      <span class="p-footer-seal" aria-hidden="true">{profile.cn}<br />{profile.name}</span>
     </footer>
   </div>
 

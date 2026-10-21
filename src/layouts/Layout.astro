@@ -5,6 +5,7 @@ import '@fontsource/noto-sans-sc/400.css'
 import '@fontsource/noto-sans-sc/500.css'
 import '@fontsource/noto-sans-sc/700.css'
 import '../styles/base.css'
+import { profile } from '../data/site'
 
 interface Props {
   title: string
@@ -19,7 +20,7 @@ const { title, bodyClass } = Astro.props
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="FLYCRAN 的个人主页：前端架构、Developer Experience 与前端基础设施。" />
+    <meta name="description" content={`${profile.name} 的个人主页：${profile.role}，关注 ${profile.focus}。`} />
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
