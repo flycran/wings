@@ -1880,7 +1880,7 @@ html[data-theme="dark"] .p-footer {
   font-family: var(--p-serif);
   font-size: clamp(4rem, 12vw, 9.5rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.01em;
   line-height: 0.78;
   text-align: center;
   user-select: none;
