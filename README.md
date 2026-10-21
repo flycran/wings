@@ -38,6 +38,12 @@ bun run sync:writing
 
 脚本会拉取掘金最新的 8 篇文章，写入 `src/data/writing.ts`，页面只读取生成后的数据。
 
+### 自动同步
+
+GitHub Actions 工作流 `.github/workflows/sync-juejin.yml` 会在每周一自动同步掘金文章，也支持在 Actions 页面手动触发。同步后如果 `src/data/writing.ts` 有变化，会自动 commit 并 push。
+
+> 定时工作流只会从仓库默认分支运行；如果当前站点分支还不是默认分支，需要合并后再启用定时同步。
+
 ### 源码定位
 
 已接入 `code-inspector-plugin`。开发模式下按住 `Option + Shift`（macOS）或 `Alt + Shift`（Windows/Linux）并点击页面元素，会打开编辑器对应源码位置。
