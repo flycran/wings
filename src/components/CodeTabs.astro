@@ -46,21 +46,46 @@ const lineNumbers: ShikiTransformer = {
         data-code-panel={tab.id}
         hidden={index !== 0}
       >
-        <Code
-          code={tab.code}
-          lang="ts"
-          themes={{ light: 'vitesse-light', dark: 'vitesse-dark' }}
-          transformers={[lineNumbers]}
-        />
+        <div class="code-panel-scroll" data-code-scroll>
+          <Code
+            code={tab.code}
+            lang="ts"
+            themes={{ light: 'vitesse-light', dark: 'vitesse-dark' }}
+            transformers={[lineNumbers]}
+          />
+        </div>
       </div>
     ))
   }
 </div>
 
 <script>
+  import { OverlayScrollbars } from 'overlayscrollbars'
+  import 'overlayscrollbars/overlayscrollbars.css'
+
+  type Scrollbar = ReturnType<typeof OverlayScrollbars>
+
   document.querySelectorAll<HTMLElement>('[data-codecard]').forEach((card) => {
     const tabs = Array.from(card.querySelectorAll<HTMLButtonElement>('[data-code-tab]'))
     const panels = Array.from(card.querySelectorAll<HTMLElement>('[data-code-panel]'))
+    const scrollbars = new Map<HTMLElement, Scrollbar>()
+
+    const mountScrollbar = (panel: HTMLElement) => {
+      const target = panel.querySelector<HTMLElement>('[data-code-scroll]')
+      if (!target) return
+      const instance =
+        scrollbars.get(panel) ??
+        OverlayScrollbars(target, {
+          scrollbars: {
+            theme: 'os-theme-light',
+            autoHide: 'leave',
+            autoHideDelay: 400,
+          },
+        })
+      if (!instance) return
+      scrollbars.set(panel, instance)
+      instance.update(true)
+    }
 
     const activate = (tab: HTMLButtonElement) => {
       const name = tab.dataset.codeTab
@@ -71,7 +96,9 @@ const lineNumbers: ShikiTransformer = {
         item.tabIndex = active ? 0 : -1
       })
       panels.forEach((panel) => {
-        panel.hidden = panel.dataset.codePanel !== name
+        const active = panel.dataset.codePanel === name
+        panel.hidden = !active
+        if (active) mountScrollbar(panel)
       })
     }
 
@@ -86,6 +113,8 @@ const lineNumbers: ShikiTransformer = {
         activate(next)
       })
     })
+
+    panels.filter((panel) => !panel.hidden).forEach(mountScrollbar)
   })
 
 </script>

@@ -397,10 +397,29 @@
   color: var(--p-ink);
 }
 
-.p-code-sheet .code-panel {
+.p-code-sheet .code-panel-scroll {
   padding: 15px;
   overflow: auto;
   max-height: 300px;
+  overscroll-behavior: contain;
+}
+
+.p-code-sheet .os-theme-light {
+  --os-size: 10px;
+  --os-padding-perpendicular: 2px;
+  --os-handle-bg: color-mix(in srgb, var(--p-muted) 38%, transparent);
+  --os-handle-bg-hover: color-mix(in srgb, var(--p-muted) 60%, transparent);
+  --os-handle-bg-active: color-mix(in srgb, var(--p-muted) 72%, transparent);
+  --os-handle-border-radius: 99px;
+  --os-track-bg: transparent;
+  --os-track-bg-hover: transparent;
+  --os-track-bg-active: transparent;
+}
+
+html[data-theme="dark"] .p-code-sheet .os-theme-light {
+  --os-handle-bg: color-mix(in srgb, var(--p-ink) 32%, transparent);
+  --os-handle-bg-hover: color-mix(in srgb, var(--p-ink) 48%, transparent);
+  --os-handle-bg-active: color-mix(in srgb, var(--p-ink) 62%, transparent);
 }
 
 .p-code-sheet .code-panel pre {
