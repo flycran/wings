@@ -100,7 +100,7 @@ export const projects: ProjectEntry[] = [
     title: 'Wings / 本站',
     description:
       'Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。',
-    linkLabel: '案例页待写 →',
+    linkLabel: '本站即案例',
   },
 ]
 
@@ -129,7 +129,7 @@ export const capabilities = [
 ]
 
 export const principles = [
-  '工具应该减少思考成本，而不是增加步骤。',
+  '工具应该让下一步更清楚。',
   '文档是产品的一部分。',
   '先正确，再优雅；先测量，再优化。',
   '动效要么解释结构，要么提供反馈，否则删掉。',
