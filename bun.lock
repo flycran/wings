@@ -8,7 +8,6 @@
         "@astrojs/react": "^7.1.0",
         "@fontsource/noto-sans-sc": "^5.3.1",
         "@fontsource/noto-serif-sc": "^5.3.1",
-        "@fontsource/space-grotesk": "^5.3.0",
         "astro": "^7.1.1",
         "motion": "^14.4.0",
         "react": "^19.3.1",
@@ -206,8 +205,6 @@
     "@fontsource/noto-sans-sc": ["@fontsource/noto-sans-sc@5.3.1", "", {}, "sha512-YxZ/VWAWo9FWzH08Q6fGTzIW6vYNP2TMhUFCnfhlimbhdXnWrxJLrzX3KWt2FKnV0s8XiM5vjpGHQiyFRlTj0w=="],
 
     "@fontsource/noto-serif-sc": ["@fontsource/noto-serif-sc@5.3.1", "", {}, "sha512-nIK2HyNGcUi2TGwIfrk2MItkh0O3Y5+TI8iPfPSzoNY6uyXYfQ9qqch8czk3aa1VhV4EU52uwCYCe1UDKJELpg=="],
-
-    "@fontsource/space-grotesk": ["@fontsource/space-grotesk@5.3.0", "", {}, "sha512-ksnGizDPXIDuvqcTYTSrmZ+evx9sDlS8rp7+42BQ7wU+spt3twEoXfbJz672C+5CLg6VeUQwRy5RXshWb67LcQ=="],
 
     "@img/colour": ["@img/colour@1.1.0", "https://registry.npmmirror.com/@img/colour/-/colour-1.1.0.tgz", {}, "sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ=="],
 
