@@ -1,6 +1,7 @@
 ---
 import { Code } from 'astro:components'
 import type { ShikiTransformer } from 'shiki'
+import { codeThemes } from '../data/codeThemes'
 import { codeTabs } from '../data/profileCode'
 
 interface Props {
@@ -46,12 +47,21 @@ const lineNumbers: ShikiTransformer = {
         data-code-panel={tab.id}
         hidden={index !== 0}
       >
-        <Code
-          code={tab.code}
-          lang="ts"
-          themes={{ light: 'vitesse-light', dark: 'vitesse-dark' }}
-          transformers={[lineNumbers]}
-        />
+        {
+          codeThemes.map((theme, themeIndex) => (
+            <div
+              class:list={['code-theme-variant', { 'is-active': themeIndex === 0 }]}
+              data-code-theme-variant={theme.id}
+            >
+              <Code
+                code={tab.code}
+                lang="ts"
+                themes={{ light: theme.light, dark: theme.dark }}
+                transformers={[lineNumbers]}
+              />
+            </div>
+          ))
+        }
       </div>
     ))
   }
@@ -87,4 +97,18 @@ const lineNumbers: ShikiTransformer = {
       })
     })
   })
+
+  const themeSelect = document.querySelector<HTMLSelectElement>('[data-code-theme-select]')
+  const codeSheet = themeSelect?.closest('.p-code-sheet')
+
+  if (themeSelect && codeSheet instanceof HTMLElement) {
+    const applyTheme = (id: string) => {
+      codeSheet.querySelectorAll<HTMLElement>('[data-code-theme-variant]').forEach((variant) => {
+        variant.classList.toggle('is-active', variant.dataset.codeThemeVariant === id)
+      })
+    }
+
+    themeSelect.addEventListener('change', () => applyTheme(themeSelect.value))
+    applyTheme(themeSelect.value)
+  }
 </script>

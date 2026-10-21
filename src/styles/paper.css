@@ -759,6 +759,35 @@ html[data-theme="dark"] .p-night-tag::after {
   padding: 15px 15px 17px;
 }
 
+.code-theme-variant {
+  display: none;
+}
+
+.code-theme-variant.is-active {
+  display: block;
+}
+
+.p-code-theme-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+.p-code-theme-picker select {
+  max-width: 92px;
+  padding: 1px 3px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--p-ink);
+  font-family: inherit;
+  font-size: 10px;
+}
+
 .p-code-sheet .code-panel pre {
   margin: 0;
   padding: 0;
@@ -771,19 +800,18 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-code-sheet .code-panel .line {
   position: relative;
-  display: block;
-  min-width: max-content;
-  padding-left: 26px;
-  white-space: pre;
+  padding-left: 20px;
 }
 
 .p-code-sheet .code-panel .line::before {
   position: absolute;
   left: 0;
-  width: 17px;
+  width: 14px;
   color: var(--p-rule);
   content: attr(data-line);
   text-align: right;
+  padding-right: 6px;
+  border-right: var(--p-rule) solid 1px;
 }
 
 html[data-theme="dark"] .p-code-sheet .code-panel pre span {

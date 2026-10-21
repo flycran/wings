@@ -5,6 +5,7 @@ import PlatformLogo from '../components/PlatformLogo.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import ProjectReference from '../components/ProjectReference.astro'
 import ThemeBookmark from '../components/ThemeBookmark'
+import { codeThemes } from '../data/codeThemes'
 import {
   colophon,
   isWingsProject,
@@ -171,6 +172,14 @@ const nav = [
             <div class="p-code-sheet-head">
               <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
               <span>FLYCRAN / PROFILE</span>
+              <label class="p-code-theme-picker">
+                <span>THEME</span>
+                <select data-code-theme-select aria-label="代码高亮主题">
+                  {codeThemes.map((theme) => (
+                    <option value={theme.id}>{theme.label}</option>
+                  ))}
+                </select>
+              </label>
               <span class="p-code-sheet-tag">v2.0</span>
             </div>
             <CodeTabs />
