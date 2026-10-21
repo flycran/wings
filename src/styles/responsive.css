@@ -83,6 +83,7 @@
   .p-mobile-tab {
     --tab: var(--p-blue);
     --tab-ink: #fff;
+    position: relative;
     display: grid;
     flex: 1;
     min-height: 42px;
@@ -114,10 +115,25 @@
     --tab: var(--p-red);
   }
 
+  .p-mobile-tab::after {
+    position: absolute;
+    right: 0;
+    bottom: calc(-1 * var(--mobilebar-bottom));
+    left: 0;
+    height: var(--mobilebar-bottom);
+    background: transparent;
+    content: "";
+    pointer-events: none;
+    transition: background-color 0.2s ease;
+  }
+
   .p-mobile-tab.is-active {
     background: var(--tab);
-    box-shadow: 0 var(--mobilebar-bottom) 0 0 var(--tab);
     color: var(--tab-ink);
+  }
+
+  .p-mobile-tab.is-active::after {
+    background: var(--tab);
   }
 
   .p-mobile-theme {
