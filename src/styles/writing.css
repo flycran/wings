@@ -1,0 +1,166 @@
+/* External writing index and platform links. */
+
+/* Writing */
+.p-writing-intro {
+  max-width: 650px;
+  margin: 0 0 26px;
+  color: var(--p-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.p-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.p-platform {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px;
+  border: 1px solid var(--p-rule);
+  border-left: 5px solid var(--accent);
+  background: var(--p-sheet);
+  box-shadow: 5px 5px 0 var(--p-rule);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.p-platform:hover {
+  box-shadow: 8px 8px 0 var(--p-rule);
+  transform: translate(-2px, -2px);
+}
+
+.p-platform-mark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--p-rule);
+  border-radius: 50%;
+  background: var(--p-paper);
+  color: var(--p-ink);
+}
+
+.p-platform-mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.p-platform-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.p-platform-copy strong {
+  font-family: var(--p-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.p-platform-copy span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-platform-copy small {
+  margin-top: 3px;
+  color: var(--p-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.p-platform-arrow {
+  margin-left: auto;
+  color: var(--accent);
+  font-family: var(--p-mono);
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.p-platform:hover .p-platform-arrow {
+  transform: translate(3px, -3px);
+}
+
+.p-writing-list {
+  border-top: 1px solid var(--p-rule);
+}
+
+.p-writing-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 138px 104px 18px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--p-rule);
+  text-decoration: none;
+  transition: background-color 0.18s ease;
+}
+
+.p-writing-row:hover {
+  background: rgba(29, 27, 23, 0.035);
+}
+
+html[data-theme="dark"] .p-writing-row:hover {
+  background: rgba(242, 237, 227, 0.04);
+}
+
+.p-writing-index {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-title {
+  overflow: hidden;
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+}
+
+.p-writing-meta {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-tag {
+  justify-self: start;
+  padding: 2px 6px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-arrow {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-row:hover .p-writing-arrow {
+  color: var(--p-ink);
+}
+
+.p-writing-foot {
+  margin: 12px 0 0;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  text-align: right;
+}
+

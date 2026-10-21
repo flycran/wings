@@ -1,0 +1,44 @@
+/* Design tokens and theme variables. */
+
+body.paper-body {
+  --p-paper: #f4efe4;
+  --p-sheet: #fffcf4;
+  --p-ink: #1d1b17;
+  --p-muted: #6e675b;
+  --p-rule: #d9d0be;
+  --p-blue: #006fb9;
+  --p-blue-bright: #00abff;
+  --p-orange: #b45f00;
+  --p-orange-bright: #ffb22f;
+  --p-green: #0b7a4b;
+  --p-green-bright: #21d486;
+  --p-red: #b8324f;
+  --p-red-bright: #fb658b;
+  --p-serif: "Noto Serif SC", "Source Serif 4", Georgia, serif;
+  --p-sans: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --p-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --focus: #006fb9;
+  margin: 0;
+  background: var(--p-paper);
+  color: var(--p-ink);
+  font-family: var(--p-sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+html[data-theme="dark"] body.paper-body {
+  --p-paper: #171512;
+  --p-sheet: #211e18;
+  --p-ink: #f2ede3;
+  --p-muted: #a79e8e;
+  --p-rule: #3a352c;
+  --p-blue: #54b8f0;
+  --p-blue-bright: #00abff;
+  --p-orange: #ffb22f;
+  --p-orange-bright: #ffb22f;
+  --p-green: #21d486;
+  --p-green-bright: #21d486;
+  --p-red: #fb658b;
+  --p-red-bright: #fb658b;
+  --focus: #54b8f0;
+}
