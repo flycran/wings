@@ -2,7 +2,7 @@
 
 FLYCRAN 的个人主页：前端架构、Developer Experience 与前端基础设施。
 
-当前为“纸上飞行”视觉稿，页面内容仍是示例数据，等待替换为真实项目、简历和文章链接。
+页面结构与视觉已完成，简历和部分个人信息仍待补充。
 
 ## 开发
 
@@ -74,7 +74,7 @@ src/
 │   ├── SmartUnitDemo.tsx      # smart-unit demo
 │   ├── GravityDemo.tsx        # 贡献图动画 demo
 │   └── RtkEndpointsDemo.tsx   # RTK Query 跳转 demo
-├── data/site.ts               # 示例资料、项目、平台、文章
+├── data/site.ts               # 资料、项目、平台、文章
 └── styles/
     ├── base.css               # reset、toast、reveal
     └── paper.css              # 纸上飞行视觉系统
@@ -92,7 +92,7 @@ src/
 
 ## 待办
 
-- 替换 `src/data/site.ts` 中的示例信息。
-- 补齐真实项目案例、简历 PDF、文章链接和联系方式。
+- 补齐简历 PDF、联系方式等个人信息。
+- 补齐项目案例详情、简历 PDF 和联系方式。
 - 统一响应式细节。
 - 多语言切换与时区自动识别（最后一轮）。

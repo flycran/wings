@@ -163,7 +163,7 @@ export const platforms = [
 export { writing, writingSyncedAt } from './writing'
 
 export const colophon = {
-  note: '示例数据 · 等待替换为真实内容',
+  note: 'Designed & built by FLYCRAN',
   builtWith: 'Astro / 原生 CSS / 少量 TS',
   year: '2026',
 }

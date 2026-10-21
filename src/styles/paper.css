@@ -121,12 +121,6 @@ html[data-theme="dark"] .p-grain {
   gap: 18px;
 }
 
-.p-topbar-note {
-  color: var(--p-muted);
-  font-family: var(--p-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-}
 
 .p-topbar-cta {
   padding-bottom: 2px;
@@ -598,10 +592,6 @@ html[data-theme="dark"] .p-night-tag::after {
   color: var(--p-ink);
 }
 
-.p-hero-links-note {
-  color: var(--p-muted);
-  opacity: 0.65;
-}
 
 .p-hero-stage {
   position: relative;
@@ -1849,12 +1839,6 @@ html[data-theme="dark"] .p-writing-row:hover {
   margin-top: 28px;
 }
 
-.p-contact-note {
-  margin: 15px 0 0;
-  color: var(--p-muted);
-  font-family: var(--p-mono);
-  font-size: 11px;
-}
 
 /* Footer */
 .p-footer {
@@ -2002,9 +1986,6 @@ html[data-theme="dark"] .p-footer {
     padding: 20px 0 0;
   }
 
-  .p-topbar-note {
-    display: none;
-  }
 
   .p-main {
     width: calc(100% - 40px);
