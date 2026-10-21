@@ -1045,14 +1045,6 @@ html[data-theme="dark"] .p-code-sheet .code-panel pre span {
   line-height: 1.8;
 }
 
-.p-project-outcome {
-  padding-left: 8px;
-  border-left: 2px solid var(--accent);
-  color: var(--accent) !important;
-  font-family: var(--p-mono);
-  font-size: 11px !important;
-  letter-spacing: 0.01em;
-}
 
 .p-tags {
   display: flex;

@@ -31,7 +31,6 @@ export interface Project {
   stack: string[]
   accent: Accent
   category: string
-  outcome: string
   href: string
   homepage?: string
   docs?: string
@@ -63,7 +62,6 @@ export const projects: ProjectEntry[] = [
     stack: ['TypeScript', 'Rollup', 'i18n'],
     accent: 'green',
     category: 'OPEN SOURCE',
-    outcome: '12 个单位 · 3 种语言 · 0 依赖',
     href: 'https://github.com/flycran/smart-unit',
     docs: 'https://flycran.github.io/smart-unit/en/',
     demo: 'unit',
@@ -79,7 +77,6 @@ export const projects: ProjectEntry[] = [
     stack: ['TypeScript', 'GitHub Actions', 'SVG'],
     accent: 'blue',
     category: 'CREATIVE',
-    outcome: '1 个 Action · 8 个配置项 · 纯 SVG',
     href: 'https://github.com/flycran/github-gravity',
     demo: 'gravity',
   },
@@ -94,7 +91,6 @@ export const projects: ProjectEntry[] = [
     stack: ['TypeScript', 'LSP', 'VS Code'],
     accent: 'orange',
     category: 'DEVELOPER TOOL',
-    outcome: '3 种 hook 模式 · 2 层 import',
     href: 'https://github.com/flycran/rtk-to-endpoints',
     demo: 'ide',
   },
