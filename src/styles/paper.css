@@ -519,7 +519,7 @@ html[data-theme="dark"] .p-night-tag::after {
   border: 1px solid var(--p-ink);
   border-radius: 3px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1;
   text-decoration: none;
   transition:
