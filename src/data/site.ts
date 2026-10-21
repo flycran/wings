@@ -33,6 +33,8 @@ export interface Project {
   category: string
   outcome: string
   href: string
+  homepage?: string
+  docs?: string
   demo: ProjectDemo
 }
 
@@ -63,6 +65,7 @@ export const projects: ProjectEntry[] = [
     category: 'OPEN SOURCE',
     outcome: '12 个单位 · 3 种语言 · 0 依赖',
     href: 'https://github.com/flycran/smart-unit',
+    docs: 'https://flycran.github.io/smart-unit/en/',
     demo: 'unit',
   },
   {

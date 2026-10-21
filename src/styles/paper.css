@@ -1010,11 +1010,23 @@ html[data-theme="dark"] .p-code-sheet .code-panel pre span {
 }
 
 .p-project-copy h3 {
-  margin: 0 0 3px;
+  margin: 0 0 5px;
   font-family: var(--p-serif);
   font-size: clamp(1.45rem, 2vw, 1.8rem);
   font-weight: 600;
   line-height: 1.15;
+}
+
+.p-project-copy h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.p-project-copy h3 a:hover,
+.p-project-copy h3 a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
 }
 
 .p-project-sub {
