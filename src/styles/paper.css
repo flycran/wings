@@ -653,11 +653,10 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-code-sheet {
   position: relative;
-  top: 10px;
+  top: 163px;
   z-index: 2;
   width: min(100%, 470px);
   align-self: flex-start;
-  margin-top: 113px;
   margin-bottom: 4px;
   flex: 0 0 auto;
   border: 1px solid var(--p-rule);
@@ -757,35 +756,6 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-code-sheet .code-panel {
   padding: 15px 15px 17px;
-}
-
-.code-theme-variant {
-  display: none;
-}
-
-.code-theme-variant.is-active {
-  display: block;
-}
-
-.p-code-theme-picker {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--p-muted);
-  font-family: var(--p-mono);
-  font-size: 10px;
-  letter-spacing: 0.05em;
-}
-
-.p-code-theme-picker select {
-  max-width: 92px;
-  padding: 1px 3px;
-  border: 1px solid var(--p-rule);
-  border-radius: 2px;
-  background: transparent;
-  color: var(--p-ink);
-  font-family: inherit;
-  font-size: 10px;
 }
 
 .p-code-sheet .code-panel pre {
