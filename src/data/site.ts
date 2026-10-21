@@ -104,30 +104,6 @@ export const projects: ProjectEntry[] = [
   },
 ]
 
-export const capabilities = [
-  {
-    index: '01',
-    title: '架构与基建',
-    en: 'ARCHITECTURE',
-    body: '把重复的决策收敛成约束：类型、构建、发布、目录边界。让团队少做选择，多做产品。',
-    evidence: ['smart-unit / API 设计', 'Wings / 静态架构', 'Vite 插件 / 环境类型'],
-  },
-  {
-    index: '02',
-    title: '工具与 DX',
-    en: 'DEVELOPER EXPERIENCE',
-    body: '编辑器、CLI、代码生成、AST/类型驱动。把反馈时间从“等 CI”缩短到“敲下回车”。',
-    evidence: ['rtk-to-endpoints / LSP', 'CLI 生成器', 'Biome / 代码规范'],
-  },
-  {
-    index: '03',
-    title: '界面与叙事',
-    en: 'INTERFACE & STORY',
-    body: '复杂概念的可视化、动效和文档。工具不仅要能跑，还要让人愿意用、看得懂。',
-    evidence: ['github-gravity / 可视化', 'Wings / 设计系统', '组件文档'],
-  },
-]
-
 export const principles = [
   '工具应该让下一步更清楚。',
   '文档是产品的一部分。',
