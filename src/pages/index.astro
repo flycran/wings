@@ -140,8 +140,19 @@ const nav = [
           </div>
           <p class="p-kicker">{profile.kicker}</p>
           <h1>
-            <span class="p-h1-line">把重复劳动变成<span class="p-mark">工具</span>，</span>
-            <span class="p-h1-line">把复杂系统变成<span class="p-mark p-mark--orange">体验</span>。</span>
+            {
+              profile.headline.map((line, index) => {
+                const mark = index === 0 ? '工具' : '体验'
+                const [before, after = ''] = line.split(mark)
+                return (
+                  <span class="p-h1-line">
+                    {before}
+                    <span class={`p-mark${index === 0 ? '' : ' p-mark--orange'}`}>{mark}</span>
+                    {after}
+                  </span>
+                )
+              })
+            }
           </h1>
           <p class="p-intro">{profile.intro}</p>
           <div class="p-actions">
