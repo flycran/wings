@@ -13,8 +13,8 @@ export const profile = {
   location: '深圳 · 中国',
   email: 'flycran@163.com',
   links: [
-    { label: 'GitHub', href: 'https://github.com/flycran', handle: '@flycran' },
-    { label: '掘金', href: 'https://juejin.cn/user/1737682330585838', handle: 'Flycran' },
+    { label: 'GitHub', href: 'https://github.com/flycran' },
+    { label: '掘金', href: 'https://juejin.cn/user/1737682330585838' },
   ],
 }
 
