@@ -65,6 +65,7 @@
   }
 
   .p-mobilebar {
+    --mobilebar-bottom: calc(8px + env(safe-area-inset-bottom));
     position: fixed;
     right: 0;
     bottom: 0;
@@ -73,7 +74,7 @@
     display: flex;
     align-items: stretch;
     gap: 5px;
-    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    padding: 8px 10px var(--mobilebar-bottom);
     border-top: 1px solid var(--p-rule);
     background: var(--p-sheet);
     box-shadow: 0 -4px 18px rgba(29, 27, 23, 0.08);
@@ -115,6 +116,7 @@
 
   .p-mobile-tab.is-active {
     background: var(--tab);
+    box-shadow: 0 var(--mobilebar-bottom) 0 0 var(--tab);
     color: var(--tab-ink);
   }
 
