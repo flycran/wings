@@ -448,21 +448,6 @@
   text-align: right;
 }
 
-.p-ide-cursor {
-  position: absolute;
-  right: 18px;
-  bottom: 14px;
-  width: 1px;
-  height: 13px;
-  background: var(--p-orange-bright);
-  animation: p-cursor 1.1s steps(2, end) infinite;
-}
-
-@keyframes p-cursor {
-  50% {
-    opacity: 0;
-  }
-}
 
 .p-work-note {
   display: flex;

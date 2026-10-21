@@ -11,7 +11,6 @@
   }
 }
 
-
 @media (max-width: 1080px) {
   .p-main,
   .p-topbar {
@@ -361,8 +360,7 @@
     transition: none;
   }
 
-  .p-demo--gravity.is-running .p-gravity-cell.is-falling,
-  .p-ide-cursor {
+  .p-demo--gravity.is-running .p-gravity-cell.is-falling {
     animation: none;
   }
 }

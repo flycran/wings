@@ -74,7 +74,7 @@ export default function ThemeBookmark() {
 
     // The bookmark spring keeps moving after visualDuration; wait for it to settle
     // before the view transition freezes the page. Measured settle time: ~670ms.
-    const delay = next === 'dark' ? 500 : 200
+    const delay = next === 'dark' ? 400 : 200
     window.setTimeout(() => beginTransition(next), delay)
   }
 

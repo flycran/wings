@@ -39,7 +39,6 @@ export default function RtkEndpointsDemo() {
         <span>/api/user/:id</span>
         <span className="p-ide-tip-note">跳转到 endpoint · hover 查看 URL</span>
       </div>
-      <div className="p-ide-cursor" aria-hidden="true" />
     </div>
   )
 }
