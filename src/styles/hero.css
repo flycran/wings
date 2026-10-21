@@ -246,10 +246,10 @@
   color: var(--p-ink);
 }
 
-
 .p-hero-stage {
   position: relative;
   display: flex;
+  min-width: 0;
   min-height: 560px;
   align-items: flex-end;
   justify-content: center;
@@ -297,11 +297,10 @@
 
 .p-code-sheet {
   position: relative;
-  top: 173px;
+  top: 223px;
   z-index: 2;
   width: min(100%, 470px);
   align-self: flex-start;
-  margin-bottom: 4px;
   flex: 0 0 auto;
   border: 1px solid var(--p-rule);
   border-radius: 3px;
@@ -399,13 +398,15 @@
 }
 
 .p-code-sheet .code-panel {
-  padding: 15px 15px 17px;
+  padding: 15px;
+  overflow: auto;
+  max-height: 300px;
 }
 
 .p-code-sheet .code-panel pre {
   margin: 0;
   padding: 0;
-  overflow-x: auto;
+  overflow-x: initial !important;
   background: transparent !important;
   font-family: var(--p-mono);
   font-size: 12px;
@@ -414,13 +415,13 @@
 
 .p-code-sheet .code-panel .line {
   position: relative;
-  padding-left: 20px;
+  padding-left: 22px;
 }
 
 .p-code-sheet .code-panel .line::before {
   position: absolute;
-  left: 0;
-  width: 14px;
+  left: -8px;
+  width: 24px;
   color: var(--p-rule);
   content: attr(data-line);
   text-align: right;
@@ -447,7 +448,7 @@ html[data-theme="dark"] .p-code-sheet .code-panel pre span {
 
 .p-hero-crane {
   position: absolute;
-  top: -75px;
+  top: -15px;
   right: 20px;
   z-index: 3;
   width: 340px;
@@ -535,4 +536,3 @@ html[data-theme="dark"] .p-code-sheet .code-panel pre span {
   opacity: 0.6;
   transform: translateX(-50%);
 }
-

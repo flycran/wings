@@ -1,13 +1,10 @@
+import craneRaw from '../components/Crane?raw'
+
 export const codeTabs = [
   {
-    id: 'profile',
-    label: 'profile.ts',
-    code: `export const flycran = {
-  role: '前端架构工程师',
-  focus: ['DX', '前端基础设施'],
-  stack: ['TypeScript', 'React', 'Astro', 'Vite', 'Bun'],
-  openTo: '全职 / 远程',
-} as const`,
+    id: 'crane',
+    label: 'Crane.tsx',
+    code: craneRaw,
   },
   {
     id: 'now',
