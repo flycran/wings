@@ -20,7 +20,6 @@ export default function SmartUnitDemo() {
     <div className="p-demo p-demo--unit">
       <div className="p-demo-head">
         <span>LIVE / smart-unit</span>
-        <span className="p-demo-badge">真实包</span>
       </div>
       <label htmlFor="unit-input">输入一个数字</label>
       <input

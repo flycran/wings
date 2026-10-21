@@ -71,7 +71,7 @@ src/
 │   ├── CodeTabs.astro         # profile.ts / now.ts / principles.ts
 │   ├── ProjectCard.astro      # 项目卡（服务端渲染介绍内容）
 │   ├── ProjectDemo.astro      # demo 注册与懒加载
-│   ├── SmartUnitDemo.tsx      # smart-unit 真实包 demo
+│   ├── SmartUnitDemo.tsx      # smart-unit demo
 │   ├── GravityDemo.tsx        # 贡献图动画 demo
 │   └── RtkEndpointsDemo.tsx   # RTK Query 跳转 demo
 ├── data/site.ts               # 示例资料、项目、平台、文章
@@ -84,7 +84,7 @@ src/
 
 - Astro 静态输出，默认零框架运行时。
 - 项目介绍、标题、摘要、标签和链接由 Astro 服务端渲染，保证 SEO。
-- 项目演示区是 React 岛，使用 `client:visible` 懒加载；smart-unit demo 直接使用真实包。
+- 项目演示区是 React 岛，使用 `client:visible` 懒加载；smart-unit demo 直接使用 `smart-unit` 包。
 - 纸鹤、夜页书签使用 React + `motion`；其余交互为原生 TypeScript：代码 tab、导航高亮、滚动 reveal、WebView 倾斜。
 - 代码高亮使用 Shiki 在构建时生成，代码内容维护在 `src/data/profileCode.ts`。
 - 字体自托管：Noto Serif SC / Noto Sans SC / JetBrains Mono / Space Grotesk。
