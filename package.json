@@ -12,7 +12,8 @@
     "astro": "astro",
     "typecheck": "astro check",
     "lint": "biome lint .",
-    "check": "bun run typecheck && biome check --fix ."
+    "check": "bun run typecheck && biome check --fix .",
+    "sync:writing": "bun run scripts/sync-juejin.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
     "@biomejs/biome": "2.5.15",
+    "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "code-inspector-plugin": "^2.0.9",

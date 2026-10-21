@@ -161,32 +161,7 @@ export const platforms = [
   },
 ]
 
-export const writing = [
-  {
-    title: '为什么我把 Vite 插件的类型生成重写了一遍',
-    platform: '掘金',
-    date: '2026.03',
-    tag: 'DX',
-  },
-  {
-    title: '从 RTK Query 跳到 endpoint：一个 Language Service 插件的实现',
-    platform: '掘金',
-    date: '2025.12',
-    tag: 'TypeScript',
-  },
-  {
-    title: '把贡献图做成物理动画：SVG + Rapier 的取舍',
-    platform: '掘金',
-    date: '2025.09',
-    tag: 'Creative Coding',
-  },
-  {
-    title: '一个个人主页需要数据库吗？',
-    platform: '掘金',
-    date: '2025.06',
-    tag: 'Architecture',
-  },
-]
+export { writing, writingSyncedAt } from './writing'
 
 export const colophon = {
   note: '示例数据 · 等待替换为真实内容',

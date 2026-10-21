@@ -14,6 +14,7 @@ import {
   profile,
   projects,
   writing,
+  writingSyncedAt,
 } from '../data/site'
 import Layout from '../layouts/Layout.astro'
 import '../styles/paper.css'
@@ -291,14 +292,14 @@ const nav = [
         <div class="p-section-head" data-reveal>
           <span class="p-section-index">03</span>
           <div class="p-section-title">
-            <p class="p-kicker">WRITING / SELECTED POSTS</p>
+            <p class="p-kicker">WRITING / LATEST POSTS</p>
             <h2>技术写作</h2>
           </div>
-          <p class="p-section-note">精选文章索引 · 外链至原文。</p>
+          <p class="p-section-note">最新文章索引 · 外链至原文。</p>
         </div>
 
         <p class="p-writing-intro" data-reveal>
-          长文主要发布在掘金，本站仅保留平台入口与精选索引。
+          长文主要发布在掘金，本站仅保留平台入口与最新文章索引。
         </p>
 
         <div class="p-platforms" data-reveal>
@@ -326,7 +327,7 @@ const nav = [
         <div class="p-writing-list" data-reveal>
           {
             writing.map((item, index) => (
-              <a class="p-writing-row" href="https://juejin.cn/user/1737682330585838" target="_blank" rel="noopener noreferrer">
+              <a class="p-writing-row" href={item.href} target="_blank" rel="noopener noreferrer">
                 <span class="p-writing-index">{String(index + 1).padStart(2, '0')}</span>
                 <span class="p-writing-title">{item.title}</span>
                 <span class="p-writing-meta">{item.platform} · {item.date}</span>
@@ -336,7 +337,7 @@ const nav = [
             ))
           }
         </div>
-        <p class="p-writing-foot">示例链接 · 最后同步 2026.10 · 之后可接 GitHub Action</p>
+        <p class="p-writing-foot">数据来自掘金 · 最后同步 {writingSyncedAt}</p>
       </section>
 
       <section class="p-contact" id="contact">

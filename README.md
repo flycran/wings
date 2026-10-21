@@ -30,6 +30,14 @@ bun run check       # 类型检查 + biome check --fix（会改动文件）
 
 Biome 固定为 `2.5.15`，配置由 `biome init` 生成，未改动推荐规则。
 
+### 同步掘金文章
+
+```bash
+bun run sync:writing
+```
+
+脚本会拉取掘金最新的 8 篇文章，写入 `src/data/writing.ts`，页面只读取生成后的数据。
+
 ### 源码定位
 
 已接入 `code-inspector-plugin`。开发模式下按住 `Option + Shift`（macOS）或 `Alt + Shift`（Windows/Linux）并点击页面元素，会打开编辑器对应源码位置。
