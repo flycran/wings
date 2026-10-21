@@ -26,12 +26,6 @@
     font-size: clamp(2.4rem, 3.6vw, 3.3rem);
   }
 
-  .p-hero-crane {
-    top: -95px;
-    right: 32px;
-    width: 280px;
-  }
-
   .p-about-grid {
     grid-template-columns: 260px 1fr;
     gap: 34px;
@@ -122,8 +116,6 @@
   .p-mobile-tab.is-active {
     background: var(--tab);
     color: var(--tab-ink);
-    transform: translateY(-4px);
-    box-shadow: 0 -2px 0 var(--p-rule);
   }
 
   .p-mobile-theme {
@@ -166,13 +158,6 @@
 
   .p-code-sheet {
     width: min(92%, 430px);
-    margin-top: 33px;
-  }
-
-  .p-hero-crane {
-    top: -120px;
-    right: 28px;
-    width: 250px;
   }
 
   .p-bigword {
@@ -278,7 +263,7 @@
 
   .p-code-sheet {
     width: 100%;
-    margin-top: 9px;
+    top: 158px;
   }
 
   .p-code-sheet::before {
@@ -297,9 +282,9 @@
   }
 
   .p-hero-crane {
-    top: -90px;
-    right: 20px;
-    width: 180px;
+    top: -42px;
+    right: 10px;
+    width: 290px;
   }
 
   .p-crane-note {
@@ -375,14 +360,14 @@ html[data-theme="dark"] .p-code-sheet::before {
 @media (min-width: 541px) and (max-width: 900px) {
   .p-code-sheet {
     width: min(86%, 440px);
-    margin-top: 33px;
     margin-right: auto;
     margin-left: 0;
+    top: 150px;
   }
 
   .p-hero-crane {
-    top: -130px;
+    top: -67px;
     right: 28px;
-    width: 270px !important;
+    width: 320px;
   }
 }
