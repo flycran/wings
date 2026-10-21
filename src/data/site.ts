@@ -47,8 +47,7 @@ export interface WingsProject {
 
 export type ProjectEntry = Project | WingsProject
 
-export const isWingsProject = (entry: ProjectEntry): entry is WingsProject =>
-  entry.id === 'wings'
+export const isWingsProject = (entry: ProjectEntry): entry is WingsProject => entry.id === 'wings'
 
 export const projects: ProjectEntry[] = [
   {

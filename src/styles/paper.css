@@ -761,15 +761,15 @@ html[data-theme="dark"] .p-night-tag::after {
 
 .p-code-sheet .code-panel pre {
   margin: 0;
+  padding: 0;
   overflow-x: auto;
-  color: var(--p-ink);
+  background: transparent !important;
   font-family: var(--p-mono);
   font-size: 12px;
   line-height: 1.85;
-  counter-reset: code-line;
 }
 
-.p-code-sheet .code-line {
+.p-code-sheet .code-panel .line {
   position: relative;
   display: block;
   min-width: max-content;
@@ -777,34 +777,17 @@ html[data-theme="dark"] .p-night-tag::after {
   white-space: pre;
 }
 
-.p-code-sheet .code-line::before {
+.p-code-sheet .code-panel .line::before {
   position: absolute;
   left: 0;
   width: 17px;
   color: var(--p-rule);
-  content: counter(code-line);
-  counter-increment: code-line;
+  content: attr(data-line);
   text-align: right;
 }
 
-.p-code-sheet .tk-key {
-  color: #8a4f9e;
-}
-
-.p-code-sheet .tk-var {
-  color: var(--p-blue);
-}
-
-.p-code-sheet .tk-str {
-  color: var(--p-green);
-}
-
-.p-code-sheet .tk-prop {
-  color: var(--p-orange);
-}
-
-.p-code-sheet .tk-pun {
-  color: var(--p-muted);
+html[data-theme="dark"] .p-code-sheet .code-panel pre span {
+  color: var(--shiki-dark) !important;
 }
 
 .p-code-sheet-foot {
