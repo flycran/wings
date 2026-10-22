@@ -1,5 +1,6 @@
 // @ts-check
 
+import { fileURLToPath } from 'node:url'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import { defineConfig } from 'astro/config'
@@ -33,7 +34,12 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [codeInspectorPlugin({ bundler: 'vite' })],
+    plugins: [
+      codeInspectorPlugin({
+        bundler: 'vite',
+        injectTo: fileURLToPath(new URL('./src/scripts/code-inspector.ts', import.meta.url)),
+      }),
+    ],
   },
   devToolbar: {
     enabled: false,
