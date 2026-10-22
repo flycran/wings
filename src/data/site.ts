@@ -10,7 +10,7 @@ export const profile = {
   intro:
     '我是 Flycran。做过 TypeScript Language Service 插件、Vite 插件、CLI 和几个有人用的小工具；喜欢把团队里反复出现的问题，变成一次性的解决方案。',
   availability: '开放全职 / 远程机会',
-  location: '深圳 · 中国',
+  location: '浙江 · 中国',
   email: 'flycran@163.com',
   links: [
     { label: 'GitHub', href: 'https://github.com/flycran' },
