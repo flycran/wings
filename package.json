@@ -17,13 +17,17 @@
   },
   "dependencies": {
     "@astrojs/react": "^7.1.0",
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource/noto-sans-sc": "^5.3.1",
     "@fontsource/noto-serif-sc": "^5.3.1",
     "astro": "^7.1.1",
+    "astro-i18n-aut": "^0.8.1",
+    "i18next": "^26.5.4",
     "motion": "^14.4.0",
     "overlayscrollbars": "^2.17.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-i18next": "^17.1.0",
     "smart-unit": "^2.1.2"
   },
   "devDependencies": {
