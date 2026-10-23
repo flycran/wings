@@ -1,0 +1,171 @@
+<!doctype html>
+<!-- og:image 1200×630 模板；?lang=zh|en 切换文案，由 scripts/generate-og-image.ts 截图 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>og-image</title>
+    <link rel="stylesheet" href="../node_modules/@fontsource/noto-serif-sc/600.css">
+    <link rel="stylesheet" href="../node_modules/@fontsource/noto-sans-sc/400.css">
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: "Noto Sans SC", sans-serif;
+      color: #1d1b17;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 39px, rgba(217, 208, 190, 0.55) 39px 40px),
+        repeating-linear-gradient(90deg, transparent 0 39px, rgba(217, 208, 190, 0.55) 39px 40px),
+        #f4efe4;
+    }
+
+    .frame {
+      position: absolute;
+      inset: 26px;
+      border: 2px solid #1d1b17;
+    }
+
+    .copy {
+      position: absolute;
+      left: 92px;
+      top: 132px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 17px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #6e675b;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      background: #ffb22f;
+      border: 2px solid #1d1b17;
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-family: "Noto Serif SC", serif;
+      font-weight: 600;
+      font-size: 128px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+
+    .tagline {
+      margin-top: 32px;
+      font-size: 28px;
+      line-height: 1.55;
+      color: #6e675b;
+    }
+
+    .tagline strong {
+      color: #1d1b17;
+      font-weight: 400;
+    }
+
+    .crane {
+      position: absolute;
+      right: 88px;
+      top: 128px;
+      width: 320px;
+      transform: rotate(-3deg);
+      filter: drop-shadow(6px 8px 0 rgba(29, 27, 23, 0.08));
+    }
+
+    .footer {
+      position: absolute;
+      left: 92px;
+      right: 92px;
+      bottom: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 10px;
+    }
+
+    .swatches i {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #1d1b17;
+    }
+
+    .swatches i:nth-child(1) {
+      background: #00abff;
+    }
+    .swatches i:nth-child(2) {
+      background: #21d486;
+    }
+    .swatches i:nth-child(3) {
+      background: #ffb22f;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="frame"></div>
+    <div class="copy">
+      <p class="kicker" data-copy="kicker"></p>
+      <h1>FLYCRAN</h1>
+      <p class="tagline" data-copy="tagline"></p>
+    </div>
+    <svg class="crane" viewBox="30 35 145 110" aria-hidden="true">
+      <g stroke="#231815" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="43.22 48.23 96.62 53.56 82.78 90.32 43.22 48.23" fill="#ffb22f" />
+        <polygon points="96.62 53.56 134.63 117.45 66.53 133.52 96.62 53.56" fill="#21d486" />
+        <path
+          d="M42.03,112.83l32.08.53-7.58,20.16s-16.67-10.87-17-11.06-16.47,4.35-16.47,4.35l8.96-13.97Z"
+          fill="#fff"
+        />
+        <polygon
+          points="134.63 117.45 143.85 92.24 164.02 95.03 144.86 73.68 116.48 86.94 134.63 117.45"
+          fill="#00abff"
+        />
+      </g>
+    </svg>
+    <div class="footer">
+      <span>flycran.xyz</span>
+      <span class="swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <script>
+    const copy = {
+      zh: {
+        lang: 'zh-CN',
+        kicker: 'WINGS · 个人主页',
+        tagline: '<strong>前端架构工程师</strong> · 关注 Developer Experience<br>与前端基础设施',
+      },
+      en: {
+        lang: 'en',
+        kicker: 'WINGS · Personal Site',
+        tagline:
+          '<strong>Frontend Architect</strong> · Developer Experience<br>&amp; Frontend Infrastructure',
+      },
+    }[new URLSearchParams(location.search).get('lang') ?? 'zh']
+
+    document.documentElement.lang = copy.lang
+    document.querySelector('[data-copy="kicker"]').textContent = copy.kicker
+    document.querySelector('[data-copy="tagline"]').innerHTML = copy.tagline
+    </script>
+  </body>
+</html>

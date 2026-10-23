@@ -109,6 +109,11 @@ const platformBase = [
   },
 ]
 
+/** 结构化数据（JSON-LD）引用的对外档案链接 */
+export const profileSameAs = platformBase.map((platform) => platform.href)
+
+export const profileName = profileBase.name
+
 const colophonYear = '2026'
 
 /** 组装完整站点数据供渲染使用；所有文案在渲染时从 messages 解析，避免模块顶层固化 locale */

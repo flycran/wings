@@ -15,6 +15,7 @@
     "lint": "biome lint .",
     "check": "bun run typecheck && biome check --fix .",
     "sync:writing": "bun run scripts/sync-juejin.ts",
+    "og:image": "bun run scripts/generate-og-image.ts",
     "check:i18n": "inlang check --project ./project.inlang"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
     "@biomejs/biome": "2.5.15",
+    "@types/bun": "^1.4.4",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

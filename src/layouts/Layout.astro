@@ -1,16 +1,10 @@
 ---
 import { m } from '@/paraglide/messages'
-import {
-  baseLocale,
-  deLocalizeHref,
-  getLocale,
-  type Locale,
-  locales,
-  localizeHref,
-} from '@/paraglide/runtime'
+import { baseLocale, getLocale, type Locale, locales } from '@/paraglide/runtime'
 import '@fontsource/noto-sans-sc/400.css'
 import '@fontsource/noto-serif-sc/600.css'
 import '../styles/site.css'
+import { profileName, profileSameAs } from '@/data/site'
 import { localizeCurrentHref } from '@/utils/localizeUrl'
 
 interface Props {
@@ -23,9 +17,54 @@ const htmlLangs: Record<Locale, string> = {
   en: 'en',
 }
 
+// og:locale 使用下划线格式，与 html lang 的连字符格式不同
+const ogLocales: Record<Locale, string> = {
+  zh: 'zh_CN',
+  en: 'en',
+}
+
+// og:image 为 1200×630 分享图，en 页单独使用英文版
+const ogImageHrefs: Record<Locale, string> = {
+  zh: '/og-image.png',
+  en: '/og-image-en.png',
+}
+
+// Netlify 构建时注入 CONTEXT（production/deploy-preview/branch-deploy），本地为空；
+// 非生产构建一律禁止收录，避免预览域名和本地产物进入索引
+const noindex = process.env.CONTEXT !== 'production'
+
 const { title, bodyClass } = Astro.props
 const locale = getLocale()
 const site = Astro.site
+const description = m.metaDescription()
+
+// 与 trailingSlash: 'never' 对齐，canonical 指向无尾斜杠地址；
+// build.format: 'file' 下静态路径带 .html 后缀（如 /en.html），需一并去掉
+const canonicalPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/+$/, '') || '/'
+const canonicalUrl = site ? new URL(canonicalPath, site).toString() : undefined
+const ogImage = site ? new URL(ogImageHrefs[locale], site).toString() : ogImageHrefs[locale]
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfilePage',
+      '@id': canonicalUrl,
+      url: canonicalUrl,
+      name: title,
+      description,
+      inLanguage: htmlLangs[locale],
+      mainEntity: {
+        '@type': 'Person',
+        name: profileName,
+        url: site?.toString(),
+        jobTitle: m.profileRole(),
+        description,
+        sameAs: profileSameAs,
+      },
+    },
+  ],
+}
 ---
 
 <!doctype html>
@@ -33,11 +72,15 @@ const site = Astro.site
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content={m.metaDescription()}>
-    <meta name="robots" content="noindex">
+    <meta name="description" content={description}>
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4efe4">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171512">
+    <link rel="sitemap" href="/sitemap-index.xml">
+    {noindex && <meta name="robots" content="noindex">}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    {site && canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     {site &&
       locales.map((locale) => {
         return (
@@ -55,6 +98,24 @@ const site = Astro.site
         href={localizeCurrentHref(baseLocale, Astro.url)}
       />
     )}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content={profileName}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content={title}>
+    <meta property="og:locale" content={ogLocales[locale]}>
+    {locales
+      .filter((other) => other !== locale)
+      .map((other) => <meta property="og:locale:alternate" content={ogLocales[other]} />)}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <title>{title}</title>
     <script src="../scripts/code-inspector" />
     <script is:inline>

@@ -52,7 +52,7 @@ const languageSwitches = locales
             </a>
           ))}
           {languageSwitches[0] && (
-            <LangHint client:load pageLocale={locale} targetHref={languageSwitches[0].href} />
+            <LangHint client:idle pageLocale={locale} targetHref={languageSwitches[0].href} />
           )}
         </nav>
         <a class="p-topbar-cta" href="#contact"
@@ -77,7 +77,7 @@ const languageSwitches = locales
           </a>
         ))}
       </nav>
-      <ThemeBookmark client:load />
+      <ThemeBookmark client:idle />
     </aside>
 
     <nav class="p-mobilebar" aria-label={m.a11yMobileNav()}>
