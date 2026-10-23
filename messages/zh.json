@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "metaTitle": "FLYCRAN · 前端架构工程师",
+  "metaDescription": "FLYCRAN 的个人主页：前端架构工程师，关注 Developer Experience 与前端基础设施。",
+  "skipToContent": "跳到主要内容",
+  "navHome": "首页",
+  "navWork": "作品",
+  "navAbout": "关于",
+  "navWriting": "写作",
+  "navContact": "简历 / 联系",
+  "actionViewWork": "看作品",
+  "actionDownloadResume": "下载简历",
+  "actionCopyEmail": "复制邮箱",
+  "emailCopied": "邮箱已复制",
+  "backToTop": "回到顶部"
+}

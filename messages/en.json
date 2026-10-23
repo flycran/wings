@@ -1,0 +1,16 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "metaTitle": "FLYCRAN · Frontend Architect",
+  "metaDescription": "FLYCRAN's personal site: frontend architect focused on Developer Experience and frontend infrastructure.",
+  "skipToContent": "Skip to content",
+  "navHome": "Home",
+  "navWork": "Work",
+  "navAbout": "About",
+  "navWriting": "Writing",
+  "navContact": "Resume / Contact",
+  "actionViewWork": "View work",
+  "actionDownloadResume": "Download resume",
+  "actionCopyEmail": "Copy email",
+  "emailCopied": "Email copied",
+  "backToTop": "Back to top"
+}

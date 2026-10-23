@@ -1,12 +1,23 @@
 export type Accent = 'blue' | 'orange' | 'green' | 'red'
 
+/** headline 的一个片段；带 accent 的片段渲染为高亮词 */
+export interface HeadlineSegment {
+  text: string
+  accent?: Accent
+}
+
+export type HeadlineLine = HeadlineSegment[]
+
 export const profile = {
   name: 'FLYCRAN',
   cn: '飞鹤',
   role: '前端架构工程师',
   focus: 'Developer Experience & 前端基础设施',
   kicker: 'FRONTEND ARCHITECT · DX & INFRA',
-  headline: ['把重复劳动变成工具，', '把复杂系统变成体验。'],
+  headline: [
+    [{ text: '把重复劳动变成' }, { text: '工具', accent: 'blue' }, { text: '，' }],
+    [{ text: '把复杂系统变成' }, { text: '体验', accent: 'orange' }, { text: '。' }],
+  ] satisfies HeadlineLine[],
   intro:
     '我是 Flycran。做过 TypeScript Language Service 插件、Vite 插件、CLI 和几个有人用的小工具；喜欢把团队里反复出现的问题，变成一次性的解决方案。',
   availability: '开放全职 / 远程机会',

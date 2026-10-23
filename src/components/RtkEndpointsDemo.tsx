@@ -21,6 +21,7 @@ export default function RtkEndpointsDemo() {
         <div>
           <span className="p-ide-ln">15</span>
           {'      query: (id) => '}
+          {/** biome-ignore lint/suspicious/noTemplateCurlyInString: 这是code内容 */}
           <span className="tk-str">{'`/api/user/${id}`'}</span>,
         </div>
         <div>

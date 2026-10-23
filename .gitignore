@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# paraglide compile output
+src/paraglide/
+
 # generated types
 .astro/
 
@@ -13,6 +16,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+debug.log
+
 # environment variables
 .env
 .env.production
@@ -22,3 +27,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local Netlify folder
+.netlify

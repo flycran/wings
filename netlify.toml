@@ -10,6 +10,17 @@
   command = "bun run dev"
   targetPort = 4321
 
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # Legacy routes from the old article-first site.
 [[redirects]]
   from = "/article"
@@ -45,9 +56,3 @@
   from = "/ui"
   to = "/"
   status = 301
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
