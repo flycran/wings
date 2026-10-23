@@ -1,0 +1,24 @@
+/* 项目卡片内交互 demo 的共享外壳。
+   暗色变体（gravity/ide）通过 --demo-* 变量注入颜色，避免跨模块覆盖。 */
+.demo {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--demo-border, var(--p-rule));
+  border-radius: 2px;
+  background: var(--demo-bg, var(--p-paper));
+  box-shadow: 3px 3px 0 var(--demo-shadow, var(--p-rule));
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--demo-head-fg, var(--p-muted));
+  font-family: var(--p-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

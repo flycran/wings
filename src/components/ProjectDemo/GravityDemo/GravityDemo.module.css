@@ -1,0 +1,108 @@
+/* github-gravity demo。 */
+.demo {
+  --demo-border: #2b333d;
+  --demo-bg: #14171b;
+  --demo-shadow: #c9d1da;
+  --demo-head-fg: rgba(216, 226, 240, 0.52);
+}
+
+.badge {
+  padding: 1px 5px;
+  border: 1px solid rgba(216, 226, 240, 0.22);
+  border-radius: 2px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.action {
+  background: transparent;
+  color: rgba(216, 226, 240, 0.65);
+  font-family: var(--p-mono);
+  cursor: pointer;
+}
+
+.action:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.stage {
+  position: relative;
+  height: 148px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 226, 240, 0.1);
+  background:
+    linear-gradient(rgba(110, 209, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 209, 255, 0.04) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  color: transparent;
+  font-family: var(--p-sans);
+  font-size: 2.9rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  -webkit-text-stroke: 1px rgba(110, 209, 255, 0.32);
+}
+
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 4px;
+  padding: 10px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  border-radius: 1px;
+  background: rgba(110, 209, 255, 0.11);
+}
+
+.isBright {
+  background: rgba(110, 209, 255, 0.42);
+}
+
+.isFalling {
+  background: rgba(33, 212, 134, 0.55);
+}
+
+.running .isFalling {
+  animation: block-drop 0.95s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: var(--d);
+}
+
+@keyframes block-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-90px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 540px) {
+  .grid {
+    gap: 3px;
+    padding: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .running .isFalling {
+    animation: none;
+  }
+}

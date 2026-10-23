@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { m } from '@/paraglide/messages'
 import type { Locale } from '@/paraglide/runtime'
+import styles from './LangHint.module.css'
 
 // 简体中文地区的时区，其余时区一律按英文处理
 const zhTimezones = new Set([
@@ -13,8 +14,6 @@ const zhTimezones = new Set([
   'Asia/Taipei',
 ])
 
-// 语言名用目标语言自称
-const localeNames: Record<Locale, string> = { zh: '中文', en: 'English' }
 const DISMISS_KEY = 'wings-lang-hint'
 
 interface Props {
@@ -67,13 +66,13 @@ export default function LangHint({ pageLocale, targetHref }: Props) {
   }
 
   return (
-    <div className={`p-lang-hint${hiding ? ' is-hiding' : ''}`} role="status">
-      <a className="p-lang-hint-switch" href={targetHref} onClick={dismiss}>
-        {m.langHintSwitchTo({ language: localeNames[suggested] }, { locale: suggested })}
+    <div className={`${styles.hint}${hiding ? ` ${styles.isHiding}` : ''}`} role="status">
+      <a className={styles.switch} href={targetHref} onClick={dismiss}>
+        {m.langHintSwitchTo({}, { locale: suggested })}
       </a>
       <button
         type="button"
-        className="p-lang-hint-close"
+        className={styles.close}
         aria-label={m.langHintDismiss({}, { locale: suggested })}
         onClick={dismiss}
       >

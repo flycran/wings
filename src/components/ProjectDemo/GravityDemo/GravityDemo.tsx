@@ -1,5 +1,7 @@
 import { type CSSProperties, useEffect, useState } from 'react'
 import { m } from '@/paraglide/messages'
+import shared from '../demo.module.css'
+import styles from './GravityDemo.module.css'
 
 const cells = Array.from({ length: 112 }, (_, index) => ({
   index,
@@ -18,27 +20,27 @@ export default function GravityDemo() {
   }, [])
 
   return (
-    <div className={`p-demo p-demo--gravity${running ? ' is-running' : ''}`}>
-      <div className="p-demo-head">
+    <div className={`${shared.demo} ${styles.demo}${running ? ` ${styles.running}` : ''}`}>
+      <div className={shared.head}>
         <span>LIVE SVG / github-gravity</span>
         <button
-          className="p-demo-badge p-demo-action"
+          className={`${styles.badge} ${styles.action}`}
           type="button"
           onClick={() => setRun((value) => value + 1)}
         >
           {m.demoGravityReplay()}
         </button>
       </div>
-      <div className="p-gravity-stage" aria-hidden="true" key={run}>
-        <div className="p-gravity-text">FLY</div>
-        <div className="p-gravity-grid">
+      <div className={styles.stage} aria-hidden="true" key={run}>
+        <div className={styles.text}>FLY</div>
+        <div className={styles.grid}>
           {cells.map((cell) => (
             <span
               key={cell.index}
               className={[
-                'p-gravity-cell',
-                cell.falling ? 'is-falling' : '',
-                cell.bright ? 'is-bright' : '',
+                styles.cell,
+                cell.falling ? styles.isFalling : '',
+                cell.bright ? styles.isBright : '',
               ]
                 .filter(Boolean)
                 .join(' ')}

@@ -1,0 +1,67 @@
+---
+import type { WingsProject } from '../../data/site'
+
+interface Props {
+  project: WingsProject
+}
+
+const { project } = Astro.props
+---
+
+<aside class="p-work-note" data-reveal>
+  <span class="p-work-note-index">{project.index} / REFERENCE</span>
+  <h3>{project.title}</h3>
+  <p>{project.description}</p>
+  {project.href ? (
+    <a class="p-work-note-link" href={project.href}>
+      {project.linkLabel}
+    </a>
+  ) : (
+    <span class="p-work-note-link">{project.linkLabel}</span>
+  )}
+</aside>
+
+<style>
+.p-work-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  border: 1px dashed var(--p-rule);
+  border-radius: 3px;
+  background: rgba(255, 252, 244, 0.45);
+}
+
+:global(html[data-theme="dark"]) .p-work-note {
+  background: rgba(33, 30, 24, 0.45);
+}
+
+.p-work-note-index {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.p-work-note h3 {
+  margin: 0;
+  font-family: var(--p-serif);
+  font-size: 1.65rem;
+  font-weight: 600;
+}
+
+.p-work-note p {
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+.p-work-note-link {
+  margin-top: 8px;
+  color: var(--p-red);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+</style>

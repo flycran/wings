@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { type MouseEvent, useRef } from 'react'
 import { m } from '@/paraglide/messages'
+import styles from './ThemeBookmark.module.css'
 
 type Theme = 'light' | 'dark'
 
@@ -82,7 +83,7 @@ export default function ThemeBookmark() {
   return (
     <motion.button
       ref={buttonRef}
-      className="p-theme-hanger"
+      className={styles.hanger}
       type="button"
       data-theme-bookmark
       aria-label={m.a11yThemeBookmark()}
@@ -90,10 +91,10 @@ export default function ThemeBookmark() {
       whileTap={{ y: 14 }}
       transition={{ type: 'spring', visualDuration: 0.15 }}
     >
-      <span className="p-theme-cord" aria-hidden="true" />
-      <span ref={tagRef} className="p-theme-tag-wrap">
-        <span className="p-night-tag" aria-hidden="true">
-          <span className="p-night-tag-text">{m.themeNightTag()}</span>
+      <span className={styles.cord} aria-hidden="true" />
+      <span ref={tagRef} className={styles.tagWrap}>
+        <span className={styles.tag} aria-hidden="true">
+          <span className={styles.tagText}>{m.themeNightTag()}</span>
         </span>
       </span>
     </motion.button>

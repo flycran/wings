@@ -1,0 +1,199 @@
+---
+import type { Project } from '../../data/site'
+import ProjectDemo from '../ProjectDemo/ProjectDemo.astro'
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+const projectUrl = project.homepage ?? project.docs ?? project.href
+---
+
+<article
+  class="p-project"
+  style={`--accent: var(--p-${project.accent}); --accent-bright: var(--p-${project.accent}-bright);`}
+>
+  <div class="p-project-top">
+    <span>{project.index} / {project.category}</span>
+    <span>{project.year}</span>
+  </div>
+
+  <div class="p-project-copy">
+    <h3><a href={projectUrl} target="_blank" rel="noopener noreferrer">{project.title}</a></h3>
+    <p class="p-project-sub">{project.subtitle}</p>
+    <p>{project.summary}</p>
+  </div>
+
+  <div class="p-project-visual">
+    <ProjectDemo demo={project.demo} />
+  </div>
+
+  <div class="p-project-foot">
+    <div class="p-tags">
+      {project.stack.map((item) => <span>{item}</span>)}
+    </div>
+    <a class="p-project-link" href={project.href} target="_blank" rel="noopener noreferrer">
+      GitHub <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>
+
+<style>
+.p-project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 19px;
+  border: 1px solid var(--p-rule);
+  border-radius: 3px;
+  background: var(--p-sheet);
+  box-shadow: 7px 7px 0 var(--p-rule);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.p-project:hover {
+  box-shadow: 10px 10px 0 var(--p-rule);
+  transform: translate(-2px, -2px);
+}
+
+/* 右上角随悬停展开的折角 */
+.p-project::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(225deg, var(--accent-bright) 0 50%, transparent 50%);
+  content: "";
+  opacity: 0.85;
+  transition:
+    width 0.22s ease,
+    height 0.22s ease;
+}
+
+.p-project:hover::after {
+  width: 38px;
+  height: 38px;
+}
+
+.p-project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px dashed var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.p-project-copy h3 {
+  margin: 0 0 5px;
+  font-family: var(--p-serif);
+  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.p-project-copy h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.p-project-copy h3 a:hover,
+.p-project-copy h3 a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+/* 特异性压过 .p-project-copy p 的通用段落样式 */
+.p-project-copy .p-project-sub {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+.p-project-copy p {
+  margin: 0 0 12px;
+  color: var(--p-muted);
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+.p-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.p-tags span {
+  padding: 3px 6px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  background: var(--p-paper);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.p-project-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding-bottom: 1px;
+  border-bottom: 1px solid var(--p-ink);
+  color: var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.p-project-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.p-project-visual {
+  display: flex;
+  min-height: 184px;
+  align-items: center;
+}
+
+.p-project-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed var(--p-rule);
+}
+
+.p-project-foot .p-project-link {
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .p-project {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-project {
+    transition: none;
+  }
+}
+</style>

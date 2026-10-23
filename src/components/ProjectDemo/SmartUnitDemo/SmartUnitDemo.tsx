@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import SmartUnit from 'smart-unit'
 import { m } from '@/paraglide/messages'
+import shared from '../demo.module.css'
+import styles from './SmartUnitDemo.module.css'
 
 type Locale = 'en' | 'zh'
 
@@ -18,24 +20,27 @@ export default function SmartUnitDemo() {
   const { numStr, unit } = units[locale].getUnit(safeValue, '0-2')
 
   return (
-    <div className="p-demo p-demo--unit">
-      <div className="p-demo-head">
+    <div className={shared.demo}>
+      <div className={shared.head}>
         <span>LIVE / smart-unit</span>
       </div>
-      <label htmlFor="unit-input">{m.demoSmartUnitInputLabel()}</label>
+      <label className={styles.label} htmlFor="unit-input">
+        {m.demoSmartUnitInputLabel()}
+      </label>
       <input
         id="unit-input"
+        className={styles.input}
         value={value}
         inputMode="decimal"
         onChange={(event) => setValue(event.target.value)}
       />
-      <div className="p-unit-output">
+      <div className={styles.output}>
         <span>{numStr}</span>
         <span>{unit}</span>
       </div>
-      <div className="p-unit-meta">
+      <div className={styles.meta}>
         <span>{m.demoSmartUnitAutoUnit()}</span>
-        <div className="p-unit-locale">
+        <div className={styles.locales}>
           <button
             className={locale === 'en' ? 'is-active' : undefined}
             type="button"

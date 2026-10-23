@@ -1,0 +1,110 @@
+/* 主题切换书签挂绳。 */
+.hanger {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  width: 60px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--p-muted);
+}
+
+.cord {
+  width: 1px;
+  height: 106px;
+  border-radius: 1px;
+  background-color: var(--p-muted);
+  background-image: repeating-linear-gradient(
+    170deg,
+    transparent 0 5px,
+    color-mix(in srgb, var(--p-muted) 55%, var(--p-paper)) 5px 7px
+  );
+  opacity: 0.5;
+}
+
+.tagWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tag {
+  position: relative;
+  display: flex;
+  width: 22px;
+  height: 54px;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 13px;
+  background: var(--p-sheet);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 11px), 50% 100%, 0 calc(100% - 11px));
+  color: var(--p-ink);
+  filter: drop-shadow(2px 2px 0 var(--p-rule));
+  transform: rotate(-2deg);
+  transform-origin: top center;
+  transition:
+    transform 0.3s ease,
+    background-color 0.35s ease,
+    color 0.35s ease,
+    filter 0.35s ease;
+}
+
+/* 书签左缘的橙色脊线 */
+.tag::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--p-orange);
+  content: "";
+  opacity: 0.8;
+}
+
+/* 书签的系绳孔 */
+.tag::after {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--p-rule);
+  border-radius: 50%;
+  background: var(--p-paper);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.tagText {
+  font-family: var(--p-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+}
+
+.hanger:hover .tag {
+  transform: rotate(1.5deg) translateY(2px);
+}
+
+:global(html[data-theme="dark"]) .tag {
+  background: #211e18;
+  color: #f2ede3;
+  filter: drop-shadow(2px 2px 0 #000);
+}
+
+:global(html[data-theme="dark"]) .tag::before {
+  background: var(--p-orange-bright);
+  opacity: 1;
+}
+
+:global(html[data-theme="dark"]) .tag::after {
+  border-color: #4a4438;
+  background: #171512;
+}

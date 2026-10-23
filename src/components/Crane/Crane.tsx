@@ -3,14 +3,10 @@ import { type CSSProperties, useEffect, useState } from 'react'
 import { m } from '@/paraglide/messages'
 import styles from './Crane.module.css'
 
-interface CraneProps {
-  className?: string
-}
-
 const hoverTarget = { '--angle': '120deg', y: -18 } as const
 const restTarget = { '--angle': '50deg', y: 0 } as const
 
-export default function Crane({ className = '' }: CraneProps) {
+export default function Crane() {
   const [canHover, setCanHover] = useState(true)
 
   useEffect(() => {
@@ -23,7 +19,6 @@ export default function Crane({ className = '' }: CraneProps) {
 
   return (
     <motion.div
-      className={className}
       initial={{ opacity: 0, y: -90, x: 40 }}
       animate={{ opacity: 1, y: 0, x: 0 }}
       transition={{ type: 'spring', visualDuration: 0.35 }}

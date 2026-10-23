@@ -1,10 +1,4 @@
+/* 全局样式的唯一入口：reset / 原语 + 设计令牌。
+   组件样式一律放在各自组件的 scoped <style> 或 *.module.css 中。 */
 @import "./base.css";
 @import "./tokens.css";
-@import "./layout.css";
-@import "./hero.css";
-@import "./sketch.css";
-@import "./work.css";
-@import "./about.css";
-@import "./writing.css";
-@import "./contact.css";
-@import "./responsive.css";

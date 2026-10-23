@@ -1,0 +1,212 @@
+---
+import { Code } from 'astro:components'
+import type { ShikiTransformer } from 'shiki'
+import { m } from '@/paraglide/messages'
+import { codeTabs } from '../../data/profileCode'
+
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+
+const lineNumbers: ShikiTransformer = {
+  line(node, line) {
+    node.properties['data-line'] = String(line)
+  },
+}
+---
+
+<div class:list={['codecard', className]} data-codecard>
+  <div class="code-tabs" role="tablist" aria-label={m.a11yCodeTabs()}>
+    {codeTabs.map((tab, index) => (
+      <button
+        class:list={['code-tab', { 'is-active': index === 0 }]}
+        type="button"
+        role="tab"
+        id={`code-tab-${tab.id}`}
+        aria-controls={`code-panel-${tab.id}`}
+        aria-selected={index === 0}
+        tabindex={index === 0 ? 0 : -1}
+        data-code-tab={tab.id}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  {codeTabs.map((tab, index) => (
+    <div
+      class="code-panel"
+      id={`code-panel-${tab.id}`}
+      role="tabpanel"
+      aria-labelledby={`code-tab-${tab.id}`}
+      data-code-panel={tab.id}
+      hidden={index !== 0}
+    >
+      <div class="code-panel-scroll" data-code-scroll>
+        <Code
+          code={tab.code}
+          lang="ts"
+          themes={{ light: 'vitesse-light', dark: 'vitesse-dark' }}
+          transformers={[lineNumbers]}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+.code-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 0 11px;
+  border-bottom: 1px solid var(--p-rule);
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.code-tab {
+  padding: 9px 8px 7px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+.code-tab.is-active {
+  border-bottom-color: var(--p-blue);
+  color: var(--p-ink);
+}
+
+.code-panel-scroll {
+  padding: 15px;
+  overflow: auto;
+  height: 260px;
+  overscroll-behavior: contain;
+}
+
+/* OverlayScrollbars 挂载后注入的主题类 */
+.code-panel-scroll:global(.os-theme-light) {
+  --os-size: 10px;
+  --os-padding-perpendicular: 2px;
+  --os-handle-bg: color-mix(in srgb, var(--p-muted) 38%, transparent);
+  --os-handle-bg-hover: color-mix(in srgb, var(--p-muted) 60%, transparent);
+  --os-handle-bg-active: color-mix(in srgb, var(--p-muted) 72%, transparent);
+  --os-handle-border-radius: 99px;
+  --os-track-bg: transparent;
+  --os-track-bg-hover: transparent;
+  --os-track-bg-active: transparent;
+}
+
+:global(html[data-theme="dark"]) .code-panel-scroll:global(.os-theme-light) {
+  --os-handle-bg: color-mix(in srgb, var(--p-ink) 32%, transparent);
+  --os-handle-bg-hover: color-mix(in srgb, var(--p-ink) 48%, transparent);
+  --os-handle-bg-active: color-mix(in srgb, var(--p-ink) 62%, transparent);
+}
+
+/* pre 与 .line 由 shiki 渲染，不在本组件模板内 */
+.code-panel :global(pre) {
+  margin: 0;
+  padding: 0;
+  overflow-x: initial !important;
+  background: transparent !important;
+  font-family: var(--p-mono);
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+.code-panel :global(.line) {
+  position: relative;
+  padding-left: 22px;
+}
+
+.code-panel :global(.line)::before {
+  position: absolute;
+  left: -8px;
+  width: 24px;
+  color: var(--p-rule);
+  content: attr(data-line);
+  text-align: right;
+  padding-right: 6px;
+  border-right: var(--p-rule) solid 1px;
+}
+
+:global(html[data-theme="dark"]) .code-panel :global(pre span) {
+  color: var(--shiki-dark) !important;
+}
+
+@media (max-width: 540px) {
+  .code-tab {
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 11px;
+  }
+
+  .code-panel :global(pre) {
+    font-size: 11px;
+  }
+}
+</style>
+
+<script>
+import { OverlayScrollbars } from 'overlayscrollbars'
+import 'overlayscrollbars/overlayscrollbars.css'
+
+type Scrollbar = ReturnType<typeof OverlayScrollbars>
+
+document.querySelectorAll<HTMLElement>('[data-codecard]').forEach((card) => {
+  const tabs = Array.from(card.querySelectorAll<HTMLButtonElement>('[data-code-tab]'))
+  const panels = Array.from(card.querySelectorAll<HTMLElement>('[data-code-panel]'))
+  const scrollbars = new Map<HTMLElement, Scrollbar>()
+
+  const mountScrollbar = (panel: HTMLElement) => {
+    const target = panel.querySelector<HTMLElement>('[data-code-scroll]')
+    if (!target) return
+    const instance =
+      scrollbars.get(panel) ??
+      OverlayScrollbars(target, {
+        scrollbars: {
+          theme: 'os-theme-light',
+          autoHide: 'leave',
+          autoHideDelay: 400,
+        },
+      })
+    if (!instance) return
+    scrollbars.set(panel, instance)
+    instance.update(true)
+  }
+
+  const activate = (tab: HTMLButtonElement) => {
+    const name = tab.dataset.codeTab
+    tabs.forEach((item) => {
+      const active = item === tab
+      item.classList.toggle('is-active', active)
+      item.setAttribute('aria-selected', String(active))
+      item.tabIndex = active ? 0 : -1
+    })
+    panels.forEach((panel) => {
+      const active = panel.dataset.codePanel === name
+      panel.hidden = !active
+      if (active) mountScrollbar(panel)
+    })
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activate(tab))
+    tab.addEventListener('keydown', (event) => {
+      const delta = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+      if (!delta) return
+      event.preventDefault()
+      const next = tabs[(index + delta + tabs.length) % tabs.length]
+      next.focus()
+      activate(next)
+    })
+  })
+
+  panels.filter((panel) => !panel.hidden).forEach(mountScrollbar)
+})
+</script>
