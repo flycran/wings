@@ -31,33 +31,42 @@ const site = Astro.site
 <!doctype html>
 <html lang={htmlLangs[locale]} data-theme="light">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={m.metaDescription()} />
-    <meta name="robots" content="noindex" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    { site && locales.map((locale) => {
-
-        return <link rel="alternate" hreflang={htmlLangs[locale]} href={localizeCurrentHref(locale, Astro.url)} />
-      })
-    }
-    {
-      site && <link rel="alternate" hreflang="x-default" href={localizeCurrentHref(baseLocale, Astro.url)} />
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content={m.metaDescription()}>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    {site &&
+      locales.map((locale) => {
+        return (
+          <link
+            rel="alternate"
+            hreflang={htmlLangs[locale]}
+            href={localizeCurrentHref(locale, Astro.url)}
+          />
+        )
+      })}
+    {site && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={localizeCurrentHref(baseLocale, Astro.url)}
+      />
+    )}
     <title>{title}</title>
-    <script src="../scripts/code-inspector"/>
+    <script src="../scripts/code-inspector" />
     <script is:inline>
-      (() => {
-        try {
-          const stored = localStorage.getItem('wings-theme')
-          document.documentElement.dataset.theme =
-            stored === 'dark' || stored === 'light' ? stored : 'light'
-        } catch {
-          document.documentElement.dataset.theme = 'light'
-        }
-      })()
+    ;(() => {
+      try {
+        const stored = localStorage.getItem('wings-theme')
+        document.documentElement.dataset.theme =
+          stored === 'dark' || stored === 'light' ? stored : 'light'
+      } catch {
+        document.documentElement.dataset.theme = 'light'
+      }
+    })()
     </script>
   </head>
   <body class={bodyClass}>
@@ -66,93 +75,94 @@ const site = Astro.site
     <div class="site-toast" data-toast role="status" aria-live="polite"></div>
 
     <script>
-      import { m } from '@/paraglide/messages'
+    import { m } from '@/paraglide/messages'
 
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-      // Scroll reveal
-      const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]')
-      if (reduced) {
-        revealItems.forEach((el) => el.classList.add('is-visible'))
-      } else {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible')
-                io.unobserve(entry.target)
-              }
-            })
-          },
-          { rootMargin: '0px 0px -8% 0px', threshold: 0.06 }
-        )
-        revealItems.forEach((el) => io.observe(el))
-      }
-
-      // Copy email
-      const toast = document.querySelector<HTMLElement>('[data-toast]')
-      let toastTimer = 0
-      const showToast = (message: string) => {
-        if (!toast) return
-        toast.textContent = message
-        toast.classList.add('is-visible')
-        window.clearTimeout(toastTimer)
-        toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 1800)
-      }
-
-      document.querySelectorAll<HTMLElement>('[data-copy-email]').forEach((el) => {
-        el.addEventListener('click', async () => {
-          const email = el.dataset.copyEmail || ''
-          try {
-            await navigator.clipboard.writeText(email)
-            showToast(m.emailCopied())
-          } catch {
-            showToast(email)
-          }
-        })
+    // Scroll reveal
+    const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]')
+    if (reduced) {
+      revealItems.forEach((el) => {
+        el.classList.add('is-visible')
       })
-
-      // Theme toggle for the mobile header; the desktop bulb is a React island.
-      const themeButtons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]')
-      themeButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
-          const apply = () => {
-            document.documentElement.dataset.theme = next
-            try {
-              localStorage.setItem('wings-theme', next)
-            } catch {
-              /* ignore */
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible')
+              io.unobserve(entry.target)
             }
-          }
-
-          if (!document.startViewTransition || reduced) {
-            apply()
-            return
-          }
-
-          const rect = button.getBoundingClientRect()
-          const x = rect.left + rect.width / 2
-          const y = rect.top + rect.height / 2
-          const radius = Math.hypot(window.innerWidth, window.innerHeight)
-          const transition = document.startViewTransition(apply)
-          transition.ready.then(() => {
-            document.documentElement.animate(
-              {
-                clipPath: [
-                  `circle(0px at ${x}px ${y}px)`,
-                  `circle(${radius}px at ${x}px ${y}px)`,
-                ],
-              },
-              {
-                duration: 560,
-                easing: 'cubic-bezier(.22,.61,.36,1)',
-                pseudoElement: '::view-transition-new(root)',
-              }
-            )
           })
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.06 }
+      )
+      revealItems.forEach((el) => {
+        io.observe(el)
+      })
+    }
+
+    // Copy email
+    const toast = document.querySelector<HTMLElement>('[data-toast]')
+    let toastTimer = 0
+    const showToast = (message: string) => {
+      if (!toast) return
+      toast.textContent = message
+      toast.classList.add('is-visible')
+      window.clearTimeout(toastTimer)
+      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 1800)
+    }
+
+    document.querySelectorAll<HTMLElement>('[data-copy-email]').forEach((el) => {
+      el.addEventListener('click', async () => {
+        const email = el.dataset.copyEmail || ''
+        try {
+          await navigator.clipboard.writeText(email)
+          showToast(m.emailCopied())
+        } catch {
+          showToast(email)
+        }
+      })
+    })
+
+    // Theme toggle for the mobile header; the desktop bulb is a React island.
+    const themeButtons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]')
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+        const apply = () => {
+          document.documentElement.dataset.theme = next
+          try {
+            localStorage.setItem('wings-theme', next)
+          } catch {
+            /* ignore */
+          }
+        }
+
+        if (!document.startViewTransition || reduced) {
+          apply()
+          return
+        }
+
+        const rect = button.getBoundingClientRect()
+        const x = rect.left + rect.width / 2
+        const y = rect.top + rect.height / 2
+        const radius = Math.hypot(window.innerWidth, window.innerHeight)
+        const transition = document.startViewTransition(apply)
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+            },
+            {
+              duration: 560,
+              easing: 'cubic-bezier(.22,.61,.36,1)',
+              pseudoElement: '::view-transition-new(root)',
+            }
+          )
         })
       })
+    })
     </script>
   </body>
 </html>

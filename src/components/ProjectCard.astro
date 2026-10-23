@@ -31,9 +31,7 @@ const projectUrl = project.homepage ?? project.docs ?? project.href
 
   <div class="p-project-foot">
     <div class="p-tags">
-      {project.stack.map((item) => (
-        <span>{item}</span>
-      ))}
+      {project.stack.map((item) => <span>{item}</span>)}
     </div>
     <a class="p-project-link" href={project.href} target="_blank" rel="noopener noreferrer">
       GitHub <span aria-hidden="true">↗</span>
