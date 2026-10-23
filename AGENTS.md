@@ -8,6 +8,10 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+- Never run `paraglide-js compile` manually. The paraglide Vite plugin regenerates `src/paraglide` automatically whenever `messages/` changes; just request the page to trigger it.
+- Do not restart the dev server to apply changes. The project usually owns the running `vite serve` process — restarting kills the user's process and hides its output. Rely on HMR and verify via HTTP requests instead.
+- Do not delete build/generated directories (`src/paraglide`, `dist`, …). Vite manages them; manual deletion can leave the output in a broken state.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

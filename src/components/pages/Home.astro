@@ -1,6 +1,7 @@
 ---
 import CodeTabs from '@/components/CodeTabs.astro'
 import PaperCrane from '@/components/Crane'
+import LangHint from '@/components/LangHint'
 import PlatformLogo from '@/components/PlatformLogo.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import ProjectReference from '@/components/ProjectReference.astro'
@@ -10,9 +11,10 @@ import Layout from '@/layouts/Layout.astro'
 import { m } from '@/paraglide/messages'
 import { getLocale, locales } from '@/paraglide/runtime'
 import { localizeCurrentHref } from '@/utils/localizeUrl'
+import { partsToSegments } from '@/utils/markup'
 
 const locale = getLocale()
-const site = getSite(locale)
+const site = getSite()
 
 const nav = [
   { label: m.navHome(), href: '#home', key: 'home' },
@@ -49,6 +51,9 @@ const languageSwitches = locales
               {item.locale === 'zh' ? '中' : 'EN'}
             </a>
           ))}
+          {languageSwitches[0] && (
+            <LangHint client:load pageLocale={locale} targetHref={languageSwitches[0].href} />
+          )}
         </nav>
         <a class="p-topbar-cta" href="#contact"
           >{m.navContact()} <span aria-hidden="true">↓</span></a
@@ -168,9 +173,9 @@ const languageSwitches = locales
           <h1>
             {site.profile.headline.map((line) => (
               <span class="p-h1-line">
-                {line.map((seg) =>
-                  seg.accent ? (
-                    <span class={`p-mark${seg.accent === 'orange' ? ' p-mark--orange' : ''}`}>
+                {partsToSegments(line.parts({})).map((seg) =>
+                  seg.variant ? (
+                    <span class={`p-mark${seg.variant === 'orange' ? ' p-mark--orange' : ''}`}>
                       {seg.text}
                     </span>
                   ) : (

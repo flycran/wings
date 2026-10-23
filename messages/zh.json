@@ -15,6 +15,18 @@
   "emailCopied": "邮箱已复制",
   "backToTop": "回到顶部",
 
+  "profileRole": "前端架构工程师",
+  "profileFocus": "Developer Experience & 前端基础设施",
+  "profileKicker": "FRONTEND ARCHITECT · DX & INFRA",
+  "profileAvailability": "开放全职 / 远程机会",
+  "profileLocation": "浙江 · 中国",
+  "profileIntro": "我是 Flycran。做过 TypeScript Language Service 插件、Vite 插件、CLI 和几个有人用的小工具；喜欢把团队里反复出现的问题，变成一次性的解决方案。",
+  "profileLink$0": "GitHub",
+  "profileLink$1": "掘金",
+
+  "homeHeadlineLine1": "把重复劳动变成{#mark}工具{/mark}，",
+  "homeHeadlineLine2": "把复杂系统变成{#mark @variant=|orange|}体验{/mark}。",
+
   "heroCraneHint": "点一下纸鹤",
   "heroScrollHint": "继续阅读",
   "homeHeroStaticNote": "纯静态 / Astro",
@@ -22,12 +34,35 @@
   "homeWorkTitle": "做过的东西",
   "homeWorkNote": "每个项目都带演示。",
 
+  "projects$0Subtitle": "会自己选单位的格式化库",
+  "projects$0Summary": "把 1234567 变成 1.23M，把单位展示从一堆 if/else 变成一个 API。",
+  "projects$0Role": "作者 / 设计 & 实现",
+  "projects$1Subtitle": "会下落的贡献图",
+  "projects$1Summary": "把 GitHub 贡献图变成物理动画，文字作为碰撞体，输出一张可嵌入 README 的 SVG。",
+  "projects$1Role": "作者 / 创意 & 实现",
+  "projects$2Subtitle": "从 hook 直接跳到 endpoint",
+  "projects$2Summary": "让 RTK Query 的 hook 可以跳转到 endpoint 定义，hover 时显示 URL 和 HTTP method。",
+  "projects$2Role": "作者 / LSP & 扩展",
+  "projects$3Title": "Wings / 本站",
+  "projects$3Description": "Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。",
+  "projects$3LinkLabel": "本站即案例",
+
   "homeAboutTitle": "关于我",
   "homeAboutNote": "这里讲我为什么做工具、怎么合作。",
   "homeAboutLead": "我从写页面开始，慢慢对“为什么每次都要手动做这件事”更感兴趣。",
   "homeAboutCraft": "现在我做前端架构和开发者工具：让类型、构建、编辑器替人记住规则，让团队把时间花在产品上。我喜欢把反复出现的问题，变成一次性的解决方案；也喜欢把复杂的东西画清楚、讲明白。",
   "homeAboutTeam": "我想找的团队：重视工程质量，也愿意为体验多走一步；有真实的用户和反馈；把“能跑”当成起点。",
+  "principles$0": "工具应该让下一步更清楚。",
+  "principles$1": "文档是产品的一部分。",
+  "principles$2": "先正确，再优雅；先测量，再优化。",
+  "principles$3": "动效要么解释结构，要么提供反馈，否则删掉。",
   "aboutNowKicker": "NOW / 现在",
+  "now$0Label": "正在做",
+  "now$0Value": "Wings v2 · 个人主页重构",
+  "now$1Label": "正在学",
+  "now$1Value": "Rust 与 WASM 工具链",
+  "now$2Label": "正在读",
+  "now$2Value": "《The Design of Everyday Things》",
   "aboutAskBuildTools": "构建工具",
   "aboutAskDesignSystems": "设计系统",
   "aboutAskIndieDev": "独立开发",
@@ -37,6 +72,11 @@
   "homeWritingIntro": "长文主要发布在掘金，本站仅保留平台入口与最新文章索引。",
   "homeWritingSynced": "数据来自掘金 · 最后同步 {date}",
 
+  "platforms$0Name": "掘金",
+  "platforms$0Description": "长文、工程实践、踩坑记录。",
+  "platforms$1Name": "GitHub",
+  "platforms$1Description": "开源项目、源码、实验。",
+
   "homeContactTitle1": "如果你在找一个能把工具做好、",
   "homeContactTitle2": "也愿意把界面做有趣的人，聊聊。",
 
@@ -44,6 +84,8 @@
   "homeFooterBuiltWith": "Built with {stack}",
   "homeFooterNoTracking": "No database. No tracking.",
   "homeFooterMistakes": "All mistakes are mine.",
+  "colophonNote": "Designed & built by FLYCRAN",
+  "colophonBuiltWith": "Astro / 原生 CSS / 少量 TS",
 
   "demoSmartUnitInputLabel": "输入一个数字",
   "demoSmartUnitAutoUnit": "自动选择单位",
@@ -51,6 +93,9 @@
   "demoRtkTipNote": "跳转到 endpoint · hover 查看 URL",
 
   "themeNightTag": "夜页",
+
+  "langHintSwitchTo": "你或许更熟悉{language}？",
+  "langHintDismiss": "关闭语言提示",
 
   "a11yHome": "{name} 首页",
   "a11yRailNav": "书签导航",

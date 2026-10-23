@@ -1,12 +1,9 @@
-import type { Locale } from '@/paraglide/runtime'
-import { type HeadlineLine, type HeadlineSegment, siteContent } from './siteContent'
+import { m } from '@/paraglide/messages'
 
 export type Accent = 'blue' | 'orange' | 'green' | 'red'
-export type { HeadlineLine, HeadlineSegment }
 
 export type ProjectDemo = 'unit' | 'gravity' | 'ide'
 
-/** 项目卡片；subtitle/summary/role 等文案来自 siteContent，按 locale 组装 */
 export interface Project {
   id: string
   index: string
@@ -51,7 +48,7 @@ interface ProjectMeta {
   demo: ProjectDemo
 }
 
-/** 语言无关的项目结构数据；文案在 siteContent.projects */
+/** 项目结构数据；subtitle/summary/role 等文案在 messages，按 projects$<index>* 取 */
 const projectMetas: ProjectMeta[] = [
   {
     id: 'smart-unit',
@@ -114,25 +111,51 @@ const platformBase = [
 
 const colophonYear = '2026'
 
-/** 按语言组装完整站点数据，供页面渲染直接使用 */
-export function getSite(locale: Locale) {
-  const content = siteContent[locale]
+/** 组装完整站点数据供渲染使用；所有文案在渲染时从 messages 解析，避免模块顶层固化 locale */
+export function getSite() {
+  const projectCopy = [
+    { subtitle: m.projects$0Subtitle(), summary: m.projects$0Summary(), role: m.projects$0Role() },
+    { subtitle: m.projects$1Subtitle(), summary: m.projects$1Summary(), role: m.projects$1Role() },
+    { subtitle: m.projects$2Subtitle(), summary: m.projects$2Summary(), role: m.projects$2Role() },
+  ]
 
   const projects: ProjectEntry[] = [
-    ...projectMetas.map((meta): Project => ({ ...meta, ...content.projects[meta.id] })),
-    { ...wingsMeta, ...content.wings },
+    ...projectMetas.map((meta, index): Project => ({ ...meta, ...projectCopy[index] })),
+    {
+      ...wingsMeta,
+      title: m.projects$3Title(),
+      description: m.projects$3Description(),
+      linkLabel: m.projects$3LinkLabel(),
+    },
   ]
 
   return {
-    profile: { ...profileBase, ...content.profile },
+    profile: {
+      ...profileBase,
+      role: m.profileRole(),
+      focus: m.profileFocus(),
+      kicker: m.profileKicker(),
+      headline: [m.homeHeadlineLine1, m.homeHeadlineLine2],
+      intro: m.profileIntro(),
+      availability: m.profileAvailability(),
+      location: m.profileLocation(),
+      links: [
+        { label: m.profileLink$0(), href: 'https://github.com/flycran' },
+        { label: m.profileLink$1(), href: 'https://juejin.cn/user/1737682330585838' },
+      ],
+    },
     projects,
-    principles: content.principles,
-    now: content.now,
-    platforms: platformBase.map((platform) => ({
-      ...platform,
-      ...content.platforms[platform.id],
-    })),
-    colophon: { ...content.colophon, year: colophonYear },
+    principles: [m.principles$0(), m.principles$1(), m.principles$2(), m.principles$3()],
+    now: [
+      { label: m.now$0Label(), value: m.now$0Value() },
+      { label: m.now$1Label(), value: m.now$1Value() },
+      { label: m.now$2Label(), value: m.now$2Value() },
+    ],
+    platforms: [
+      { ...platformBase[0], name: m.platforms$0Name(), description: m.platforms$0Description() },
+      { ...platformBase[1], name: m.platforms$1Name(), description: m.platforms$1Description() },
+    ],
+    colophon: { note: m.colophonNote(), builtWith: m.colophonBuiltWith(), year: colophonYear },
   }
 }
 
