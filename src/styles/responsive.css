@@ -40,12 +40,12 @@
     opacity: 0.35;
   }
 
-  .p-sketch {
-    display: none;
+  .above::before {
+    opacity: 0.18;
   }
 
-  .p-hero::before {
-    opacity: 0.18;
+  .p-sketch {
+    display: none;
   }
 
   .p-topbar {
@@ -147,7 +147,7 @@
     min-height: auto;
     grid-template-columns: 1fr;
     gap: 22px;
-    padding: 42px 0 60px;
+    padding: 222px 0 40px;
   }
 
   .p-hero .p-kicker {
@@ -163,17 +163,19 @@
     font-size: 15px;
   }
 
-  .p-hero-stage {
-    min-height: 480px;
-    margin-top: 10px;
-  }
-
   .p-scroll {
     display: none;
   }
 
   .p-code-sheet {
     width: min(92%, 430px);
+    margin-top: 160px;
+  }
+
+  .p-hero-crane {
+    top: -67px;
+    right: 128px;
+    width: 320px;
   }
 
   .p-bigword {
@@ -273,13 +275,8 @@
     font-size: clamp(1.8rem, 8.4vw, 2.25rem);
   }
 
-  .p-hero-stage {
-    min-height: 430px;
-  }
-
   .p-code-sheet {
     width: 100%;
-    top: 158px;
   }
 
   .p-code-sheet::before {
@@ -299,7 +296,8 @@
 
   .p-hero-crane {
     top: -42px;
-    right: 10px;
+    right: initial;
+    left: calc(50% - 120px);
     width: 290px;
   }
 
@@ -370,19 +368,4 @@ html[data-theme="dark"] .p-scrap {
 
 html[data-theme="dark"] .p-code-sheet::before {
   background: rgba(255, 178, 47, 0.34);
-}
-
-@media (min-width: 541px) and (max-width: 900px) {
-  .p-code-sheet {
-    width: min(86%, 440px);
-    margin-right: auto;
-    margin-left: 0;
-    top: 150px;
-  }
-
-  .p-hero-crane {
-    top: -67px;
-    right: 28px;
-    width: 320px;
-  }
 }

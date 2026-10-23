@@ -1,29 +1,23 @@
-import craneRaw from '../components/Crane?raw'
+import codeaw from '../utils/localizeUrl?raw'
 
 export const codeTabs = [
   {
-    id: 'crane',
-    label: 'Crane.tsx',
-    code: craneRaw,
+    id: 'localizeUrl',
+    label: 'localizeUrl.ts',
+    code: codeaw,
   },
   {
-    id: 'now',
-    label: 'now.ts',
-    code: `export const now = {
-  building: 'Wings v2',
-  learning: 'Rust + WASM',
-  reading: 'The Design of Everyday Things',
-  listening: 'lo-fi & 雨声',
-}`,
+    id: 'github-gravity',
+    label: 'github-gravity.ts',
+    code: await fetch(
+      'https://raw.githubusercontent.com/flycran/github-gravity/v1.0.0/src/main.ts'
+    ).then((res) => res.text()),
   },
   {
-    id: 'principles',
-    label: 'principles.ts',
-    code: `export const principles = [
-  '工具应该减少思考成本',
-  '文档是产品的一部分',
-  '先正确，再优雅',
-  '动效必须有用',
-] as const`,
+    id: 'unplugin-favicon-identity',
+    label: 'favicon-identity.ts',
+    code: await fetch(
+      'https://raw.githubusercontent.com/flycran/unplugin-favicon-identity/v0.2.0/src/index.ts'
+    ).then((res) => res.text()),
   },
 ]

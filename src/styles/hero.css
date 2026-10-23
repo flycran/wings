@@ -9,25 +9,10 @@
   grid-template-columns: 1.04fr 0.96fr;
   align-items: center;
   gap: 30px;
-  padding: 54px 0 94px;
+  padding: 0px 0 40px;
 }
 
-.p-hero::before {
-  position: absolute;
-  inset: -30px 0 20px;
-  z-index: 0;
-  background-image:
-    linear-gradient(var(--p-rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--p-rule) 1px, transparent 1px);
-  background-size: 32px 32px;
-  content: "";
-  mask-image: radial-gradient(ellipse at 58% 44%, black 4%, transparent 74%);
-  opacity: 0.32;
-  pointer-events: none;
-}
-
-.p-hero-copy,
-.p-hero-stage {
+.p-hero-copy {
   position: relative;
   z-index: 2;
 }
@@ -203,11 +188,11 @@
 }
 
 .p-hero-stage {
+  z-index: 2;
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 560px;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
@@ -253,7 +238,7 @@
 
 .p-code-sheet {
   position: relative;
-  top: 223px;
+  margin-top: 200px;
   z-index: 2;
   width: min(100%, 470px);
   align-self: flex-start;
@@ -356,7 +341,7 @@
 .p-code-sheet .code-panel-scroll {
   padding: 15px;
   overflow: auto;
-  max-height: 300px;
+  height: 260px;
   overscroll-behavior: contain;
 }
 
@@ -423,7 +408,7 @@ html[data-theme="dark"] .p-code-sheet .code-panel pre span {
 
 .p-hero-crane {
   position: absolute;
-  top: -15px;
+  top: -42px;
   right: 20px;
   z-index: 3;
   width: 340px;
