@@ -10,7 +10,54 @@
   "navContact": "简历 / 联系",
   "actionViewWork": "看作品",
   "actionDownloadResume": "下载简历",
+  "actionJuejin": "掘金",
   "actionCopyEmail": "复制邮箱",
   "emailCopied": "邮箱已复制",
-  "backToTop": "回到顶部"
+  "backToTop": "回到顶部",
+
+  "heroCraneHint": "点一下纸鹤",
+  "heroScrollHint": "继续阅读",
+  "homeHeroStaticNote": "纯静态 / Astro",
+
+  "homeWorkTitle": "做过的东西",
+  "homeWorkNote": "每个项目都带演示。",
+
+  "homeAboutTitle": "关于我",
+  "homeAboutNote": "这里讲我为什么做工具、怎么合作。",
+  "homeAboutLead": "我从写页面开始，慢慢对“为什么每次都要手动做这件事”更感兴趣。",
+  "homeAboutCraft": "现在我做前端架构和开发者工具：让类型、构建、编辑器替人记住规则，让团队把时间花在产品上。我喜欢把反复出现的问题，变成一次性的解决方案；也喜欢把复杂的东西画清楚、讲明白。",
+  "homeAboutTeam": "我想找的团队：重视工程质量，也愿意为体验多走一步；有真实的用户和反馈；把“能跑”当成起点。",
+  "aboutNowKicker": "NOW / 现在",
+  "aboutAskBuildTools": "构建工具",
+  "aboutAskDesignSystems": "设计系统",
+  "aboutAskIndieDev": "独立开发",
+
+  "homeWritingTitle": "技术写作",
+  "homeWritingNote": "最新文章索引 · 外链至原文。",
+  "homeWritingIntro": "长文主要发布在掘金，本站仅保留平台入口与最新文章索引。",
+  "homeWritingSynced": "数据来自掘金 · 最后同步 {date}",
+
+  "homeContactTitle1": "如果你在找一个能把工具做好、",
+  "homeContactTitle2": "也愿意把界面做有趣的人，聊聊。",
+
+  "homeFooterTagline": "Wings / {name} / 自由",
+  "homeFooterBuiltWith": "Built with {stack}",
+  "homeFooterNoTracking": "No database. No tracking.",
+  "homeFooterMistakes": "All mistakes are mine.",
+
+  "demoSmartUnitInputLabel": "输入一个数字",
+  "demoSmartUnitAutoUnit": "自动选择单位",
+  "demoGravityReplay": "重播",
+  "demoRtkTipNote": "跳转到 endpoint · hover 查看 URL",
+
+  "themeNightTag": "夜页",
+
+  "a11yHome": "{name} 首页",
+  "a11yRailNav": "书签导航",
+  "a11yMobileNav": "移动端导航",
+  "a11yToggleDarkMode": "切换深色模式",
+  "a11yThemeBookmark": "拉下夜页书签，切换深色模式",
+  "a11yCrane": "纸鹤，点一下扇动翅膀",
+  "a11yScrollToWork": "继续阅读，翻到作品",
+  "a11yCodeTabs": "个人资料代码页"
 }

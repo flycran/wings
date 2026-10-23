@@ -6,4 +6,3 @@ const langsPaths = locales
   .map((locale) => ({ params: { locale } })) satisfies ReturnType<GetStaticPaths>
 
 export const getLangsPaths = () => [...langsPaths]
-

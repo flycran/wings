@@ -10,7 +10,54 @@
   "navContact": "Resume / Contact",
   "actionViewWork": "View work",
   "actionDownloadResume": "Download resume",
+  "actionJuejin": "Juejin",
   "actionCopyEmail": "Copy email",
   "emailCopied": "Email copied",
-  "backToTop": "Back to top"
+  "backToTop": "Back to top",
+
+  "heroCraneHint": "Tap the crane",
+  "heroScrollHint": "Keep reading",
+  "homeHeroStaticNote": "Static only / Astro",
+
+  "homeWorkTitle": "Selected work",
+  "homeWorkNote": "Every project comes with a live demo.",
+
+  "homeAboutTitle": "About me",
+  "homeAboutNote": "Why I build tools, and how I work with teams.",
+  "homeAboutLead": "I started out building pages, and got more and more curious about why anyone should have to do the same thing by hand twice.",
+  "homeAboutCraft": "These days I work on frontend architecture and developer tooling: types, builds and editors remember the rules so teams can spend their time on the product. I like turning recurring problems into one-time solutions, and drawing complex things until they're clear.",
+  "homeAboutTeam": "The team I'm looking for: one that cares about engineering quality and goes an extra step for the experience; has real users and real feedback; and treats “it runs” as the starting point.",
+  "aboutNowKicker": "NOW / CURRENTLY",
+  "aboutAskBuildTools": "Build tooling",
+  "aboutAskDesignSystems": "Design systems",
+  "aboutAskIndieDev": "Indie dev",
+
+  "homeWritingTitle": "Writing",
+  "homeWritingNote": "Latest posts · links go to the originals.",
+  "homeWritingIntro": "Long-form posts live on Juejin; this site keeps the platform links and a latest-posts index.",
+  "homeWritingSynced": "Data from Juejin · last synced {date}",
+
+  "homeContactTitle1": "If you're looking for someone who builds tools that work",
+  "homeContactTitle2": "and makes interfaces that are fun to use — let's talk.",
+
+  "homeFooterTagline": "Wings / {name} / Freedom",
+  "homeFooterBuiltWith": "Built with {stack}",
+  "homeFooterNoTracking": "No database. No tracking.",
+  "homeFooterMistakes": "All mistakes are mine.",
+
+  "demoSmartUnitInputLabel": "Enter a number",
+  "demoSmartUnitAutoUnit": "Auto unit selection",
+  "demoGravityReplay": "Replay",
+  "demoRtkTipNote": "Jump to endpoint · hover for URL",
+
+  "themeNightTag": "Night",
+
+  "a11yHome": "{name} home",
+  "a11yRailNav": "Bookmark navigation",
+  "a11yMobileNav": "Mobile navigation",
+  "a11yToggleDarkMode": "Toggle dark mode",
+  "a11yThemeBookmark": "Pull the night tab to toggle dark mode",
+  "a11yCrane": "Paper crane, tap to flap wings",
+  "a11yScrollToWork": "Keep reading, jump to the work section",
+  "a11yCodeTabs": "Profile code tabs"
 }

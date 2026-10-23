@@ -26,49 +26,6 @@
   pointer-events: none;
 }
 
-.p-sketch {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  z-index: 1;
-  width: 100vw;
-  max-width: none;
-  height: 100%;
-  opacity: 0.72;
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.p-sketch-lines .sk {
-  fill: none;
-  stroke: var(--p-muted);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.1;
-  vector-effect: non-scaling-stroke;
-}
-
-.p-sketch .sk-blue {
-  stroke: var(--p-blue);
-}
-
-.p-sketch .sk-orange {
-  stroke: var(--p-orange);
-}
-
-.p-sketch .sk-dash {
-  stroke-dasharray: 7 9;
-}
-
-.p-sketch-labels text {
-  fill: var(--p-muted);
-  font-family: var(--p-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  opacity: 0.62;
-}
-
 .p-hero-copy,
 .p-hero-stage {
   position: relative;
@@ -123,7 +80,6 @@
 
 .p-h1-line {
   display: block;
-  white-space: nowrap;
 }
 
 .p-mark {

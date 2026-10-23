@@ -1,36 +1,12 @@
+import type { Locale } from '@/paraglide/runtime'
+import { type HeadlineLine, type HeadlineSegment, siteContent } from './siteContent'
+
 export type Accent = 'blue' | 'orange' | 'green' | 'red'
-
-/** headline 的一个片段；带 accent 的片段渲染为高亮词 */
-export interface HeadlineSegment {
-  text: string
-  accent?: Accent
-}
-
-export type HeadlineLine = HeadlineSegment[]
-
-export const profile = {
-  name: 'FLYCRAN',
-  cn: '飞鹤',
-  role: '前端架构工程师',
-  focus: 'Developer Experience & 前端基础设施',
-  kicker: 'FRONTEND ARCHITECT · DX & INFRA',
-  headline: [
-    [{ text: '把重复劳动变成' }, { text: '工具', accent: 'blue' }, { text: '，' }],
-    [{ text: '把复杂系统变成' }, { text: '体验', accent: 'orange' }, { text: '。' }],
-  ] satisfies HeadlineLine[],
-  intro:
-    '我是 Flycran。做过 TypeScript Language Service 插件、Vite 插件、CLI 和几个有人用的小工具；喜欢把团队里反复出现的问题，变成一次性的解决方案。',
-  availability: '开放全职 / 远程机会',
-  location: '浙江 · 中国',
-  email: 'flycran@163.com',
-  links: [
-    { label: 'GitHub', href: 'https://github.com/flycran' },
-    { label: '掘金', href: 'https://juejin.cn/user/1737682330585838' },
-  ],
-}
+export type { HeadlineLine, HeadlineSegment }
 
 export type ProjectDemo = 'unit' | 'gravity' | 'ide'
 
+/** 项目卡片；subtitle/summary/role 等文案来自 siteContent，按 locale 组装 */
 export interface Project {
   id: string
   index: string
@@ -61,14 +37,26 @@ export type ProjectEntry = Project | WingsProject
 
 export const isWingsProject = (entry: ProjectEntry): entry is WingsProject => entry.id === 'wings'
 
-export const projects: ProjectEntry[] = [
+interface ProjectMeta {
+  id: 'smart-unit' | 'github-gravity' | 'rtk-to-endpoints'
+  index: string
+  title: string
+  year: string
+  stack: string[]
+  accent: Accent
+  category: string
+  href: string
+  homepage?: string
+  docs?: string
+  demo: ProjectDemo
+}
+
+/** 语言无关的项目结构数据；文案在 siteContent.projects */
+const projectMetas: ProjectMeta[] = [
   {
     id: 'smart-unit',
     index: '01',
     title: 'smart-unit',
-    subtitle: '会自己选单位的格式化库',
-    summary: '把 1234567 变成 1.23M，把单位展示从一堆 if/else 变成一个 API。',
-    role: '作者 / 设计 & 实现',
     year: '2025',
     stack: ['TypeScript', 'Rollup', 'i18n'],
     accent: 'green',
@@ -81,9 +69,6 @@ export const projects: ProjectEntry[] = [
     id: 'github-gravity',
     index: '02',
     title: 'github-gravity',
-    subtitle: '会下落的贡献图',
-    summary: '把 GitHub 贡献图变成物理动画，文字作为碰撞体，输出一张可嵌入 README 的 SVG。',
-    role: '作者 / 创意 & 实现',
     year: '2025',
     stack: ['TypeScript', 'GitHub Actions', 'SVG'],
     accent: 'blue',
@@ -95,9 +80,6 @@ export const projects: ProjectEntry[] = [
     id: 'rtk-to-endpoints',
     index: '03',
     title: 'rtk-to-endpoints',
-    subtitle: '从 hook 直接跳到 endpoint',
-    summary: '让 RTK Query 的 hook 可以跳转到 endpoint 定义，hover 时显示 URL 和 HTTP method。',
-    role: '作者 / LSP & 扩展',
     year: '2025',
     stack: ['TypeScript', 'LSP', 'VS Code'],
     accent: 'orange',
@@ -105,52 +87,53 @@ export const projects: ProjectEntry[] = [
     href: 'https://github.com/flycran/rtk-to-endpoints',
     demo: 'ide',
   },
+]
+
+const wingsMeta = { id: 'wings' as const, index: '04' }
+
+const profileBase = {
+  name: 'FLYCRAN',
+  cn: '飞鹤',
+  email: 'flycran@163.com',
+}
+
+const platformBase = [
   {
-    id: 'wings',
-    index: '04',
-    title: 'Wings / 本站',
-    description:
-      'Astro 静态站、零数据库、纸感设计系统。这个页面本身也是案例：书签导航、纸鹤动效、可打印简历。',
-    linkLabel: '本站即案例',
-  },
-]
-
-export const principles = [
-  '工具应该让下一步更清楚。',
-  '文档是产品的一部分。',
-  '先正确，再优雅；先测量，再优化。',
-  '动效要么解释结构，要么提供反馈，否则删掉。',
-]
-
-export const now = [
-  { label: '正在做', value: 'Wings v2 · 个人主页重构' },
-  { label: '正在学', value: 'Rust 与 WASM 工具链' },
-  { label: '正在读', value: '《The Design of Everyday Things》' },
-]
-
-export const platforms = [
-  {
-    id: 'juejin',
-    name: '掘金',
+    id: 'juejin' as const,
     handle: 'Flycran',
-    description: '长文、工程实践、踩坑记录。',
     href: 'https://juejin.cn/user/1737682330585838',
-    accent: 'orange',
+    accent: 'orange' as Accent,
   },
   {
-    id: 'github',
-    name: 'GitHub',
+    id: 'github' as const,
     handle: '@flycran',
-    description: '开源项目、源码、实验。',
     href: 'https://github.com/flycran',
-    accent: 'blue',
+    accent: 'blue' as Accent,
   },
 ]
+
+const colophonYear = '2026'
+
+/** 按语言组装完整站点数据，供页面渲染直接使用 */
+export function getSite(locale: Locale) {
+  const content = siteContent[locale]
+
+  const projects: ProjectEntry[] = [
+    ...projectMetas.map((meta): Project => ({ ...meta, ...content.projects[meta.id] })),
+    { ...wingsMeta, ...content.wings },
+  ]
+
+  return {
+    profile: { ...profileBase, ...content.profile },
+    projects,
+    principles: content.principles,
+    now: content.now,
+    platforms: platformBase.map((platform) => ({
+      ...platform,
+      ...content.platforms[platform.id],
+    })),
+    colophon: { ...content.colophon, year: colophonYear },
+  }
+}
 
 export { writing, writingSyncedAt } from './writing'
-
-export const colophon = {
-  note: 'Designed & built by FLYCRAN',
-  builtWith: 'Astro / 原生 CSS / 少量 TS',
-  year: '2026',
-}

@@ -1,6 +1,7 @@
 ---
 import { Code } from 'astro:components'
 import type { ShikiTransformer } from 'shiki'
+import { m } from '@/paraglide/messages'
 import { codeTabs } from '../data/profileCode'
 
 interface Props {
@@ -16,8 +17,8 @@ const lineNumbers: ShikiTransformer = {
 }
 ---
 
-<div class:list={['codecard', className]} data-codecard>
-  <div class="code-tabs" role="tablist" aria-label="个人资料代码页">
+  <div class:list={['codecard', className]} data-codecard>
+  <div class="code-tabs" role="tablist" aria-label={m.a11yCodeTabs()}>
     {
       codeTabs.map((tab, index) => (
         <button

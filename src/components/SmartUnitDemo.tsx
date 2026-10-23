@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import SmartUnit from 'smart-unit'
+import { m } from '@/paraglide/messages'
 
 type Locale = 'en' | 'zh'
 
@@ -21,7 +22,7 @@ export default function SmartUnitDemo() {
       <div className="p-demo-head">
         <span>LIVE / smart-unit</span>
       </div>
-      <label htmlFor="unit-input">输入一个数字</label>
+      <label htmlFor="unit-input">{m.demoSmartUnitInputLabel()}</label>
       <input
         id="unit-input"
         value={value}
@@ -33,7 +34,7 @@ export default function SmartUnitDemo() {
         <span>{unit}</span>
       </div>
       <div className="p-unit-meta">
-        <span>自动选择单位</span>
+        <span>{m.demoSmartUnitAutoUnit()}</span>
         <div className="p-unit-locale">
           <button
             className={locale === 'en' ? 'is-active' : undefined}

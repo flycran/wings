@@ -5,23 +5,14 @@ import PlatformLogo from '@/components/PlatformLogo.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import ProjectReference from '@/components/ProjectReference.astro'
 import ThemeBookmark from '@/components/ThemeBookmark'
-import {
-  colophon,
-  isWingsProject,
-  now,
-  platforms,
-  principles,
-  profile,
-  projects,
-  writing,
-  writingSyncedAt,
-} from '@/data/site'
+import { getSite, isWingsProject, writing, writingSyncedAt } from '@/data/site'
 import Layout from '@/layouts/Layout.astro'
 import { m } from '@/paraglide/messages'
 import { deLocalizeHref, getLocale, locales, localizeHref } from '@/paraglide/runtime'
 import { localizeCurrentHref } from '@/utils/localizeUrl'
 
 const locale = getLocale()
+const site = getSite(locale)
 
 const nav = [
   { label: m.navHome(), href: '#home', key: 'home' },
@@ -47,9 +38,9 @@ const languageSwitches = locales
     <div class="p-grain" aria-hidden="true"></div>
 
     <header class="p-topbar">
-      <a class="p-logo" href="#home" aria-label={`${profile.name} 首页`}>
+      <a class="p-logo" href="#home" aria-label={m.a11yHome({ name: site.profile.name })}>
         <span class="p-logo-mark" aria-hidden="true">F</span>
-        <span class="p-logo-text">{profile.name} <em>/ WINGS</em></span>
+        <span class="p-logo-text">{site.profile.name} <em>/ WINGS</em></span>
       </a>
       <div class="p-topbar-right">
         <nav class="p-lang-switch" aria-label="Language">
@@ -65,7 +56,7 @@ const languageSwitches = locales
       </div>
     </header>
 
-    <aside class="p-rail" aria-label="书签导航">
+    <aside class="p-rail" aria-label={m.a11yRailNav()}>
       <nav class="p-rail-tabs">
         {
           nav.map((item, index) => (
@@ -84,7 +75,7 @@ const languageSwitches = locales
       <ThemeBookmark client:load />
     </aside>
 
-    <nav class="p-mobilebar" aria-label="移动端导航">
+    <nav class="p-mobilebar" aria-label={m.a11yMobileNav()}>
       {
         nav.map((item, index) => (
           <a
@@ -97,75 +88,81 @@ const languageSwitches = locales
           </a>
         ))
       }
-      <button class="p-mobile-theme" type="button" data-theme-toggle aria-label="切换深色模式">
+      <button
+        class="p-mobile-theme"
+        type="button"
+        data-theme-toggle
+        aria-label={m.a11yToggleDarkMode()}
+      >
         ◐
       </button>
     </nav>
+      <svg
+        class="p-sketch"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="pencil-rough" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.012"
+              numOctaves="2"
+              seed="11"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="1.8"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+
+        <g class="p-sketch-lines" filter="url(#pencil-rough)">
+          <path
+            class="sk sk-muted"
+            d="M 742 430 C 752 258 916 158 1092 174 C 1278 192 1392 318 1362 500 C 1334 668 1176 736 1014 712 C 852 688 744 590 752 438 C 757 360 782 302 820 256"
+          />
+          <path class="sk sk-orange" d="M 1248 118 L 1362 166 L 1296 232 Z" />
+          <path class="sk sk-orange sk-dash" d="M 1248 118 L 1296 232 M 1362 166 L 1296 232" />
+
+          <path class="sk sk-blue" d="M 632 676 C 686 666 728 636 762 600" />
+          <path class="sk sk-blue" d="M 750 604 L 762 600 L 758 613" />
+
+          <path class="sk sk-muted" d="M 126 420 L 136 398 M 126 420 L 136 442 M 126 420 L 104 410 M 126 420 L 104 432" />
+          <path class="sk sk-muted" d="M 1120 708 L 1140 680 M 1134 714 L 1154 686 M 1148 720 L 1168 692 M 1162 726 L 1182 698" />
+          <path class="sk sk-muted" d="M 90 812 L 110 812 M 100 802 L 100 822" />
+          <path class="sk sk-muted" d="M 1330 84 L 1348 84 M 1339 75 L 1339 93" />
+          <circle class="sk sk-muted" cx="1310" cy="770" r="2.5" />
+          <circle class="sk sk-muted" cx="700" cy="190" r="2" />
+          <circle class="sk sk-muted" cx="1390" cy="610" r="1.8" />
+          <path class="sk sk-muted sk-dash" d="M 60 300 C 90 286 120 292 138 312" />
+        </g>
+
+        <g class="p-sketch-labels">
+          <text x="1240" y="842">NOTE / 01</text>
+        </g>
+      </svg>
 
     <main id="main" class="p-main">
+
       <section class="p-hero" id="home">
-        <svg
-          class="p-sketch"
-          viewBox="0 0 1440 900"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden="true"
-        >
-          <defs>
-            <filter id="pencil-rough" x="-5%" y="-5%" width="110%" height="110%">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.012"
-                numOctaves="2"
-                seed="11"
-                result="noise"
-              />
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="noise"
-                scale="1.8"
-                xChannelSelector="R"
-                yChannelSelector="G"
-              />
-            </filter>
-          </defs>
-
-          <g class="p-sketch-lines" filter="url(#pencil-rough)">
-            <path
-              class="sk sk-muted"
-              d="M 742 430 C 752 258 916 158 1092 174 C 1278 192 1392 318 1362 500 C 1334 668 1176 736 1014 712 C 852 688 744 590 752 438 C 757 360 782 302 820 256"
-            />
-            <path class="sk sk-orange" d="M 1248 118 L 1362 166 L 1296 232 Z" />
-            <path class="sk sk-orange sk-dash" d="M 1248 118 L 1296 232 M 1362 166 L 1296 232" />
-
-            <path class="sk sk-blue" d="M 632 676 C 686 666 728 636 762 600" />
-            <path class="sk sk-blue" d="M 750 604 L 762 600 L 758 613" />
-
-            <path class="sk sk-muted" d="M 126 420 L 136 398 M 126 420 L 136 442 M 126 420 L 104 410 M 126 420 L 104 432" />
-            <path class="sk sk-muted" d="M 1120 708 L 1140 680 M 1134 714 L 1154 686 M 1148 720 L 1168 692 M 1162 726 L 1182 698" />
-            <path class="sk sk-muted" d="M 90 812 L 110 812 M 100 802 L 100 822" />
-            <path class="sk sk-muted" d="M 1330 84 L 1348 84 M 1339 75 L 1339 93" />
-            <circle class="sk sk-muted" cx="1310" cy="770" r="2.5" />
-            <circle class="sk sk-muted" cx="700" cy="190" r="2" />
-            <circle class="sk sk-muted" cx="1390" cy="610" r="1.8" />
-            <path class="sk sk-muted sk-dash" d="M 60 300 C 90 286 120 292 138 312" />
-          </g>
-
-          <g class="p-sketch-labels">
-            <text x="1240" y="842">NOTE / 01</text>
-          </g>
-        </svg>
 
         <div class="p-hero-copy" data-reveal>
           <div class="p-status">
             <span class="p-status-dot" aria-hidden="true"></span>
-            <span>{profile.availability}</span>
+            <span>{site.profile.availability}</span>
             <span class="p-status-sep" aria-hidden="true">·</span>
-            <span>{profile.location}</span>
+            <span>{site.profile.location}</span>
           </div>
-          <p class="p-kicker">{profile.kicker}</p>
+          <p class="p-kicker">{site.profile.kicker}</p>
           <h1>
             {
-              profile.headline.map((line) => (
+              site.profile.headline.map((line) => (
                 <span class="p-h1-line">
                   {line.map((seg) =>
                     seg.accent ? (
@@ -180,17 +177,17 @@ const languageSwitches = locales
               ))
             }
           </h1>
-          <p class="p-intro">{profile.intro}</p>
+          <p class="p-intro">{site.profile.intro}</p>
           <div class="p-actions">
             <a class="p-btn p-btn--primary" href="#work">{m.actionViewWork()} <span aria-hidden="true">↘</span></a>
             <a class="p-btn p-btn--ghost" href="#contact">{m.actionDownloadResume()} <span aria-hidden="true">↓</span></a>
-            <button class="p-copy" type="button" data-copy-email={profile.email}>
+            <button class="p-copy" type="button" data-copy-email={site.profile.email}>
               {m.actionCopyEmail()}
             </button>
           </div>
           <div class="p-hero-links">
             {
-              profile.links.map((link) => (
+              site.profile.links.map((link) => (
                 <a href={link.href} target="_blank" rel="noopener noreferrer">
                   {link.label} <span aria-hidden="true">↗</span>
                 </a>
@@ -206,24 +203,24 @@ const languageSwitches = locales
           <div class="p-code-sheet">
             <div class="p-code-sheet-head">
               <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span>{profile.name} / PROFILE</span>
+              <span>{site.profile.name} / PROFILE</span>
               <span class="p-code-sheet-tag">v2.0</span>
             </div>
             <CodeTabs />
             <div class="p-code-sheet-foot">
               <span>WINGS / 2026</span>
-              <span>纯静态 / Astro</span>
+              <span>{m.homeHeroStaticNote()}</span>
             </div>
           </div>
           <PaperCrane client:load className="p-hero-crane" />
           <div class="p-crane-note">
-            <span>点一下纸鹤</span>
+            <span>{m.heroCraneHint()}</span>
             <span class="p-crane-note-line" aria-hidden="true"></span>
           </div>
         </div>
 
-        <a class="p-scroll" href="#work" aria-label="继续阅读，翻到作品">
-          <span class="p-scroll-text">继续阅读</span>
+        <a class="p-scroll" href="#work" aria-label={m.a11yScrollToWork()}>
+          <span class="p-scroll-text">{m.heroScrollHint()}</span>
           <span class="p-scroll-track" aria-hidden="true">
             <svg class="p-scroll-arrow" viewBox="0 0 12 18">
               <path d="M6 2V16M1.5 11.5L6 16l4.5-4.5" />
@@ -238,13 +235,13 @@ const languageSwitches = locales
           <span class="p-section-index">01</span>
           <div class="p-section-title">
             <p class="p-kicker">SELECTED WORK</p>
-            <h2>做过的东西</h2>
+            <h2>{m.homeWorkTitle()}</h2>
           </div>
-          <p class="p-section-note">每个项目都带演示。</p>
+          <p class="p-section-note">{m.homeWorkNote()}</p>
         </div>
 
         <div class="p-work-grid">
-          {projects.map((project) =>
+          {site.projects.map((project) =>
             isWingsProject(project) ? (
               <ProjectReference project={project} />
             ) : (
@@ -263,35 +260,29 @@ const languageSwitches = locales
           <span class="p-section-index">02</span>
           <div class="p-section-title">
             <p class="p-kicker">ABOUT / HOW I WORK</p>
-            <h2>关于我</h2>
+            <h2>{m.homeAboutTitle()}</h2>
           </div>
-          <p class="p-section-note">这里讲我为什么做工具、怎么合作。</p>
+          <p class="p-section-note">{m.homeAboutNote()}</p>
         </div>
 
         <div class="p-about-grid">
           <figure class="p-portrait" data-reveal>
             <div class="p-portrait-inner">
               <span class="p-portrait-char">飞</span>
-              <span class="p-portrait-seal">{profile.name}<br />{profile.cn}</span>
+              <span class="p-portrait-seal">{site.profile.name}<br />{site.profile.cn}</span>
             </div>
-            <figcaption>{profile.name} · {colophon.year}</figcaption>
+            <figcaption>{site.profile.name} · {site.colophon.year}</figcaption>
           </figure>
 
           <div class="p-about-copy" data-reveal>
-            <p class="p-lead">
-              我从写页面开始，慢慢对“为什么每次都要手动做这件事”更感兴趣。
-            </p>
-            <p>
-              现在我做前端架构和开发者工具：让类型、构建、编辑器替人记住规则，让团队把时间花在产品上。我喜欢把反复出现的问题，变成一次性的解决方案；也喜欢把复杂的东西画清楚、讲明白。
-            </p>
-            <p>
-              我想找的团队：重视工程质量，也愿意为体验多走一步；有真实的用户和反馈；把“能跑”当成起点。
-            </p>
+            <p class="p-lead">{m.homeAboutLead()}</p>
+            <p>{m.homeAboutCraft()}</p>
+            <p>{m.homeAboutTeam()}</p>
 
             <div class="p-principles">
               <p class="p-kicker">PRINCIPLES / 04</p>
               {
-                principles.map((item, index) => (
+                site.principles.map((item, index) => (
                   <div class="p-principle">
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     <p>{item}</p>
@@ -301,9 +292,9 @@ const languageSwitches = locales
             </div>
 
             <div class="p-now">
-              <p class="p-kicker">NOW / 现在</p>
+              <p class="p-kicker">{m.aboutNowKicker()}</p>
               {
-                now.map((item) => (
+                site.now.map((item) => (
                   <div class="p-now-row">
                     <span>{item.label}</span>
                     <p>{item.value}</p>
@@ -315,7 +306,7 @@ const languageSwitches = locales
             <div class="p-ask">
               <span>Ask me about</span>
               <div>
-                <em>TypeScript</em><em>构建工具</em><em>设计系统</em><em>独立开发</em>
+                <em>TypeScript</em><em>{m.aboutAskBuildTools()}</em><em>{m.aboutAskDesignSystems()}</em><em>{m.aboutAskIndieDev()}</em>
               </div>
             </div>
           </div>
@@ -327,18 +318,16 @@ const languageSwitches = locales
           <span class="p-section-index">03</span>
           <div class="p-section-title">
             <p class="p-kicker">WRITING / LATEST POSTS</p>
-            <h2>技术写作</h2>
+            <h2>{m.homeWritingTitle()}</h2>
           </div>
-          <p class="p-section-note">最新文章索引 · 外链至原文。</p>
+          <p class="p-section-note">{m.homeWritingNote()}</p>
         </div>
 
-        <p class="p-writing-intro" data-reveal>
-          长文主要发布在掘金，本站仅保留平台入口与最新文章索引。
-        </p>
+        <p class="p-writing-intro" data-reveal>{m.homeWritingIntro()}</p>
 
         <div class="p-platforms" data-reveal>
           {
-            platforms.map((platform) => (
+            site.platforms.map((platform) => (
               <a
                 class="p-platform"
                 href={platform.href}
@@ -371,25 +360,25 @@ const languageSwitches = locales
             ))
           }
         </div>
-        <p class="p-writing-foot">数据来自掘金 · 最后同步 {writingSyncedAt}</p>
+        <p class="p-writing-foot">{m.homeWritingSynced({ date: writingSyncedAt })}</p>
       </section>
 
       <section class="p-contact" id="contact">
         <p class="p-kicker" data-reveal>04 / CONTACT</p>
         <h2 data-reveal>
-          如果你在找一个能把工具做好、<br />
-          也愿意把界面做有趣的人，聊聊。
+          {m.homeContactTitle1()}<br />
+          {m.homeContactTitle2()}
         </h2>
-        <a class="p-email" href={`mailto:${profile.email}`} data-reveal>{profile.email}</a>
+        <a class="p-email" href={`mailto:${site.profile.email}`} data-reveal>{site.profile.email}</a>
         <div class="p-contact-actions" data-reveal>
-          <button class="p-btn p-btn--primary" type="button" data-copy-email={profile.email}>
+          <button class="p-btn p-btn--primary" type="button" data-copy-email={site.profile.email}>
             {m.actionCopyEmail()}
           </button>
           <a class="p-btn p-btn--ghost" href="https://github.com/flycran" target="_blank" rel="noopener noreferrer">
             GitHub <span aria-hidden="true">↗</span>
           </a>
           <a class="p-btn p-btn--ghost" href="https://juejin.cn/user/1737682330585838" target="_blank" rel="noopener noreferrer">
-            掘金 <span aria-hidden="true">↗</span>
+            {m.actionJuejin()} <span aria-hidden="true">↗</span>
           </a>
         </div>
       </section>
@@ -397,18 +386,18 @@ const languageSwitches = locales
 
     <footer class="p-footer">
       <div class="p-footer-top">
-        <p>Wings / {profile.cn} / 自由</p>
-        <p>{colophon.note}</p>
+        <p>{m.homeFooterTagline({ name: site.profile.cn })}</p>
+        <p>{site.colophon.note}</p>
       </div>
-      <div class="p-footer-wordmark" aria-label={profile.name}>
-        <span class="p-footer-fly">{profile.name.slice(0, 3)}</span><span class="p-footer-cran">{profile.name.slice(3)}</span>
+      <div class="p-footer-wordmark" aria-label={site.profile.name}>
+        <span class="p-footer-fly">{site.profile.name.slice(0, 3)}</span><span class="p-footer-cran">{site.profile.name.slice(3)}</span>
       </div>
       <div class="p-footer-grid">
-        <p>Built with {colophon.builtWith}<br />No database. No tracking.</p>
-        <p>© {colophon.year} {profile.name}<br />All mistakes are mine.</p>
+        <p>{m.homeFooterBuiltWith({ stack: site.colophon.builtWith })}<br />{m.homeFooterNoTracking()}</p>
+        <p>© {site.colophon.year} {site.profile.name}<br />{m.homeFooterMistakes()}</p>
         <p><a href="#home">{m.backToTop()} ↑</a><br /><a href="#work">{m.navWork()}</a></p>
       </div>
-      <span class="p-footer-seal" aria-hidden="true">{profile.cn}<br />{profile.name}</span>
+      <span class="p-footer-seal" aria-hidden="true">{site.profile.cn}<br />{site.profile.name}</span>
     </footer>
   </div>
 

@@ -1,4 +1,5 @@
 import { type CSSProperties, useEffect, useState } from 'react'
+import { m } from '@/paraglide/messages'
 
 const cells = Array.from({ length: 112 }, (_, index) => ({
   index,
@@ -25,7 +26,7 @@ export default function GravityDemo() {
           type="button"
           onClick={() => setRun((value) => value + 1)}
         >
-          重播
+          {m.demoGravityReplay()}
         </button>
       </div>
       <div className="p-gravity-stage" aria-hidden="true" key={run}>

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { type CSSProperties, useEffect, useState } from 'react'
+import { m } from '@/paraglide/messages'
 import styles from './Crane.module.css'
 
 interface CraneProps {
@@ -30,7 +31,7 @@ export default function Crane({ className = '' }: CraneProps) {
       <motion.button
         type="button"
         className={styles.craneButton}
-        aria-label="纸鹤，点一下扇动翅膀"
+        aria-label={m.a11yCrane()}
         style={{ '--angle': '50deg' } as CSSProperties}
         initial={restTarget as never}
         whileHover={canHover ? (hoverTarget as never) : undefined}

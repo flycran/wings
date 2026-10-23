@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { type MouseEvent, useRef } from 'react'
+import { m } from '@/paraglide/messages'
 
 type Theme = 'light' | 'dark'
 
@@ -84,7 +85,7 @@ export default function ThemeBookmark() {
       className="p-theme-hanger"
       type="button"
       data-theme-bookmark
-      aria-label="拉下夜页书签，切换深色模式"
+      aria-label={m.a11yThemeBookmark()}
       onClick={toggle}
       whileTap={{ y: 14 }}
       transition={{ type: 'spring', visualDuration: 0.15 }}
@@ -92,7 +93,7 @@ export default function ThemeBookmark() {
       <span className="p-theme-cord" aria-hidden="true" />
       <span ref={tagRef} className="p-theme-tag-wrap">
         <span className="p-night-tag" aria-hidden="true">
-          <span className="p-night-tag-text">夜页</span>
+          <span className="p-night-tag-text">{m.themeNightTag()}</span>
         </span>
       </span>
     </motion.button>

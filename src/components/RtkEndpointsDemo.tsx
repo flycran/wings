@@ -1,3 +1,5 @@
+import { m } from '@/paraglide/messages'
+
 export default function RtkEndpointsDemo() {
   return (
     <div className="p-demo p-demo--ide">
@@ -38,7 +40,7 @@ export default function RtkEndpointsDemo() {
       <div className="p-ide-tip">
         <span className="p-ide-method">GET</span>
         <span>/api/user/:id</span>
-        <span className="p-ide-tip-note">跳转到 endpoint · hover 查看 URL</span>
+        <span className="p-ide-tip-note">{m.demoRtkTipNote()}</span>
       </div>
     </div>
   )
