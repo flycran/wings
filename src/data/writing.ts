@@ -7,63 +7,63 @@ export interface WritingItem {
   href: string
 }
 
-export const writingSyncedAt = '2026.10'
+export const writingSyncedAt = "2026.10"
 
 export const writing: WritingItem[] = [
   {
-    title: '浏览器标签页全是一个图标：我用名字哈希生成 favicon，让每个项目都有身份标识',
-    platform: '掘金',
-    date: '2026.10',
-    tag: '前端',
-    href: 'https://juejin.cn/post/7698043861926903817',
+    "title": "浏览器标签页全是一个图标：我用名字哈希生成 favicon，让每个项目都有身份标识",
+    "platform": "掘金",
+    "date": "2026.10",
+    "tag": "前端",
+    "href": "https://juejin.cn/post/7698043861926903817"
   },
   {
-    title: '我做了一个专门“教人”的 Agent：从普通 Agent 到导师 Agent',
-    platform: '掘金',
-    date: '2026.08',
-    tag: 'Agent',
-    href: 'https://juejin.cn/post/7675556948209352730',
+    "title": "我做了一个专门“教人”的 Agent：从普通 Agent 到导师 Agent",
+    "platform": "掘金",
+    "date": "2026.08",
+    "tag": "Agent",
+    "href": "https://juejin.cn/post/7675556948209352730"
   },
   {
-    title: '让数值格式化成可读性最佳的字符串 | smart-unit 2.1+ ! 支持链式单位+国际化',
-    platform: '掘金',
-    date: '2026.04',
-    tag: 'JavaScript',
-    href: 'https://juejin.cn/post/7627135662009548854',
+    "title": "让数值格式化成可读性最佳的字符串 | smart-unit 2.1+ ! 支持链式单位+国际化",
+    "platform": "掘金",
+    "date": "2026.04",
+    "tag": "JavaScript",
+    "href": "https://juejin.cn/post/7627135662009548854"
   },
   {
-    title: 'smart-unit：一个优雅的 JavaScript 单位转换库，告别繁琐的依赖管理',
-    platform: '掘金',
-    date: '2026.03',
-    tag: 'TypeScript',
-    href: 'https://juejin.cn/post/7616650313072771110',
+    "title": "smart-unit：一个优雅的 JavaScript 单位转换库，告别繁琐的依赖管理",
+    "platform": "掘金",
+    "date": "2026.03",
+    "tag": "TypeScript",
+    "href": "https://juejin.cn/post/7616650313072771110"
   },
   {
-    title: '开发一个 TypeScript 语言服务插件：让 RTK Query 的"跳转到定义"更智能',
-    platform: '掘金',
-    date: '2026.03',
-    tag: 'TypeScript',
-    href: 'https://juejin.cn/post/7614123089519525907',
+    "title": "开发一个 TypeScript 语言服务插件：让 RTK Query 的\"跳转到定义\"更智能",
+    "platform": "掘金",
+    "date": "2026.03",
+    "tag": "TypeScript",
+    "href": "https://juejin.cn/post/7614123089519525907"
   },
   {
-    title: '实现一个基于`motion/react`的数字滚动组件',
-    platform: '掘金',
-    date: '2025.05',
-    tag: '动效',
-    href: 'https://juejin.cn/post/7502203192941576211',
+    "title": "实现一个基于`motion/react`的数字滚动组件",
+    "platform": "掘金",
+    "date": "2025.05",
+    "tag": "动效",
+    "href": "https://juejin.cn/post/7502203192941576211"
   },
   {
-    title: 'Vue进阶-深度性能优化',
-    platform: '掘金',
-    date: '2025.05',
-    tag: 'Vue.js',
-    href: 'https://juejin.cn/post/7501187644328673343',
+    "title": "Vue进阶-深度性能优化",
+    "platform": "掘金",
+    "date": "2025.05",
+    "tag": "Vue.js",
+    "href": "https://juejin.cn/post/7501187644328673343"
   },
   {
-    title: '修复WebStorm对TypeScript部分类型不提供代码补全',
-    platform: '掘金',
-    date: '2025.04',
-    tag: '前端',
-    href: 'https://juejin.cn/post/7496876252630433827',
-  },
+    "title": "修复WebStorm对TypeScript部分类型不提供代码补全",
+    "platform": "掘金",
+    "date": "2025.04",
+    "tag": "前端",
+    "href": "https://juejin.cn/post/7496876252630433827"
+  }
 ]
