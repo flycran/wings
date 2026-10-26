@@ -89,7 +89,12 @@
 
   "demoSmartUnitInputLabel": "输入一个数字",
   "demoSmartUnitAutoUnit": "自动选择单位",
+  "demoGravityPlay": "播放",
+  "demoGravityPause": "暂停",
   "demoGravityReplay": "重播",
+  "demoGravityProgress": "播放进度",
+  "demoGravityArtwork": "github-gravity 生成的 SVG 动画",
+  "demoGravityLoading": "正在加载 SVG",
 
   "themeNightTag": "夜页",
 

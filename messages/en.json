@@ -89,7 +89,12 @@
 
   "demoSmartUnitInputLabel": "Enter a number",
   "demoSmartUnitAutoUnit": "Auto unit selection",
+  "demoGravityPlay": "Play",
+  "demoGravityPause": "Pause",
   "demoGravityReplay": "Replay",
+  "demoGravityProgress": "Playback progress",
+  "demoGravityArtwork": "github-gravity generated SVG animation",
+  "demoGravityLoading": "Loading SVG",
 
   "themeNightTag": "NT",
 
