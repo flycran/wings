@@ -1,0 +1,165 @@
+---
+import { getSite } from '@/data/site'
+import { m } from '@/paraglide/messages'
+
+const site = getSite()
+---
+
+<footer class="p-footer">
+  <div class="p-footer-top">
+    <p>{m.homeFooterTagline({ name: site.profile.cn })}</p>
+    <p>{site.colophon.note}</p>
+  </div>
+  <div class="p-footer-wordmark">
+    <span class="p-footer-fly">{site.profile.name.slice(0, 3)}</span>
+    <span class="p-footer-cran">{site.profile.name.slice(3)}</span>
+  </div>
+  <div class="p-footer-grid">
+    <p>
+      {m.homeFooterBuiltWith({ stack: site.colophon.builtWith })}<br>{m.homeFooterNoTracking()}
+    </p>
+    <p>© {site.colophon.year} {site.profile.name}<br>{m.homeFooterMistakes()}</p>
+    <p><a href="#home">{m.backToTop()} ↑</a><br><a href="#work">{m.navWork()}</a></p>
+  </div>
+  <span class="p-footer-seal" aria-hidden="true">{site.profile.cn}<br>{site.profile.name}</span>
+</footer>
+
+<style>
+.p-footer {
+  position: relative;
+  margin-top: 40px;
+  padding: 38px 0 44px 80px;
+  border-top: 1px solid var(--p-rule);
+  background: rgba(29, 27, 23, 0.025);
+}
+
+:global(html[data-theme="dark"]) .p-footer {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.p-footer-top,
+.p-footer-grid {
+  width: min(100%, 1200px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.p-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-footer-top p {
+  margin: 0;
+}
+
+.p-footer-wordmark {
+  margin: 18px 0 28px;
+  font-family: var(--p-serif);
+  font-size: clamp(4rem, 12vw, 9.5rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 0.78;
+  text-align: center;
+  user-select: none;
+}
+
+.p-footer-fly {
+  color: var(--p-blue-bright);
+}
+
+.p-footer-cran {
+  color: var(--p-orange-bright);
+}
+
+.p-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.p-footer-grid p {
+  margin: 0;
+}
+
+.p-footer-grid a {
+  color: var(--p-ink);
+  text-decoration: none;
+}
+
+.p-footer-grid a:hover {
+  text-decoration: underline;
+}
+
+.p-footer-seal {
+  position: absolute;
+  right: 46px;
+  bottom: 40px;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 3px double var(--p-red);
+  border-radius: 50%;
+  color: var(--p-red);
+  font-family: var(--p-serif);
+  font-size: 11.5px;
+  line-height: 1.35;
+  text-align: center;
+  transform: rotate(-8deg);
+  opacity: 0.68;
+}
+
+@media (max-width: 1080px) {
+  .p-footer {
+    padding-left: 96px;
+  }
+}
+
+@media (max-width: 900px) {
+  .p-footer {
+    padding: 30px 20px 40px;
+  }
+
+  .p-footer-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .p-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .p-footer-seal {
+    right: 24px;
+    bottom: 24px;
+    width: 62px;
+    height: 62px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 540px) {
+  .p-footer-wordmark {
+    font-size: 3.5rem;
+  }
+
+  .p-footer-seal {
+    display: none;
+  }
+}
+</style>

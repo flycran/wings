@@ -1,5 +1,5 @@
 ---
-import type { Project } from '../../data/site'
+import type { Project } from '@/types/site'
 import ProjectDemo from '../ProjectDemo/ProjectDemo.astro'
 
 interface Props {
@@ -26,7 +26,7 @@ const projectUrl = project.homepage ?? project.docs ?? project.href
   </div>
 
   <div class="p-project-visual">
-    <ProjectDemo demo={project.demo} />
+    <ProjectDemo id={project.id} />
   </div>
 
   <div class="p-project-foot">
@@ -166,7 +166,6 @@ const projectUrl = project.homepage ?? project.docs ?? project.href
 
 .p-project-visual {
   display: flex;
-  min-height: 184px;
   align-items: center;
 }
 

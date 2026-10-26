@@ -1,52 +1,5 @@
 import { m } from '@/paraglide/messages'
-
-export type Accent = 'blue' | 'orange' | 'green' | 'red'
-
-export type ProjectDemo = 'unit' | 'gravity' | 'ide'
-
-export interface Project {
-  id: string
-  index: string
-  title: string
-  subtitle: string
-  summary: string
-  role: string
-  year: string
-  stack: string[]
-  accent: Accent
-  category: string
-  href: string
-  homepage?: string
-  docs?: string
-  demo: ProjectDemo
-}
-
-export interface WingsProject {
-  id: 'wings'
-  index: string
-  title: string
-  description: string
-  linkLabel: string
-  href?: string
-}
-
-export type ProjectEntry = Project | WingsProject
-
-export const isWingsProject = (entry: ProjectEntry): entry is WingsProject => entry.id === 'wings'
-
-interface ProjectMeta {
-  id: 'smart-unit' | 'github-gravity' | 'rtk-to-endpoints'
-  index: string
-  title: string
-  year: string
-  stack: string[]
-  accent: Accent
-  category: string
-  href: string
-  homepage?: string
-  docs?: string
-  demo: ProjectDemo
-}
+import type { Project, ProjectEntry, ProjectMeta, WingsProject } from '@/types/site'
 
 /** 项目结构数据；subtitle/summary/role 等文案在 messages，按 projects$<index>* 取 */
 const projectMetas: ProjectMeta[] = [
@@ -60,7 +13,6 @@ const projectMetas: ProjectMeta[] = [
     category: 'OPEN SOURCE',
     href: 'https://github.com/flycran/smart-unit',
     docs: 'https://flycran.github.io/smart-unit/en/',
-    demo: 'unit',
   },
   {
     id: 'github-gravity',
@@ -71,7 +23,6 @@ const projectMetas: ProjectMeta[] = [
     accent: 'blue',
     category: 'CREATIVE',
     href: 'https://github.com/flycran/github-gravity',
-    demo: 'gravity',
   },
   {
     id: 'rtk-to-endpoints',
@@ -82,7 +33,6 @@ const projectMetas: ProjectMeta[] = [
     accent: 'orange',
     category: 'DEVELOPER TOOL',
     href: 'https://github.com/flycran/rtk-to-endpoints',
-    demo: 'ide',
   },
 ]
 
@@ -96,16 +46,16 @@ const profileBase = {
 
 const platformBase = [
   {
-    id: 'juejin' as const,
+    id: 'juejin',
     handle: 'Flycran',
     href: 'https://juejin.cn/user/1737682330585838',
-    accent: 'orange' as Accent,
+    accent: 'orange',
   },
   {
-    id: 'github' as const,
+    id: 'github',
     handle: '@flycran',
     href: 'https://github.com/flycran',
-    accent: 'blue' as Accent,
+    accent: 'blue',
   },
 ]
 
@@ -163,5 +113,7 @@ export function getSite() {
     colophon: { note: m.colophonNote(), builtWith: m.colophonBuiltWith(), year: colophonYear },
   }
 }
+
+export const isWingsProject = (entry: ProjectEntry): entry is WingsProject => entry.id === 'wings'
 
 export { writing, writingSyncedAt } from './writing'

@@ -1,0 +1,149 @@
+---
+import LangHint from '@/components/LangHint/LangHint'
+import { getSite } from '@/data/site'
+import { m } from '@/paraglide/messages'
+import { getLocale, locales } from '@/paraglide/runtime'
+import { localizeCurrentHref } from '@/utils/localizeUrl'
+
+const locale = getLocale()
+const site = getSite()
+
+// 其他语言的首页链接
+const languageSwitches = locales
+  .filter((item) => item !== locale)
+  .map((locale) => {
+    const url = new URL(localizeCurrentHref(locale, Astro.url))
+    return {
+      locale,
+      href: url.pathname + url.search + url.hash,
+    }
+  })
+---
+
+<header class="p-topbar">
+  <a class="p-logo" href="#home" aria-label={m.a11yHome({ name: site.profile.name })}>
+    <span class="p-logo-mark" aria-hidden="true">F</span>
+    <span class="p-logo-text">{site.profile.name} <em>/ WINGS</em></span>
+  </a>
+  <div class="p-topbar-right">
+    <nav class="p-lang-switch" aria-label="Language">
+      {languageSwitches.map((item) => (
+        <a href={item.href} hreflang={item.locale} lang={item.locale}>
+          {item.locale === 'zh' ? '中' : 'EN'}
+        </a>
+      ))}
+      {languageSwitches[0] && (
+        <LangHint client:idle pageLocale={locale} targetHref={languageSwitches[0].href} />
+      )}
+    </nav>
+    <a class="p-topbar-cta" href="#contact"
+      >{m.navContact()} <span aria-hidden="true">↓</span></a
+    >
+  </div>
+</header>
+
+<style>
+.p-topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100% - 48px, 1280px);
+  margin: 0 auto;
+  padding: 28px 0 0 80px;
+}
+
+.p-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.p-logo-mark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--p-ink);
+  border-radius: 50%;
+  font-family: var(--p-serif);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.p-logo-text {
+  font-family: var(--p-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+}
+
+.p-logo-text em {
+  color: var(--p-muted);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.p-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.p-topbar-cta {
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.p-lang-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p-lang-switch a {
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--p-muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+}
+
+.p-lang-switch a:hover {
+  color: var(--p-ink);
+  border-bottom-color: var(--p-ink);
+}
+
+@media (max-width: 1080px) {
+  .p-topbar {
+    padding-left: 96px;
+  }
+}
+
+@media (max-width: 900px) {
+  .p-topbar {
+    width: calc(100% - 40px);
+    padding: 20px 0 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .p-topbar-cta {
+    font-size: 11px;
+  }
+
+  .p-logo-text {
+    font-size: 11.5px;
+  }
+}
+</style>

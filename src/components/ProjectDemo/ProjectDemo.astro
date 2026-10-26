@@ -1,16 +1,19 @@
 ---
-import type { ProjectDemo as ProjectDemoId } from '../../data/site'
-import GravityDemo from './GravityDemo/GravityDemo'
-import RtkEndpointsDemo from './RtkEndpointsDemo/RtkEndpointsDemo'
-import SmartUnitDemo from './SmartUnitDemo/SmartUnitDemo'
+import type smartUnit from './demos/smart-unit.astro'
 
 interface Props {
-  demo: ProjectDemoId
+  id: string
 }
 
-const { demo } = Astro.props
+const { id } = Astro.props
+
+/* demos/ 目录约定：文件名 = 项目 id，有 demo 的项目放入同名文件即生效 */
+const demos = import.meta.glob<{ default: typeof smartUnit }>('./demos/*.astro', { eager: true })
+const entry = demos[`./demos/${id}.astro`]
+if (!entry) {
+  throw new Error(`No demo for project "${id}": expected src/components/ProjectDemo/demos/${id}.astro`)
+}
+const Demo = entry.default
 ---
 
-{demo === 'unit' && <SmartUnitDemo client:visible />}
-{demo === 'gravity' && <GravityDemo client:visible />}
-{demo === 'ide' && <RtkEndpointsDemo client:visible />}
+<Demo />
