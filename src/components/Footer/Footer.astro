@@ -1,5 +1,6 @@
 ---
 import { getSite } from '@/data/site'
+import resumePdf from '@/assets/resume-redacted.pdf'
 import { m } from '@/paraglide/messages'
 
 const site = getSite()
@@ -19,7 +20,10 @@ const site = getSite()
       {m.homeFooterBuiltWith({ stack: site.colophon.builtWith })}<br>{m.homeFooterNoTracking()}
     </p>
     <p>© {site.colophon.year} {site.profile.name}<br>{m.homeFooterMistakes()}</p>
-    <p><a href="#home">{m.backToTop()} ↑</a><br><a href="#work">{m.navWork()}</a></p>
+    <p>
+      <a href="#home">{m.backToTop()} ↑</a> · <a href="#work">{m.navWork()}</a><br>
+      <a href={resumePdf} target="_blank" rel="noopener noreferrer">{m.contactResumeLink()} ↗</a>
+    </p>
   </div>
   <span class="p-footer-seal" aria-hidden="true">{site.profile.cn}<br>{site.profile.name}</span>
 </footer>

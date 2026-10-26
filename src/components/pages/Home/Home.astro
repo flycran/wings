@@ -8,6 +8,7 @@ import PlatformLogo from '@/components/PlatformLogo/PlatformLogo.astro'
 import ProjectCard from '@/components/ProjectCard/ProjectCard.astro'
 import ProjectReference from '@/components/ProjectReference/ProjectReference.astro'
 import ThemeBookmark from '@/components/ThemeBookmark/ThemeBookmark'
+import resumePdf from '@/assets/resume-redacted.pdf'
 import { getSite, isWingsProject, writing, writingSyncedAt } from '@/data/site'
 import Layout from '@/layouts/Layout.astro'
 import { m } from '@/paraglide/messages'
@@ -163,7 +164,7 @@ const nav = [
               >{m.actionViewWork()} <span aria-hidden="true">↘</span></a
             >
             <a class="p-btn p-btn--ghost" href="#contact"
-              >{m.actionDownloadResume()} <span aria-hidden="true">↓</span></a
+              >{m.navContact()} <span aria-hidden="true">↓</span></a
             >
           </div>
           <div class="p-hero-links">
@@ -374,6 +375,9 @@ const nav = [
             rel="noopener noreferrer"
           >
             {m.actionJuejin()} <span aria-hidden="true">↗</span>
+          </a>
+          <a class="p-btn p-btn--ghost" href={resumePdf} download="Flycran-Resume.pdf">
+            {m.contactResumeLink()} <span aria-hidden="true">↓</span>
           </a>
         </div>
       </section>
