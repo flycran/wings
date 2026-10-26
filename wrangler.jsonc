@@ -1,0 +1,7 @@
+// Cloudflare Pages 项目配置。
+// 构建命令仍需在 Cloudflare Dashboard 中设置：bun run build
+{
+  "name": "wings",
+  "compatibility_date": "2026-10-01",
+  "pages_build_output_dir": "dist"
+}

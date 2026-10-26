@@ -6,6 +6,7 @@ src/paraglide/
 
 # generated types
 .astro/
+.wrangler
 
 # dependencies
 node_modules/

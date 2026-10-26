@@ -1,0 +1,8 @@
+# Legacy routes from the old article-first site.
+/article /#writing 301
+/article/* /#writing 301
+/project /#work 301
+/project/* /#work 301
+/admin / 302
+/admin/* / 302
+/ui / 301
