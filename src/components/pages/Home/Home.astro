@@ -1,4 +1,5 @@
 ---
+import clsx from 'clsx'
 import CodeTabs from '@/components/CodeTabs/CodeTabs.astro'
 import PaperCrane from '@/components/Crane/Crane'
 import LangHint from '@/components/LangHint/LangHint'
@@ -171,11 +172,15 @@ const languageSwitches = locales
           </div>
           <p class="p-kicker">{site.profile.kicker}</p>
           <h1>
-            {site.profile.headline.map((line) => (
+            {site.profile.headline.map((line, index) => (
               <span class="p-h1-line">
                 {partsToSegments(line.parts({})).map((seg) =>
                   seg.variant ? (
-                    <span class={`p-mark${seg.variant === 'orange' ? ' p-mark--orange' : ''}`}>
+                    <span
+                      class={clsx('p-mark', {
+                        'p-mark--orange': index === 1,
+                      })}
+                    >
                       {seg.text}
                     </span>
                   ) : (
