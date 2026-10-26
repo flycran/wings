@@ -8,13 +8,14 @@ import PlatformLogo from '@/components/PlatformLogo/PlatformLogo.astro'
 import ProjectCard from '@/components/ProjectCard/ProjectCard.astro'
 import ProjectReference from '@/components/ProjectReference/ProjectReference.astro'
 import ThemeBookmark from '@/components/ThemeBookmark/ThemeBookmark'
-import resumePdf from '@/assets/resume-redacted.pdf'
 import { getSite, isWingsProject, writing, writingSyncedAt } from '@/data/site'
 import Layout from '@/layouts/Layout.astro'
 import { m } from '@/paraglide/messages'
 import { partsToSegments } from '@/utils/markup'
 
 const site = getSite()
+
+const resumeUrl = '/pdf/resume.pdf'
 
 const nav = [
   { label: m.navHome(), href: '#home', key: 'home' },
@@ -376,7 +377,11 @@ const nav = [
           >
             {m.actionJuejin()} <span aria-hidden="true">↗</span>
           </a>
-          <a class="p-btn p-btn--ghost" href={resumePdf} download="Flycran-Resume.pdf">
+          <a
+            class="p-btn p-btn--ghost"
+            href={`${resumeUrl}?dl=1`}
+            download="Flycran-Resume.pdf"
+          >
             {m.contactResumeLink()} <span aria-hidden="true">↓</span>
           </a>
         </div>
