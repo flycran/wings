@@ -1,0 +1,2134 @@
+---
+import CodeTabs from '@/components/CodeTabs/CodeTabs.astro'
+import PaperCrane from '@/components/Crane/Crane'
+import LangHint from '@/components/LangHint/LangHint'
+import PlatformLogo from '@/components/PlatformLogo/PlatformLogo.astro'
+import ProjectCard from '@/components/ProjectCard/ProjectCard.astro'
+import ProjectReference from '@/components/ProjectReference/ProjectReference.astro'
+import ThemeBookmark from '@/components/ThemeBookmark/ThemeBookmark'
+import { getSite, isWingsProject, writing, writingSyncedAt } from '@/data/site'
+import Layout from '@/layouts/Layout.astro'
+import { m } from '@/paraglide/messages'
+import { getLocale, locales } from '@/paraglide/runtime'
+import { localizeCurrentHref } from '@/utils/localizeUrl'
+import { partsToSegments } from '@/utils/markup'
+
+const locale = getLocale()
+const site = getSite()
+
+const nav = [
+  { label: m.navHome(), href: '#home', key: 'home' },
+  { label: m.navWork(), href: '#work', key: 'work' },
+  { label: m.navAbout(), href: '#about', key: 'about' },
+  { label: m.navWriting(), href: '#writing', key: 'writing' },
+]
+
+// 其他语言的首页链接
+const languageSwitches = locales
+  .filter((item) => item !== locale)
+  .map((locale) => {
+    const url = new URL(localizeCurrentHref(locale, Astro.url))
+    return {
+      locale,
+      href: url.pathname + url.search + url.hash,
+    }
+  })
+---
+
+<Layout title={m.metaTitle()} bodyClass="paper-body">
+  <div class="p-root">
+    <div class="p-grain" aria-hidden="true"></div>
+
+    <header class="p-topbar">
+      <a class="p-logo" href="#home" aria-label={m.a11yHome({ name: site.profile.name })}>
+        <span class="p-logo-mark" aria-hidden="true">F</span>
+        <span class="p-logo-text">{site.profile.name} <em>/ WINGS</em></span>
+      </a>
+      <div class="p-topbar-right">
+        <nav class="p-lang-switch" aria-label="Language">
+          {languageSwitches.map((item) => (
+            <a href={item.href} hreflang={item.locale} lang={item.locale}>
+              {item.locale === 'zh' ? '中' : 'EN'}
+            </a>
+          ))}
+          {languageSwitches[0] && (
+            <LangHint client:idle pageLocale={locale} targetHref={languageSwitches[0].href} />
+          )}
+        </nav>
+        <a class="p-topbar-cta" href="#contact"
+          >{m.navContact()} <span aria-hidden="true">↓</span></a
+        >
+      </div>
+    </header>
+
+    <aside class="p-rail" aria-label={m.a11yRailNav()}>
+      <nav class="p-rail-tabs">
+        {nav.map((item, index) => (
+          <a
+            class:list={['p-tab', { 'is-active': index === 0 }]}
+            href={item.href}
+            data-nav-link={item.key}
+            aria-current={index === 0 ? 'page' : undefined}
+          >
+            <span class="p-tab-label">{item.label}</span>
+            <span class="p-tab-arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+        ))}
+      </nav>
+      <ThemeBookmark client:idle />
+    </aside>
+
+    <nav class="p-mobilebar" aria-label={m.a11yMobileNav()}>
+      {nav.map((item, index) => (
+        <a
+          class:list={['p-mobile-tab', { 'is-active': index === 0 }]}
+          href={item.href}
+          data-nav-link={item.key}
+          aria-current={index === 0 ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <button
+        class="p-mobile-theme"
+        type="button"
+        data-theme-toggle
+        aria-label={m.a11yToggleDarkMode()}
+      >
+        ◐
+      </button>
+    </nav>
+
+    <div class="above">
+      <svg
+        class="p-sketch"
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="pencil-rough" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.012"
+              numOctaves="2"
+              seed="11"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="1.8"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+
+        <g class="p-sketch-lines" filter="url(#pencil-rough)">
+          <path
+            class="sk sk-muted"
+            d="M 742 430 C 752 258 916 158 1092 174 C 1278 192 1392 318 1362 500 C 1334 668 1176 736 1014 712 C 852 688 744 590 752 438 C 757 360 782 302 820 256"
+          />
+          <path class="sk sk-orange" d="M 1248 118 L 1362 166 L 1296 232 Z" />
+          <path class="sk sk-orange sk-dash" d="M 1248 118 L 1296 232 M 1362 166 L 1296 232" />
+
+          <path class="sk sk-blue" d="M 632 676 C 686 666 728 636 762 600" />
+          <path class="sk sk-blue" d="M 750 604 L 762 600 L 758 613" />
+
+          <path
+            class="sk sk-muted"
+            d="M 126 420 L 136 398 M 126 420 L 136 442 M 126 420 L 104 410 M 126 420 L 104 432"
+          />
+          <path
+            class="sk sk-muted"
+            d="M 1120 708 L 1140 680 M 1134 714 L 1154 686 M 1148 720 L 1168 692 M 1162 726 L 1182 698"
+          />
+          <path class="sk sk-muted" d="M 90 812 L 110 812 M 100 802 L 100 822" />
+          <path class="sk sk-muted" d="M 1330 84 L 1348 84 M 1339 75 L 1339 93" />
+          <circle class="sk sk-muted" cx="1310" cy="770" r="2.5" />
+          <circle class="sk sk-muted" cx="700" cy="190" r="2" />
+          <circle class="sk sk-muted" cx="1390" cy="610" r="1.8" />
+          <path class="sk sk-muted sk-dash" d="M 60 300 C 90 286 120 292 138 312" />
+        </g>
+
+        <g class="p-sketch-labels">
+          <text x="1240" y="842">NOTE / 01</text>
+        </g>
+      </svg>
+    </div>
+
+    <main id="main" class="p-main">
+      <section class="p-hero" id="home">
+        <div class="p-hero-copy" data-reveal>
+          <div class="p-status">
+            <span class="p-status-dot" aria-hidden="true"></span>
+            <span>{site.profile.availability}</span>
+            <span class="p-status-sep" aria-hidden="true">·</span>
+            <span>{site.profile.location}</span>
+          </div>
+          <p class="p-kicker">{site.profile.kicker}</p>
+          <h1>
+            {site.profile.headline.map((line) => (
+              <span class="p-h1-line">
+                {partsToSegments(line.parts({})).map((seg) =>
+                  seg.variant ? (
+                    <span class={`p-mark${seg.variant === 'orange' ? ' p-mark--orange' : ''}`}>
+                      {seg.text}
+                    </span>
+                  ) : (
+                    seg.text
+                  )
+                )}
+              </span>
+            ))}
+          </h1>
+          <p class="p-intro">{site.profile.intro}</p>
+          <div class="p-actions">
+            <a class="p-btn p-btn--primary" href="#work"
+              >{m.actionViewWork()} <span aria-hidden="true">↘</span></a
+            >
+            <a class="p-btn p-btn--ghost" href="#contact"
+              >{m.actionDownloadResume()} <span aria-hidden="true">↓</span></a
+            >
+          </div>
+          <div class="p-hero-links">
+            {site.profile.links.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="p-hero-stage" data-reveal>
+          <div class="p-bigword" aria-hidden="true">FLY<br>CRAN</div>
+          <div class="p-scrap p-scrap--orange" aria-hidden="true"></div>
+          <div class="p-scrap p-scrap--blue" aria-hidden="true"></div>
+          <div class="p-code-sheet">
+            <div class="p-code-sheet-head">
+              <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>{site.profile.name} / PROFILE</span>
+              <span class="p-code-sheet-tag">v2.0</span>
+            </div>
+            <CodeTabs />
+            <div class="p-code-sheet-foot">
+              <span>WINGS / 2026</span>
+              <span>{m.homeHeroStaticNote()}</span>
+            </div>
+          </div>
+          <div class="p-hero-crane">
+            <PaperCrane client:load />
+          </div>
+          <div class="p-crane-note">
+            <span>{m.heroCraneHint()}</span>
+            <span class="p-crane-note-line" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <a class="p-scroll" href="#work" aria-label={m.a11yScrollToWork()}>
+          <span class="p-scroll-text">{m.heroScrollHint()}</span>
+          <span class="p-scroll-track" aria-hidden="true">
+            <svg class="p-scroll-arrow" viewBox="0 0 12 18">
+              <title>arrow</title>
+              <path d="M6 2V16M1.5 11.5L6 16l4.5-4.5" />
+            </svg>
+            <span class="p-scroll-line"></span>
+          </span>
+        </a>
+      </section>
+
+      <section class="p-section" id="work">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">01</span>
+          <div class="p-section-title">
+            <p class="p-kicker">SELECTED WORK</p>
+            <h2>{m.homeWorkTitle()}</h2>
+          </div>
+          <p class="p-section-note">{m.homeWorkNote()}</p>
+        </div>
+
+        <div class="p-work-grid">
+          {site.projects.map((project) =>
+            isWingsProject(project) ? (
+              <ProjectReference project={project} />
+            ) : (
+              <ProjectCard project={project} />
+            )
+          )}
+        </div>
+      </section>
+
+      <div class="p-fold" aria-hidden="true">
+        <span>FOLD HERE</span>
+      </div>
+
+      <section class="p-section" id="about">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">02</span>
+          <div class="p-section-title">
+            <p class="p-kicker">ABOUT / HOW I WORK</p>
+            <h2>{m.homeAboutTitle()}</h2>
+          </div>
+          <p class="p-section-note">{m.homeAboutNote()}</p>
+        </div>
+
+        <div class="p-about-grid">
+          <figure class="p-portrait" data-reveal>
+            <div class="p-portrait-inner">
+              <span class="p-portrait-char">飞</span>
+              <span class="p-portrait-seal">{site.profile.name}<br>{site.profile.cn}</span>
+            </div>
+            <figcaption>{site.profile.name} · {site.colophon.year}</figcaption>
+          </figure>
+
+          <div class="p-about-copy" data-reveal>
+            <p class="p-lead">{m.homeAboutLead()}</p>
+            <p>{m.homeAboutCraft()}</p>
+            <p>{m.homeAboutTeam()}</p>
+
+            <div class="p-principles">
+              <p class="p-kicker">PRINCIPLES / 04</p>
+              {site.principles.map((item, index) => (
+                <div class="p-principle">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="p-now">
+              <p class="p-kicker">{m.aboutNowKicker()}</p>
+              {site.now.map((item) => (
+                <div class="p-now-row">
+                  <span>{item.label}</span>
+                  <p>{item.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="p-ask">
+              <span>Ask me about</span>
+              <div>
+                <em>TypeScript</em><em>{m.aboutAskBuildTools()}</em
+                ><em>{m.aboutAskDesignSystems()}</em><em>{m.aboutAskIndieDev()}</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-section" id="writing">
+        <div class="p-section-head" data-reveal>
+          <span class="p-section-index">03</span>
+          <div class="p-section-title">
+            <p class="p-kicker">WRITING / LATEST POSTS</p>
+            <h2>{m.homeWritingTitle()}</h2>
+          </div>
+          <p class="p-section-note">{m.homeWritingNote()}</p>
+        </div>
+
+        <p class="p-writing-intro" data-reveal>{m.homeWritingIntro()}</p>
+
+        <div class="p-platforms" data-reveal>
+          {site.platforms.map((platform) => (
+            <a
+              class="p-platform"
+              href={platform.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={`--accent: var(--p-${platform.accent}); --accent-bright: var(--p-${platform.accent}-bright);`}
+            >
+              <span class="p-platform-mark" aria-hidden="true">
+                <PlatformLogo id={platform.id} />
+              </span>
+              <span class="p-platform-copy">
+                <strong>{platform.name}</strong>
+                <span>{platform.handle}</span>
+                <small>{platform.description}</small>
+              </span>
+              <span class="p-platform-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <div class="p-writing-list" data-reveal>
+          {writing.map((item, index) => (
+            <a class="p-writing-row" href={item.href} target="_blank" rel="noopener noreferrer">
+              <span class="p-writing-index">{String(index + 1).padStart(2, '0')}</span>
+              <span class="p-writing-title">{item.title}</span>
+              <span class="p-writing-meta">
+                {item.platform} · {item.date}
+              </span>
+              <span class="p-writing-tag">{item.tag}</span>
+              <span class="p-writing-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          ))}
+        </div>
+        <p class="p-writing-foot">{m.homeWritingSynced({ date: writingSyncedAt })}</p>
+      </section>
+
+      <section class="p-contact" id="contact">
+        <p class="p-kicker" data-reveal>04 / CONTACT</p>
+        <h2 data-reveal>
+          {m.homeContactTitle1()}<br>
+          {m.homeContactTitle2()}
+        </h2>
+        <a class="p-email" href={`mailto:${site.profile.email}`} data-reveal
+          >{site.profile.email}</a
+        >
+        <div class="p-contact-actions" data-reveal>
+          <button class="p-btn p-btn--primary" type="button" data-copy-email={site.profile.email}>
+            {m.actionCopyEmail()}
+          </button>
+          <a
+            class="p-btn p-btn--ghost"
+            href="https://github.com/flycran"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="p-btn p-btn--ghost"
+            href="https://juejin.cn/user/1737682330585838"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {m.actionJuejin()} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="p-footer">
+      <div class="p-footer-top">
+        <p>{m.homeFooterTagline({ name: site.profile.cn })}</p>
+        <p>{site.colophon.note}</p>
+      </div>
+      <div class="p-footer-wordmark">
+        <span class="p-footer-fly">{site.profile.name.slice(0, 3)}</span>
+        <span class="p-footer-cran">{site.profile.name.slice(3)}</span>
+      </div>
+      <div class="p-footer-grid">
+        <p>
+          {m.homeFooterBuiltWith({ stack: site.colophon.builtWith })}<br>{m.homeFooterNoTracking()}
+        </p>
+        <p>© {site.colophon.year} {site.profile.name}<br>{m.homeFooterMistakes()}</p>
+        <p><a href="#home">{m.backToTop()} ↑</a><br><a href="#work">{m.navWork()}</a></p>
+      </div>
+      <span class="p-footer-seal" aria-hidden="true">{site.profile.cn}<br>{site.profile.name}</span>
+    </footer>
+  </div>
+
+  <script>
+  // Mobile/desktop bookmark nav active state
+  const navLinks = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-link]'))
+  const sections = ['home', 'work', 'about', 'writing']
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => Boolean(el))
+
+  const setActive = (key: string) => {
+    navLinks.forEach((link) => {
+      const active = link.dataset.navLink === key
+      link.classList.toggle('is-active', active)
+      if (active) link.setAttribute('aria-current', 'page')
+      else link.removeAttribute('aria-current')
+    })
+  }
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible?.target.id) setActive(visible.target.id)
+      },
+      { rootMargin: '-24% 0px -58% 0px', threshold: [0.01, 0.2, 0.5] }
+    )
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+  }
+
+  // WebView paper tilt
+  const codeSheet = document.querySelector<HTMLElement>('.p-code-sheet')
+  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (codeSheet && canTilt && !reduceMotion) {
+    const state = { x: 0, y: 0, lift: 0 }
+    const target = { x: 0, y: 0, lift: 0 }
+    let frame = 0
+
+    const render = () => {
+      codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
+    }
+
+    const tick = () => {
+      state.x += (target.x - state.x) * 0.14
+      state.y += (target.y - state.y) * 0.14
+      state.lift += (target.lift - state.lift) * 0.14
+      render()
+
+      const settled =
+        Math.abs(target.x - state.x) < 0.01 &&
+        Math.abs(target.y - state.y) < 0.01 &&
+        Math.abs(target.lift - state.lift) < 0.01
+
+      if (settled) {
+        state.x = target.x
+        state.y = target.y
+        state.lift = target.lift
+        frame = 0
+        if (target.x === 0 && target.y === 0 && target.lift === 0) {
+          codeSheet.style.removeProperty('transform')
+        }
+        return
+      }
+
+      frame = requestAnimationFrame(tick)
+    }
+
+    const start = () => {
+      if (!frame) frame = requestAnimationFrame(tick)
+    }
+
+    codeSheet.addEventListener('pointerenter', () => {
+      codeSheet.classList.add('is-tilting')
+      target.lift = 8
+      start()
+    })
+
+    codeSheet.addEventListener('pointermove', (event) => {
+      const rect = codeSheet.getBoundingClientRect()
+      target.x = (0.5 - (event.clientY - rect.top) / rect.height) * 10.5
+      target.y = ((event.clientX - rect.left) / rect.width - 0.5) * 10.5
+      target.lift = 8
+      start()
+    })
+
+    codeSheet.addEventListener('pointerleave', () => {
+      codeSheet.classList.remove('is-tilting')
+      target.x = 0
+      target.y = 0
+      target.lift = 0
+      start()
+    })
+  }
+  </script>
+</Layout>
+
+<style>
+/* ===== 页面壳层 ===== */
+
+.p-root {
+  position: relative;
+  overflow: clip;
+  min-height: 100vh;
+}
+
+.p-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image: radial-gradient(rgba(29, 27, 23, 0.14) 0.55px, transparent 0.55px);
+  background-size: 4px 4px;
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+}
+
+:global(html[data-theme="dark"]) .p-grain {
+  opacity: 0.3;
+  background-image: radial-gradient(rgba(242, 237, 227, 0.14) 0.55px, transparent 0.55px);
+}
+
+.above {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.above::before {
+  position: absolute;
+  inset: -30px 0 20px;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--p-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--p-rule) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  mask-image: radial-gradient(ellipse at 58% 44%, black 4%, transparent 74%);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.p-main {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 48px, 1280px);
+  margin: 0 auto;
+  padding-left: 80px;
+}
+
+.p-topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100% - 48px, 1280px);
+  margin: 0 auto;
+  padding: 28px 0 0 80px;
+}
+
+.p-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.p-logo-mark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--p-ink);
+  border-radius: 50%;
+  font-family: var(--p-serif);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.p-logo-text {
+  font-family: var(--p-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+}
+
+.p-logo-text em {
+  color: var(--p-muted);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.p-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.p-topbar-cta {
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.p-lang-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p-lang-switch a {
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--p-muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+}
+
+.p-lang-switch a:hover {
+  color: var(--p-ink);
+  border-bottom-color: var(--p-ink);
+}
+
+/* ===== 桌面书签导航栏 ===== */
+
+.p-rail {
+  position: fixed;
+  top: 50%;
+  left: 16px;
+  z-index: 60;
+  display: flex;
+  width: 76px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transform: translateY(-50%);
+}
+
+.p-rail-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.p-tab {
+  --tab: var(--p-blue);
+  --tab-ink: #fff;
+  position: relative;
+  display: flex;
+  width: 72px;
+  height: 50px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px 9px;
+  border: 0;
+  border-left: 5px solid var(--tab);
+  border-radius: 0 5px 5px 0;
+  background: var(--p-sheet);
+  box-shadow: 3px 3px 0 var(--p-rule);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), 50% 100%, 0 calc(100% - 9px));
+  color: var(--p-ink);
+  font-family: var(--p-sans);
+  font-size: 13px;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.p-tab:nth-child(1) {
+  --tab: var(--p-blue);
+}
+
+.p-tab:nth-child(2) {
+  --tab: var(--p-green);
+}
+
+.p-tab:nth-child(3) {
+  --tab: var(--p-orange);
+}
+
+.p-tab:nth-child(4) {
+  --tab: var(--p-red);
+}
+
+.p-tab:hover,
+.p-tab:focus-visible {
+  transform: translateX(4px);
+}
+
+.p-tab.is-active {
+  width: 78px;
+  height: 54px;
+  background: var(--tab);
+  box-shadow: 4px 4px 0 var(--p-rule);
+  color: var(--tab-ink);
+  transform: translateX(4px);
+}
+
+.p-tab-label {
+  flex: 1;
+  text-align: left;
+}
+
+.p-tab-arrow {
+  opacity: 0;
+  font-family: var(--p-mono);
+  font-size: 11px;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.p-tab:hover .p-tab-arrow,
+.p-tab:focus-visible .p-tab-arrow,
+.p-tab.is-active .p-tab-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== 移动端底部导航栏 ===== */
+
+.p-mobilebar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .p-rail {
+    display: none;
+  }
+
+  .p-mobilebar {
+    --mobilebar-bottom: calc(8px + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+    padding: 8px 10px var(--mobilebar-bottom);
+    border-top: 1px solid var(--p-rule);
+    background: var(--p-sheet);
+    box-shadow: 0 -4px 18px rgba(29, 27, 23, 0.08);
+  }
+
+  .p-mobile-tab {
+    --tab: var(--p-blue);
+    --tab-ink: #fff;
+    position: relative;
+    display: grid;
+    flex: 1;
+    min-height: 42px;
+    place-items: center;
+    border-radius: 5px 5px 0 0;
+    color: var(--p-muted);
+    font-family: var(--p-mono);
+    font-size: 11.5px;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .p-mobile-tab:nth-child(1) {
+    --tab: var(--p-blue);
+  }
+
+  .p-mobile-tab:nth-child(2) {
+    --tab: var(--p-green);
+  }
+
+  .p-mobile-tab:nth-child(3) {
+    --tab: var(--p-orange);
+  }
+
+  .p-mobile-tab:nth-child(4) {
+    --tab: var(--p-red);
+  }
+
+  .p-mobile-tab::after {
+    position: absolute;
+    right: 0;
+    bottom: calc(-1 * var(--mobilebar-bottom));
+    left: 0;
+    height: var(--mobilebar-bottom);
+    background: transparent;
+    content: "";
+    pointer-events: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .p-mobile-tab.is-active {
+    background: var(--tab);
+    color: var(--tab-ink);
+  }
+
+  .p-mobile-tab.is-active::after {
+    background: var(--tab);
+  }
+
+  .p-mobile-theme {
+    width: 38px;
+    border: 1px solid var(--p-rule);
+    border-radius: 5px;
+    background: var(--p-paper);
+    color: var(--p-ink);
+    font-size: 15px;
+  }
+}
+
+/* ===== 通用 section 骨架 ===== */
+
+.p-section {
+  position: relative;
+  padding: 92px 0;
+}
+
+.p-section-head {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 36px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--p-rule);
+}
+
+.p-section-index {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--p-rule);
+  border-radius: 50%;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-section-title h2 {
+  margin: 5px 0 0;
+  font-family: var(--p-serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.p-section-note {
+  max-width: 250px;
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 11.5px;
+  line-height: 1.7;
+  text-align: right;
+}
+
+.p-fold {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.p-fold::before,
+.p-fold::after {
+  flex: 1;
+  border-top: 1px dashed var(--p-rule);
+  content: "";
+}
+
+.p-fold span {
+  white-space: nowrap;
+}
+
+/* ===== 通用元素 ===== */
+
+.p-kicker {
+  margin: 0;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.p-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 17px;
+  border: 1px solid var(--p-ink);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.p-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
+.p-btn--primary {
+  border-color: var(--p-blue);
+  background: var(--p-blue);
+  box-shadow: 4px 4px 0 var(--p-rule);
+  color: #fff;
+}
+
+.p-btn--primary:hover {
+  box-shadow: 7px 7px 0 var(--p-rule);
+}
+
+.p-btn--ghost {
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--p-rule);
+  color: var(--p-ink);
+}
+
+.p-btn--ghost:hover {
+  background: var(--p-sheet);
+  box-shadow: 7px 7px 0 var(--p-rule);
+}
+
+/* ===== Hero ===== */
+
+.p-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: calc(100vh - 110px);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: center;
+  gap: 30px;
+  padding: 0px 0 40px;
+}
+
+.p-hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.p-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+.p-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-green-bright);
+  box-shadow: 0 0 0 4px rgba(33, 212, 134, 0.12);
+}
+
+.p-status-sep {
+  color: var(--p-rule);
+}
+
+.p-hero .p-kicker {
+  margin: 26px 0 14px;
+}
+
+.p-hero h1 {
+  margin: 0 0 24px;
+  font-family: var(--p-serif);
+  font-size: clamp(2.5rem, 3.7vw, 3.7rem);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p-h1-line {
+  display: block;
+}
+
+.p-mark {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* 文字底部的荧光笔划线 */
+.p-mark::after {
+  position: absolute;
+  z-index: -1;
+  right: -2%;
+  bottom: 0.08em;
+  left: -2%;
+  height: 0.16em;
+  border-radius: 999px;
+  background: var(--p-blue-bright);
+  content: "";
+  opacity: 0.28;
+  transform: rotate(-1.2deg);
+}
+
+.p-mark--orange::after {
+  background: var(--p-orange-bright);
+  opacity: 0.38;
+}
+
+.p-intro {
+  max-width: 37em;
+  margin: 0 0 30px;
+  color: var(--p-muted);
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.p-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.p-copy {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--p-muted);
+  background: none;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+.p-copy:hover {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+
+.p-hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 27px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+}
+
+.p-hero-links a {
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+}
+
+.p-hero-links a:hover {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+
+.p-hero-stage {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-bigword {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: transparent;
+  font-family: var(--p-serif);
+  font-size: clamp(7rem, 14vw, 12rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.72;
+  opacity: 0.6;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  user-select: none;
+  -webkit-text-stroke: 1px var(--p-rule);
+}
+
+.p-scrap {
+  position: absolute;
+  width: 230px;
+  height: 300px;
+  opacity: 0.36;
+  pointer-events: none;
+}
+
+.p-scrap--orange {
+  top: 14%;
+  right: 2%;
+  background: var(--p-orange-bright);
+  clip-path: polygon(12% 0, 100% 7%, 88% 100%, 0 86%);
+  transform: rotate(11deg);
+}
+
+.p-scrap--blue {
+  bottom: 6%;
+  left: 2%;
+  background: var(--p-blue-bright);
+  clip-path: polygon(0 9%, 91% 0, 100% 88%, 8% 100%);
+  transform: rotate(-8deg);
+}
+
+:global(html[data-theme="dark"]) .p-scrap {
+  opacity: 0.16;
+}
+
+.p-code-sheet {
+  position: relative;
+  margin-top: 200px;
+  z-index: 2;
+  width: min(100%, 580px);
+  align-self: flex-start;
+  flex: 0 0 auto;
+  border: 1px solid var(--p-rule);
+  border-radius: 3px;
+  background: var(--p-sheet);
+  box-shadow: 12px 12px 0 var(--p-rule);
+  transform: rotate(-1.4deg);
+  transform-origin: center center;
+  transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* 顶部的胶带 */
+.p-code-sheet::before {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  z-index: 3;
+  width: 88px;
+  height: 26px;
+  background: rgba(255, 178, 47, 0.58);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  content: "";
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+:global(html[data-theme="dark"]) .p-code-sheet::before {
+  background: rgba(255, 178, 47, 0.34);
+}
+
+.p-code-sheet.is-tilting,
+.p-code-sheet:focus-within {
+  box-shadow: 18px 20px 0 var(--p-rule);
+}
+
+.p-code-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 15px;
+  border-bottom: 1px dashed var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.p-code-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.p-code-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--p-rule);
+}
+
+.p-code-dots i:nth-child(1) {
+  background: var(--p-red-bright);
+}
+
+.p-code-dots i:nth-child(2) {
+  background: var(--p-orange-bright);
+}
+
+.p-code-dots i:nth-child(3) {
+  background: var(--p-green-bright);
+}
+
+.p-code-sheet-tag {
+  padding: 1px 5px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+}
+
+.p-code-sheet-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 15px;
+  border-top: 1px dashed var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+/* 纸鹤的摆位由本组件的包装层负责，岛内样式归 Crane.module.css */
+.p-hero-crane {
+  position: absolute;
+  top: -42px;
+  right: 20px;
+  z-index: 3;
+  width: 340px;
+  filter: drop-shadow(12px 20px 26px rgba(29, 27, 23, 0.16));
+}
+
+.p-crane-note {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  transform: rotate(-3deg);
+}
+
+.p-crane-note-line {
+  width: 48px;
+  border-top: 1px dashed var(--p-muted);
+  opacity: 0.6;
+}
+
+.p-scroll {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transform: translate(-50%, 0);
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.p-scroll:hover,
+.p-scroll:focus-visible {
+  transform: translate(-50%, -8px);
+}
+
+.p-scroll-text {
+  opacity: 0.85;
+}
+
+.p-scroll-track {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 38px;
+}
+
+.p-scroll-arrow {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 12px;
+  height: 18px;
+  color: var(--p-muted);
+  transform: translateX(-50%);
+}
+
+.p-scroll-arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+}
+
+.p-scroll-line {
+  position: absolute;
+  top: 0;
+  bottom: 14px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--p-muted));
+  opacity: 0.6;
+  transform: translateX(-50%);
+}
+
+/* ===== 背景涂鸦 ===== */
+
+.p-sketch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.p-sketch-lines .sk {
+  fill: none;
+  stroke: var(--p-muted);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+.p-sketch .sk-blue {
+  stroke: var(--p-blue);
+}
+
+.p-sketch .sk-orange {
+  stroke: var(--p-orange);
+}
+
+.p-sketch .sk-dash {
+  stroke-dasharray: 7 9;
+}
+
+.p-sketch .p-sketch-labels text {
+  fill: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  opacity: 0.62;
+}
+
+/* ===== Work ===== */
+
+.p-work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* ===== About ===== */
+
+.p-about-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  align-items: start;
+  gap: 48px;
+}
+
+.p-portrait {
+  margin: 0;
+  padding: 13px;
+  border: 1px solid var(--p-rule);
+  background: var(--p-sheet);
+  box-shadow: 8px 8px 0 var(--p-rule);
+  transform: rotate(-1deg);
+}
+
+.p-portrait-inner {
+  position: relative;
+  display: grid;
+  aspect-ratio: 4 / 5;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--p-rule);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 178, 47, 0.2), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(0, 171, 255, 0.16), transparent 45%), var(--p-paper);
+}
+
+.p-portrait-char {
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0.88;
+}
+
+.p-portrait-seal {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 6px;
+  border: 2px solid var(--p-red);
+  color: var(--p-red);
+  font-family: var(--p-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  text-align: center;
+  transform: rotate(-8deg);
+  opacity: 0.75;
+}
+
+.p-portrait figcaption {
+  margin-top: 10px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.p-about-copy {
+  max-width: 680px;
+}
+
+.p-about-copy > p {
+  margin: 0 0 16px;
+  color: var(--p-muted);
+  font-size: 14px;
+  line-height: 1.95;
+}
+
+.p-about-copy > .p-lead {
+  margin-bottom: 18px;
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 1.3rem;
+  line-height: 1.7;
+}
+
+.p-principles {
+  margin-top: 30px;
+  padding-top: 16px;
+  border-top: 1px solid var(--p-rule);
+}
+
+.p-principle {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--p-rule);
+}
+
+.p-principle span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-principle p {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.p-now {
+  margin-top: 28px;
+}
+
+.p-now-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--p-rule);
+}
+
+.p-now-row span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-now-row p {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 12.5px;
+}
+
+.p-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.p-ask > span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.p-ask div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.p-ask em {
+  padding: 3px 7px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  background: var(--p-sheet);
+  color: var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  font-style: normal;
+}
+
+/* ===== Writing ===== */
+
+.p-writing-intro {
+  max-width: 650px;
+  margin: 0 0 26px;
+  color: var(--p-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.p-platforms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.p-platform {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px;
+  border: 1px solid var(--p-rule);
+  border-left: 5px solid var(--accent);
+  background: var(--p-sheet);
+  box-shadow: 5px 5px 0 var(--p-rule);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.p-platform:hover {
+  box-shadow: 8px 8px 0 var(--p-rule);
+  transform: translate(-2px, -2px);
+}
+
+.p-platform-mark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--p-rule);
+  border-radius: 50%;
+  background: var(--p-paper);
+  color: var(--p-ink);
+}
+
+.p-platform-mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.p-platform-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.p-platform-copy strong {
+  font-family: var(--p-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.p-platform-copy span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-platform-copy small {
+  margin-top: 3px;
+  color: var(--p-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.p-platform-arrow {
+  margin-left: auto;
+  color: var(--accent);
+  font-family: var(--p-mono);
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.p-platform:hover .p-platform-arrow {
+  transform: translate(3px, -3px);
+}
+
+.p-writing-list {
+  border-top: 1px solid var(--p-rule);
+}
+
+.p-writing-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 138px 104px 18px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--p-rule);
+  text-decoration: none;
+  transition: background-color 0.18s ease;
+}
+
+.p-writing-row:hover {
+  background: rgba(29, 27, 23, 0.035);
+}
+
+:global(html[data-theme="dark"]) .p-writing-row:hover {
+  background: rgba(242, 237, 227, 0.04);
+}
+
+.p-writing-index {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-title {
+  overflow: hidden;
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+}
+
+.p-writing-meta {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-tag {
+  justify-self: start;
+  padding: 2px 6px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-arrow {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-writing-row:hover .p-writing-arrow {
+  color: var(--p-ink);
+}
+
+.p-writing-foot {
+  margin: 12px 0 0;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  text-align: right;
+}
+
+/* ===== Contact ===== */
+
+.p-contact {
+  position: relative;
+  margin-top: 40px;
+  padding: 104px 0 88px;
+  border-top: 1px solid var(--p-rule);
+}
+
+.p-contact h2 {
+  max-width: 900px;
+  margin: 16px 0 30px;
+  font-family: var(--p-serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.4;
+}
+
+.p-email {
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--p-blue);
+  color: var(--p-blue);
+  font-family: var(--p-mono);
+  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+  text-decoration: none;
+}
+
+.p-email:hover {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+
+.p-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* ===== Footer ===== */
+
+.p-footer {
+  position: relative;
+  margin-top: 40px;
+  padding: 38px 0 44px 80px;
+  border-top: 1px solid var(--p-rule);
+  background: rgba(29, 27, 23, 0.025);
+}
+
+:global(html[data-theme="dark"]) .p-footer {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.p-footer-top,
+.p-footer-grid {
+  width: min(100%, 1200px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.p-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-footer-top p {
+  margin: 0;
+}
+
+.p-footer-wordmark {
+  margin: 18px 0 28px;
+  font-family: var(--p-serif);
+  font-size: clamp(4rem, 12vw, 9.5rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 0.78;
+  text-align: center;
+  user-select: none;
+}
+
+.p-footer-fly {
+  color: var(--p-blue-bright);
+}
+
+.p-footer-cran {
+  color: var(--p-orange-bright);
+}
+
+.p-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.p-footer-grid p {
+  margin: 0;
+}
+
+.p-footer-grid a {
+  color: var(--p-ink);
+  text-decoration: none;
+}
+
+.p-footer-grid a:hover {
+  text-decoration: underline;
+}
+
+.p-footer-seal {
+  position: absolute;
+  right: 46px;
+  bottom: 40px;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 3px double var(--p-red);
+  border-radius: 50%;
+  color: var(--p-red);
+  font-family: var(--p-serif);
+  font-size: 11.5px;
+  line-height: 1.35;
+  text-align: center;
+  transform: rotate(-8deg);
+  opacity: 0.68;
+}
+
+/* ===== 响应式 ===== */
+
+@media (max-width: 1080px) {
+  .p-main,
+  .p-topbar {
+    padding-left: 96px;
+  }
+
+  .p-footer {
+    padding-left: 96px;
+  }
+
+  .p-hero h1 {
+    font-size: clamp(2.4rem, 3.6vw, 3.3rem);
+  }
+
+  .p-about-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  .p-grain {
+    opacity: 0.35;
+  }
+
+  .above::before {
+    opacity: 0.18;
+  }
+
+  .p-sketch {
+    display: none;
+  }
+
+  .p-topbar {
+    width: calc(100% - 40px);
+    padding: 20px 0 0;
+  }
+
+  .p-main {
+    width: calc(100% - 40px);
+    padding-left: 0;
+  }
+
+  .p-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 222px 0 40px;
+  }
+
+  .p-hero .p-kicker {
+    margin-top: 20px;
+  }
+
+  .p-hero h1 {
+    font-size: clamp(2.1rem, 5.2vw, 2.9rem);
+  }
+
+  .p-intro {
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  .p-scroll {
+    display: none;
+  }
+
+  .p-code-sheet {
+    width: min(92%, 430px);
+    margin-top: 160px;
+  }
+
+  .p-hero-crane {
+    top: -67px;
+    right: 128px;
+    width: 320px;
+  }
+
+  .p-bigword {
+    font-size: 7.5rem;
+  }
+
+  .p-scrap {
+    width: 160px;
+    height: 220px;
+  }
+
+  .p-section {
+    padding: 66px 0;
+  }
+
+  .p-section-head {
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+  }
+
+  .p-section-note {
+    display: none;
+  }
+
+  .p-work-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .p-about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .p-portrait {
+    width: min(100%, 260px);
+    margin: 0 auto;
+  }
+
+  .p-platforms {
+    grid-template-columns: 1fr;
+  }
+
+  .p-writing-row {
+    grid-template-columns: 28px minmax(0, 1fr) 16px;
+    gap: 9px;
+    padding: 13px 2px;
+  }
+
+  .p-writing-meta,
+  .p-writing-tag {
+    display: none;
+  }
+
+  .p-contact {
+    padding: 76px 0 64px;
+  }
+
+  .p-footer {
+    padding: 30px 20px 40px;
+  }
+
+  .p-footer-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .p-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .p-footer-seal {
+    right: 24px;
+    bottom: 24px;
+    width: 62px;
+    height: 62px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 540px) {
+  .p-topbar-cta {
+    font-size: 11px;
+  }
+
+  .p-logo-text {
+    font-size: 11.5px;
+  }
+
+  .p-hero h1 {
+    font-size: clamp(1.8rem, 8.4vw, 2.25rem);
+  }
+
+  .p-code-sheet {
+    width: 100%;
+  }
+
+  .p-code-sheet::before {
+    width: 66px;
+    height: 22px;
+  }
+
+  .p-hero-crane {
+    top: -42px;
+    right: initial;
+    left: calc(50% - 120px);
+    width: 290px;
+  }
+
+  .p-crane-note {
+    display: none;
+  }
+
+  .p-bigword {
+    font-size: 6rem;
+    opacity: 0.45;
+  }
+
+  .p-actions {
+    align-items: stretch;
+  }
+
+  .p-btn {
+    justify-content: center;
+  }
+
+  .p-btn--primary {
+    flex: 1 1 100%;
+  }
+
+  .p-writing-title {
+    font-size: 0.92rem;
+  }
+
+  .p-contact h2 {
+    font-size: 1.9rem;
+  }
+
+  .p-footer-wordmark {
+    font-size: 3.9rem;
+  }
+
+  .p-footer-seal {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-scroll {
+    transition: none;
+  }
+
+  .p-scroll:hover,
+  .p-scroll:focus-visible {
+    transform: translate(-50%, 0);
+  }
+
+  .p-code-sheet,
+  .p-platform,
+  .p-btn,
+  .p-tab {
+    transition: none;
+  }
+}
+</style>
