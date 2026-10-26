@@ -1,5 +1,9 @@
 // Cloudflare Pages 项目配置。
-// 构建命令仍需在 Cloudflare Dashboard 中设置：bun run build
+// Dashboard 构建设置（Settings → Build & deployments）：
+//   Build command:  bun run build
+//   Deploy command: npx wrangler pages deploy
+// 注意：不要使用 Astro preset 默认的 `npx wrangler deploy`，
+// 那是 Workers 部署命令，会绕过 Pages 项目导致本文件校验失败。
 {
   "name": "wings",
   "compatibility_date": "2026-10-01",
