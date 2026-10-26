@@ -2,6 +2,9 @@
   "name": "wings",
   "compatibility_date": "2026-10-01",
   "main": "worker.ts",
+  "secrets": {
+    "required": ["RESUME_SIGNING_SECRET"]
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

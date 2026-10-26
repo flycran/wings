@@ -29,10 +29,6 @@ const ogImageHrefs: Record<Locale, string> = {
   en: '/og-image-en.png',
 }
 
-// Netlify 构建时注入 CONTEXT（production/deploy-preview/branch-deploy），本地为空；
-// 非生产构建一律禁止收录，避免预览域名和本地产物进入索引
-const noindex = process.env.CONTEXT !== 'production'
-
 const { title, bodyClass } = Astro.props
 const locale = getLocale()
 const site = Astro.site
@@ -76,7 +72,6 @@ const jsonLd = {
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4efe4">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171512">
     <link rel="sitemap" href="/sitemap-index.xml">
-    {noindex && <meta name="robots" content="noindex">}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
