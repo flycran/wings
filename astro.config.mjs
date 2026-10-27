@@ -14,6 +14,9 @@ const locales = Object.fromEntries(projectInlangSettings.locales.map((e) => [e, 
 export default defineConfig({
   site: process.env.ASTRO_SITE || 'https://flycran.xyz',
   trailingSlash: 'never',
+  devToolbar: {
+    enabled: false,
+  },
   i18n: {
     locales: projectInlangSettings.locales,
     defaultLocale,
