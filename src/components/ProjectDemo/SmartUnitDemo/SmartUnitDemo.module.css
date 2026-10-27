@@ -1,4 +1,13 @@
 /* smart-unit demo。 */
+.badge {
+  padding: 1px 6px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
 .label {
   display: block;
   color: var(--p-muted);
@@ -7,9 +16,16 @@
   letter-spacing: 0.04em;
 }
 
+.valueField {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
 .input {
-  width: 100%;
-  margin: 5px 0 0;
+  flex: 1;
+  min-width: 0;
+  margin-top: 5px;
   padding: 6px 0;
   border: 0;
   border-bottom: 1px solid var(--p-rule);
@@ -24,14 +40,30 @@
   border-color: var(--accent);
 }
 
+.input:focus-visible {
+  outline: none;
+}
+
+.baseUnit {
+  flex: none;
+  max-width: 72px;
+  overflow: hidden;
+  color: var(--accent);
+  font-family: var(--p-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .output {
   display: flex;
   align-items: baseline;
   gap: 2px;
-  margin: 16px 0 5px;
+  margin: 14px 0 4px;
   color: var(--accent);
   font-family: var(--p-serif);
-  font-size: 3rem;
+  font-size: 2.9rem;
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -39,7 +71,7 @@
 
 .output span:last-child {
   font-family: var(--p-mono);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -54,24 +86,214 @@
   font-size: 11px;
 }
 
-.locales {
+.toolbar {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 5px;
+  min-width: 0;
+  margin: 14px 0 0;
+  padding: 0;
+  border: 0;
 }
 
-.locales button {
-  padding: 1px 3px;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  background: none;
+.chip {
+  padding: 2px 7px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  background: transparent;
   color: var(--p-muted);
   font-family: var(--p-mono);
   font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
-.locales button.is-active {
+.chip:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.chipActive,
+.chipActive:hover {
+  border-color: var(--p-ink);
+  background: var(--p-ink);
+  color: var(--p-paper);
+}
+
+.code {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 0 5px 9px;
+  border-left: 2px solid var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.codeFn {
+  color: var(--p-ink);
+}
+
+.codeString {
+  color: var(--p-ink);
+}
+
+.codeNumber {
+  color: var(--accent);
+}
+
+.codePunct {
+  color: var(--p-muted);
+}
+
+.editor {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--p-rule);
+}
+
+.editorHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.editorHint {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unitRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nameInput {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 0;
+  border: 0;
+  border-bottom: 1px solid var(--p-rule);
+  outline: none;
+  background: transparent;
+  color: var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 12px;
+}
+
+.nameInput:focus {
+  border-color: var(--accent);
+}
+
+.nameInput:focus-visible,
+.ratioInput:focus-visible {
+  outline: none;
+}
+
+.ratioField {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+  gap: 3px;
+  width: 68px;
+  font-family: var(--p-mono);
+}
+
+.ratioX {
+  flex: none;
+  color: var(--p-muted);
+  font-size: 10px;
+}
+
+.ratioInput {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 0;
+  border: 0;
+  border-bottom: 1px solid var(--p-rule);
+  outline: none;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--p-mono);
+  font-size: 12px;
+  text-align: right;
+}
+
+.ratioInput:focus {
+  border-color: var(--accent);
+}
+
+.ratioSpacer {
+  flex: none;
+  width: 68px;
+}
+
+.remove {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 13px;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.remove:hover:not(:disabled) {
+  background: var(--p-rule);
+  color: var(--p-ink);
+}
+
+.remove:disabled {
+  cursor: default;
+  opacity: 0.25;
+}
+
+.addUnit {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border: 1px dashed var(--p-rule);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.addUnit:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.addUnit:disabled {
+  cursor: default;
+  opacity: 0.4;
 }
 
 @media (max-width: 540px) {
