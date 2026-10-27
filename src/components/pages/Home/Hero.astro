@@ -1,0 +1,625 @@
+---
+import clsx from 'clsx'
+import CodeTabs from '@/components/CodeTabs/CodeTabs.astro'
+import PaperCrane from '@/components/Crane/Crane'
+import { getSite } from '@/data/site'
+import { m } from '@/paraglide/messages'
+import { partsToSegments } from '@/utils/markup'
+import Button from './Button.astro'
+import Kicker from './Kicker.astro'
+
+const site = getSite()
+---
+
+<section class="p-hero" id="home">
+  <div class="p-hero-copy" data-reveal>
+    <div class="p-status">
+      <span class="p-status-dot" aria-hidden="true"></span>
+      <span>{site.profile.availability}</span>
+      <span class="p-status-sep" aria-hidden="true">·</span>
+      <span>{site.profile.location}</span>
+    </div>
+    <Kicker>{site.profile.kicker}</Kicker>
+    <h1>
+      {site.profile.headline.map((line, index) => (
+        <span class="p-h1-line">
+          {partsToSegments(line.parts({})).map((seg) =>
+            seg.variant ? (
+              <span class={clsx('p-mark', { 'p-mark--orange': index === 1 })}>{seg.text}</span>
+            ) : (
+              seg.text
+            )
+          )}
+        </span>
+      ))}
+    </h1>
+    <p class="p-intro">{site.profile.intro}</p>
+    <div class="p-actions">
+      <Button variant="primary" href="#work">
+        {m.actionViewWork()} <span aria-hidden="true">↘</span>
+      </Button>
+      <Button href="#contact">
+        {m.navContact()} <span aria-hidden="true">↓</span>
+      </Button>
+    </div>
+    <div class="p-hero-links">
+      {site.profile.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="p-hero-stage" data-reveal>
+    <div class="p-bigword" aria-hidden="true">FLY<br>CRAN</div>
+    <div class="p-scrap p-scrap--orange" aria-hidden="true"></div>
+    <div class="p-scrap p-scrap--blue" aria-hidden="true"></div>
+    <div class="p-code-sheet">
+      <div class="p-code-sheet-head">
+        <span class="p-code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>{site.profile.name} / PROFILE</span>
+        <span class="p-code-sheet-tag">v2.0</span>
+      </div>
+      <CodeTabs />
+      <div class="p-code-sheet-foot">
+        <span>WINGS / 2026</span>
+        <span>{m.homeHeroStaticNote()}</span>
+      </div>
+    </div>
+    <div class="p-hero-crane">
+      <PaperCrane client:load />
+    </div>
+    <div class="p-crane-note">
+      <span>{m.heroCraneHint()}</span>
+      <span class="p-crane-note-line" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <a class="p-scroll" href="#work" aria-label={m.a11yScrollToWork()}>
+    <span class="p-scroll-text">{m.heroScrollHint()}</span>
+    <span class="p-scroll-track" aria-hidden="true">
+      <svg class="p-scroll-arrow" viewBox="0 0 12 18">
+        <title>arrow</title>
+        <path d="M6 2V16M1.5 11.5L6 16l4.5-4.5" />
+      </svg>
+      <span class="p-scroll-line"></span>
+    </span>
+  </a>
+</section>
+
+<script>
+// WebView paper tilt
+const codeSheet = document.querySelector<HTMLElement>('.p-code-sheet')
+const canTilt =
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+  !window.matchMedia('(max-width: 900px)').matches
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+if (codeSheet && canTilt && !reduceMotion) {
+  const state = { x: 0, y: 0, lift: 0 }
+  const target = { x: 0, y: 0, lift: 0 }
+  let frame = 0
+
+  const render = () => {
+    codeSheet.style.transform = `perspective(1200px) translateY(${-state.lift}px) rotate(-1.4deg) rotateX(${state.x}deg) rotateY(${state.y}deg) scale(${1 + state.lift * 0.0009})`
+  }
+
+  const tick = () => {
+    state.x += (target.x - state.x) * 0.14
+    state.y += (target.y - state.y) * 0.14
+    state.lift += (target.lift - state.lift) * 0.14
+    render()
+
+    const settled =
+      Math.abs(target.x - state.x) < 0.01 &&
+      Math.abs(target.y - state.y) < 0.01 &&
+      Math.abs(target.lift - state.lift) < 0.01
+
+    if (settled) {
+      state.x = target.x
+      state.y = target.y
+      state.lift = target.lift
+      frame = 0
+      if (target.x === 0 && target.y === 0 && target.lift === 0) {
+        codeSheet.style.removeProperty('transform')
+      }
+      return
+    }
+
+    frame = requestAnimationFrame(tick)
+  }
+
+  const start = () => {
+    if (!frame) frame = requestAnimationFrame(tick)
+  }
+
+  codeSheet.addEventListener('pointerenter', () => {
+    codeSheet.classList.add('is-tilting')
+    target.lift = 8
+    start()
+  })
+
+  codeSheet.addEventListener('pointermove', (event) => {
+    const rect = codeSheet.getBoundingClientRect()
+    target.x = (0.5 - (event.clientY - rect.top) / rect.height) * 10.5
+    target.y = ((event.clientX - rect.left) / rect.width - 0.5) * 10.5
+    target.lift = 8
+    start()
+  })
+
+  codeSheet.addEventListener('pointerleave', () => {
+    codeSheet.classList.remove('is-tilting')
+    target.x = 0
+    target.y = 0
+    target.lift = 0
+    start()
+  })
+}
+</script>
+
+<style>
+.p-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: calc(100vh - 110px);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: center;
+  gap: 30px;
+  padding: 0px 0 40px;
+}
+
+.p-hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.p-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+.p-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-green-bright);
+  box-shadow: 0 0 0 4px rgba(33, 212, 134, 0.12);
+}
+
+.p-status-sep {
+  color: var(--p-rule);
+}
+
+.p-hero :global(.p-kicker) {
+  margin: 26px 0 14px;
+}
+
+.p-hero h1 {
+  margin: 0 0 24px;
+  font-family: var(--p-serif);
+  font-size: clamp(2.5rem, 3.7vw, 3.7rem);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.p-h1-line {
+  display: block;
+}
+
+.p-mark {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* 文字底部的荧光笔划线 */
+.p-mark::after {
+  position: absolute;
+  z-index: -1;
+  right: -2%;
+  bottom: 0.08em;
+  left: -2%;
+  height: 0.16em;
+  border-radius: 999px;
+  background: var(--p-blue-bright);
+  content: "";
+  opacity: 0.28;
+  transform: rotate(-1.2deg);
+}
+
+.p-mark--orange::after {
+  background: var(--p-orange-bright);
+  opacity: 0.38;
+}
+
+.p-intro {
+  max-width: 37em;
+  margin: 0 0 30px;
+  color: var(--p-muted);
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.p-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.p-hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 27px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+}
+
+.p-hero-links a {
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+}
+
+.p-hero-links a:hover {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+
+.p-hero-stage {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-bigword {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: transparent;
+  font-family: var(--p-serif);
+  font-size: clamp(7rem, 14vw, 12rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.72;
+  opacity: 0.6;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  user-select: none;
+  -webkit-text-stroke: 1px var(--p-rule);
+}
+
+.p-scrap {
+  position: absolute;
+  width: 230px;
+  height: 300px;
+  opacity: 0.36;
+  pointer-events: none;
+}
+
+.p-scrap--orange {
+  top: 14%;
+  right: 2%;
+  background: var(--p-orange-bright);
+  clip-path: polygon(12% 0, 100% 7%, 88% 100%, 0 86%);
+  transform: rotate(11deg);
+}
+
+.p-scrap--blue {
+  bottom: 6%;
+  left: 2%;
+  background: var(--p-blue-bright);
+  clip-path: polygon(0 9%, 91% 0, 100% 88%, 8% 100%);
+  transform: rotate(-8deg);
+}
+
+:global(html[data-theme="dark"]) .p-scrap {
+  opacity: 0.16;
+}
+
+.p-code-sheet {
+  position: relative;
+  margin-top: 200px;
+  z-index: 2;
+  width: min(100%, 580px);
+  align-self: flex-start;
+  flex: 0 0 auto;
+  border: 1px solid var(--p-rule);
+  border-radius: 3px;
+  background: var(--p-sheet);
+  box-shadow: 12px 12px 0 var(--p-rule);
+  transform: rotate(-1.4deg);
+  transform-origin: center center;
+  transition: box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* 顶部的胶带 */
+.p-code-sheet::before {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  z-index: 3;
+  width: 88px;
+  height: 26px;
+  background: rgba(255, 178, 47, 0.58);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  content: "";
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+:global(html[data-theme="dark"]) .p-code-sheet::before {
+  background: rgba(255, 178, 47, 0.34);
+}
+
+.p-code-sheet.is-tilting,
+.p-code-sheet:focus-within {
+  box-shadow: 18px 20px 0 var(--p-rule);
+}
+
+.p-code-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 15px;
+  border-bottom: 1px dashed var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.p-code-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.p-code-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--p-rule);
+}
+
+.p-code-dots i:nth-child(1) {
+  background: var(--p-red-bright);
+}
+
+.p-code-dots i:nth-child(2) {
+  background: var(--p-orange-bright);
+}
+
+.p-code-dots i:nth-child(3) {
+  background: var(--p-green-bright);
+}
+
+.p-code-sheet-tag {
+  padding: 1px 5px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+}
+
+.p-code-sheet-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 15px;
+  border-top: 1px dashed var(--p-rule);
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+/* 纸鹤的摆位由本组件的包装层负责，岛内样式归 Crane.module.css */
+.p-hero-crane {
+  position: absolute;
+  top: -42px;
+  right: 20px;
+  z-index: 3;
+  width: 340px;
+  filter: drop-shadow(12px 20px 26px rgba(29, 27, 23, 0.16));
+}
+
+.p-crane-note {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  transform: rotate(-3deg);
+}
+
+.p-crane-note-line {
+  width: 48px;
+  border-top: 1px dashed var(--p-muted);
+  opacity: 0.6;
+}
+
+.p-scroll {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transform: translate(-50%, 0);
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.p-scroll:hover,
+.p-scroll:focus-visible {
+  transform: translate(-50%, -8px);
+}
+
+.p-scroll-text {
+  opacity: 0.85;
+}
+
+.p-scroll-track {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 38px;
+}
+
+.p-scroll-arrow {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 12px;
+  height: 18px;
+  color: var(--p-muted);
+  transform: translateX(-50%);
+}
+
+.p-scroll-arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+}
+
+.p-scroll-line {
+  position: absolute;
+  top: 0;
+  bottom: 14px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--p-muted));
+  opacity: 0.6;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1080px) {
+  .p-hero h1 {
+    font-size: clamp(2.4rem, 3.6vw, 3.3rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .p-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 32px 0 40px;
+  }
+
+  .p-hero :global(.p-kicker) {
+    margin-top: 20px;
+  }
+
+  .p-hero h1 {
+    font-size: clamp(2.1rem, 5.2vw, 2.9rem);
+  }
+
+  .p-intro {
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  .p-scroll {
+    display: none;
+  }
+
+  .p-code-sheet {
+    width: min(92%, 430px);
+    margin-top: 160px;
+    transform: none;
+  }
+
+  .p-hero-crane {
+    top: -67px;
+    right: 128px;
+    width: 320px;
+  }
+
+  .p-bigword {
+    font-size: 7.5rem;
+  }
+
+  .p-scrap {
+    width: 160px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 540px) {
+  .p-hero h1 {
+    font-size: clamp(1.8rem, 8.4vw, 2.25rem);
+  }
+
+  .p-code-sheet {
+    width: 100%;
+  }
+
+  .p-code-sheet::before {
+    width: 66px;
+    height: 22px;
+  }
+
+  .p-hero-crane {
+    top: -42px;
+    right: initial;
+    left: calc(50% - 120px);
+    width: 290px;
+  }
+
+  .p-crane-note {
+    display: none;
+  }
+
+  .p-bigword {
+    font-size: 6rem;
+    opacity: 0.45;
+  }
+
+  .p-actions {
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-scroll {
+    transition: none;
+  }
+
+  .p-scroll:hover,
+  .p-scroll:focus-visible {
+    transform: translate(-50%, 0);
+  }
+
+  .p-code-sheet {
+    transition: none;
+  }
+}
+</style>

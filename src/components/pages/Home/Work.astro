@@ -1,0 +1,42 @@
+---
+import ProjectCard from '@/components/ProjectCard/ProjectCard.astro'
+import ProjectReference from '@/components/ProjectReference/ProjectReference.astro'
+import { getSite, isWingsProject } from '@/data/site'
+import { m } from '@/paraglide/messages'
+import Section from './Section.astro'
+
+const site = getSite()
+---
+
+<Section
+  id="work"
+  index="01"
+  kicker="SELECTED WORK"
+  title={m.homeWorkTitle()}
+  note={m.homeWorkNote()}
+>
+  <div class="p-work-grid">
+    {site.projects.map((project) =>
+      isWingsProject(project) ? (
+        <ProjectReference project={project} />
+      ) : (
+        <ProjectCard project={project} />
+      )
+    )}
+  </div>
+</Section>
+
+<style>
+.p-work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .p-work-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+</style>

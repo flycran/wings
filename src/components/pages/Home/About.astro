@@ -1,0 +1,245 @@
+---
+import { getSite } from '@/data/site'
+import { m } from '@/paraglide/messages'
+import Kicker from './Kicker.astro'
+import Section from './Section.astro'
+
+const site = getSite()
+---
+
+<Section
+  id="about"
+  index="02"
+  kicker="ABOUT / HOW I WORK"
+  title={m.homeAboutTitle()}
+  note={m.homeAboutNote()}
+>
+  <div class="p-about-grid">
+    <figure class="p-portrait" data-reveal>
+      <div class="p-portrait-inner">
+        <span class="p-portrait-char">飞</span>
+        <span class="p-portrait-seal">{site.profile.name}<br>{site.profile.cn}</span>
+      </div>
+      <figcaption>{site.profile.name} · {site.colophon.year}</figcaption>
+    </figure>
+
+    <div class="p-about-copy" data-reveal>
+      <p class="p-lead">{m.homeAboutLead()}</p>
+      <p>{m.homeAboutCraft()}</p>
+      <p>{m.homeAboutTeam()}</p>
+
+      <div class="p-principles">
+        <Kicker>PRINCIPLES / 04</Kicker>
+        {site.principles.map((item, index) => (
+          <div class="p-principle">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="p-now">
+        <Kicker>{m.aboutNowKicker()}</Kicker>
+        {site.now.map((item) => (
+          <div class="p-now-row">
+            <span>{item.label}</span>
+            <p>{item.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="p-ask">
+        <span>Ask me about</span>
+        <div>
+          <em>TypeScript</em><em>{m.aboutAskBuildTools()}</em><em>{m.aboutAskDesignSystems()}</em
+          ><em>{m.aboutAskIndieDev()}</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+.p-about-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  align-items: start;
+  gap: 48px;
+}
+
+.p-portrait {
+  margin: 0;
+  padding: 13px;
+  border: 1px solid var(--p-rule);
+  background: var(--p-sheet);
+  box-shadow: 8px 8px 0 var(--p-rule);
+  transform: rotate(-1deg);
+}
+
+.p-portrait-inner {
+  position: relative;
+  display: grid;
+  aspect-ratio: 4 / 5;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--p-rule);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 178, 47, 0.2), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(0, 171, 255, 0.16), transparent 45%), var(--p-paper);
+}
+
+.p-portrait-char {
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 8rem;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0.88;
+}
+
+.p-portrait-seal {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 6px;
+  border: 2px solid var(--p-red);
+  color: var(--p-red);
+  font-family: var(--p-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  text-align: center;
+  transform: rotate(-8deg);
+  opacity: 0.75;
+}
+
+.p-portrait figcaption {
+  margin-top: 10px;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.p-about-copy {
+  max-width: 680px;
+}
+
+.p-about-copy > p {
+  margin: 0 0 16px;
+  color: var(--p-muted);
+  font-size: 14px;
+  line-height: 1.95;
+}
+
+.p-about-copy > .p-lead {
+  margin-bottom: 18px;
+  color: var(--p-ink);
+  font-family: var(--p-serif);
+  font-size: 1.3rem;
+  line-height: 1.7;
+}
+
+.p-principles {
+  margin-top: 30px;
+  padding-top: 16px;
+  border-top: 1px solid var(--p-rule);
+}
+
+.p-principle {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--p-rule);
+}
+
+.p-principle span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-principle p {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.p-now {
+  margin-top: 28px;
+}
+
+.p-now-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--p-rule);
+}
+
+.p-now-row span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-now-row p {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 12.5px;
+}
+
+.p-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.p-ask > span {
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.p-ask div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.p-ask em {
+  padding: 3px 7px;
+  border: 1px solid var(--p-rule);
+  border-radius: 2px;
+  background: var(--p-sheet);
+  color: var(--p-ink);
+  font-family: var(--p-mono);
+  font-size: 11px;
+  font-style: normal;
+}
+
+@media (max-width: 1080px) {
+  .p-about-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  .p-about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .p-portrait {
+    width: min(100%, 260px);
+    margin: 0 auto;
+  }
+}
+</style>

@@ -1,0 +1,87 @@
+---
+import Kicker from './Kicker.astro'
+
+interface Props {
+  id: string
+  index: string
+  kicker: string
+  title: string
+  note?: string
+}
+
+const { id, index, kicker, title, note } = Astro.props
+---
+
+<section class="p-section" id={id}>
+  <div class="p-section-head" data-reveal>
+    <span class="p-section-index">{index}</span>
+    <div class="p-section-title">
+      <Kicker>{kicker}</Kicker>
+      <h2>{title}</h2>
+    </div>
+    {note && <p class="p-section-note">{note}</p>}
+  </div>
+  <slot />
+</section>
+
+<style>
+.p-section {
+  position: relative;
+  padding: 92px 0;
+}
+
+.p-section-head {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 36px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--p-rule);
+}
+
+.p-section-index {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--p-rule);
+  border-radius: 50%;
+  color: var(--p-muted);
+  font-family: var(--p-mono);
+  font-size: 11px;
+}
+
+.p-section-title h2 {
+  margin: 5px 0 0;
+  font-family: var(--p-serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.p-section-note {
+  max-width: 250px;
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 11.5px;
+  line-height: 1.7;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .p-section {
+    padding: 66px 0;
+  }
+
+  .p-section-head {
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+  }
+
+  .p-section-note {
+    display: none;
+  }
+}
+</style>

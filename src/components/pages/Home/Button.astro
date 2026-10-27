@@ -1,0 +1,81 @@
+---
+interface Props {
+  variant?: 'primary' | 'ghost'
+  href?: string
+  type?: 'button' | 'submit' | 'reset'
+  [key: string]: unknown
+}
+
+const { variant = 'ghost', href, type = 'button', ...rest } = Astro.props
+const Tag = href ? 'a' : 'button'
+---
+
+<Tag
+  class:list={['p-btn', `p-btn--${variant}`]}
+  href={href}
+  type={href ? undefined : type}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+.p-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 17px;
+  border: 1px solid var(--p-ink);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.p-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
+.p-btn--primary {
+  border-color: var(--p-blue);
+  background: var(--p-blue);
+  box-shadow: 4px 4px 0 var(--p-rule);
+  color: #fff;
+}
+
+.p-btn--primary:hover {
+  box-shadow: 7px 7px 0 var(--p-rule);
+}
+
+.p-btn--ghost {
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--p-rule);
+  color: var(--p-ink);
+}
+
+.p-btn--ghost:hover {
+  background: var(--p-sheet);
+  box-shadow: 7px 7px 0 var(--p-rule);
+}
+
+@media (max-width: 540px) {
+  .p-btn {
+    justify-content: center;
+  }
+
+  .p-btn--primary {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-btn {
+    transition: none;
+  }
+}
+</style>
