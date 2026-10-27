@@ -29,6 +29,3 @@ debug.log
 
 # jetbrains setting folder
 .idea/
-
-# browser automation artifacts
-.playwright-mcp/
