@@ -3,8 +3,8 @@ name: Sync Juejin articles
 on:
   workflow_dispatch:
   schedule:
-    # Every Monday at 02:00 UTC / 10:00 Asia/Shanghai
-    - cron: '0 2 * * 1'
+    # Every 2 days at 02:00 UTC / 10:00 Asia/Shanghai
+    - cron: '0 2 */2 * *'
 
 permissions:
   contents: write
@@ -34,8 +34,8 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "flycran"
+          git config user.email "cffhidol@163.com"
           git add src/data/writing.ts
           if git diff --cached --quiet; then
             echo "No article changes"
