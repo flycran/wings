@@ -7,15 +7,15 @@ export interface WritingItem {
   href: string
 }
 
-export const writingSyncedAt = '2026.11.03'
+export const writingSyncedAt = '2026.11.07'
 
 export const writing: WritingItem[] = [
   {
-    title: 'github-gravity：用 Rapier2D 把 GitHub 贡献图做成 SVG 物理动画',
+    title: '把贡献图变成会掉落的物理动画：github-gravity 实现笔记',
     platform: '掘金',
-    date: '2026.10',
-    tag: 'GitHub',
-    href: 'https://juejin.cn/post/7701900929897103396',
+    date: '2026.11',
+    tag: '前端',
+    href: 'https://juejin.cn/post/7704168443955789860',
   },
   {
     title: '浏览器标签页全是一个图标：我用名字哈希生成 favicon，让每个项目都有身份标识',
