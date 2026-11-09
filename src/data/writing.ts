@@ -7,7 +7,7 @@ export interface WritingItem {
   href: string
 }
 
-export const writingSyncedAt = '2026.11.07'
+export const writingSyncedAt = '2026.11.09'
 
 export const writing: WritingItem[] = [
   {
